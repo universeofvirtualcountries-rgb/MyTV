@@ -21,6 +21,7 @@
             overflow-x: hidden;
         }
 
+        /* ===================== ЗРИТЕЛЬ ===================== */
         .container {
             display: flex;
             flex-direction: column;
@@ -51,6 +52,15 @@
             animation: pulse 2s ease-in-out infinite;
         }
 
+        .live-indicator.offline .live-dot {
+            background: #888888;
+            animation: none;
+        }
+
+        .live-indicator.offline span:last-child {
+            color: #888888;
+        }
+
         @keyframes pulse {
             0%, 100% { opacity: 1; }
             50% { opacity: 0.4; }
@@ -74,32 +84,34 @@
             background: #000;
         }
 
+        /* Кастомная кнопка Play по центру */
         .vjs-big-play-button {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 64px;
-            height: 64px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.12);
-            border: 2px solid rgba(255, 255, 255, 0.6);
-            backdrop-filter: none;
+            position: absolute !important;
+            top: 50% !important;
+            left: 50% !important;
+            transform: translate(-50%, -50%) !important;
+            width: 64px !important;
+            height: 64px !important;
+            border-radius: 50% !important;
+            background: rgba(255, 255, 255, 0.12) !important;
+            border: 2px solid rgba(255, 255, 255, 0.6) !important;
             cursor: pointer;
-            display: flex;
+            display: flex !important;
             align-items: center;
             justify-content: center;
             transition: opacity 0.2s ease;
             z-index: 10;
-            line-height: 0;
-            padding: 0;
-            margin: 0;
+            line-height: 0 !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            font-size: inherit !important;
+            line-height: inherit !important;
         }
 
         .vjs-big-play-button:hover {
-            opacity: 0.7;
-            background: rgba(255, 255, 255, 0.12);
-            border-color: rgba(255, 255, 255, 0.6);
+            opacity: 0.7 !important;
+            background: rgba(255, 255, 255, 0.12) !important;
+            border-color: rgba(255, 255, 255, 0.6) !important;
         }
 
         .vjs-big-play-button .vjs-icon-placeholder {
@@ -117,6 +129,10 @@
             margin-left: 4px;
         }
 
+        .vjs-has-started .vjs-big-play-button {
+            display: none !important;
+        }
+
         .vjs-control-bar {
             background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
             height: 40px;
@@ -130,24 +146,255 @@
             opacity: 0.7;
         }
 
-        .vjs-play-control .vjs-icon-placeholder::before {
-            font-size: 1.4em;
-        }
-
-        .vjs-volume-panel .vjs-icon-placeholder::before {
-            font-size: 1.4em;
-        }
-
-        .vjs-fullscreen-control .vjs-icon-placeholder::before {
-            font-size: 1.2em;
-        }
-
         .viewer-count {
             font-size: 13px;
             color: #888888;
             letter-spacing: 0.3px;
         }
 
+        .no-stream-msg {
+            color: #888888;
+            font-size: 14px;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        /* ===================== АДМИН-ПАНЕЛЬ ===================== */
+        .admin-panel {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: #0d0d0d;
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .admin-panel.active {
+            display: block;
+        }
+
+        .admin-inner {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #222;
+        }
+
+        .admin-header h2 {
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .admin-close {
+            background: none;
+            border: 1px solid #333;
+            color: #888;
+            padding: 6px 14px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 13px;
+            font-family: inherit;
+            transition: opacity 0.2s ease;
+        }
+
+        .admin-close:hover {
+            opacity: 0.7;
+        }
+
+        .admin-section {
+            margin-bottom: 28px;
+        }
+
+        .admin-section label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #888;
+            margin-bottom: 8px;
+        }
+
+        .admin-section input[type="text"],
+        .admin-section input[type="password"],
+        .admin-section select {
+            width: 100%;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            color: #fff;
+            padding: 10px 14px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .admin-section input:focus,
+        .admin-section select:focus {
+            border-color: #555;
+        }
+
+        .admin-section select option {
+            background: #1a1a1a;
+        }
+
+        .admin-btn {
+            width: 100%;
+            padding: 12px;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            color: #fff;
+            font-size: 14px;
+            font-family: inherit;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: opacity 0.2s ease;
+            margin-top: 4px;
+        }
+
+        .admin-btn:hover {
+            opacity: 0.7;
+        }
+
+        .admin-btn.primary {
+            background: #e53e3e;
+            border-color: #e53e3e;
+        }
+
+        .admin-btn.primary:hover {
+            opacity: 0.85;
+        }
+
+        .admin-status {
+            font-size: 13px;
+            color: #888;
+            margin-top: 8px;
+            min-height: 20px;
+        }
+
+        .admin-status.success {
+            color: #48bb78;
+        }
+
+        .admin-status.error {
+            color: #e53e3e;
+        }
+
+        .admin-saved-list {
+            margin-top: 12px;
+        }
+
+        .admin-saved-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 12px;
+            background: #1a1a1a;
+            border: 1px solid #222;
+            border-radius: 4px;
+            margin-bottom: 6px;
+            font-size: 13px;
+        }
+
+        .admin-saved-item .name {
+            color: #fff;
+            flex: 1;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            margin-right: 10px;
+        }
+
+        .admin-saved-item .name.active-source {
+            color: #48bb78;
+        }
+
+        .admin-saved-item button {
+            background: none;
+            border: none;
+            color: #888;
+            cursor: pointer;
+            font-size: 13px;
+            font-family: inherit;
+            padding: 2px 8px;
+            transition: opacity 0.2s ease;
+        }
+
+        .admin-saved-item button:hover {
+            opacity: 0.7;
+        }
+
+        .admin-saved-item button.delete-btn {
+            color: #e53e3e;
+        }
+
+        .admin-viewers {
+            font-size: 24px;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        /* Экран входа в админку */
+        .admin-login {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 80vh;
+            gap: 16px;
+        }
+
+        .admin-login h3 {
+            font-size: 16px;
+            color: #888;
+            font-weight: 400;
+        }
+
+        .admin-login input {
+            width: 260px;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            color: #fff;
+            padding: 10px 14px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-family: inherit;
+            outline: none;
+            text-align: center;
+        }
+
+        .admin-login input:focus {
+            border-color: #555;
+        }
+
+        .admin-login button {
+            width: 260px;
+            padding: 10px;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            color: #fff;
+            font-size: 14px;
+            font-family: inherit;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: opacity 0.2s ease;
+        }
+
+        .admin-login button:hover {
+            opacity: 0.7;
+        }
+
+        /* ===================== АДАПТИВ ===================== */
         @media (max-width: 600px) {
             .container {
                 padding: 10px;
@@ -159,8 +406,8 @@
             }
 
             .vjs-big-play-button {
-                width: 52px;
-                height: 52px;
+                width: 52px !important;
+                height: 52px !important;
             }
 
             .vjs-big-play-button .vjs-icon-placeholder::before {
@@ -175,6 +422,10 @@
             .viewer-count {
                 font-size: 12px;
             }
+
+            .admin-panel {
+                padding: 16px;
+            }
         }
 
         @media (max-width: 380px) {
@@ -186,86 +437,397 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="live-indicator">
-            <span class="live-dot"></span>
-            <span>ПРЯМОЙ ЭФИР</span>
-        </div>
 
-        <div class="player-wrapper">
-            <video-js
-                id="stream-player"
-                class="vjs-default-skin"
-                controls
-                preload="auto"
-                fluid="false"
-                data-setup='{}'
-            >
-                <!-- ЗАМЕНИТЕ ССЫЛКУ НИЖЕ НА ВАШ СОБСТВЕННЫЙ HLS-СТРИМ (.m3u8) -->
-                <source src="https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8" type="application/x-mpegURL">
-                <!-- КОНЕЦ БЛОКА ЗАМЕНЫ -->
-            </video-js>
-        </div>
-
-        <div class="viewer-count" id="viewer-count">Онлайн: Загрузка...</div>
+<!-- ===================== СТРАНИЦА ЗРИТЕЛЯ ===================== -->
+<div class="container" id="viewer-page">
+    <div class="live-indicator" id="live-indicator">
+        <span class="live-dot"></span>
+        <span>ПРЯМОЙ ЭФИР</span>
     </div>
 
-    <script src="https://vjs.zencdn.net/8.17.4/video.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var player = videojs('stream-player', {
-                html5: {
-                    vhs: {
-                        overrideNative: true
-                    },
-                    nativeAudioTracks: false,
-                    nativeVideoTracks: false
-                },
-                controlBar: {
-                    playToggle: true,
-                    volumePanel: { inline: false },
-                    fullscreenToggle: true,
-                    pictureInPictureToggle: false,
-                    remainingTimeDisplay: false,
-                    currentTimeDisplay: false,
-                    progressControl: false,
-                    liveDisplay: false,
-                    seekToLive: false,
-                    chaptersButton: false,
-                    subtitlesButton: false,
-                    audioTrackButton: false,
-                    playbackRateMenuButton: false
-                },
-                suppressNotSupportedError: true
-            });
+    <div class="player-wrapper">
+        <video-js
+            id="stream-player"
+            class="vjs-default-skin"
+            controls
+            preload="auto"
+            data-setup='{}'
+        >
+            <source src="" type="application/x-mpegURL">
+        </video-js>
+        <div class="no-stream-msg" id="no-stream-msg" style="display:none;">
+            Трансляция временно недоступна
+        </div>
+    </div>
 
-            player.ready(function () {
-                player.play().catch(function () {});
-            });
+    <div class="viewer-count" id="viewer-count">Онлайн: --</div>
+</div>
 
-            player.on('play', function () {
-                var bigPlay = player.el().querySelector('.vjs-big-play-button');
-                if (bigPlay) bigPlay.style.display = 'none';
-            });
+<!-- ===================== АДМИН-ПАНЕЛЬ ===================== -->
+<div class="admin-panel" id="admin-panel">
 
-            player.on('pause', function () {
-                var bigPlay = player.el().querySelector('.vjs-big-play-button');
-                if (bigPlay) bigPlay.style.display = 'flex';
-            });
+    <!-- Экран входа -->
+    <div class="admin-login" id="admin-login">
+        <h3>Панель управления</h3>
+        <input type="password" id="admin-password" placeholder="Пароль" autocomplete="off">
+        <button id="admin-login-btn">Войти</button>
+    </div>
 
-            // Счетчик зрителей — замените на реальное API
-            var viewerEl = document.getElementById('viewer-count');
-            function fetchViewers() {
-                // ЗАМЕНИТЕ НА ВАШ РЕАЛЬНЫЙ ENDPOINT ДЛЯ ПОЛУЧЕНИЯ КОЛИЧЕСТВА ЗРИТЕЛЕЙ
-                // Пример: fetch('/api/viewers').then(...)
-                setTimeout(function () {
-                    var count = Math.floor(Math.random() * 500) + 50;
-                    viewerEl.textContent = 'Онлайн: ' + count;
-                }, 800);
-            }
-            fetchViewers();
-            setInterval(fetchViewers, 30000);
+    <!-- Управление (после входа) -->
+    <div class="admin-inner" id="admin-controls" style="display:none;">
+        <div class="admin-header">
+            <h2>Управление трансляцией</h2>
+            <button class="admin-close" id="admin-close-btn">Закрыть</button>
+        </div>
+
+        <div class="admin-section">
+            <label>Онлайн сейчас</label>
+            <div class="admin-viewers" id="admin-viewers-count">--</div>
+        </div>
+
+        <div class="admin-section">
+            <label>Добавить источник</label>
+            <input type="text" id="source-name" placeholder="Название (например: Основной канал)">
+            <div style="height:8px;"></div>
+            <input type="text" id="source-url" placeholder="HLS-ссылка (.m3u8)">
+            <div style="height:8px;"></div>
+            <button class="admin-btn" id="add-source-btn">Сохранить источник</button>
+        </div>
+
+        <div class="admin-section">
+            <label>Сохранённые источники</label>
+            <div class="admin-saved-list" id="saved-sources-list"></div>
+        </div>
+
+        <div class="admin-section">
+            <label>Активный источник</label>
+            <select id="active-source-select">
+                <option value="">-- Нет активного --</option>
+            </select>
+            <div style="height:8px;"></div>
+            <button class="admin-btn primary" id="go-live-btn">Начать трансляцию</button>
+        </div>
+
+        <div class="admin-section">
+            <button class="admin-btn" id="stop-stream-btn">Остановить трансляцию</button>
+        </div>
+
+        <div class="admin-status" id="admin-status"></div>
+    </div>
+</div>
+
+<!-- ===================== СКРИПТЫ ===================== -->
+<script src="https://vjs.zencdn.net/8.17.4/video.min.js"></script>
+<script type="module">
+    // ============================================================
+    //  НАСТРОЙКИ FIREBASE — ЗАМЕНИТЕ НА СВОИ ДАННЫЕ
+    //  1. Создайте проект на https://console.firebase.google.com
+    //  2. Создайте Realtime Database
+    //  3. Скопируйте конфигурацию ниже
+    // ============================================================
+    const firebaseConfig = {
+        apiKey: "ЗАМЕНИТЕ_НА_ВАШ_API_KEY",
+        authDomain: "ВАШ_ПРОЕКТ.firebaseapp.com",
+        databaseURL: "https://ВАШ_ПРОЕКТ-default-rtdb.firebaseio.com",
+        projectId: "ВАШ_ПРОЕКТ",
+        storageBucket: "ВАШ_ПРОЕКТ.firebasestorage.app",
+        messagingSenderId: "XXXXXXXXXXXX",
+        appId: "1:XXXXXXXXXXXX:web:XXXXXXXXXXXX"
+    };
+
+    // ============================================================
+    //  ПАРОЛЬ ДЛЯ АДМИН-ПАНЕЛИ — ИЗМЕНИТЕ НА СВОЙ
+    // ============================================================
+    const ADMIN_PASSWORD = "ВАШ_ПАРОЛЬ";
+
+    // ============================================================
+    //  FIREBASE ИНИЦИАЛИЗАЦИЯ
+    // ============================================================
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import { getDatabase, ref, set, onValue, onDisconnect, remove, push, get, child } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
+
+    let db = null;
+    let viewerSessionId = null;
+    let isFirebaseConfigured = false;
+
+    try {
+        if (firebaseConfig.apiKey && firebaseConfig.apiKey !== "ЗАМЕНИТЕ_НА_ВАШ_API_KEY") {
+            const app = initializeApp(firebaseConfig);
+            db = getDatabase(app);
+            isFirebaseConfigured = true;
+        }
+    } catch (e) {
+        console.warn("Firebase не настроен:", e);
+    }
+
+    // ============================================================
+    //  СЧЁТЧИК ЗРИТЕЛЕЙ (Real-time через Firebase)
+    // ============================================================
+    function setupViewerTracking() {
+        if (!isFirebaseConfigured) return;
+
+        viewerSessionId = "v_" + Date.now() + "_" + Math.random().toString(36).substr(2, 9);
+
+        const viewerRef = ref(db, "viewers/" + viewerSessionId);
+        set(viewerRef, { joinedAt: Date.now() });
+
+        onDisconnect(viewerRef).remove();
+
+        const viewersRef = ref(db, "viewers");
+        onValue(viewersRef, (snapshot) => {
+            const val = snapshot.val();
+            const count = val ? Object.keys(val).length : 0;
+            document.getElementById("viewer-count").textContent = "Онлайн: " + count;
+
+            const adminCountEl = document.getElementById("admin-viewers-count");
+            if (adminCountEl) adminCountEl.textContent = count + " viewers";
         });
-    </script>
+    }
+
+    // ============================================================
+    //  ПЛЕЕР
+    // ============================================================
+    let player = videojs("stream-player", {
+        html5: {
+            vhs: { overrideNative: true },
+            nativeAudioTracks: false,
+            nativeVideoTracks: false
+        },
+        controlBar: {
+            playToggle: true,
+            volumePanel: { inline: false },
+            fullscreenToggle: true,
+            pictureInPictureToggle: false,
+            remainingTimeDisplay: false,
+            currentTimeDisplay: false,
+            progressControl: false,
+            liveDisplay: false,
+            seekToLive: false,
+            chaptersButton: false,
+            subtitlesButton: false,
+            audioTrackButton: false,
+            playbackRateMenuButton: false
+        },
+        suppressNotSupportedError: true
+    });
+
+    function loadStream(url) {
+        const noStreamMsg = document.getElementById("no-stream-msg");
+        const indicator = document.getElementById("live-indicator");
+
+        if (!url) {
+            player.pause();
+            player.src({ src: "", type: "application/x-mpegURL" });
+            noStreamMsg.style.display = "block";
+            indicator.classList.add("offline");
+            return;
+        }
+
+        noStreamMsg.style.display = "none";
+        indicator.classList.remove("offline");
+
+        player.src({ src: url, type: "application/x-mpegURL" });
+        player.play().catch(function () {});
+    }
+
+    // ============================================================
+    //  ПОДПИСКА НА ТЕКУЩИЙ СТРИМ (Real-time)
+    // ============================================================
+    function subscribeToStream() {
+        if (!isFirebaseConfigured) {
+            document.getElementById("no-stream-msg").textContent = "Ожидание настройки...";
+            document.getElementById("no-stream-msg").style.display = "block";
+            return;
+        }
+
+        const streamRef = ref(db, "currentStream");
+        onValue(streamRef, (snapshot) => {
+            const data = snapshot.val();
+            if (data && data.url) {
+                loadStream(data.url);
+            } else {
+                loadStream(null);
+            }
+        });
+    }
+
+    // ============================================================
+    //  АДМИН-ПАНЕЛЬ
+    // ============================================================
+    let isAdmin = false;
+
+    function checkAdminRoute() {
+        if (window.location.hash === "#admin") {
+            document.getElementById("admin-panel").classList.add("active");
+            document.getElementById("viewer-page").style.display = "none";
+        } else {
+            document.getElementById("admin-panel").classList.remove("active");
+            document.getElementById("viewer-page").style.display = "";
+        }
+    }
+
+    window.addEventListener("hashchange", checkAdminRoute);
+
+    // Вход
+    document.getElementById("admin-login-btn").addEventListener("click", () => {
+        const pwd = document.getElementById("admin-password").value;
+        if (pwd === ADMIN_PASSWORD) {
+            isAdmin = true;
+            document.getElementById("admin-login").style.display = "none";
+            document.getElementById("admin-controls").style.display = "block";
+            loadSavedSources();
+        } else {
+            showAdminStatus("Неверный пароль", "error");
+        }
+    });
+
+    document.getElementById("admin-password").addEventListener("keydown", (e) => {
+        if (e.key === "Enter") document.getElementById("admin-login-btn").click();
+    });
+
+    // Закрыть
+    document.getElementById("admin-close-btn").addEventListener("click", () => {
+        window.location.hash = "";
+    });
+
+    // Добавить источник
+    document.getElementById("add-source-btn").addEventListener("click", () => {
+        if (!isFirebaseConfigured) {
+            showAdminStatus("Firebase не настроен", "error");
+            return;
+        }
+
+        const name = document.getElementById("source-name").value.trim();
+        const url = document.getElementById("source-url").value.trim();
+
+        if (!name || !url) {
+            showAdminStatus("Заполните оба поля", "error");
+            return;
+        }
+
+        const sourcesRef = ref(db, "sources");
+        push(sourcesRef, { name, url, createdAt: Date.now() }).then(() => {
+            document.getElementById("source-name").value = "";
+            document.getElementById("source-url").value = "";
+            showAdminStatus("Источник сохранён", "success");
+            loadSavedSources();
+        }).catch(err => {
+            showAdminStatus("Ошибка: " + err.message, "error");
+        });
+    });
+
+    // Загрузить источники
+    function loadSavedSources() {
+        if (!isFirebaseConfigured) return;
+
+        const sourcesRef = ref(db, "sources");
+        onValue(sourcesRef, (snapshot) => {
+            const data = snapshot.val();
+            const list = document.getElementById("saved-sources-list");
+            const select = document.getElementById("active-source-select");
+
+            list.innerHTML = "";
+            select.innerHTML = '<option value="">-- Нет активного --</option>';
+
+            let currentStreamUrl = "";
+            const currentRef = ref(db, "currentStream");
+
+            get(currentRef).then(cs => {
+                const cv = cs.val();
+                if (cv) currentStreamUrl = cv.url || "";
+
+                if (!data) return;
+
+                Object.keys(data).forEach(key => {
+                    const source = data[key];
+
+                    const item = document.createElement("div");
+                    item.className = "admin-saved-item";
+
+                    const nameSpan = document.createElement("span");
+                    nameSpan.className = "name" + (source.url === currentStreamUrl ? " active-source" : "");
+                    nameSpan.textContent = source.name + (source.url === currentStreamUrl ? " [LIVE]" : "");
+
+                    const selectBtn = document.createElement("button");
+                    selectBtn.textContent = "Включить";
+                    selectBtn.addEventListener("click", () => activateStream(source.url, source.name));
+
+                    const deleteBtn = document.createElement("button");
+                    deleteBtn.className = "delete-btn";
+                    deleteBtn.textContent = "Удалить";
+                    deleteBtn.addEventListener("click", () => deleteSource(key));
+
+                    item.appendChild(nameSpan);
+                    item.appendChild(selectBtn);
+                    item.appendChild(deleteBtn);
+                    list.appendChild(item);
+
+                    const opt = document.createElement("option");
+                    opt.value = source.url;
+                    opt.textContent = source.name;
+                    if (source.url === currentStreamUrl) opt.selected = true;
+                    select.appendChild(opt);
+                });
+            });
+        });
+    }
+
+    // Включить трансляцию
+    function activateStream(url, name) {
+        if (!isFirebaseConfigured) return;
+
+        set(ref(db, "currentStream"), {
+            url: url,
+            name: name || "Трансляция",
+            startedAt: Date.now()
+        }).then(() => {
+            showAdminStatus("Трансляция запущена: " + name, "success");
+        });
+    }
+
+    document.getElementById("go-live-btn").addEventListener("click", () => {
+        const select = document.getElementById("active-source-select");
+        const url = select.value;
+        const name = select.options[select.selectedIndex].text;
+
+        if (!url) {
+            showAdminStatus("Выберите источник", "error");
+            return;
+        }
+
+        activateStream(url, name);
+    });
+
+    // Остановить
+    document.getElementById("stop-stream-btn").addEventListener("click", () => {
+        if (!isFirebaseConfigured) return;
+
+        set(ref(db, "currentStream"), null).then(() => {
+            showAdminStatus("Трансляция остановлена", "success");
+        });
+    });
+
+    // Удалить источник
+    function deleteSource(key) {
+        if (!isFirebaseConfigured) return;
+        remove(ref(db, "sources/" + key)).then(() => {
+            showAdminStatus("Источник удалён", "success");
+        });
+    }
+
+    function showAdminStatus(msg, type) {
+        const el = document.getElementById("admin-status");
+        el.textContent = msg;
+        el.className = "admin-status " + type;
+        setTimeout(() => { el.textContent = ""; el.className = "admin-status"; }, 3000);
+    }
+
+    // ============================================================
+    //  ЗАПУСК
+    // ============================================================
+    checkAdminRoute();
+    setupViewerTracking();
+    subscribeToStream();
+</script>
 </body>
-</html>
+                    </html>
