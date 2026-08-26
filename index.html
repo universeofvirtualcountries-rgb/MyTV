@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Прямая трансляция</title>
+    <link href="https://vjs.zencdn.net/8.17.4/video-js.css" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+            background: #0d0d0d;
+            color: #ffffff;
+            font-family: system-ui, -apple-system, sans-serif;
+            overflow-x: hidden;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            min-height: 100dvh;
+            padding: 16px;
+            gap: 12px;
+        }
+
+        .live-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #ffffff;
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background: #e53e3e;
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .player-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 960px;
+            background: #000;
+        }
+
+        .video-js {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 9;
+        }
+
+        .video-js .vjs-tech {
+            object-fit: contain;
+            background: #000;
+        }
+
+        .vjs-big-play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.12);
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            backdrop-filter: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.2s ease;
+            z-index: 10;
+            line-height: 0;
+            padding: 0;
+            margin: 0;
+        }
+
+        .vjs-big-play-button:hover {
+            opacity: 0.7;
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+
+        .vjs-big-play-button .vjs-icon-placeholder {
+            line-height: 0;
+        }
+
+        .vjs-big-play-button .vjs-icon-placeholder::before {
+            content: "";
+            display: block;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 12px 0 12px 22px;
+            border-color: transparent transparent transparent rgba(255, 255, 255, 0.9);
+            margin-left: 4px;
+        }
+
+        .vjs-control-bar {
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+            height: 40px;
+        }
+
+        .vjs-control {
+            transition: opacity 0.2s ease;
+        }
+
+        .vjs-control:hover {
+            opacity: 0.7;
+        }
+
+        .vjs-play-control .vjs-icon-placeholder::before {
+            font-size: 1.4em;
+        }
+
+        .vjs-volume-panel .vjs-icon-placeholder::before {
+            font-size: 1.4em;
+        }
+
+        .vjs-fullscreen-control .vjs-icon-placeholder::before {
+            font-size: 1.2em;
+        }
+
+        .viewer-count {
+            font-size: 13px;
+            color: #888888;
+            letter-spacing: 0.3px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+                gap: 10px;
+            }
+
+            .live-indicator {
+                font-size: 12px;
+            }
+
+            .vjs-big-play-button {
+                width: 52px;
+                height: 52px;
+            }
+
+            .vjs-big-play-button .vjs-icon-placeholder::before {
+                border-width: 10px 0 10px 18px;
+                margin-left: 3px;
+            }
+
+            .vjs-control-bar {
+                height: 36px;
+            }
+
+            .viewer-count {
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .container {
+                padding: 8px;
+                gap: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="live-indicator">
+            <span class="live-dot"></span>
+            <span>ПРЯМОЙ ЭФИР</span>
+        </div>
+
+        <div class="player-wrapper">
+            <video-js
+                id="stream-player"
+                class="vjs-default-skin"
+                controls
+                preload="auto"
+                fluid="false"
+                data-setup='{}'
+            >
+                <!-- ЗАМЕНИТЕ ССЫЛКУ НИЖЕ НА ВАШ СОБСТВЕННЫЙ HLS-СТРИМ (.m3u8) -->
+                <source src="https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8" type="application/x-mpegURL">
+                <!-- КОНЕЦ БЛОКА ЗАМЕНЫ -->
+            </video-js>
+        </div>
+
+        <div class="viewer-count" id="viewer-count">Онлайн: Загрузка...</div>
+    </div>
+
+    <script src="https://vjs.zencdn.net/8.17.4/video.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var player = videojs('stream-player', {
+                html5: {
+                    vhs: {
+                        overrideNative: true
+                    },
+                    nativeAudioTracks: false,
+                    nativeVideoTracks: false
+                },
+                controlBar: {
+                    playToggle: true,
+                    volumePanel: { inline: false },
+                    fullscreenToggle: true,
+                    pictureInPictureToggle: false,
+                    remainingTimeDisplay: false,
+                    currentTimeDisplay: false,
+                    progressControl: false,
+                    liveDisplay: false,
+                    seekToLive: false,
+                    chaptersButton: false,
+                    subtitlesButton: false,
+                    audioTrackButton: false,
+                    playbackRateMenuButton: false
+                },
+                suppressNotSupportedError: true
+            });
+
+            player.ready(function () {
+                player.play().catch(function () {});
+            });
+
+            player.on('play', function () {
+                var bigPlay = player.el().querySelector('.vjs-big-play-button');
+                if (bigPlay) bigPlay.style.display = 'none';
+            });
+
+            player.on('pause', function () {
+                var bigPlay = player.el().querySelector('.vjs-big-play-button');
+                if (bigPlay) bigPlay.style.display = 'flex';
+            });
+
+            // Счетчик зрителей — замените на реальное API
+            var viewerEl = document.getElementById('viewer-count');
+            function fetchViewers() {
+                // ЗАМЕНИТЕ НА ВАШ РЕАЛЬНЫЙ ENDPOINT ДЛЯ ПОЛУЧЕНИЯ КОЛИЧЕСТВА ЗРИТЕЛЕЙ
+                // Пример: fetch('/api/viewers').then(...)
+                setTimeout(function () {
+                    var count = Math.floor(Math.random() * 500) + 50;
+                    viewerEl.textContent = 'Онлайн: ' + count;
+                }, 800);
+            }
+            fetchViewers();
+            setInterval(fetchViewers, 30000);
+        });
+    </script>
+</body>
+</html>
