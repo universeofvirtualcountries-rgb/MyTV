@@ -164,6 +164,7 @@ input[type="time"]{flex:0 0 auto}
 .auth-divider{display:flex;align-items:center;gap:12px;margin:16px 0;color:rgba(255,255,255,0.3);font-size:12px}
 .auth-divider::before,.auth-divider::after{content:"";flex:1;height:1px;background:rgba(255,255,255,0.1)}
 .auth-error{color:#ff3b30;font-size:13px;text-align:center;margin-top:12px;min-height:20px}
+.auth-warning{color:#ff9500;font-size:12px;text-align:center;margin-top:8px;min-height:16px}
 
 .limit-screen{position:fixed;inset:0;background:#0a0a0a;z-index:3000;display:none;align-items:center;justify-content:center;padding:20px;flex-direction:column;gap:16px;text-align:center}
 .limit-screen.active{display:flex}
@@ -215,11 +216,12 @@ input[type="time"]{flex:0 0 auto}
         <div class="auth-divider">или</div>
         <button class="auth-btn" id="auth-guest-btn" style="background:rgba(255,255,255,0.1);font-size:13px">Зайти как гость</button>
         <div class="auth-error" id="auth-error"></div>
+        <div class="auth-warning" id="auth-warning"></div>
     </div>
 </div>
 
 <div class="limit-screen" id="limit-screen">
-    <div class="limit-icon"></div>
+    <div class="limit-icon">⏳</div>
     <div class="limit-title">Трансляция переполнена</div>
     <div class="limit-text">Максимум 100 зрителей. Подожди, пока кто-нибудь выйдет.</div>
 </div>
@@ -245,7 +247,7 @@ input[type="time"]{flex:0 0 auto}
     <div class="viewer-count" id="viewer-count">Онлайн: --</div>
 </div>
 
-<button class="chat-toggle-btn" id="chat-toggle-btn" style="display:none">💬</button>
+<button class="chat-toggle-btn" id="chat-toggle-btn" style="display:none"></button>
 <div class="chat-popup" id="chat-popup">
     <div class="chat-popup-header"><h4>Чат</h4><button class="chat-popup-close" id="chat-popup-close">✕</button></div>
     <div class="chat-messages" id="chat-messages-viewer"></div>
@@ -326,7 +328,7 @@ input[type="time"]{flex:0 0 auto}
                 <div class="fx-block"><div class="fx-header"><span class="fx-title">Виньетка</span><div class="fx-toggle" data-fx="vignette"></div></div><div class="fx-body" data-fx-body="vignette"><div class="fx-row"><label>Сила</label><input type="range" id="fx-vignette-intensity" min="0" max="1" step="0.05" value="1"></div></div></div>
                 <div class="fx-block"><div class="fx-header"><span class="fx-title">Цветной оверлей</span><div class="fx-toggle" data-fx="colorOverlay"></div></div><div class="fx-body" data-fx-body="colorOverlay"><div class="fx-row"><label>Цвет</label><input type="color" id="fx-color-color" value="#ff0000"></div><div class="fx-row"><label>Прозрачн.</label><input type="range" id="fx-color-opacity" min="0" max="1" step="0.05" value="0.2"></div></div></div>
                 <div class="fx-block"><div class="fx-header"><span class="fx-title">Полоса TV</span><div class="fx-toggle" data-fx="oldtvBar"></div></div></div>
-                <div class="fx-block"><div class="fx-header"><span class="fx-title">Фото / лого</span><div class="fx-toggle" data-fx="image"></div></div><div class="fx-body" data-fx-body="image"><div class="fx-row"><label>URL</label><input type="text" id="fx-image-url" placeholder="https://..."></div><div class="fx-row"><label>Позиция</label><select id="fx-image-position"><option value="center center">Центр</option><option value="top left"></option><option value="top right">↗</option><option value="bottom left">↙</option><option value="bottom right">↘</option><option value="top center">Сверху</option><option value="bottom center">Снизу</option></select></div><div class="fx-row"><label>Прозрачн.</label><input type="range" id="fx-image-opacity" min="0" max="1" step="0.05" value="0.7"></div></div></div>
+                <div class="fx-block"><div class="fx-header"><span class="fx-title">Фото / лого</span><div class="fx-toggle" data-fx="image"></div></div><div class="fx-body" data-fx-body="image"><div class="fx-row"><label>URL</label><input type="text" id="fx-image-url" placeholder="https://..."></div><div class="fx-row"><label>Позиция</label><select id="fx-image-position"><option value="center center">Центр</option><option value="top left">↖</option><option value="top right">↗</option><option value="bottom left">↙</option><option value="bottom right">↘</option><option value="top center">Сверху</option><option value="bottom center">Снизу</option></select></div><div class="fx-row"><label>Прозрачн.</label><input type="range" id="fx-image-opacity" min="0" max="1" step="0.05" value="0.7"></div></div></div>
             </div>
         </div>
         <div class="admin-tab-content" data-content="themes">
@@ -379,7 +381,7 @@ input[type="time"]{flex:0 0 auto}
             <div class="admin-section">
                 <label>Готовые звуки</label>
                 <button class="btn-secondary" data-amb="rain" style="margin-bottom:6px">🌧 Дождь</button>
-                <button class="btn-secondary" data-amb="forest" style="margin-bottom:6px"> Лес</button>
+                <button class="btn-secondary" data-amb="forest" style="margin-bottom:6px">🌲 Лес</button>
                 <button class="btn-secondary" data-amb="ocean" style="margin-bottom:6px">🌊 Океан</button>
                 <button class="btn-secondary" data-amb="fire" style="margin-bottom:6px">🔥 Костёр</button>
                 <button class="btn-secondary" data-amb="cafe">☕ Кафе</button>
@@ -428,21 +430,25 @@ function hideLimit(){document.getElementById("limit-screen").classList.remove("a
 
 async function doLogin(){
     const email=document.getElementById("auth-email").value.trim().toLowerCase();
-    const nick=document.getElementById("auth-nick").value.trim();
     const pass=document.getElementById("auth-pass").value;
     const err=document.getElementById("auth-error");
+    const warn=document.getElementById("auth-warning");
     if(!email||!pass){err.textContent="Email и пароль обязательны";return}
-    err.textContent="Вход...";
+    err.textContent="Вход...";warn.textContent="";
     try{
         const cred=await signInWithEmailAndPassword(auth,email,pass);
         const uid=cred.user.uid;
-        let profile=(await get(ref(db,"users/"+uid))).val();
-        if(!profile){err.textContent="Профиль не найден. Проверь данные.";await auth.signOut();return}
-        me={uid,email:cred.user.email,name:profile.name,role:profile.role||"viewer",isAnon:cred.user.isAnonymous};
+        let profile=null;
+        try{profile=(await get(ref(db,"users/"+uid))).val()}catch(e){console.warn("БД недоступна:",e.message);warn.textContent="База данных недоступна. Ты всё равно можешь смотреть."}
+        if(!profile){
+            me={uid,email:cred.user.email,name:email.split("@")[0],role:"viewer",isAnon:cred.user.isAnonymous};
+            warn.textContent="Профиль не найден в БД, но вход выполнен.";
+        }else{
+            me={uid,email:cred.user.email,name:profile.name,role:profile.role||"viewer",isAnon:cred.user.isAnonymous};
+        }
         saveSession(me);
-        await registerViewer();
-        hideAuth();
-        initApp();
+        try{await registerViewer()}catch(e){}
+        setTimeout(()=>{hideAuth();initApp()},1500);
     }catch(e){err.textContent=friendlyError(e.code)}
 }
 
@@ -451,40 +457,45 @@ async function doRegister(){
     const nick=document.getElementById("auth-nick").value.trim();
     const pass=document.getElementById("auth-pass").value;
     const err=document.getElementById("auth-error");
+    const warn=document.getElementById("auth-warning");
     if(!email||!nick||!pass){err.textContent="Заполни все поля";return}
     if(pass.length<6){err.textContent="Пароль минимум 6 символов";return}
     if(nick.length<2){err.textContent="Ник минимум 2 символа";return}
-    err.textContent="Регистрация...";
+    err.textContent="Регистрация...";warn.textContent="";
     try{
         const cred=await createUserWithEmailAndPassword(auth,email,pass);
         const uid=cred.user.uid;
-        const usersSnap=await get(ref(db,"users"));
-        const isFirst=!usersSnap.exists();
-        await set(ref(db,"users/"+uid),{name:nick,email,role:isFirst?"admin":"viewer",createdAt:Date.now(),bio:""});
-        await set(ref(db,"accounts/"+uid),{name:nick,email,createdAt:Date.now()});
+        let isFirst=false;
+        try{
+            const usersSnap=await get(ref(db,"users"));
+            isFirst=!usersSnap.exists();
+            await set(ref(db,"users/"+uid),{name:nick,email,role:isFirst?"admin":"viewer",createdAt:Date.now(),bio:""});
+            await set(ref(db,"accounts/"+uid),{name:nick,email,createdAt:Date.now()});
+        }catch(dbErr){
+            console.warn("БД заблокирована:",dbErr.message);
+            warn.textContent="Аккаунт создан! БД недоступна, но ты можешь смотреть трансляцию.";
+        }
         me={uid,email,name:nick,role:isFirst?"admin":"viewer",isAnon:false};
         saveSession(me);
-        await registerViewer();
-        hideAuth();
-        initApp();
-        if(isFirst)alert("Ты первый пользователь — тебе назначена роль АДМИН. Добавь #admin к URL сайта для входа в админку.");
+        try{await registerViewer()}catch(e){}
+        setTimeout(()=>{hideAuth();initApp();if(isFirst)alert("Ты АДМИН! Добавь #admin к URL для админки.")},1500);
     }catch(e){err.textContent=friendlyError(e.code)}
 }
 
 async function doGuest(){
     const err=document.getElementById("auth-error");
-    err.textContent="Заходим как гость...";
+    const warn=document.getElementById("auth-warning");
+    err.textContent="Заходим как гость...";warn.textContent="";
     try{
         const cred=await signInAnonymously(auth);
         const uid=cred.user.uid;
         const guestName="Гость_"+uid.substr(-4);
-        await set(ref(db,"users/"+uid),{name:guestName,email:null,role:"viewer",createdAt:Date.now(),bio:"",isGuest:true});
+        try{await set(ref(db,"users/"+uid),{name:guestName,email:null,role:"viewer",createdAt:Date.now(),bio:"",isGuest:true})}catch(e){}
         me={uid,email:null,name:guestName,role:"viewer",isAnon:true};
         isGuest=true;
         saveSession(me);
-        await registerViewer();
-        hideAuth();
-        initApp();
+        try{await registerViewer()}catch(e){}
+        setTimeout(()=>{hideAuth();initApp()},1000);
     }catch(e){err.textContent=friendlyError(e.code)}
 }
 
@@ -505,11 +516,20 @@ let viewerRegistered=false;
 async function registerViewer(){
     if(!FB_OK||viewerRegistered||!me)return;
     viewerRegistered=true;
-    const vRef=ref(db,"viewers/"+me.uid);
-    await set(vRef,{joinedAt:Date.now(),name:me.name,role:me.role});
-    onDisconnect(vRef).remove();
+    try{
+        const vRef=ref(db,"viewers/"+me.uid);
+        await set(vRef,{joinedAt:Date.now(),name:me.name,role:me.role});
+        onDisconnect(vRef).remove();
+    }catch(e){console.warn("Счётчик недоступен:",e.message)}
 }
-async function checkLimit(){if(!FB_OK)return false;const snap=await get(ref(db,"viewers"));const v=snap.val();return v?Object.keys(v).length>=100:false}
+async function checkLimit(){
+    if(!FB_OK)return false;
+    try{
+        const snap=await get(ref(db,"viewers"));
+        const v=snap.val();
+        return v?Object.keys(v).length>=100:false;
+    }catch(e){return false}
+}
 
 const player=videojs("stream-player",{html5:{vhs:{overrideNative:true},nativeAudioTracks:false,nativeVideoTracks:false},controlBar:{playToggle:true,volumePanel:{inline:false},fullscreenToggle:true,pictureInPictureToggle:false,remainingTimeDisplay:false,currentTimeDisplay:false,progressControl:false,liveDisplay:false,seekToLive:false,chaptersButton:false,subtitlesButton:false,audioTrackButton:false,playbackRateMenuButton:false},suppressNotSupportedError:true});
 
@@ -554,7 +574,7 @@ let chatMsgs=[];
 function subscribeChat(){if(!FB_OK)return;onValue(ref(db,"chat"),s=>{chatMsgs=[];const d=s.val();if(!d){renderChat();return}Object.keys(d).sort((a,b)=>(d[a].ts||0)-(d[b].ts||0)).forEach(k=>chatMsgs.push({id:k,...d[k]}));renderChat()})}
 function renderChat(){
     const aEl=document.getElementById("chat-messages-admin"),vEl=document.getElementById("chat-messages-viewer");
-    const html=chatMsgs.map(m=>{const isOwn=m.userId===me?.uid,isMod=m.role==="moderator",isAdmin=m.role==="admin";const cls="chat-msg"+(isOwn?" own":"")+(isMod?" mod":"")+(isAdmin?" admin":"");const canDel=me&&(me.role==="admin"||me.role==="moderator");const pfx=getPrefix(m.userId,m.name);return`<div class="${cls}" data-id="${m.id}"><div class="chat-author-wrap">${pfx?`<span class="chat-prefix${pfx.rainbow?" rainbow":""}" style="${pfx.rainbow?"":"background:"+pfx.color+";color:#fff"}">${esc(pfx.text)}</span>`:""}<span class="chat-author">${esc(m.name||"Аноним")}</span></div><span class="chat-text">${esc(m.text)}</span><span class="chat-time">${fmtTime(m.ts)}</span>${canDel?`<button class="chat-del" onclick="window.delChatMsg('${m.id}')"></button>`:""}</div>`}).join("");
+    const html=chatMsgs.map(m=>{const isOwn=m.userId===me?.uid,isMod=m.role==="moderator",isAdmin=m.role==="admin";const cls="chat-msg"+(isOwn?" own":"")+(isMod?" mod":"")+(isAdmin?" admin":"");const canDel=me&&(me.role==="admin"||me.role==="moderator");const pfx=getPrefix(m.userId,m.name);return`<div class="${cls}" data-id="${m.id}"><div class="chat-author-wrap">${pfx?`<span class="chat-prefix${pfx.rainbow?" rainbow":""}" style="${pfx.rainbow?"":"background:"+pfx.color+";color:#fff"}">${esc(pfx.text)}</span>`:""}<span class="chat-author">${esc(m.name||"Аноним")}</span></div><span class="chat-text">${esc(m.text)}</span><span class="chat-time">${fmtTime(m.ts)}</span>${canDel?`<button class="chat-del" onclick="window.delChatMsg('${m.id}')">✕</button>`:""}</div>`}).join("");
     if(aEl)aEl.innerHTML=html;if(vEl)vEl.innerHTML=html;
     [aEl,vEl].forEach(el=>{if(el)el.scrollTop=el.scrollHeight});
 }
@@ -653,11 +673,12 @@ onAuthStateChanged(auth,async(user)=>{
             if(over){showLimit();setInterval(async()=>{if(!(await checkLimit())){hideLimit();initApp()}},10000);return}
             hideAuth();initApp();
         }else if(!me){
-            const prof=(await get(ref(db,"users/"+user.uid))).val();
+            let prof=null;
+            try{prof=(await get(ref(db,"users/"+user.uid))).val()}catch(e){}
             if(prof){me={uid:user.uid,email:user.email,name:prof.name,role:prof.role||"viewer",isAnon:user.isAnonymous};saveSession(me);const over=await checkLimit();if(over){showLimit();setInterval(async()=>{if(!(await checkLimit())){hideLimit();initApp()}},10000);return}hideAuth();initApp()}else{showAuth()}
         }
     }else{if(!me)showAuth()}
 });
 </script>
 </body>
-            </html>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                  </html>
