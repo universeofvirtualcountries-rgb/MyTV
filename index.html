@@ -275,6 +275,12 @@ input[type="time"]{flex:0 0 auto}
 .auth-card{padding:24px 20px}
 }
 
+.sched-days-bar{display:flex;gap:4px;padding:8px 12px 6px;border-bottom:1px solid rgba(255,255,255,0.06);background:rgba(0,0,0,0.25);overflow-x:auto}
+.day-tab{flex:1;min-width:36px;padding:7px 2px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:8px;color:rgba(255,255,255,0.55);font-size:12px;font-weight:700;cursor:pointer;text-align:center;transition:all .2s;font-family:inherit}
+.day-tab:hover{background:rgba(255,255,255,0.1);color:#fff}
+.day-tab.active{background:#007aff;border-color:#007aff;color:#fff}
+.day-tab.today{border-color:rgba(0,122,255,0.6)}
+.day-badge{font-size:10px;font-weight:700;padding:2px 5px;background:rgba(255,255,255,0.08);border-radius:4px;margin-right:6px;color:rgba(255,255,255,0.8)}
 </style>
 </head>
 <body class="theme-minimal">
@@ -373,6 +379,15 @@ input[type="time"]{flex:0 0 auto}
     <div class="modal-header">
       <h3>Телепрограмма</h3>
       <button class="modal-close" id="schedule-close">✕</button>
+    </div>
+    <div class="sched-days-bar" id="user-sched-days">
+      <button class="day-tab" data-day="1">Пн</button>
+      <button class="day-tab" data-day="2">Вт</button>
+      <button class="day-tab" data-day="3">Ср</button>
+      <button class="day-tab" data-day="4">Чт</button>
+      <button class="day-tab" data-day="5">Пт</button>
+      <button class="day-tab" data-day="6">Сб</button>
+      <button class="day-tab" data-day="7">Вс</button>
     </div>
     <div class="schedule-user-list" id="schedule-user-list"></div>
   </div>
@@ -578,34 +593,72 @@ input[type="time"]{flex:0 0 auto}
             </div>
         </div>
         <div class="admin-tab-content" data-content="schedule">
-            <!-- БЛОК АВТО-РАСПИСАНИЯ НА ВЕСЬ ДЕНЬ -->
+            <!-- БЛОК АВТО-РАСПИСАНИЯ НА НЕДЕЛИ / ВЕСЬ ДЕНЬ -->
             <div class="admin-section" style="background:rgba(0,122,255,0.08);border:1px solid rgba(0,122,255,0.25);border-radius:14px;padding:14px;margin-bottom:20px">
-                <label style="color:#007aff;font-size:12px;letter-spacing:1.5px;margin-bottom:6px">⚡ АВТО-РАСПИСАНИЕ НА ВЕСЬ ДЕНЬ (24 ЧАСА)</label>
+                <label style="color:#007aff;font-size:12px;letter-spacing:1.5px;margin-bottom:6px">⚡ АВТО-РАСПИСАНИЕ ПО ДНЯМ НЕДЕЛИ И НА НЕДЕЛИ ВПЕРЁД</label>
                 <div class="hint" style="color:rgba(255,255,255,0.7);margin-bottom:12px">
-                    В 1 клик генерирует беспрерывную сетку вещания на полные сутки из всех передач списка источников!
+                    Генерирует полную непрерывную сетку вещания из ваших передач на всю неделю (7 дней) или на выбранный день!
+                </div>
+                <div class="fx-row" style="margin-bottom:8px">
+                    <label style="min-width:105px">Охват:</label>
+                    <select id="auto-sched-target" style="flex:1">
+                        <option value="week" selected>📅 Вся неделя (7 дней по 24 часа)</option>
+                        <option value="1">Понедельник (24ч)</option>
+                        <option value="2">Вторник (24ч)</option>
+                        <option value="3">Среда (24ч)</option>
+                        <option value="4">Четверг (24ч)</option>
+                        <option value="5">Пятница (24ч)</option>
+                        <option value="6">Суббота (24ч)</option>
+                        <option value="7">Воскресенье (24ч)</option>
+                    </select>
                 </div>
                 <div class="fx-row" style="margin-bottom:10px">
-                    <label style="min-width:105px">Старт дня с:</label>
+                    <label style="min-width:105px">Старт с:</label>
                     <input type="time" id="auto-sched-start" value="06:00" style="width:110px">
-                    <label style="min-width:100px;margin-left:8px">Длина блока:</label>
+                    <label style="min-width:90px;margin-left:8px">Блок:</label>
                     <select id="auto-sched-duration" style="flex:1">
                         <option value="60">1 час (60 мин)</option>
                         <option value="90" selected>1.5 часа (90 мин)</option>
                         <option value="120">2 часа (120 мин)</option>
                     </select>
                 </div>
-                <div style="display:flex;gap:8px">
-                    <button class="btn-primary" id="btn-auto-schedule" style="background:#007aff;margin:0">⚡ Заполнить расписание на 24 часа</button>
-                    <button class="btn-danger" id="btn-clear-schedule" style="width:auto;margin:0;padding:0 14px">Очистить всё</button>
+                <div style="display:flex;gap:8px;flex-wrap:wrap">
+                    <button class="btn-primary" id="btn-auto-schedule" style="background:#007aff;margin:0;flex:2">⚡ Заполнить расписание</button>
+                    <button class="btn-danger" id="btn-clear-schedule" style="width:auto;margin:0;padding:0 14px;flex:1">Очистить</button>
                 </div>
             </div>
 
             <div class="admin-section">
-                <label>Расписание</label>
-                <div class="fx-row"><input type="time" id="sched-time" style="width:130px"><input type="text" id="sched-url" placeholder="Ссылка (MP4/HLS/YT)"></div>
+                <label>Добавить передачу вручную</label>
+                <div class="fx-row">
+                    <select id="sched-day" style="width:140px">
+                        <option value="all">Все дни (Ежедневно)</option>
+                        <option value="1">Понедельник</option>
+                        <option value="2">Вторник</option>
+                        <option value="3">Среда</option>
+                        <option value="4">Четверг</option>
+                        <option value="5">Пятница</option>
+                        <option value="6">Суббота</option>
+                        <option value="7">Воскресенье</option>
+                    </select>
+                    <input type="time" id="sched-time" style="width:110px">
+                    <input type="text" id="sched-url" placeholder="Ссылка (MP4/HLS/YT)" style="flex:1">
+                </div>
                 <div class="fx-row"><input type="text" id="sched-name" placeholder="Название программы"></div>
-                <button class="btn-primary" id="add-schedule-btn">Добавить</button>
-                <div id="schedule-list" style="margin-top:12px"></div>
+                <button class="btn-primary" id="add-schedule-btn">Добавить в расписание</button>
+                <div style="height:14px"></div>
+                <label>Текущая сетка вещания:</label>
+                <div class="sched-days-bar" id="admin-sched-days" style="margin-bottom:8px;border-radius:10px">
+                    <button class="day-tab active" data-admin-day="all">Все</button>
+                    <button class="day-tab" data-admin-day="1">Пн</button>
+                    <button class="day-tab" data-admin-day="2">Вт</button>
+                    <button class="day-tab" data-admin-day="3">Ср</button>
+                    <button class="day-tab" data-admin-day="4">Чт</button>
+                    <button class="day-tab" data-admin-day="5">Пт</button>
+                    <button class="day-tab" data-admin-day="6">Сб</button>
+                    <button class="day-tab" data-admin-day="7">Вс</button>
+                </div>
+                <div id="schedule-list" style="margin-top:8px"></div>
             </div>
         </div>
         <div class="admin-tab-content" data-content="chat">
@@ -669,272 +722,46 @@ input[type="time"]{flex:0 0 auto}
 </div>
 
 
-<script src="https://vjs.zencdn.net/8.17.4/video.min.js">
-// ПОДБОРКА МУЛЬТФИЛЬМОВ ДЛЯ ЭФИРА (7 ПЕРЕДАЧ)
-const CARTOON_PACK = [
-    { name: "Симпсоны — Сборник серий (на русском)", url: "https://www.youtube.com/watch?v=JkXSgzLeN3A" },
-    { name: "Лунтик — Все серии подряд (Марафон)", url: "https://www.youtube.com/watch?v=jO1t3Jo1sj8" },
-    { name: "LEGO Ниндзяго — Мастера Кружитцу (Серии подряд)", url: "https://www.youtube.com/watch?v=FqThDNh9Mkk" },
-    { name: "Смешарики 2D — Большой марафон (Все серии)", url: "https://www.youtube.com/watch?v=msg4kEAJ7mw" },
-    { name: "Смурфики — 60 минут приключений (на русском)", url: "https://www.youtube.com/watch?v=oAKxAJXjlms" },
-    { name: "Фиксики — Большой сборник серий (на русском)", url: "https://www.youtube.com/watch?v=qp0BM_y3vJk" },
-    { name: "Маша и Медведь — Золотой марафон (на русском)", url: "https://www.youtube.com/watch?v=MYbFnk9mEZo" }
-];
-
-document.getElementById("load-cartoon-pack")?.addEventListener("click", async () => {
-    if (!FB_OK || !me || me.role !== "admin") {
-        showStatus("Требуются права администратора", "error");
-        return;
-    }
-    try {
-        const ex = await withTimeout(get(ref(db, "sources")), 4000);
-        const vals = ex?.val() || {};
-        let addedCount = 0;
-        for (const item of CARTOON_PACK) {
-            let exists = false;
-            for (const k in vals) {
-                if (vals[k].url === item.url) { exists = true; break; }
-            }
-            if (!exists) {
-                await push(ref(db, "sources"), { ...item, createdAt: Date.now() });
-                addedCount++;
-            }
-        }
-        showStatus(`Добавлено передач в список: ${addedCount}`, "success");
-    } catch(e) {
-        showStatus("Ошибка: " + e.message, "error");
-    }
-});
-
-// Защита от перемотки (Режим настоящего телевидения)
-window.addEventListener("keydown", (e) => {
-    if (["ArrowLeft", "ArrowRight", "KeyJ", "KeyL"].includes(e.code)) {
-        if (document.activeElement?.tagName !== "INPUT" && document.activeElement?.tagName !== "TEXTAREA") {
-            e.preventDefault();
-        }
-    }
-});
-
-player.on("seeking", () => {
-    if (!me || (me.role !== "admin")) {
-        if (currentBroadcastStartedAt) {
-            const curElapsed = Math.max(0, Math.floor((Date.now() - currentBroadcastStartedAt) / 1000));
-            if (Math.abs(player.currentTime() - curElapsed) > 1.5) {
-                player.currentTime(curElapsed);
-            }
-        }
-    }
-});
-
-
-// ЗВУК / MUTE КНОПКА
-document.getElementById("mute-btn")?.addEventListener("click", () => {
-    const isCurrentlyUnmuted = localStorage.getItem("mytv_unmuted") === "true";
-    if (isCurrentlyUnmuted) {
-        muteTv();
-    } else {
-        unmuteTv();
-    }
-});
-
-// ПРИ КЛИКЕ НА ЭКРАННЫЙ ЗАМОК: АКТИВАЦИЯ ЗВУКА И ВИДЕО ПРИ ПЕРВОМ ТАПЕ
-document.getElementById("tv-screen-lock")?.addEventListener("click", () => {
-    if (localStorage.getItem("mytv_unmuted") !== "true") {
-        unmuteTv();
-    }
-    resumeLivePlayback();
-});
-
-// АВТО-РАСПИСАНИЕ НА 24 ЧАСА
-document.getElementById("btn-auto-schedule")?.addEventListener("click", async () => {
-    if (!FB_OK || !me || me.role !== "admin") {
-        showStatus("Требуются права администратора", "error");
-        return;
-    }
-    try {
-        const srcSnap = await withTimeout(get(ref(db, "sources")), 4000).catch(() => null);
-        let srcVals = srcSnap ? srcSnap.val() : null;
-        let sourceList = [];
-        if (srcVals) {
-            sourceList = Object.values(srcVals);
-        }
-        if (sourceList.length === 0) {
-            sourceList = CARTOON_PACK;
-        }
-
-        const startTime = document.getElementById("auto-sched-start")?.value || "06:00";
-        const durationMin = parseInt(document.getElementById("auto-sched-duration")?.value) || 90;
-
-        const [sh, sm] = startTime.split(":").map(Number);
-        let curMinutes = sh * 60 + sm;
-        const slotsCount = Math.floor((24 * 60) / durationMin);
-
-        // Очищаем старую сетку
-        await set(ref(db, "schedule"), null);
-
-        let added = 0;
-        for (let i = 0; i < slotsCount; i++) {
-            const dayMin = curMinutes % (24 * 60);
-            const h = Math.floor(dayMin / 60);
-            const m = dayMin % 60;
-            const timeStr = `${h < 10 ? '0' : ''}${h}:${m < 10 ? '0' : ''}${m}`;
-            const src = sourceList[i % sourceList.length];
-
-            const newRef = push(ref(db, "schedule"));
-            await set(newRef, {
-                time: timeStr,
-                name: src.name,
-                url: src.url
-            });
-            curMinutes += durationMin;
-            added++;
-        }
-
-        showStatus(`Готово! Заполнено расписание: ${added} передач на 24 часа!`, "success");
-    } catch (err) {
-        showStatus("Ошибка: " + err.message, "error");
-    }
-});
-
-document.getElementById("btn-clear-schedule")?.addEventListener("click", async () => {
-    if (!FB_OK || !me || me.role !== "admin") return;
-    if (!confirm("Очистить всю текущую сетку расписания?")) return;
-    try {
-        await set(ref(db, "schedule"), null);
-        showStatus("Расписание очищено", "success");
-    } catch (err) {
-        showStatus("Ошибка: " + err.message, "error");
-    }
-});
-
-
-// --- ФОНОВОЕ ВОСПРОИЗВЕДЕНИЕ И АВТО-ВОЗОБНОВЛЕНИЕ ПРИ ВОЗВРАТЕ НА СТРАНИЦУ ---
-
-function resumeLivePlayback() {
-    if (isPaused) return; // Если эфир официально на паузе от администратора, не запускаем
-
-    const elapsed = currentBroadcastStartedAt ? Math.max(0, Math.floor((Date.now() - currentBroadcastStartedAt) / 1000)) : 0;
-    const yt = document.getElementById("yt-frame");
-    const sp = document.getElementById("stream-player");
-
-    // Если в эфире YouTube
-    if (yt && yt.style.display !== "none" && yt.src) {
-        try {
-            yt.contentWindow?.postMessage(JSON.stringify({ event: 'command', func: 'seekTo', args: [elapsed, true] }), '*');
-            yt.contentWindow?.postMessage(JSON.stringify({ event: 'command', func: 'playVideo' }), '*');
-            if (localStorage.getItem("mytv_unmuted") === "true") {
-                yt.contentWindow?.postMessage(JSON.stringify({ event: 'command', func: 'unMute' }), '*');
-            }
-        } catch(e) {}
-    }
-
-    // Если в эфире HTML5 / HLS видео
-    if (sp && sp.style.display !== "none" && player) {
-        try {
-            if (player.duration && player.duration() && elapsed < player.duration()) {
-                if (Math.abs(player.currentTime() - elapsed) > 3) {
-                    player.currentTime(elapsed);
-                }
-            }
-            if (player.paused && player.paused()) {
-                const playPromise = player.play();
-                if (playPromise !== undefined) {
-                    playPromise.catch(() => {
-                        // Если браузер заблокировал со звуком, продолжаем играть без звука
-                        player.muted(true);
-                        player.play().catch(() => {});
-                    });
-                }
-            }
-        } catch(e) {}
-    }
-
-    // Фоновая музыка
-    if (bgAudio && !bgAudio.paused) {
-        bgAudio.play().catch(() => {});
-    }
-
-    // Обновляем MediaSession
-    updateMediaSession();
-}
-
-function updateMediaSession() {
-    if ('mediaSession' in navigator && typeof window !== 'undefined' && 'MediaMetadata' in window) {
-        const titleEl = document.getElementById("stream-title-display");
-        const title = titleEl ? titleEl.textContent : "Прямой эфир MyTV";
-        navigator.mediaSession.metadata = new MediaMetadata({
-            title: title,
-            artist: "Телеканал MyTV",
-            album: "Прямой эфир"
-        });
-        navigator.mediaSession.playbackState = isPaused ? "paused" : "playing";
-        try {
-            navigator.mediaSession.setActionHandler('play', () => resumeLivePlayback());
-            navigator.mediaSession.setActionHandler('pause', () => {});
-        } catch(e) {}
-    }
-}
-
-// При возвращении на вкладку / разблокировке экрана / переключении из другого приложения
-document.addEventListener("visibilitychange", async () => {
-    if (document.visibilityState === "visible") {
-        resumeLivePlayback();
-    } else if (document.visibilityState === "hidden") {
-        // Если пользователь свернул вкладку, пробуем автоматический PiP (если поддерживается)
-        const v = document.querySelector("#stream-player video");
-        if (v && !v.paused && document.pictureInPictureEnabled && !document.pictureInPictureElement) {
-            try {
-                await v.requestPictureInPicture();
-            } catch(e) {}
-        }
-    }
-});
-
-window.addEventListener("focus", () => {
-    resumeLivePlayback();
-});
-
-window.addEventListener("pageshow", () => {
-    resumeLivePlayback();
-});
-
-// Глобальная функция включения звука
-function unmuteTv() {
-    localStorage.setItem("mytv_unmuted", "true");
-    if (player) player.muted(false);
-    const yt = document.getElementById("yt-frame");
-    if (yt && yt.contentWindow) {
-        yt.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'unMute' }), '*');
-        yt.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'playVideo' }), '*');
-    }
-    const txt = document.getElementById("mute-btn-text");
-    if (txt) txt.textContent = "Звук";
-}
-
-function muteTv() {
-    localStorage.setItem("mytv_unmuted", "false");
-    if (player) player.muted(true);
-    const yt = document.getElementById("yt-frame");
-    if (yt && yt.contentWindow) {
-        yt.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'mute' }), '*');
-    }
-    const txt = document.getElementById("mute-btn-text");
-    if (txt) txt.textContent = "Без звука";
-}
-
-</script>
-<script type="module">
+<script src="https://vjs.zencdn.net/8.17.4/video.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
+<script>
 
 const FB={apiKey:"AIzaSyBg3llrHWLdM-F7xyBF5OL0b1ivYuSBSvg",authDomain:"mytv-abbce.firebaseapp.com",databaseURL:"https://mytv-abbce-default-rtdb.europe-west1.firebasedatabase.app",projectId:"mytv-abbce",storageBucket:"mytv-abbce.firebasestorage.app",messagingSenderId:"581328764091",appId:"1:581328764091:web:a67e805f176f53335bfd9e",measurementId:"G-XQFXVTL204"};
 const AMBIENT={rain:"https://cdn.pixabay.com/download/audio/2022/07/04/audio_13b0c5b628.mp3",forest:"https://cdn.pixabay.com/download/audio/2021/09/06/audio_3456d1b0a6.mp3",ocean:"https://cdn.pixabay.com/download/audio/2022/02/07/audio_6e8b0a8c2e.mp3",fire:"https://cdn.pixabay.com/download/audio/2022/01/18/audio_d0a13f69d2.mp3",cafe:"https://cdn.pixabay.com/download/audio/2022/10/30/audio_347111d1a2.mp3"};
 const DEFAULT_SOURCES=[{name:"Mux Test",url:"https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8"},{name:"Mux Bunny",url:"https://test-streams.mux.dev/tos_ismc/main.m3u8"},{name:"Mux Sintel",url:"https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8"}];
 
-import{initializeApp}from"https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-import{getDatabase,ref,set,update,onValue,onDisconnect,remove,push,get}from"https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
-import{getAuth,signInWithEmailAndPassword,createUserWithEmailAndPassword,signInAnonymously,signOut,onAuthStateChanged, updateProfile}from"https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+// Universal Firebase Shim (работает и на http/https, и при прямом открытии file:/// без блокировок CORS)
+let db = null, auth = null, FB_OK = false;
 
-let db=null,auth=null,FB_OK=false;
-try{const app=initializeApp(FB);db=getDatabase(app);auth=getAuth(app);FB_OK=true;}catch(e){console.warn("Firebase init error:",e);}
+const ref = (database, path) => (database ? database.ref(path) : null);
+const set = (r, val) => (r ? r.set(val) : Promise.reject(new Error("DB not ready")));
+const update = (r, val) => (r ? r.update(val) : Promise.reject(new Error("DB not ready")));
+const get = (r) => (r ? r.once("value") : Promise.reject(new Error("DB not ready")));
+const remove = (r) => (r ? r.remove() : Promise.reject(new Error("DB not ready")));
+const push = (r, val) => (r ? (val !== undefined ? r.push(val) : r.push()) : null);
+const onValue = (r, cb) => (r ? r.on("value", cb) : null);
+const onDisconnect = (r) => (r ? r.onDisconnect() : { remove: () => {} });
+const signInWithEmailAndPassword = (a, em, pw) => a.signInWithEmailAndPassword(em, pw);
+const createUserWithEmailAndPassword = (a, em, pw) => a.createUserWithEmailAndPassword(em, pw);
+const signInAnonymously = (a) => a.signInAnonymously();
+const signOut = (a) => a.signOut();
+const onAuthStateChanged = (a, cb) => a.onAuthStateChanged(cb);
+const updateProfile = (u, prof) => u.updateProfile(prof);
+
+try {
+    if (typeof firebase !== "undefined") {
+        const app = firebase.initializeApp(FB);
+        db = firebase.database();
+        auth = firebase.auth();
+        FB_OK = true;
+    } else {
+        console.warn("Firebase scripts not yet loaded or blocked");
+    }
+} catch (e) {
+    console.warn("Firebase init error:", e);
+}
 
 let me=null;
 let appInitialized=false;
@@ -954,14 +781,17 @@ function showApp(){
 }
 
 function updateProfileBtn(){
-    const btn=document.getElementById("profile-btn");
-    if(!btn)return;
-    if(me&&!me.isAnon){
-        btn.textContent=(me.name||"?")[0].toUpperCase();
-        btn.classList.remove("anon");
-    }else{
-        btn.textContent="Войти";
-        btn.classList.add("anon");
+    const slot = document.getElementById("nav-avatar-slot");
+    if (slot) {
+        if (me && !me.isAnon) {
+            if (me.avatar) {
+                slot.innerHTML = `<img src="${esc(me.avatar)}" class="nav-avatar-img" alt="avatar">`;
+            } else {
+                slot.textContent = (me.name || "👤")[0].toUpperCase();
+            }
+        } else {
+            slot.textContent = "👤";
+        }
     }
 }
 
@@ -1632,47 +1462,117 @@ function subscribeSchedule(){
     });
 }
 
+const DAY_NAMES_RU = ["", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"];
+const DAY_FULL_RU = ["", "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"];
+
+function getTodayDayIndex() {
+    const d = new Date().getDay();
+    return d === 0 ? 7 : d; // 1 = Пн .. 7 = Вс
+}
+
+let userSelectedDay = getTodayDayIndex();
+let adminSelectedDay = "all";
+
+function evaluateSchedule(){
+    if(!schedData)return;
+    const now=new Date();
+    const curDay = getTodayDayIndex();
+    const cm=now.getHours()*60+now.getMinutes();
+
+    let best=null,bestD=999999;
+    for(const k in schedData){
+        const it=schedData[k];
+        // Подходит если день совпадает или передача ежедневная ('all' или не указан)
+        const matchDay = (!it.day || it.day === "all" || Number(it.day) === curDay);
+        if(!matchDay) continue;
+
+        const t=t2m(it.time);
+        const df=cm-t;
+        if(df>=0 && df<bestD){
+            best=it;
+            bestD=df;
+        }
+    }
+    if(best && best.url && best.name!==lastSchedName && bestD<120){
+        lastSchedName=best.name;
+        if(me && me.role==="admin"){
+            set(ref(db,"currentStream"),{
+                url:best.url,
+                name:best.name,
+                startedAt:Date.now() - bestD * 60 * 1000,
+                paused:false
+            }).catch(()=>{});
+        }else{
+            loadStream({
+                url: best.url,
+                name: best.name,
+                startedAt: Date.now() - bestD * 60 * 1000
+            });
+        }
+    }
+}
+
 function renderScheduleUI(){
     const userList = document.getElementById("schedule-user-list");
     const nextEl = document.getElementById("stream-next-display");
-    if(!schedData) return;
+    const currentSched = schedData || {};
 
-    const items = Object.keys(schedData).map(k => ({ id: k, ...schedData[k] }))
+    const todayDay = getTodayDayIndex();
+
+    // Обновляем активность кнопок дней в окне программы
+    document.querySelectorAll("#user-sched-days .day-tab").forEach(tab => {
+        const d = Number(tab.dataset.day);
+        tab.classList.toggle("today", d === todayDay);
+        tab.classList.toggle("active", d === userSelectedDay);
+    });
+
+    const allItems = Object.keys(currentSched).map(k => ({ id: k, ...currentSched[k] }))
         .sort((a, b) => t2m(a.time) - t2m(b.time));
 
+    // Находим "Далее" для сегодняшнего дня
+    const todayItems = allItems.filter(it => !it.day || it.day === "all" || Number(it.day) === todayDay);
     const now = new Date();
     const cm = now.getHours() * 60 + now.getMinutes();
 
     let curIdx = -1;
-    for(let i = 0; i < items.length; i++){
-        if(t2m(items[i].time) <= cm){
+    for(let i = 0; i < todayItems.length; i++){
+        if(t2m(todayItems[i].time) <= cm){
             curIdx = i;
         } else {
             break;
         }
     }
 
-    const nextItem = items[curIdx + 1] || items[0];
+    const nextItem = todayItems[curIdx + 1] || todayItems[0];
     if(nextEl){
         nextEl.textContent = nextItem ? (nextItem.time + " " + (nextItem.name || "")) : "—";
     }
 
+    // Рендерим передачи для выбранного пользователем дня недели
+    const displayItems = allItems.filter(it => !it.day || it.day === "all" || Number(it.day) === userSelectedDay);
+
     if(userList){
-        if(items.length === 0){
-            userList.innerHTML = '<div style="text-align:center;padding:24px;color:rgba(255,255,255,0.4)">Расписание пока не заполнено</div>';
+        if(displayItems.length === 0){
+            userList.innerHTML = `<div style="text-align:center;padding:28px 16px;color:rgba(255,255,255,0.4)">
+                На <strong>${DAY_FULL_RU[userSelectedDay]}</strong> передач не запланировано
+            </div>`;
         } else {
-            userList.innerHTML = items.map((it, idx) => {
+            userList.innerHTML = displayItems.map((it, idx) => {
                 let cls = "sched-item";
                 let badge = "";
-                if(idx === curIdx){
+                const isViewingToday = (userSelectedDay === todayDay);
+
+                if(isViewingToday && idx === curIdx){
                     cls += " now";
                     badge = '<span class="sched-badge">В эфире</span>';
-                } else if(idx === curIdx + 1 || (curIdx === items.length - 1 && idx === 0)){
+                } else if(isViewingToday && (idx === curIdx + 1 || (curIdx === displayItems.length - 1 && idx === 0))){
                     cls += " next";
                     badge = '<span class="sched-badge">Далее</span>';
                 }
+                const dayTag = (it.day && it.day !== "all" && it.day !== userSelectedDay) ? `<span class="day-badge">${DAY_NAMES_RU[it.day]}</span>` : "";
+
                 return `<div class="${cls}">
-                    <span class="sched-time">${esc(it.time)}</span>
+                    <span class="sched-time">${dayTag}${esc(it.time)}</span>
                     <span class="sched-title">${esc(it.name || "")}</span>
                     ${badge}
                 </div>`;
@@ -1680,36 +1580,6 @@ function renderScheduleUI(){
         }
     }
 }
-
-function evaluateSchedule(){
-    if(!schedData)return;
-    const now=new Date();
-    const cm=now.getHours()*60+now.getMinutes();
-    let best=null,bestD=999999;
-    for(const k in schedData){
-        const it=schedData[k];
-        const t=t2m(it.time);
-        const df=cm-t;
-        if(df>=0&&df<bestD){
-            best=it;
-            bestD=df;
-        }
-    }
-    if(best&&best.url&&best.name!==lastSchedName&&bestD<30){
-        lastSchedName=best.name;
-        if(me&&me.role==="admin"){
-            set(ref(db,"currentStream"),{
-                url:best.url,
-                name:best.name,
-                startedAt:Date.now(),
-                paused:false
-            }).catch(()=>{});
-        }else{
-            loadStream(best.url);
-        }
-    }
-}
-
 let platformTimer=null;
 function setupPlatform(){
     if(!FB_OK)return;
@@ -2251,7 +2121,7 @@ fxB.forEach(b=>{
 
 function updFx(k,c){
     if(!FB_OK||!me||me.role!=="admin")return;
-    const cur=fxState[k]||FX[k].def||{};
+    const cur=fxState[k]||(FX[k]&&FX[k].def)||{};
     set(ref(db,"effects/"+k),{...cur,...c}).catch(e=>showStatus("Ошибка: "+e.message,"error"));
 }
 
@@ -2306,25 +2176,90 @@ function loadSchedule(){
               list=document.getElementById("schedule-list");
         if(!list)return;
         list.innerHTML="";
-        if(!d)return;
-        Object.keys(d).forEach(k=>{
-            const it=d[k];
+        if(!d){
+            list.innerHTML='<div style="color:rgba(255,255,255,0.4);font-size:13px;padding:8px">Расписание пусто</div>';
+            return;
+        }
+
+        const items = Object.keys(d).map(k => ({ id: k, ...d[k] }))
+            .sort((a,b) => {
+                const dayA = (a.day && a.day !== "all") ? Number(a.day) : 0;
+                const dayB = (b.day && b.day !== "all") ? Number(b.day) : 0;
+                if(dayA !== dayB) return dayA - dayB;
+                return t2m(a.time) - t2m(b.time);
+            });
+
+        const filtered = items.filter(it => {
+            if(adminSelectedDay === "all") return true;
+            return it.day === "all" || Number(it.day) === Number(adminSelectedDay);
+        });
+
+        if(filtered.length === 0){
+            list.innerHTML='<div style="color:rgba(255,255,255,0.4);font-size:13px;padding:8px">На выбранный день передач нет</div>';
+            return;
+        }
+
+        filtered.forEach(it=>{
             const row=document.createElement("div");
             row.className="list-item";
-            row.innerHTML=`<span class="li-name">${esc(it.time)} — ${esc(it.name||"")}</span><button class="del">Удалить</button>`;
-            row.querySelector("button").onclick=()=>remove(ref(db,"schedule/"+k));
+            const dayLabel = (it.day && it.day !== "all") ? `<span class="day-badge">${DAY_NAMES_RU[it.day] || it.day}</span>` : `<span class="day-badge">Все дни</span>`;
+            row.innerHTML=`<span class="li-name">${dayLabel}<strong>${esc(it.time)}</strong> — ${esc(it.name||"")}</span><button class="del">Удалить</button>`;
+            row.querySelector("button").onclick=()=>remove(ref(db,"schedule/"+it.id));
             list.appendChild(row);
         });
     });
 }
+
+// Переключение дней в модалке программы зрителя
+document.querySelectorAll("#user-sched-days .day-tab").forEach(tab => {
+    tab.addEventListener("click", () => {
+        userSelectedDay = Number(tab.dataset.day);
+        renderScheduleUI();
+    });
+});
+
+// Фильтрация дней в админке
+document.querySelectorAll("#admin-sched-days .day-tab").forEach(tab => {
+    tab.addEventListener("click", () => {
+        document.querySelectorAll("#admin-sched-days .day-tab").forEach(t => t.classList.remove("active"));
+        tab.classList.add("active");
+        adminSelectedDay = tab.dataset.adminDay;
+        loadSchedule();
+    });
+});
+
+// Добавление передачи вручную с выбором дня недели
+document.getElementById("add-schedule-btn")?.addEventListener("click", () => {
+    const day = document.getElementById("sched-day")?.value || "all";
+    const time = document.getElementById("sched-time")?.value;
+    const name = document.getElementById("sched-name")?.value.trim();
+    const url = document.getElementById("sched-url")?.value.trim();
+    if(!time || !name){
+        showStatus("Время и название обязательны", "error");
+        return;
+    }
+    if(!FB_OK || !me || me.role !== "admin") return;
+
+    push(ref(db, "schedule"), {
+        day: day === "all" ? "all" : Number(day),
+        time,
+        name,
+        url: url || "",
+        createdAt: Date.now()
+    }).then(() => {
+        document.getElementById("sched-name").value = "";
+        document.getElementById("sched-url").value = "";
+        showStatus("Передача добавлена в расписание", "success");
+    }).catch(e => showStatus("Ошибка: " + e.message, "error"));
+});
 
 document.getElementById("chat-slow-mode")?.addEventListener("change",e=>{
     if(FB_OK&&me&&me.role==="admin"){
         set(ref(db,"settings/chatSlowMode"),parseInt(e.target.value)||0).catch(()=>{});
     }
 });
-document.getElementById("chat-mod-only")?.addEventListener("click",function(){
-    this.classList.toggle("on");
+document.getElementById("chat-mod-only")?.addEventListener("click",function(e){
+    const t=e.currentTarget||this;if(t)t.classList.toggle("on");
     if(FB_OK&&me&&me.role==="admin"){
         set(ref(db,"settings/chatModOnly"),this.classList.contains("on")).catch(()=>{});
     }
@@ -2354,8 +2289,8 @@ document.getElementById("sound-stop-btn")?.addEventListener("click",()=>{
 document.getElementById("sound-volume")?.addEventListener("input",e=>{
     if(bgAudio)bgAudio.volume=parseFloat(e.target.value);
 });
-document.getElementById("sound-loop")?.addEventListener("click",function(){
-    this.classList.toggle("on");
+document.getElementById("sound-loop")?.addEventListener("click",function(e){
+    const t=e.currentTarget||this;if(t)t.classList.toggle("on");
 });
 document.querySelectorAll("[data-amb]").forEach(btn=>btn.addEventListener("click",()=>{
     const k=btn.dataset.amb,u=AMBIENT[k];
@@ -2369,8 +2304,8 @@ document.querySelectorAll("[data-amb]").forEach(btn=>btn.addEventListener("click
 document.getElementById("prefix-email")?.addEventListener("input",updPrefixPreview);
 document.getElementById("prefix-text")?.addEventListener("input",updPrefixPreview);
 document.getElementById("prefix-color")?.addEventListener("input",updPrefixPreview);
-document.getElementById("prefix-rainbow")?.addEventListener("click",function(){
-    this.classList.toggle("on");
+document.getElementById("prefix-rainbow")?.addEventListener("click",function(e){
+    const t=e.currentTarget||this;if(t)t.classList.toggle("on");
     updPrefixPreview();
 });
 
@@ -2792,9 +2727,11 @@ navProfile?.addEventListener("click", () => {
 });
 
 navAdmin?.addEventListener("click", () => {
-    if (me && (me.role === "admin" || me.role === "mod")) {
+    if (me && (me.role === "admin" || me.role === "mod" || me.role === "moderator")) {
         setActiveNav(navAdmin);
         window.location.hash = "#admin";
+        document.getElementById("admin-panel")?.classList.add("active");
+        checkAdminRoute();
     } else {
         document.getElementById("admin-denied")?.classList.add("active");
     }
@@ -2977,7 +2914,7 @@ document.getElementById("tv-screen-lock")?.addEventListener("click", () => {
     resumeLivePlayback();
 });
 
-// АВТО-РАСПИСАНИЕ НА 24 ЧАСА
+// АВТО-РАСПИСАНИЕ ПО ДНЯМ НЕДЕЛИ И НА ВСЮ НЕДЕЛЮ (7 ДНЕЙ)
 document.getElementById("btn-auto-schedule")?.addEventListener("click", async () => {
     if (!FB_OK || !me || me.role !== "admin") {
         showStatus("Требуются права администратора", "error");
@@ -2994,35 +2931,77 @@ document.getElementById("btn-auto-schedule")?.addEventListener("click", async ()
             sourceList = CARTOON_PACK;
         }
 
+        const target = document.getElementById("auto-sched-target")?.value || "week";
         const startTime = document.getElementById("auto-sched-start")?.value || "06:00";
         const durationMin = parseInt(document.getElementById("auto-sched-duration")?.value) || 90;
 
         const [sh, sm] = startTime.split(":").map(Number);
-        let curMinutes = sh * 60 + sm;
-        const slotsCount = Math.floor((24 * 60) / durationMin);
+        const startMinutes = sh * 60 + sm;
+        const slotsPerDay = Math.floor((24 * 60) / durationMin);
 
-        // Очищаем старую сетку
-        await set(ref(db, "schedule"), null);
+        let totalAdded = 0;
 
-        let added = 0;
-        for (let i = 0; i < slotsCount; i++) {
-            const dayMin = curMinutes % (24 * 60);
-            const h = Math.floor(dayMin / 60);
-            const m = dayMin % 60;
-            const timeStr = `${h < 10 ? '0' : ''}${h}:${m < 10 ? '0' : ''}${m}`;
-            const src = sourceList[i % sourceList.length];
+        if (target === "week") {
+            // Очищаем расписание и заполняем все 7 дней недели с уникальной ротацией
+            await set(ref(db, "schedule"), null);
 
-            const newRef = push(ref(db, "schedule"));
-            await set(newRef, {
-                time: timeStr,
-                name: src.name,
-                url: src.url
-            });
-            curMinutes += durationMin;
-            added++;
+            for (let day = 1; day <= 7; day++) {
+                let curMinutes = startMinutes;
+                // Смещение индекса передач для каждого дня недели, чтобы сетка была разнообразной!
+                let dayOffset = (day - 1) * 2;
+
+                for (let s = 0; s < slotsPerDay; s++) {
+                    const dayMin = curMinutes % (24 * 60);
+                    const h = Math.floor(dayMin / 60);
+                    const m = dayMin % 60;
+                    const timeStr = `${h < 10 ? '0' : ''}${h}:${m < 10 ? '0' : ''}${m}`;
+                    const src = sourceList[(dayOffset + s) % sourceList.length];
+
+                    const newRef = push(ref(db, "schedule"));
+                    await set(newRef, {
+                        day: day,
+                        time: timeStr,
+                        name: src.name,
+                        url: src.url
+                    });
+                    curMinutes += durationMin;
+                    totalAdded++;
+                }
+            }
+            showStatus(`Готово! Заполнена вся неделя: 7 дней, ${totalAdded} передач!`, "success");
+        } else {
+            // Заполнение одного выбранного дня
+            const dayNum = Number(target);
+            // Удаляем старые записи этого дня
+            const curSnap = await withTimeout(get(ref(db, "schedule")), 3000).catch(() => null);
+            const curVal = curSnap ? curSnap.val() : {};
+            for (const k in curVal) {
+                if (Number(curVal[k].day) === dayNum) {
+                    await remove(ref(db, `schedule/${k}`));
+                }
+            }
+
+            let curMinutes = startMinutes;
+            let dayOffset = (dayNum - 1) * 2;
+            for (let s = 0; s < slotsPerDay; s++) {
+                const dayMin = curMinutes % (24 * 60);
+                const h = Math.floor(dayMin / 60);
+                const m = dayMin % 60;
+                const timeStr = `${h < 10 ? '0' : ''}${h}:${m < 10 ? '0' : ''}${m}`;
+                const src = sourceList[(dayOffset + s) % sourceList.length];
+
+                const newRef = push(ref(db, "schedule"));
+                await set(newRef, {
+                    day: dayNum,
+                    time: timeStr,
+                    name: src.name,
+                    url: src.url
+                });
+                curMinutes += durationMin;
+                totalAdded++;
+            }
+            showStatus(`Заполнен день ${DAY_FULL_RU[dayNum]}: ${totalAdded} передач на 24 часа!`, "success");
         }
-
-        showStatus(`Готово! Заполнено расписание: ${added} передач на 24 часа!`, "success");
     } catch (err) {
         showStatus("Ошибка: " + err.message, "error");
     }
@@ -3030,10 +3009,25 @@ document.getElementById("btn-auto-schedule")?.addEventListener("click", async ()
 
 document.getElementById("btn-clear-schedule")?.addEventListener("click", async () => {
     if (!FB_OK || !me || me.role !== "admin") return;
-    if (!confirm("Очистить всю текущую сетку расписания?")) return;
+    const target = document.getElementById("auto-sched-target")?.value || "week";
+    const msg = target === "week" ? "Удалить расписание на всю неделю?" : `Очистить расписание на ${DAY_FULL_RU[target]}?`;
+    if (!confirm(msg)) return;
+
     try {
-        await set(ref(db, "schedule"), null);
-        showStatus("Расписание очищено", "success");
+        if (target === "week") {
+            await set(ref(db, "schedule"), null);
+            showStatus("Вся неделя очищена", "success");
+        } else {
+            const dayNum = Number(target);
+            const curSnap = await withTimeout(get(ref(db, "schedule")), 3000).catch(() => null);
+            const curVal = curSnap ? curSnap.val() : {};
+            for (const k in curVal) {
+                if (Number(curVal[k].day) === dayNum) {
+                    await remove(ref(db, `schedule/${k}`));
+                }
+            }
+            showStatus(`День ${DAY_FULL_RU[dayNum]} очищен`, "success");
+        }
     } catch (err) {
         showStatus("Ошибка: " + err.message, "error");
     }
@@ -3155,5 +3149,5 @@ function muteTv() {
 }
 
 </script>
-<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a31e113d1a7bd9d6',t:'MTc4Nzg2NTA3Mg=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a31e6ecbe913fe50',t:'MTc4Nzg2ODkwNA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
