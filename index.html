@@ -82,8 +82,9 @@ body.theme-neon{background:radial-gradient(ellipse at top,#12001f 0%,#050510 100
 @keyframes glitchCyan{0%,100%{transform:translate(0,0)}25%{transform:translate(3px,-2px)}50%{transform:translate(-4px,1px)}75%{transform:translate(2px,-3px)}}
 .fx-color-overlay{position:absolute;inset:0;opacity:0;background:var(--fx-color,#ff0000);mix-blend-mode:multiply}
 .fx-color-overlay.active{opacity:var(--fx-opacity,0.2)}
-.fx-image{position:absolute;opacity:0;background-size:contain;background-repeat:no-repeat;background-position:var(--fx-img-pos,center center);width:100%;height:100%;background-image:var(--fx-img-url,none)}
-.fx-image.active{opacity:var(--fx-opacity,0.7)}
+.fx-image{position:absolute;opacity:0;pointer-events:none;background-size:contain;background-repeat:no-repeat;background-position:center center;background-image:var(--fx-img-url,none);width:var(--fx-img-size,80px);height:var(--fx-img-size,80px);z-index:24;transition:opacity .2s,width .15s,height .15s}
+.fx-image.active{opacity:var(--fx-opacity,0.85)}
+.tv-screen-lock{position:absolute;inset:0;width:100%;height:100%;z-index:26;background:transparent;pointer-events:auto;cursor:default;touch-action:manipulation;-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
 .fx-marquee{position:absolute;bottom:8%;left:0;width:100%;height:44px;background:rgba(0,0,0,0.75);border-top:2px solid var(--fx-marquee-color,#ff3b30);border-bottom:2px solid var(--fx-marquee-color,#ff3b30);display:none;align-items:center;overflow:hidden}
 .fx-marquee.active{display:flex}
 .fx-marquee-track{display:inline-block;white-space:nowrap;color:var(--fx-marquee-color,#fff);font-size:20px;font-weight:700;letter-spacing:2px;padding-left:100%;animation:marqueeScroll var(--fx-marquee-speed,15s) linear infinite}
@@ -285,9 +286,7 @@ input[type="time"]{flex:0 0 auto}
     <div class="player-wrapper" id="player-wrapper">
         <video id="stream-player" class="video-js vjs-default-skin" controls preload="auto" playsinline webkit-playsinline></video>
         <iframe id="yt-frame" class="yt-player" sandbox="allow-scripts allow-same-origin allow-presentation" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" style="display:none"></iframe>
-        <div id="yt-blocker-top" class="yt-blocker-top" style="display:none" title="MyTV Эфир"></div>
-        <div id="yt-blocker-bottom" class="yt-blocker-bottom" style="display:none" title="MyTV Эфир"></div>
-        <div id="yt-blocker-seek" class="yt-blocker-seek" style="display:none" title="MyTV Эфир"></div>
+        <div id="tv-screen-lock" class="tv-screen-lock" title="Прямой эфир MyTV"></div>
         <div class="no-stream-msg" id="no-stream-msg" style="display:none">Трансляция недоступна</div>
         <div class="pause-overlay" id="pause-overlay"><div class="pause-icon">⏸</div><div class="pause-text">На паузе</div></div>
         <div class="effects-layer" id="effects-layer">
@@ -311,6 +310,10 @@ input[type="time"]{flex:0 0 auto}
             </div>
             <div class="stream-controls-group">
                 <div class="stream-timer-badge" id="stream-runtime" title="Время вещания">⏱ 00:00</div>
+                <button class="stream-btn" id="mute-btn" title="Вкл / выкл звук">
+                    <svg viewBox="0 0 24 24" id="mute-icon" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+                    <span id="mute-btn-text">Звук</span>
+                </button>
                 <button class="stream-btn" id="pip-btn" title="Картинка в картинке">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><rect x="12" y="9" width="8" height="6" rx="1"/></svg>
                     <span>PiP</span>
@@ -517,15 +520,43 @@ input[type="time"]{flex:0 0 auto}
                     <div class="fx-header"><span class="fx-title">Фото / лого поверх</span><div class="fx-toggle" data-fx="image"></div></div>
                     <div class="fx-body" data-fx-body="image">
                         <div class="fx-row">
-                            <label>Файл / URL</label>
+                            <label>Логотип (PNG):</label>
                             <div class="file-btn-wrap" style="flex:1">
-                                <input type="file" id="fx-image-file" accept="image/*" style="display:none">
-                                <button type="button" class="btn-upload" id="btn-upload-fximg">Галерея</button>
-                                <input type="text" id="fx-image-url" placeholder="https://... или файл">
+                                <input type="file" id="fx-image-file" accept="image/png,image/webp,image/svg+xml,image/*" style="display:none">
+                                <button type="button" class="btn-upload" id="btn-upload-fximg">Выбрать PNG</button>
+                                <input type="text" id="fx-image-url" placeholder="Или URL картинки без фона">
                             </div>
                         </div>
-                        <div class="fx-row"><label>Позиция</label><select id="fx-image-position"><option value="center center">Центр</option><option value="top left">↖</option><option value="top right">↗</option><option value="bottom left">↙</option><option value="bottom right">↘</option><option value="top center">Сверху</option><option value="bottom center">Снизу</option></select></div>
-                        <div class="fx-row"><label>Прозрачн.</label><input type="range" id="fx-image-opacity" min="0" max="1" step="0.05" value="0.7"></div>
+                        <div class="fx-row">
+                            <label>Позиция:</label>
+                            <select id="fx-image-position">
+                                <option value="top right">Сверху справа (классика ТВ)</option>
+                                <option value="top left">Сверху слева</option>
+                                <option value="bottom right">Снизу справа</option>
+                                <option value="bottom left">Снизу слева</option>
+                                <option value="center">По центру</option>
+                            </select>
+                        </div>
+                        <div class="fx-row">
+                            <label>Размер: <span id="fx-size-val" style="color:#007aff;font-weight:700">80px</span></label>
+                            <input type="range" id="fx-image-size" min="30" max="220" value="80">
+                        </div>
+                        <div class="fx-row">
+                            <label>Прозрачность:</label>
+                            <input type="range" id="fx-image-opacity" min="0.1" max="1" step="0.05" value="0.85">
+                        </div>
+                        <div class="fx-row">
+                            <label>Отступ X (сбоку):</label>
+                            <input type="range" id="fx-image-offset-x" min="0" max="60" value="16">
+                        </div>
+                        <div class="fx-row">
+                            <label>Отступ Y (высота):</label>
+                            <input type="range" id="fx-image-offset-y" min="0" max="60" value="16">
+                        </div>
+                        <div style="margin-top:8px;padding:10px;background:rgba(255,255,255,0.04);border:1px dashed rgba(255,255,255,0.15);border-radius:10px;text-align:center">
+                            <div style="font-size:11px;color:rgba(255,255,255,0.4);margin-bottom:6px">Предпросмотр логотипа:</div>
+                            <div id="fx-logo-preview" style="display:inline-block;max-width:140px;max-height:80px"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -547,6 +578,28 @@ input[type="time"]{flex:0 0 auto}
             </div>
         </div>
         <div class="admin-tab-content" data-content="schedule">
+            <!-- БЛОК АВТО-РАСПИСАНИЯ НА ВЕСЬ ДЕНЬ -->
+            <div class="admin-section" style="background:rgba(0,122,255,0.08);border:1px solid rgba(0,122,255,0.25);border-radius:14px;padding:14px;margin-bottom:20px">
+                <label style="color:#007aff;font-size:12px;letter-spacing:1.5px;margin-bottom:6px">⚡ АВТО-РАСПИСАНИЕ НА ВЕСЬ ДЕНЬ (24 ЧАСА)</label>
+                <div class="hint" style="color:rgba(255,255,255,0.7);margin-bottom:12px">
+                    В 1 клик генерирует беспрерывную сетку вещания на полные сутки из всех передач списка источников!
+                </div>
+                <div class="fx-row" style="margin-bottom:10px">
+                    <label style="min-width:105px">Старт дня с:</label>
+                    <input type="time" id="auto-sched-start" value="06:00" style="width:110px">
+                    <label style="min-width:100px;margin-left:8px">Длина блока:</label>
+                    <select id="auto-sched-duration" style="flex:1">
+                        <option value="60">1 час (60 мин)</option>
+                        <option value="90" selected>1.5 часа (90 мин)</option>
+                        <option value="120">2 часа (120 мин)</option>
+                    </select>
+                </div>
+                <div style="display:flex;gap:8px">
+                    <button class="btn-primary" id="btn-auto-schedule" style="background:#007aff;margin:0">⚡ Заполнить расписание на 24 часа</button>
+                    <button class="btn-danger" id="btn-clear-schedule" style="width:auto;margin:0;padding:0 14px">Очистить всё</button>
+                </div>
+            </div>
+
             <div class="admin-section">
                 <label>Расписание</label>
                 <div class="fx-row"><input type="time" id="sched-time" style="width:130px"><input type="text" id="sched-url" placeholder="Ссылка (MP4/HLS/YT)"></div>
@@ -670,6 +723,97 @@ player.on("seeking", () => {
                 player.currentTime(curElapsed);
             }
         }
+    }
+});
+
+
+// ЗВУК / MUTE КНОПКА
+let isTvMuted = false;
+document.getElementById("mute-btn")?.addEventListener("click", () => {
+    isTvMuted = !isTvMuted;
+    player.muted(isTvMuted);
+    const yt = document.getElementById("yt-frame");
+    if (yt && yt.contentWindow) {
+        yt.contentWindow.postMessage(JSON.stringify({
+            event: "command",
+            func: isTvMuted ? "mute" : "unMute"
+        }), "*");
+    }
+    const txt = document.getElementById("mute-btn-text");
+    if (txt) txt.textContent = isTvMuted ? "Вкл звук" : "Звук";
+});
+
+// ПРИ КЛИКЕ НА ЭКРАННЫЙ ЗАМОК: АКТИВАЦИЯ ЗВУКА И ВИДЕО ПРИ ПЕРВОМ ТАПЕ
+document.getElementById("tv-screen-lock")?.addEventListener("click", () => {
+    if (player && player.paused && player.paused()) {
+        player.play().catch(() => {});
+    }
+    if (player && player.muted && player.muted()) {
+        player.muted(false);
+        const txt = document.getElementById("mute-btn-text");
+        if (txt) txt.textContent = "Звук";
+    }
+});
+
+// АВТО-РАСПИСАНИЕ НА 24 ЧАСА
+document.getElementById("btn-auto-schedule")?.addEventListener("click", async () => {
+    if (!FB_OK || !me || me.role !== "admin") {
+        showStatus("Требуются права администратора", "error");
+        return;
+    }
+    try {
+        const srcSnap = await withTimeout(get(ref(db, "sources")), 4000).catch(() => null);
+        let srcVals = srcSnap ? srcSnap.val() : null;
+        let sourceList = [];
+        if (srcVals) {
+            sourceList = Object.values(srcVals);
+        }
+        if (sourceList.length === 0) {
+            sourceList = CARTOON_PACK;
+        }
+
+        const startTime = document.getElementById("auto-sched-start")?.value || "06:00";
+        const durationMin = parseInt(document.getElementById("auto-sched-duration")?.value) || 90;
+
+        const [sh, sm] = startTime.split(":").map(Number);
+        let curMinutes = sh * 60 + sm;
+        const slotsCount = Math.floor((24 * 60) / durationMin);
+
+        // Очищаем старую сетку
+        await set(ref(db, "schedule"), null);
+
+        let added = 0;
+        for (let i = 0; i < slotsCount; i++) {
+            const dayMin = curMinutes % (24 * 60);
+            const h = Math.floor(dayMin / 60);
+            const m = dayMin % 60;
+            const timeStr = `${h < 10 ? '0' : ''}${h}:${m < 10 ? '0' : ''}${m}`;
+            const src = sourceList[i % sourceList.length];
+
+            const newRef = push(ref(db, "schedule"));
+            await set(newRef, {
+                time: timeStr,
+                name: src.name,
+                url: src.url
+            });
+            curMinutes += durationMin;
+            added++;
+        }
+
+        showStatus(`Готово! Заполнено расписание: ${added} передач на 24 часа!`, "success");
+    } catch (err) {
+        showStatus("Ошибка: " + err.message, "error");
+    }
+});
+
+document.getElementById("btn-clear-schedule")?.addEventListener("click", async () => {
+    if (!FB_OK || !me || me.role !== "admin") return;
+    if (!confirm("Очистить всю текущую сетку расписания?")) return;
+    try {
+        await set(ref(db, "schedule"), null);
+        showStatus("Расписание очищено", "success");
+    } catch (err) {
+        showStatus("Ошибка: " + err.message, "error");
     }
 });
 
@@ -967,6 +1111,7 @@ function loadStream(streamData){
         const lt = document.getElementById("live-text");
         if(lt) lt.textContent = "НЕТ ЭФИРА";
         if(badgeEl){ badgeEl.textContent = "OFFLINE"; badgeEl.className = "stream-status-badge offline"; }
+        const tLock = document.getElementById("tv-screen-lock"); if(tLock) tLock.style.display = "none";
         if(titleEl) titleEl.textContent = "Нет активной трансляции";
         if(p) p.classList.remove("active");
         isPaused = false;
@@ -981,6 +1126,7 @@ function loadStream(streamData){
     const lt = document.getElementById("live-text");
     if(lt) lt.textContent = "ПРЯМОЙ ЭФИР";
     if(badgeEl){ badgeEl.textContent = "LIVE"; badgeEl.className = "stream-status-badge"; }
+    const tLock = document.getElementById("tv-screen-lock"); if(tLock) tLock.style.display = "block";
     if(titleEl) titleEl.textContent = name || "Прямой эфир";
     currentBroadcastStartedAt = startedAt || Date.now();
 
@@ -1176,13 +1322,49 @@ const FX={
     },
     image:{
         el:"fx-image",
-        def:{enabled:false,url:"",position:"center center",opacity:0.7},
+        def:{enabled:false,url:"",position:"top right",size:80,opacity:0.85,offsetX:16,offsetY:16},
         apply(el,c){
             if(c.url)el.style.setProperty("--fx-img-url",`url("${c.url}")`);
             else el.style.removeProperty("--fx-img-url");
-            el.style.setProperty("--fx-img-pos",c.position||"center center");
-            el.style.setProperty("--fx-opacity",c.opacity??0.7);
+            el.style.setProperty("--fx-opacity",c.opacity!==undefined?c.opacity:0.85);
+            el.style.setProperty("--fx-img-size",(c.size||80)+"px");
+
+            const pos = c.position || "top right";
+            const ox = (c.offsetX !== undefined ? c.offsetX : 16) + "px";
+            const oy = (c.offsetY !== undefined ? c.offsetY : 16) + "px";
+
+            el.style.top = "auto";
+            el.style.right = "auto";
+            el.style.bottom = "auto";
+            el.style.left = "auto";
+            el.style.transform = "none";
+
+            if(pos === "top right"){
+                el.style.top = oy;
+                el.style.right = ox;
+            }else if(pos === "top left"){
+                el.style.top = oy;
+                el.style.left = ox;
+            }else if(pos === "bottom right"){
+                el.style.bottom = oy;
+                el.style.right = ox;
+            }else if(pos === "bottom left"){
+                el.style.bottom = oy;
+                el.style.left = ox;
+            }else if(pos === "center"){
+                el.style.top = "50%";
+                el.style.left = "50%";
+                el.style.transform = "translate(-50%, -50%)";
+            }
             el.classList.toggle("active",!!c.enabled);
+
+            const prev = document.getElementById("fx-logo-preview");
+            if(prev){
+                if(c.url) prev.innerHTML = `<img src="${c.url}" style="max-width:120px;max-height:70px;object-fit:contain">`;
+                else prev.innerHTML = "";
+            }
+            const sVal = document.getElementById("fx-size-val");
+            if(sVal && c.size) sVal.textContent = c.size + "px";
         }
     }
 };
@@ -1211,6 +1393,28 @@ function syncAdminFxUI(){
         const isEnabled=!!state.enabled;
         if(toggle)toggle.classList.toggle("on",isEnabled);
         if(body)body.classList.toggle("open",isEnabled);
+    }
+    const imgSt = fxState["image"] || {};
+    const imgUrl = document.getElementById("fx-image-url");
+    if(imgUrl && imgSt.url !== undefined) imgUrl.value = imgSt.url || "";
+    const imgPos = document.getElementById("fx-image-position");
+    if(imgPos && imgSt.position) imgPos.value = imgSt.position;
+    const imgSize = document.getElementById("fx-image-size");
+    if(imgSize && imgSt.size) {
+        imgSize.value = imgSt.size;
+        const sVal = document.getElementById("fx-size-val");
+        if(sVal) sVal.textContent = imgSt.size + "px";
+    }
+    const imgOp = document.getElementById("fx-image-opacity");
+    if(imgOp && imgSt.opacity !== undefined) imgOp.value = imgSt.opacity;
+    const imgOx = document.getElementById("fx-image-offset-x");
+    if(imgOx && imgSt.offsetX !== undefined) imgOx.value = imgSt.offsetX;
+    const imgOy = document.getElementById("fx-image-offset-y");
+    if(imgOy && imgSt.offsetY !== undefined) imgOy.value = imgSt.offsetY;
+    const prev = document.getElementById("fx-logo-preview");
+    if(prev){
+        if(imgSt.url) prev.innerHTML = `<img src="${imgSt.url}" style="max-width:120px;max-height:70px;object-fit:contain">`;
+        else prev.innerHTML = "";
     }
     fxB.forEach(b=>{
         const inp=document.getElementById(b.id);
@@ -1902,7 +2106,10 @@ const fxB=[
     {id:"fx-color-opacity",fx:"colorOverlay",f:"opacity",n:1},
     {id:"fx-image-url",fx:"image",f:"url"},
     {id:"fx-image-position",fx:"image",f:"position"},
-    {id:"fx-image-opacity",fx:"image",f:"opacity",n:1}
+    {id:"fx-image-size",fx:"image",f:"size",n:1},
+    {id:"fx-image-opacity",fx:"image",f:"opacity",n:1},
+    {id:"fx-image-offset-x",fx:"image",f:"offsetX",n:1},
+    {id:"fx-image-offset-y",fx:"image",f:"offsetY",n:1}
 ];
 
 fxB.forEach(b=>{
@@ -2331,8 +2538,9 @@ function fmtSecs(s) {
     return `${m < 10 ? '0' : ''}${m}:${sec < 10 ? '0' : ''}${sec}`;
 }
 
-function compressImage(file, maxWidth = 400, maxHeight = 400, quality = 0.75) {
+function compressImage(file, maxWidth = 800, maxHeight = 800, quality = 0.85) {
     return new Promise((resolve, reject) => {
+        const isPng = file.type === "image/png" || file.type === "image/webp" || file.type === "image/svg+xml" || (file.name && file.name.toLowerCase().endsWith(".png"));
         const reader = new FileReader();
         reader.onload = (e) => {
             const img = new Image();
@@ -2340,22 +2548,25 @@ function compressImage(file, maxWidth = 400, maxHeight = 400, quality = 0.75) {
                 const canvas = document.createElement("canvas");
                 let w = img.width;
                 let h = img.height;
-                if (w > h) {
-                    if (w > maxWidth) {
+                if (w > maxWidth || h > maxHeight) {
+                    if (w > h) {
                         h = Math.round((h * maxWidth) / w);
                         w = maxWidth;
-                    }
-                } else {
-                    if (h > maxHeight) {
-                        w = Math.round((h * maxHeight) / h);
+                    } else {
+                        w = Math.round((w * maxHeight) / h);
                         h = maxHeight;
                     }
                 }
                 canvas.width = w;
                 canvas.height = h;
                 const ctx = canvas.getContext("2d");
+                ctx.clearRect(0, 0, w, h);
                 ctx.drawImage(img, 0, 0, w, h);
-                resolve(canvas.toDataURL("image/jpeg", quality));
+                if (isPng) {
+                    resolve(canvas.toDataURL("image/png"));
+                } else {
+                    resolve(canvas.toDataURL("image/jpeg", quality));
+                }
             };
             img.onerror = reject;
             img.src = e.target.result;
@@ -2626,6 +2837,97 @@ player.on("seeking", () => {
     }
 });
 
+
+// ЗВУК / MUTE КНОПКА
+let isTvMuted = false;
+document.getElementById("mute-btn")?.addEventListener("click", () => {
+    isTvMuted = !isTvMuted;
+    player.muted(isTvMuted);
+    const yt = document.getElementById("yt-frame");
+    if (yt && yt.contentWindow) {
+        yt.contentWindow.postMessage(JSON.stringify({
+            event: "command",
+            func: isTvMuted ? "mute" : "unMute"
+        }), "*");
+    }
+    const txt = document.getElementById("mute-btn-text");
+    if (txt) txt.textContent = isTvMuted ? "Вкл звук" : "Звук";
+});
+
+// ПРИ КЛИКЕ НА ЭКРАННЫЙ ЗАМОК: АКТИВАЦИЯ ЗВУКА И ВИДЕО ПРИ ПЕРВОМ ТАПЕ
+document.getElementById("tv-screen-lock")?.addEventListener("click", () => {
+    if (player && player.paused && player.paused()) {
+        player.play().catch(() => {});
+    }
+    if (player && player.muted && player.muted()) {
+        player.muted(false);
+        const txt = document.getElementById("mute-btn-text");
+        if (txt) txt.textContent = "Звук";
+    }
+});
+
+// АВТО-РАСПИСАНИЕ НА 24 ЧАСА
+document.getElementById("btn-auto-schedule")?.addEventListener("click", async () => {
+    if (!FB_OK || !me || me.role !== "admin") {
+        showStatus("Требуются права администратора", "error");
+        return;
+    }
+    try {
+        const srcSnap = await withTimeout(get(ref(db, "sources")), 4000).catch(() => null);
+        let srcVals = srcSnap ? srcSnap.val() : null;
+        let sourceList = [];
+        if (srcVals) {
+            sourceList = Object.values(srcVals);
+        }
+        if (sourceList.length === 0) {
+            sourceList = CARTOON_PACK;
+        }
+
+        const startTime = document.getElementById("auto-sched-start")?.value || "06:00";
+        const durationMin = parseInt(document.getElementById("auto-sched-duration")?.value) || 90;
+
+        const [sh, sm] = startTime.split(":").map(Number);
+        let curMinutes = sh * 60 + sm;
+        const slotsCount = Math.floor((24 * 60) / durationMin);
+
+        // Очищаем старую сетку
+        await set(ref(db, "schedule"), null);
+
+        let added = 0;
+        for (let i = 0; i < slotsCount; i++) {
+            const dayMin = curMinutes % (24 * 60);
+            const h = Math.floor(dayMin / 60);
+            const m = dayMin % 60;
+            const timeStr = `${h < 10 ? '0' : ''}${h}:${m < 10 ? '0' : ''}${m}`;
+            const src = sourceList[i % sourceList.length];
+
+            const newRef = push(ref(db, "schedule"));
+            await set(newRef, {
+                time: timeStr,
+                name: src.name,
+                url: src.url
+            });
+            curMinutes += durationMin;
+            added++;
+        }
+
+        showStatus(`Готово! Заполнено расписание: ${added} передач на 24 часа!`, "success");
+    } catch (err) {
+        showStatus("Ошибка: " + err.message, "error");
+    }
+});
+
+document.getElementById("btn-clear-schedule")?.addEventListener("click", async () => {
+    if (!FB_OK || !me || me.role !== "admin") return;
+    if (!confirm("Очистить всю текущую сетку расписания?")) return;
+    try {
+        await set(ref(db, "schedule"), null);
+        showStatus("Расписание очищено", "success");
+    } catch (err) {
+        showStatus("Ошибка: " + err.message, "error");
+    }
+});
+
 </script>
-<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a31dd13c99241ce4',t:'MTc4Nzg2MjQ1MA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</body>
 </html>
