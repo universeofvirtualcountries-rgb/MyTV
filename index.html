@@ -728,31 +728,21 @@ player.on("seeking", () => {
 
 
 // ЗВУК / MUTE КНОПКА
-let isTvMuted = false;
 document.getElementById("mute-btn")?.addEventListener("click", () => {
-    isTvMuted = !isTvMuted;
-    player.muted(isTvMuted);
-    const yt = document.getElementById("yt-frame");
-    if (yt && yt.contentWindow) {
-        yt.contentWindow.postMessage(JSON.stringify({
-            event: "command",
-            func: isTvMuted ? "mute" : "unMute"
-        }), "*");
+    const isCurrentlyUnmuted = localStorage.getItem("mytv_unmuted") === "true";
+    if (isCurrentlyUnmuted) {
+        muteTv();
+    } else {
+        unmuteTv();
     }
-    const txt = document.getElementById("mute-btn-text");
-    if (txt) txt.textContent = isTvMuted ? "Вкл звук" : "Звук";
 });
 
 // ПРИ КЛИКЕ НА ЭКРАННЫЙ ЗАМОК: АКТИВАЦИЯ ЗВУКА И ВИДЕО ПРИ ПЕРВОМ ТАПЕ
 document.getElementById("tv-screen-lock")?.addEventListener("click", () => {
-    if (player && player.paused && player.paused()) {
-        player.play().catch(() => {});
+    if (localStorage.getItem("mytv_unmuted") !== "true") {
+        unmuteTv();
     }
-    if (player && player.muted && player.muted()) {
-        player.muted(false);
-        const txt = document.getElementById("mute-btn-text");
-        if (txt) txt.textContent = "Звук";
-    }
+    resumeLivePlayback();
 });
 
 // АВТО-РАСПИСАНИЕ НА 24 ЧАСА
@@ -816,6 +806,121 @@ document.getElementById("btn-clear-schedule")?.addEventListener("click", async (
         showStatus("Ошибка: " + err.message, "error");
     }
 });
+
+
+// --- ФОНОВОЕ ВОСПРОИЗВЕДЕНИЕ И АВТО-ВОЗОБНОВЛЕНИЕ ПРИ ВОЗВРАТЕ НА СТРАНИЦУ ---
+
+function resumeLivePlayback() {
+    if (isPaused) return; // Если эфир официально на паузе от администратора, не запускаем
+
+    const elapsed = currentBroadcastStartedAt ? Math.max(0, Math.floor((Date.now() - currentBroadcastStartedAt) / 1000)) : 0;
+    const yt = document.getElementById("yt-frame");
+    const sp = document.getElementById("stream-player");
+
+    // Если в эфире YouTube
+    if (yt && yt.style.display !== "none" && yt.src) {
+        try {
+            yt.contentWindow?.postMessage(JSON.stringify({ event: 'command', func: 'seekTo', args: [elapsed, true] }), '*');
+            yt.contentWindow?.postMessage(JSON.stringify({ event: 'command', func: 'playVideo' }), '*');
+            if (localStorage.getItem("mytv_unmuted") === "true") {
+                yt.contentWindow?.postMessage(JSON.stringify({ event: 'command', func: 'unMute' }), '*');
+            }
+        } catch(e) {}
+    }
+
+    // Если в эфире HTML5 / HLS видео
+    if (sp && sp.style.display !== "none" && player) {
+        try {
+            if (player.duration && player.duration() && elapsed < player.duration()) {
+                if (Math.abs(player.currentTime() - elapsed) > 3) {
+                    player.currentTime(elapsed);
+                }
+            }
+            if (player.paused && player.paused()) {
+                const playPromise = player.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(() => {
+                        // Если браузер заблокировал со звуком, продолжаем играть без звука
+                        player.muted(true);
+                        player.play().catch(() => {});
+                    });
+                }
+            }
+        } catch(e) {}
+    }
+
+    // Фоновая музыка
+    if (bgAudio && !bgAudio.paused) {
+        bgAudio.play().catch(() => {});
+    }
+
+    // Обновляем MediaSession
+    updateMediaSession();
+}
+
+function updateMediaSession() {
+    if ('mediaSession' in navigator && typeof window !== 'undefined' && 'MediaMetadata' in window) {
+        const titleEl = document.getElementById("stream-title-display");
+        const title = titleEl ? titleEl.textContent : "Прямой эфир MyTV";
+        navigator.mediaSession.metadata = new MediaMetadata({
+            title: title,
+            artist: "Телеканал MyTV",
+            album: "Прямой эфир"
+        });
+        navigator.mediaSession.playbackState = isPaused ? "paused" : "playing";
+        try {
+            navigator.mediaSession.setActionHandler('play', () => resumeLivePlayback());
+            navigator.mediaSession.setActionHandler('pause', () => {});
+        } catch(e) {}
+    }
+}
+
+// При возвращении на вкладку / разблокировке экрана / переключении из другого приложения
+document.addEventListener("visibilitychange", async () => {
+    if (document.visibilityState === "visible") {
+        resumeLivePlayback();
+    } else if (document.visibilityState === "hidden") {
+        // Если пользователь свернул вкладку, пробуем автоматический PiP (если поддерживается)
+        const v = document.querySelector("#stream-player video");
+        if (v && !v.paused && document.pictureInPictureEnabled && !document.pictureInPictureElement) {
+            try {
+                await v.requestPictureInPicture();
+            } catch(e) {}
+        }
+    }
+});
+
+window.addEventListener("focus", () => {
+    resumeLivePlayback();
+});
+
+window.addEventListener("pageshow", () => {
+    resumeLivePlayback();
+});
+
+// Глобальная функция включения звука
+function unmuteTv() {
+    localStorage.setItem("mytv_unmuted", "true");
+    if (player) player.muted(false);
+    const yt = document.getElementById("yt-frame");
+    if (yt && yt.contentWindow) {
+        yt.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'unMute' }), '*');
+        yt.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'playVideo' }), '*');
+    }
+    const txt = document.getElementById("mute-btn-text");
+    if (txt) txt.textContent = "Звук";
+}
+
+function muteTv() {
+    localStorage.setItem("mytv_unmuted", "false");
+    if (player) player.muted(true);
+    const yt = document.getElementById("yt-frame");
+    if (yt && yt.contentWindow) {
+        yt.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'mute' }), '*');
+    }
+    const txt = document.getElementById("mute-btn-text");
+    if (txt) txt.textContent = "Без звука";
+}
 
 </script>
 <script type="module">
@@ -1138,9 +1243,25 @@ function loadStream(streamData){
         if(sp) sp.style.display = "none";
         if(yt){
             yt.style.display = "block";
-            const ytTarget = `https://www.youtube.com/embed/${ytId}?autoplay=1&mute=0&controls=0&disablekb=1&enablejsapi=1&rel=0&modestbranding=1&iv_load_policy=3&playsinline=1&start=${elapsed}`;
+            let shouldMute = localStorage.getItem("mytv_unmuted") !== "true";
+            const ytTarget = `https://www.youtube.com/embed/${ytId}?autoplay=1&mute=${shouldMute ? 1 : 0}&controls=0&disablekb=1&enablejsapi=1&rel=0&modestbranding=1&iv_load_policy=3&playsinline=1&start=${elapsed}`;
             if(!yt.src || !yt.src.includes(ytId)){
                 yt.src = ytTarget;
+                yt.onload = () => {
+                    setTimeout(() => {
+                        try {
+                            yt.contentWindow?.postMessage(JSON.stringify({ event: 'command', func: 'playVideo' }), '*');
+                            if (localStorage.getItem("mytv_unmuted") === "true") {
+                                yt.contentWindow?.postMessage(JSON.stringify({ event: 'command', func: 'unMute' }), '*');
+                            }
+                        } catch(e) {}
+                    }, 400);
+                };
+            } else {
+                try {
+                    yt.contentWindow?.postMessage(JSON.stringify({ event: 'command', func: 'seekTo', args: [elapsed, true] }), '*');
+                    yt.contentWindow?.postMessage(JSON.stringify({ event: 'command', func: 'playVideo' }), '*');
+                } catch(e) {}
             }
         }
         const bTop = document.getElementById("yt-blocker-top");
@@ -2839,31 +2960,21 @@ player.on("seeking", () => {
 
 
 // ЗВУК / MUTE КНОПКА
-let isTvMuted = false;
 document.getElementById("mute-btn")?.addEventListener("click", () => {
-    isTvMuted = !isTvMuted;
-    player.muted(isTvMuted);
-    const yt = document.getElementById("yt-frame");
-    if (yt && yt.contentWindow) {
-        yt.contentWindow.postMessage(JSON.stringify({
-            event: "command",
-            func: isTvMuted ? "mute" : "unMute"
-        }), "*");
+    const isCurrentlyUnmuted = localStorage.getItem("mytv_unmuted") === "true";
+    if (isCurrentlyUnmuted) {
+        muteTv();
+    } else {
+        unmuteTv();
     }
-    const txt = document.getElementById("mute-btn-text");
-    if (txt) txt.textContent = isTvMuted ? "Вкл звук" : "Звук";
 });
 
 // ПРИ КЛИКЕ НА ЭКРАННЫЙ ЗАМОК: АКТИВАЦИЯ ЗВУКА И ВИДЕО ПРИ ПЕРВОМ ТАПЕ
 document.getElementById("tv-screen-lock")?.addEventListener("click", () => {
-    if (player && player.paused && player.paused()) {
-        player.play().catch(() => {});
+    if (localStorage.getItem("mytv_unmuted") !== "true") {
+        unmuteTv();
     }
-    if (player && player.muted && player.muted()) {
-        player.muted(false);
-        const txt = document.getElementById("mute-btn-text");
-        if (txt) txt.textContent = "Звук";
-    }
+    resumeLivePlayback();
 });
 
 // АВТО-РАСПИСАНИЕ НА 24 ЧАСА
@@ -2928,6 +3039,121 @@ document.getElementById("btn-clear-schedule")?.addEventListener("click", async (
     }
 });
 
+
+// --- ФОНОВОЕ ВОСПРОИЗВЕДЕНИЕ И АВТО-ВОЗОБНОВЛЕНИЕ ПРИ ВОЗВРАТЕ НА СТРАНИЦУ ---
+
+function resumeLivePlayback() {
+    if (isPaused) return; // Если эфир официально на паузе от администратора, не запускаем
+
+    const elapsed = currentBroadcastStartedAt ? Math.max(0, Math.floor((Date.now() - currentBroadcastStartedAt) / 1000)) : 0;
+    const yt = document.getElementById("yt-frame");
+    const sp = document.getElementById("stream-player");
+
+    // Если в эфире YouTube
+    if (yt && yt.style.display !== "none" && yt.src) {
+        try {
+            yt.contentWindow?.postMessage(JSON.stringify({ event: 'command', func: 'seekTo', args: [elapsed, true] }), '*');
+            yt.contentWindow?.postMessage(JSON.stringify({ event: 'command', func: 'playVideo' }), '*');
+            if (localStorage.getItem("mytv_unmuted") === "true") {
+                yt.contentWindow?.postMessage(JSON.stringify({ event: 'command', func: 'unMute' }), '*');
+            }
+        } catch(e) {}
+    }
+
+    // Если в эфире HTML5 / HLS видео
+    if (sp && sp.style.display !== "none" && player) {
+        try {
+            if (player.duration && player.duration() && elapsed < player.duration()) {
+                if (Math.abs(player.currentTime() - elapsed) > 3) {
+                    player.currentTime(elapsed);
+                }
+            }
+            if (player.paused && player.paused()) {
+                const playPromise = player.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(() => {
+                        // Если браузер заблокировал со звуком, продолжаем играть без звука
+                        player.muted(true);
+                        player.play().catch(() => {});
+                    });
+                }
+            }
+        } catch(e) {}
+    }
+
+    // Фоновая музыка
+    if (bgAudio && !bgAudio.paused) {
+        bgAudio.play().catch(() => {});
+    }
+
+    // Обновляем MediaSession
+    updateMediaSession();
+}
+
+function updateMediaSession() {
+    if ('mediaSession' in navigator && typeof window !== 'undefined' && 'MediaMetadata' in window) {
+        const titleEl = document.getElementById("stream-title-display");
+        const title = titleEl ? titleEl.textContent : "Прямой эфир MyTV";
+        navigator.mediaSession.metadata = new MediaMetadata({
+            title: title,
+            artist: "Телеканал MyTV",
+            album: "Прямой эфир"
+        });
+        navigator.mediaSession.playbackState = isPaused ? "paused" : "playing";
+        try {
+            navigator.mediaSession.setActionHandler('play', () => resumeLivePlayback());
+            navigator.mediaSession.setActionHandler('pause', () => {});
+        } catch(e) {}
+    }
+}
+
+// При возвращении на вкладку / разблокировке экрана / переключении из другого приложения
+document.addEventListener("visibilitychange", async () => {
+    if (document.visibilityState === "visible") {
+        resumeLivePlayback();
+    } else if (document.visibilityState === "hidden") {
+        // Если пользователь свернул вкладку, пробуем автоматический PiP (если поддерживается)
+        const v = document.querySelector("#stream-player video");
+        if (v && !v.paused && document.pictureInPictureEnabled && !document.pictureInPictureElement) {
+            try {
+                await v.requestPictureInPicture();
+            } catch(e) {}
+        }
+    }
+});
+
+window.addEventListener("focus", () => {
+    resumeLivePlayback();
+});
+
+window.addEventListener("pageshow", () => {
+    resumeLivePlayback();
+});
+
+// Глобальная функция включения звука
+function unmuteTv() {
+    localStorage.setItem("mytv_unmuted", "true");
+    if (player) player.muted(false);
+    const yt = document.getElementById("yt-frame");
+    if (yt && yt.contentWindow) {
+        yt.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'unMute' }), '*');
+        yt.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'playVideo' }), '*');
+    }
+    const txt = document.getElementById("mute-btn-text");
+    if (txt) txt.textContent = "Звук";
+}
+
+function muteTv() {
+    localStorage.setItem("mytv_unmuted", "false");
+    if (player) player.muted(true);
+    const yt = document.getElementById("yt-frame");
+    if (yt && yt.contentWindow) {
+        yt.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'mute' }), '*');
+    }
+    const txt = document.getElementById("mute-btn-text");
+    if (txt) txt.textContent = "Без звука";
+}
+
 </script>
-</body>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a31e113d1a7bd9d6',t:'MTc4Nzg2NTA3Mg=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
