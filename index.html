@@ -275,7 +275,7 @@ input[type="time"]{flex:0 0 auto}
 <body class="theme-minimal">
 
 
-<div class="app" id="app" style="display:none">
+<div class="app" id="app">
     <div class="live-indicator" id="live-indicator"><span class="live-dot"></span><span id="live-text">ПРЯМОЙ ЭФИР</span></div>
     
     <div class="player-wrapper" id="player-wrapper">
@@ -1633,10 +1633,10 @@ async function checkAdminRoute(){
 
 window.addEventListener("hashchange",checkAdminRoute);
 
-document.getElementById("admin-close-btn").addEventListener("click",()=>{
+document.getElementById("admin-close-btn")?.addEventListener("click",()=>{
     window.location.hash="";
 });
-document.getElementById("admin-denied-close").addEventListener("click",()=>{
+document.getElementById("admin-denied-close")?.addEventListener("click",()=>{
     document.getElementById("admin-denied").classList.remove("active");
     window.location.hash="";
 });
@@ -1676,7 +1676,7 @@ document.querySelectorAll(".admin-tab").forEach(tab=>tab.addEventListener("click
     if(target)target.classList.add("active");
 }));
 
-document.getElementById("add-source-btn").addEventListener("click",()=>{
+document.getElementById("add-source-btn")?.addEventListener("click",()=>{
     const n=document.getElementById("source-name").value.trim(),
           u=document.getElementById("source-url").value.trim();
     if(!n||!u){
@@ -1751,7 +1751,7 @@ function activateStream(url,name){
     }).catch(e=>showStatus("Ошибка: "+e.message,"error"));
 }
 
-document.getElementById("go-live-btn").addEventListener("click",()=>{
+document.getElementById("go-live-btn")?.addEventListener("click",()=>{
     const s=document.getElementById("active-source-select");
     if(!s||!s.value){
         showStatus("Выбери источник","error");
@@ -1760,9 +1760,9 @@ document.getElementById("go-live-btn").addEventListener("click",()=>{
     activateStream(s.value,s.options[s.selectedIndex].text);
 });
 
-document.getElementById("pause-stream-btn").addEventListener("click",togglePause);
+document.getElementById("pause-stream-btn")?.addEventListener("click",togglePause);
 
-document.getElementById("stop-stream-btn").addEventListener("click",()=>{
+document.getElementById("stop-stream-btn")?.addEventListener("click",()=>{
     if(!me||me.role!=="admin"){
         showStatus("Нет прав","error");
         return;
@@ -1773,8 +1773,8 @@ document.getElementById("stop-stream-btn").addEventListener("click",()=>{
     }).catch(e=>showStatus("Ошибка: "+e.message,"error"));
 });
 
-document.getElementById("platform-mode").addEventListener("change",savePlatform);
-document.getElementById("platform-interval").addEventListener("change",savePlatform);
+document.getElementById("platform-mode")?.addEventListener("change",savePlatform);
+document.getElementById("platform-interval")?.addEventListener("change",savePlatform);
 function savePlatform(){
     if(!FB_OK||!me||me.role!=="admin")return;
     set(ref(db,"settings/platform"),{
@@ -1783,7 +1783,7 @@ function savePlatform(){
     }).catch(()=>{});
 }
 
-document.getElementById("load-default-sources").addEventListener("click",async()=>{
+document.getElementById("load-default-sources")?.addEventListener("click",async()=>{
     if(!FB_OK||!me||me.role!=="admin")return;
     try{
         const ex=await withTimeout(get(ref(db,"sources")),4000);
@@ -1847,8 +1847,8 @@ function updFx(k,c){
     set(ref(db,"effects/"+k),{...cur,...c}).catch(e=>showStatus("Ошибка: "+e.message,"error"));
 }
 
-document.getElementById("theme-select").addEventListener("change",e=>setTheme(e.target.value));
-document.getElementById("theme-auto-select").addEventListener("change",saveThemeAuto);
+document.getElementById("theme-select")?.addEventListener("change",e=>setTheme(e.target.value));
+document.getElementById("theme-auto-select")?.addEventListener("change",saveThemeAuto);
 ["tt-morning","tt-day","tt-evening","tt-night","tm-morning","tm-day","tm-evening","tm-night"].forEach(id=>{
     const el=document.getElementById(id);
     if(el)el.addEventListener("change",saveThemeAuto);
@@ -1875,7 +1875,7 @@ function saveThemeAuto(){
     }).catch(()=>{});
 }
 
-document.getElementById("add-schedule-btn").addEventListener("click",()=>{
+document.getElementById("add-schedule-btn")?.addEventListener("click",()=>{
     const t=document.getElementById("sched-time").value,
           u=document.getElementById("sched-url").value.trim(),
           n=document.getElementById("sched-name").value.trim();
@@ -1910,25 +1910,25 @@ function loadSchedule(){
     });
 }
 
-document.getElementById("chat-slow-mode").addEventListener("change",e=>{
+document.getElementById("chat-slow-mode")?.addEventListener("change",e=>{
     if(FB_OK&&me&&me.role==="admin"){
         set(ref(db,"settings/chatSlowMode"),parseInt(e.target.value)||0).catch(()=>{});
     }
 });
-document.getElementById("chat-mod-only").addEventListener("click",function(){
+document.getElementById("chat-mod-only")?.addEventListener("click",function(){
     this.classList.toggle("on");
     if(FB_OK&&me&&me.role==="admin"){
         set(ref(db,"settings/chatModOnly"),this.classList.contains("on")).catch(()=>{});
     }
 });
-document.getElementById("clear-chat-btn").addEventListener("click",()=>{
+document.getElementById("clear-chat-btn")?.addEventListener("click",()=>{
     if(!FB_OK||!me||me.role!=="admin")return;
     if(confirm("Очистить чат?")){
         set(ref(db,"chat"),null).then(()=>showStatus("Чат очищен","success")).catch(e=>showStatus("Ошибка: "+e.message,"error"));
     }
 });
 
-document.getElementById("sound-save-btn").addEventListener("click",()=>{
+document.getElementById("sound-save-btn")?.addEventListener("click",()=>{
     const u=document.getElementById("sound-url").value.trim(),
           v=parseFloat(document.getElementById("sound-volume").value)||0.3,
           l=document.getElementById("sound-loop").classList.contains("on");
@@ -1939,14 +1939,14 @@ document.getElementById("sound-save-btn").addEventListener("click",()=>{
     playBg(u,v,l);
     showStatus("Звук включён","success");
 });
-document.getElementById("sound-stop-btn").addEventListener("click",()=>{
+document.getElementById("sound-stop-btn")?.addEventListener("click",()=>{
     stopBg();
     showStatus("Остановлен","success");
 });
-document.getElementById("sound-volume").addEventListener("input",e=>{
+document.getElementById("sound-volume")?.addEventListener("input",e=>{
     if(bgAudio)bgAudio.volume=parseFloat(e.target.value);
 });
-document.getElementById("sound-loop").addEventListener("click",function(){
+document.getElementById("sound-loop")?.addEventListener("click",function(){
     this.classList.toggle("on");
 });
 document.querySelectorAll("[data-amb]").forEach(btn=>btn.addEventListener("click",()=>{
@@ -1959,9 +1959,9 @@ document.querySelectorAll("[data-amb]").forEach(btn=>btn.addEventListener("click
 }));
 
 document.getElementById("prefix-email")?.addEventListener("input",updPrefixPreview);
-document.getElementById("prefix-text").addEventListener("input",updPrefixPreview);
-document.getElementById("prefix-color").addEventListener("input",updPrefixPreview);
-document.getElementById("prefix-rainbow").addEventListener("click",function(){
+document.getElementById("prefix-text")?.addEventListener("input",updPrefixPreview);
+document.getElementById("prefix-color")?.addEventListener("input",updPrefixPreview);
+document.getElementById("prefix-rainbow")?.addEventListener("click",function(){
     this.classList.toggle("on");
     updPrefixPreview();
 });
@@ -1982,7 +1982,7 @@ function updPrefixPreview(){
     }
 }
 
-document.getElementById("prefix-save-btn").addEventListener("click",async()=>{
+document.getElementById("prefix-save-btn")?.addEventListener("click",async()=>{
     const email=document.getElementById("prefix-email").value.trim().toLowerCase();
     const txt=document.getElementById("prefix-text").value.trim();
     const col=document.getElementById("prefix-color").value;
@@ -2053,7 +2053,7 @@ function loadPrefixes(){
     });
 }
 
-document.getElementById("profile-btn").addEventListener("click",()=>{
+document.getElementById("profile-btn")?.addEventListener("click",()=>{
     if(me&&!me.isAnon){
         document.getElementById("profile-modal").classList.add("active");
     }else{
@@ -2063,15 +2063,15 @@ document.getElementById("profile-btn").addEventListener("click",()=>{
     }
 });
 
-document.getElementById("profile-close").addEventListener("click",()=>{
+document.getElementById("profile-close")?.addEventListener("click",()=>{
     document.getElementById("profile-modal").classList.remove("active");
 });
-document.getElementById("profile-bio-input").addEventListener("change",e=>{
+document.getElementById("profile-bio-input")?.addEventListener("change",e=>{
     if(FB_OK&&me)set(ref(db,"users/"+me.uid+"/bio"),e.target.value).catch(()=>{});
 });
-document.getElementById("logout-btn").addEventListener("click",doLogout);
+document.getElementById("logout-btn")?.addEventListener("click",doLogout);
 
-document.getElementById("auth-close").addEventListener("click",()=>{
+document.getElementById("auth-close")?.addEventListener("click",()=>{
     document.getElementById("auth-modal").classList.remove("active");
 });
 document.querySelectorAll(".auth-tab").forEach(tab=>tab.addEventListener("click",()=>{
@@ -2083,19 +2083,19 @@ document.querySelectorAll(".auth-tab").forEach(tab=>tab.addEventListener("click"
     document.getElementById("auth-warning").textContent="";
 }));
 
-document.getElementById("auth-login-btn").addEventListener("click",doLogin);
-document.getElementById("auth-reg-btn").addEventListener("click",doRegister);
-document.getElementById("auth-pass").addEventListener("keydown",e=>{if(e.key==="Enter")doLogin();});
-document.getElementById("auth-reg-pass").addEventListener("keydown",e=>{if(e.key==="Enter")doRegister();});
+document.getElementById("auth-login-btn")?.addEventListener("click",doLogin);
+document.getElementById("auth-reg-btn")?.addEventListener("click",doRegister);
+document.getElementById("auth-pass")?.addEventListener("keydown",e=>{if(e.key==="Enter")doLogin();});
+document.getElementById("auth-reg-pass")?.addEventListener("keydown",e=>{if(e.key==="Enter")doRegister();});
 
-document.getElementById("chat-toggle-btn").addEventListener("click",()=>document.getElementById("chat-popup").classList.toggle("active"));
-document.getElementById("chat-popup-close").addEventListener("click",()=>document.getElementById("chat-popup").classList.remove("active"));
-document.getElementById("chat-send-viewer").addEventListener("click",()=>{
+document.getElementById("chat-toggle-btn")?.addEventListener("click",()=>document.getElementById("chat-popup").classList.toggle("active"));
+document.getElementById("chat-popup-close")?.addEventListener("click",()=>document.getElementById("chat-popup").classList.remove("active"));
+document.getElementById("chat-send-viewer")?.addEventListener("click",()=>{
     const inp=document.getElementById("chat-input-viewer");
     sendChat(inp.value);
     inp.value="";
 });
-document.getElementById("chat-input-viewer").addEventListener("keydown",e=>{
+document.getElementById("chat-input-viewer")?.addEventListener("keydown",e=>{
     if(e.key==="Enter"){
         sendChat(e.target.value);
         e.target.value="";
@@ -2143,6 +2143,7 @@ function initApp(){
     },30000);
 }
 
+if (auth) {
 onAuthStateChanged(auth,async(user)=>{
     if(user){
         if(!me||me.uid!==user.uid){
@@ -2212,8 +2213,23 @@ onAuthStateChanged(auth,async(user)=>{
         }
     }
 });
-
-
+} else {
+    // Режим офлайн / гость при отсутствии подключения к Firebase Auth
+    me = {
+        uid: "guest_" + Math.random().toString(36).substr(2, 9),
+        email: null,
+        name: "Гость",
+        role: "viewer",
+        isAnon: true
+    };
+    showApp();
+    updateProfileBtn();
+    updateChatUI();
+    if (!appInitialized) {
+        appInitialized = true;
+        initApp();
+    }
+}
 
 // --- НОВЫЕ ХЕЛПЕРЫ И ФУНКЦИИ (YOUTUBE, PIP, ФАЙЛЫ, СИНХРОНИЗАЦИЯ) ---
 
@@ -2474,5 +2490,5 @@ document.getElementById("save-profile-btn")?.addEventListener("click", async () 
 });
 
 </script>
-</body>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a31dabdee88b0524',t:'MTc4Nzg2MDkyMA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
