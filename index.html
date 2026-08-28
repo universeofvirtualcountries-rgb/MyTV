@@ -281,6 +281,53 @@ input[type="time"]{flex:0 0 auto}
 .day-tab.active{background:#007aff;border-color:#007aff;color:#fff}
 .day-tab.today{border-color:rgba(0,122,255,0.6)}
 .day-badge{font-size:10px;font-weight:700;padding:2px 5px;background:rgba(255,255,255,0.08);border-radius:4px;margin-right:6px;color:rgba(255,255,255,0.8)}
+/* RATING BADGE & MODAL */
+.stream-rating-badge{display:inline-flex;align-items:center;gap:5px;background:rgba(255,193,7,0.15);border:1px solid rgba(255,193,7,0.35);color:#ffc107;padding:3px 10px;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;user-select:none;margin-left:6px}
+.stream-rating-badge:hover{background:rgba(255,193,7,0.25);transform:scale(1.04)}
+.stream-rating-badge .star-icon{font-size:14px;color:#ffc107}
+.stream-rating-badge .rating-count{font-size:11px;color:rgba(255,255,255,0.6);font-weight:400}
+
+.rating-modal-content{background:#18181c;border:1px solid rgba(255,255,255,0.1);border-radius:20px;width:100%;max-width:480px;max-height:85vh;overflow-y:auto;padding:22px;display:flex;flex-direction:column;gap:14px;box-shadow:0 20px 40px rgba(0,0,0,0.6)}
+.rating-hero{display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,0.03);padding:14px 18px;border-radius:14px;border:1px solid rgba(255,255,255,0.06)}
+.rating-big-num{font-size:36px;font-weight:900;color:#ffc107;line-height:1}
+.rating-hero-stars{color:#ffc107;font-size:18px;letter-spacing:2px}
+.rating-hero-sub{font-size:12px;color:rgba(255,255,255,0.5)}
+
+.interactive-stars{display:flex;gap:6px;font-size:32px;cursor:pointer;user-select:none;margin:6px 0}
+.interactive-stars .star{color:rgba(255,255,255,0.2);transition:all .15s}
+.interactive-stars .star.hover, .interactive-stars .star.active{color:#ffc107;transform:scale(1.15)}
+
+.reviews-list{display:flex;flex-direction:column;gap:10px;margin-top:6px;max-height:260px;overflow-y:auto;padding-right:4px}
+.review-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:6px}
+.review-header{display:flex;justify-content:space-between;align-items:center}
+.review-author{display:flex;align-items:center;gap:8px;font-weight:700;font-size:13px}
+.review-author-img{width:22px;height:22px;border-radius:50%;object-fit:cover;background:#333}
+.review-stars{color:#ffc107;font-size:13px}
+.review-date{font-size:11px;color:rgba(255,255,255,0.4)}
+.review-text{font-size:13px;color:rgba(255,255,255,0.85);line-height:1.4;word-break:break-word}
+
+/* PROFILE TABS & FRIENDS */
+.profile-tabs{display:flex;gap:6px;background:rgba(0,0,0,0.3);padding:4px;border-radius:12px;margin-bottom:14px;border:1px solid rgba(255,255,255,0.06)}
+.p-tab{flex:1;background:transparent;border:none;color:rgba(255,255,255,0.6);font-size:13px;font-weight:700;padding:8px 6px;border-radius:8px;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:6px}
+.p-tab.active{background:#007aff;color:#fff}
+.p-tab .badge{background:rgba(255,255,255,0.2);padding:1px 6px;border-radius:10px;font-size:10px}
+
+.friends-section{display:flex;flex-direction:column;gap:12px}
+.friend-add-bar{display:flex;gap:8px}
+.friend-add-bar input{flex:1;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:10px;color:#fff;padding:8px 12px;font-size:13px}
+.friend-add-bar input:focus{outline:none;border-color:#007aff}
+
+.friends-list{display:flex;flex-direction:column;gap:8px;max-height:240px;overflow-y:auto;padding-right:2px}
+.friend-card{display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:8px 12px}
+.friend-info{display:flex;align-items:center;gap:10px}
+.friend-avatar{width:34px;height:34px;border-radius:50%;background:#333;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:#fff;object-fit:cover}
+.friend-name{font-size:13px;font-weight:700;color:#fff}
+.friend-status{font-size:11px;color:#34c759}
+.friend-actions{display:flex;align-items:center;gap:6px}
+.btn-friend-action{background:rgba(255,255,255,0.08);border:none;color:rgba(255,255,255,0.7);padding:5px 9px;border-radius:6px;font-size:11px;cursor:pointer;transition:all .15s}
+.btn-friend-action:hover{background:rgba(255,59,48,0.2);color:#ff3b30}
+.btn-friend-accept{background:rgba(52,199,89,0.2);color:#34c759}
+.btn-friend-accept:hover{background:rgba(52,199,89,0.35);color:#fff}
 </style>
 </head>
 <body class="theme-minimal">
@@ -313,9 +360,18 @@ input[type="time"]{flex:0 0 auto}
             <div class="stream-title-group">
                 <span class="stream-status-badge" id="stream-badge">LIVE</span>
                 <span class="stream-title" id="stream-title-display">Прямой эфир</span>
+                <div class="stream-rating-badge" id="stream-rating-badge" title="Оценить передачу и почитать отзывы">
+                    <span class="star-icon">★</span>
+                    <span id="stream-rating-avg">—</span>
+                    <span class="rating-count" id="stream-rating-count">(0)</span>
+                </div>
             </div>
             <div class="stream-controls-group">
                 <div class="stream-timer-badge" id="stream-runtime" title="Время вещания">⏱ 00:00</div>
+                <button class="stream-btn" id="viewer-pause-btn" title="Пауза / Прямой эфир">
+                    <span id="viewer-pause-icon">⏸</span>
+                    <span id="viewer-pause-text">Пауза</span>
+                </button>
                 <button class="stream-btn" id="mute-btn" title="Вкл / выкл звук">
                     <svg viewBox="0 0 24 24" id="mute-icon" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
                     <span id="mute-btn-text">Звук</span>
@@ -373,6 +429,59 @@ input[type="time"]{flex:0 0 auto}
     <div class="chat-input-row"><input type="text" class="chat-input" id="chat-input-viewer" placeholder="Сообщение..." maxlength="200"><button class="chat-send" id="chat-send-viewer">→</button></div>
 </div>
 
+<!-- МОДАЛЬНОЕ ОКНО РЕЙТИНГА И ОТЗЫВОВ О ПЕРЕДАЧЕ -->
+<div class="modal-overlay" id="rating-modal">
+    <div class="rating-modal-content">
+        <div class="modal-header">
+            <h3>⭐ Рейтинг и отзывы</h3>
+            <button class="modal-close" id="rating-close">✕</button>
+        </div>
+        <div class="rating-hero">
+            <div>
+                <div class="rating-big-num" id="modal-rating-avg">—</div>
+                <div class="rating-hero-stars" id="modal-rating-stars">☆☆☆☆☆</div>
+                <div class="rating-hero-sub" id="modal-rating-sub">0 оценок</div>
+            </div>
+            <div style="text-align:right">
+                <div style="font-size:13px;font-weight:700;color:#fff;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" id="rating-modal-title">Прямой эфир</div>
+                <div style="font-size:11px;color:rgba(255,255,255,0.5)">Оценка зрителей MyTV</div>
+            </div>
+        </div>
+
+        <!-- СЕКЦИЯ ДЛЯ ВЫСТАВЛЕНИЯ ОЦЕНКИ -->
+        <div id="rating-form-section" style="background:rgba(255,255,255,0.03);padding:14px;border-radius:14px;border:1px solid rgba(255,255,255,0.06)">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+                <label style="font-size:12px;color:rgba(255,255,255,0.7);font-weight:700">ТВОЯ ОЦЕНКА:</label>
+                <span id="star-score-text" style="font-size:12px;color:#ffc107;font-weight:700">Выбери звёзды</span>
+            </div>
+            <div class="interactive-stars" id="interactive-stars">
+                <span class="star" data-star="1">★</span>
+                <span class="star" data-star="2">★</span>
+                <span class="star" data-star="3">★</span>
+                <span class="star" data-star="4">★</span>
+                <span class="star" data-star="5">★</span>
+            </div>
+            <textarea id="rating-comment-input" rows="2" maxlength="250" placeholder="Напиши отзыв о серии (необязательно)..." style="width:100%;background:rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.1);border-radius:10px;color:#fff;padding:8px 10px;font-size:13px;resize:none;margin-top:6px"></textarea>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px">
+                <span id="rating-status-msg" style="font-size:11px;color:rgba(255,255,255,0.5)">1 отзыв от аккаунта</span>
+                <button class="btn-primary" id="btn-submit-rating" style="margin:0;padding:6px 16px;width:auto;background:#ffc107;color:#000;font-weight:700">Оценить</button>
+            </div>
+        </div>
+
+        <div id="rating-anon-warning" style="display:none;background:rgba(255,193,7,0.1);border:1px solid rgba(255,193,7,0.25);border-radius:12px;padding:12px;text-align:center;font-size:13px;color:rgba(255,255,255,0.9)">
+            ⭐ Оценивать передачи и писать отзывы могут только зарегистрированные зрители.<br>
+            <button id="btn-rating-login" style="background:#ffc107;color:#000;border:none;font-weight:700;padding:6px 14px;border-radius:8px;margin-top:8px;cursor:pointer">Войти в профиль</button>
+        </div>
+
+        <div>
+            <label style="font-size:12px;color:rgba(255,255,255,0.5);letter-spacing:1px;font-weight:700">ОТЗЫВЫ ЗРИТЕЛЕЙ</label>
+            <div class="reviews-list" id="reviews-list">
+                <div style="text-align:center;padding:20px;color:rgba(255,255,255,0.4);font-size:13px">Пока нет отзывов. Будь первым!</div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- ПРОГРАММА ДЛЯ ВСЕХ ЗРИТЕЛЕЙ -->
 <div class="modal-overlay" id="schedule-modal">
   <div class="modal-card">
@@ -424,7 +533,13 @@ input[type="time"]{flex:0 0 auto}
     <div class="profile-card">
         <button class="profile-close" id="profile-close">✕</button>
         <div class="profile-banner" id="profile-banner"><div class="profile-avatar" id="profile-avatar">?</div></div>
-        <div class="profile-info">
+        <div class="profile-tabs">
+            <button class="p-tab active" id="ptab-btn-info" data-ptab="info">👤 Профиль</button>
+            <button class="p-tab" id="ptab-btn-friends" data-ptab="friends">👥 Друзья <span class="badge" id="friends-badge">0</span></button>
+        </div>
+
+        <!-- ВКЛАДКА ПРОФИЛЯ -->
+        <div class="profile-info" id="ptab-content-info">
             <div class="profile-name" id="profile-name">Ник</div>
             <div class="profile-role" id="profile-role">Зритель</div>
             <div class="profile-bio" id="profile-bio">Напиши о себе</div>
@@ -463,6 +578,29 @@ input[type="time"]{flex:0 0 auto}
                     </div>
                 </div>
                 <button class="btn-primary" id="save-profile-btn">Сохранить изменения</button>
+            </div>
+        </div>
+
+        <!-- ВКЛАДКА ДРУЗЕЙ -->
+        <div class="friends-section" id="ptab-content-friends" style="display:none;padding:0 4px">
+            <label style="font-size:12px;color:rgba(255,255,255,0.6);font-weight:700">ДОБАВИТЬ ДРУГА</label>
+            <div class="friend-add-bar">
+                <input type="text" id="friend-search-input" placeholder="Никнейм или ID друга...">
+                <button class="btn-primary" id="btn-add-friend" style="margin:0;width:auto;padding:0 14px">➕ Запрос</button>
+            </div>
+            <div id="friend-add-status" style="font-size:12px;min-height:16px"></div>
+
+            <!-- ВХОДЯЩИЕ ЗАЯВКИ -->
+            <div id="friend-requests-wrap" style="display:none">
+                <label style="font-size:12px;color:#007aff;font-weight:700">ВХОДЯЩИЕ ЗАЯВКИ (<span id="friend-req-count">0</span>)</label>
+                <div class="friends-list" id="friend-requests-list" style="max-height:130px;margin-bottom:10px"></div>
+            </div>
+
+            <label style="font-size:12px;color:rgba(255,255,255,0.6);font-weight:700">МОИ ДРУЗЬЯ (<span id="friends-total-count">0</span>)</label>
+            <div class="friends-list" id="friends-list">
+                <div style="text-align:center;padding:24px 10px;color:rgba(255,255,255,0.4);font-size:13px">
+                    У вас пока нет друзей.<br>Добавляйте зрителей по нику или из чата!
+                </div>
             </div>
         </div>
     </div>
@@ -518,7 +656,7 @@ input[type="time"]{flex:0 0 auto}
                 <div style="height:10px"></div>
                 <label>Источники по умолчанию</label>
                 <div class="hint">Тестовые HLS-стримы.</div>
-                <button class="btn-secondary" id="load-default-sources">Загрузить</button>
+                <button class="btn-secondary" id="load-default-sources" style="background:rgba(0,122,255,0.2);border-color:rgba(0,122,255,0.4);color:#fff">⚡ Загрузить мультфильмы в источники</button>
             </div>
         </div>
         <div class="admin-tab-content" data-content="effects">
@@ -730,7 +868,7 @@ input[type="time"]{flex:0 0 auto}
 
 const FB={apiKey:"AIzaSyBg3llrHWLdM-F7xyBF5OL0b1ivYuSBSvg",authDomain:"mytv-abbce.firebaseapp.com",databaseURL:"https://mytv-abbce-default-rtdb.europe-west1.firebasedatabase.app",projectId:"mytv-abbce",storageBucket:"mytv-abbce.firebasestorage.app",messagingSenderId:"581328764091",appId:"1:581328764091:web:a67e805f176f53335bfd9e",measurementId:"G-XQFXVTL204"};
 const AMBIENT={rain:"https://cdn.pixabay.com/download/audio/2022/07/04/audio_13b0c5b628.mp3",forest:"https://cdn.pixabay.com/download/audio/2021/09/06/audio_3456d1b0a6.mp3",ocean:"https://cdn.pixabay.com/download/audio/2022/02/07/audio_6e8b0a8c2e.mp3",fire:"https://cdn.pixabay.com/download/audio/2022/01/18/audio_d0a13f69d2.mp3",cafe:"https://cdn.pixabay.com/download/audio/2022/10/30/audio_347111d1a2.mp3"};
-const DEFAULT_SOURCES=[{name:"Mux Test",url:"https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8"},{name:"Mux Bunny",url:"https://test-streams.mux.dev/tos_ismc/main.m3u8"},{name:"Mux Sintel",url:"https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8"}];
+
 
 // Universal Firebase Shim (работает и на http/https, и при прямом открытии file:/// без блокировок CORS)
 let db = null, auth = null, FB_OK = false;
@@ -1017,6 +1155,11 @@ const player=videojs("stream-player",{
 
 let isPaused=false;
 function loadStream(streamData){
+    const sRatingKey = getCleanStreamRatingKey(
+        typeof streamData === "object" ? (streamData?.name || streamData?.title) : "",
+        typeof streamData === "string" ? streamData : streamData?.url
+    );
+    subscribeRatingsForStream(sRatingKey);
     const url = typeof streamData === "string" ? streamData : streamData?.url;
     const startedAt = typeof streamData === "object" ? streamData?.startedAt : null;
     const name = typeof streamData === "object" ? (streamData?.name || streamData?.title) : null;
@@ -1135,12 +1278,36 @@ function loadStream(streamData){
 function pauseStream(fromRemote=false){
     if(isPaused)return;
     isPaused=true;
-    player.pause();
-    document.getElementById("pause-overlay").classList.add("active");
-    document.getElementById("live-indicator").classList.add("paused");
+
+    // 1. Пауза HTML5 VideoJS
+    if (player && typeof player.pause === "function") {
+        try { player.pause(); } catch(e) {}
+    }
+    const nativeV = document.querySelector("#stream-player video");
+    if (nativeV) {
+        try { nativeV.pause(); } catch(e) {}
+    }
+
+    // 2. Пауза YouTube Iframe
+    const yt = document.getElementById("yt-frame");
+    if (yt && yt.contentWindow) {
+        try {
+            yt.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'pauseVideo' }), '*');
+        } catch(e) {}
+    }
+
+    // 3. UI индикаторы
+    document.getElementById("pause-overlay")?.classList.add("active");
+    document.getElementById("live-indicator")?.classList.add("paused");
+    const badgeEl = document.getElementById("stream-badge");
+    if (badgeEl) { badgeEl.textContent = "PAUSED"; badgeEl.className = "stream-status-badge paused"; }
     document.getElementById("live-text").textContent="НА ПАУЗЕ";
     const pBtn=document.getElementById("pause-stream-btn");
     if(pBtn)pBtn.textContent="▶ Продолжить";
+
+    if (navigator.mediaSession) {
+        navigator.mediaSession.playbackState = "paused";
+    }
 
     if(!fromRemote&&FB_OK&&me&&me.role==="admin"){
         set(ref(db,"currentStream/paused"),true).catch(()=>{});
@@ -1150,12 +1317,27 @@ function pauseStream(fromRemote=false){
 function resumeStream(fromRemote=false){
     if(!isPaused)return;
     isPaused=false;
-    document.getElementById("pause-overlay").classList.remove("active");
-    document.getElementById("live-indicator").classList.remove("paused");
+    document.getElementById("pause-overlay")?.classList.remove("active");
+    document.getElementById("live-indicator")?.classList.remove("paused");
+    const badgeEl = document.getElementById("stream-badge");
+    if (badgeEl) { badgeEl.textContent = "LIVE"; badgeEl.className = "stream-status-badge"; }
     document.getElementById("live-text").textContent="ПРЯМОЙ ЭФИР";
     const pBtn=document.getElementById("pause-stream-btn");
     if(pBtn)pBtn.textContent="⏸ Пауза";
-    player.play().catch(()=>{});
+
+    if (player && typeof player.play === "function") {
+        player.play().catch(()=>{});
+    }
+    const yt = document.getElementById("yt-frame");
+    if (yt && yt.style.display !== "none" && yt.contentWindow) {
+        try {
+            yt.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'playVideo' }), '*');
+        } catch(e) {}
+    }
+
+    if (navigator.mediaSession) {
+        navigator.mediaSession.playbackState = "playing";
+    }
 
     if(!fromRemote&&FB_OK&&me&&me.role==="admin"){
         set(ref(db,"currentStream/paused"),false).catch(()=>{});
@@ -2078,12 +2260,15 @@ document.getElementById("load-default-sources")?.addEventListener("click",async(
     }
 });
 
-document.querySelectorAll(".fx-toggle[data-fx]").forEach(t=>t.addEventListener("click",()=>{
-    const k=t.dataset.fx,
-          b=document.querySelector(`[data-fx-body="${k}"]`);
-    const on=t.classList.toggle("on");
-    if(b)b.classList.toggle("open",on);
-    updFx(k,{enabled:on});
+document.querySelectorAll(".fx-toggle[data-fx]").forEach(t => t.addEventListener("click", () => {
+    const k = t.dataset.fx,
+          b = document.querySelector(`[data-fx-body="${k}"]`);
+    const on = t.classList.toggle("on");
+    if (b) b.classList.toggle("open", on);
+    if (!fxState[k]) fxState[k] = {};
+    fxState[k].enabled = on;
+    renderFx(); // Мгновенное применение на экране
+    updFx(k, { enabled: on });
 }));
 
 const fxB=[
@@ -2103,20 +2288,23 @@ const fxB=[
     {id:"fx-image-offset-y",fx:"image",f:"offsetY",n:1}
 ];
 
-fxB.forEach(b=>{
-    const inp=document.getElementById(b.id);
-    if(!inp)return;
-    let t=null;
-    const h=()=>{
+fxB.forEach(b => {
+    const inp = document.getElementById(b.id);
+    if (!inp) return;
+    let t = null;
+    const h = () => {
+        let v = inp.value;
+        if (b.n) v = parseFloat(v);
+        if (!fxState[b.fx]) fxState[b.fx] = {};
+        fxState[b.fx][b.f] = v;
+        renderFx(); // Мгновенный предпросмотр на экране
         clearTimeout(t);
-        t=setTimeout(()=>{
-            let v=inp.value;
-            if(b.n)v=parseFloat(v);
-            updFx(b.fx,{[b.f]:v});
-        },200);
+        t = setTimeout(() => {
+            updFx(b.fx, { [b.f]: v });
+        }, 120);
     };
-    inp.addEventListener("input",h);
-    inp.addEventListener("change",h);
+    inp.addEventListener("input", h);
+    inp.addEventListener("change", h);
 });
 
 function updFx(k,c){
@@ -2840,15 +3028,20 @@ document.getElementById("save-profile-btn")?.addEventListener("click", async () 
 
 
 // ПОДБОРКА МУЛЬТФИЛЬМОВ ДЛЯ ЭФИРА (7 ПЕРЕДАЧ)
+// ПОДБОРКА МУЛЬТФИЛЬМОВ И ПЕРЕДАЧ (БЕЗ ТЕСТОВЫХ ВИДЕО)
 const CARTOON_PACK = [
-    { name: "Симпсоны — Сборник серий (на русском)", url: "https://www.youtube.com/watch?v=JkXSgzLeN3A" },
+    { name: "Смешарики 2D — Большой марафон", url: "https://www.youtube.com/watch?v=msg4kEAJ7mw" },
     { name: "Лунтик — Все серии подряд (Марафон)", url: "https://www.youtube.com/watch?v=jO1t3Jo1sj8" },
-    { name: "LEGO Ниндзяго — Мастера Кружитцу (Серии подряд)", url: "https://www.youtube.com/watch?v=FqThDNh9Mkk" },
-    { name: "Смешарики 2D — Большой марафон (Все серии)", url: "https://www.youtube.com/watch?v=msg4kEAJ7mw" },
+    { name: "LEGO Ниндзяго — Мастера Кружитцу", url: "https://www.youtube.com/watch?v=FqThDNh9Mkk" },
     { name: "Смурфики — 60 минут приключений (на русском)", url: "https://www.youtube.com/watch?v=oAKxAJXjlms" },
-    { name: "Фиксики — Большой сборник серий (на русском)", url: "https://www.youtube.com/watch?v=qp0BM_y3vJk" },
-    { name: "Маша и Медведь — Золотой марафон (на русском)", url: "https://www.youtube.com/watch?v=MYbFnk9mEZo" }
+    { name: "Фиксики — Большой сборник серий", url: "https://www.youtube.com/watch?v=qp0BM_y3vJk" },
+    { name: "Маша и Медведь — Золотой марафон", url: "https://www.youtube.com/watch?v=MYbFnk9mEZo" },
+    { name: "Симпсоны — Сборник лучших серий", url: "https://www.youtube.com/watch?v=fdd3O_DlA4I" },
+    { name: "Смешарики — Золотая коллекция", url: "https://www.youtube.com/watch?v=_bL0s9JRVRk" },
+    { name: "Лунтик — Новые серии подряд", url: "https://www.youtube.com/watch?v=PuHEtOGLjtw" },
+    { name: "LEGO Ниндзяго — Турнир стихий", url: "https://www.youtube.com/watch?v=KR7dTusscvk" }
 ];
+const DEFAULT_SOURCES = CARTOON_PACK;
 
 document.getElementById("load-cartoon-pack")?.addEventListener("click", async () => {
     if (!FB_OK || !me || me.role !== "admin") {
@@ -2908,6 +3101,7 @@ document.getElementById("mute-btn")?.addEventListener("click", () => {
 
 // ПРИ КЛИКЕ НА ЭКРАННЫЙ ЗАМОК: АКТИВАЦИЯ ЗВУКА И ВИДЕО ПРИ ПЕРВОМ ТАПЕ
 document.getElementById("tv-screen-lock")?.addEventListener("click", () => {
+    if (isPaused || isViewerLocalPaused) return;
     if (localStorage.getItem("mytv_unmuted") !== "true") {
         unmuteTv();
     }
@@ -2925,7 +3119,11 @@ document.getElementById("btn-auto-schedule")?.addEventListener("click", async ()
         let srcVals = srcSnap ? srcSnap.val() : null;
         let sourceList = [];
         if (srcVals) {
-            sourceList = Object.values(srcVals);
+            sourceList = Object.values(srcVals).filter(s => {
+                const n = (s.name || "").toLowerCase();
+                const u = (s.url || "").toLowerCase();
+                return !n.includes("mux") && !n.includes("test") && !u.includes("mux.dev") && !u.includes("akamaihd");
+            });
         }
         if (sourceList.length === 0) {
             sourceList = CARTOON_PACK;
@@ -3104,6 +3302,7 @@ function updateMediaSession() {
 // При возвращении на вкладку / разблокировке экрана / переключении из другого приложения
 document.addEventListener("visibilitychange", async () => {
     if (document.visibilityState === "visible") {
+        if (isPaused || isViewerLocalPaused) return;
         resumeLivePlayback();
     } else if (document.visibilityState === "hidden") {
         // Если пользователь свернул вкладку, пробуем автоматический PiP (если поддерживается)
@@ -3117,10 +3316,12 @@ document.addEventListener("visibilitychange", async () => {
 });
 
 window.addEventListener("focus", () => {
+    if (isPaused || isViewerLocalPaused) return;
     resumeLivePlayback();
 });
 
 window.addEventListener("pageshow", () => {
+    if (isPaused || isViewerLocalPaused) return;
     resumeLivePlayback();
 });
 
@@ -3148,6 +3349,512 @@ function muteTv() {
     if (txt) txt.textContent = "Без звука";
 }
 
+
+
+// ==========================================
+// СИСТЕМА РЕЙТИНГА И ОТЗЫВОВ ПЕРЕДАЧИ
+// ==========================================
+let currentRatingUnsub = null;
+let currentStreamRatingId = "stream_default";
+let userSelectedStars = 0;
+let ratingsData = {};
+
+function getCleanStreamRatingKey(name, url) {
+    const base = (name || url || "stream").trim();
+    return base.replace(/[^a-zA-Z0-9_Ѐ-ӿ]/g, "_").substring(0, 40) || "stream_default";
+}
+
+function updateStreamRatingUI(ratings) {
+    const avgEl = document.getElementById("stream-rating-avg");
+    const countEl = document.getElementById("stream-rating-count");
+    const modalAvg = document.getElementById("modal-rating-avg");
+    const modalStars = document.getElementById("modal-rating-stars");
+    const modalSub = document.getElementById("modal-rating-sub");
+    const reviewsList = document.getElementById("reviews-list");
+
+    const entries = ratings ? Object.values(ratings) : [];
+    const count = entries.length;
+
+    let avg = 0;
+    if (count > 0) {
+        const sum = entries.reduce((acc, it) => acc + (Number(it.stars) || 0), 0);
+        avg = (sum / count).toFixed(1);
+    }
+
+    const avgStr = count > 0 ? avg : "—";
+    if (avgEl) avgEl.textContent = avgStr;
+    if (countEl) countEl.textContent = `(${count})`;
+    if (modalAvg) modalAvg.textContent = avgStr;
+    if (modalSub) modalSub.textContent = `${count} ${count === 1 ? 'оценка' : (count > 1 && count < 5 ? 'оценки' : 'оценок')}`;
+
+    if (modalStars) {
+        const numAvg = Number(avg) || 0;
+        let starStr = "";
+        for (let i = 1; i <= 5; i++) {
+            starStr += (i <= Math.round(numAvg)) ? "★" : "☆";
+        }
+        modalStars.textContent = starStr;
+    }
+
+    // Рендерим отзывы зрителей
+    if (reviewsList) {
+        if (count === 0) {
+            reviewsList.innerHTML = '<div style="text-align:center;padding:24px 10px;color:rgba(255,255,255,0.4);font-size:13px">Пока нет отзывов. Поставьте оценку первым!</div>';
+        } else {
+            // Сортируем: новые сверху
+            const sorted = entries.sort((a, b) => (b.ts || 0) - (a.ts || 0));
+            reviewsList.innerHTML = sorted.map(it => {
+                let starsTxt = "";
+                for (let i = 1; i <= 5; i++) {
+                    starsTxt += (i <= (Number(it.stars) || 0)) ? "★" : "☆";
+                }
+                const avatarContent = it.userAvatar ? `<img src="${esc(it.userAvatar)}" class="review-author-img">` : `<div class="review-author-img" style="display:flex;align-items:center;justify-content:center;color:#fff;font-size:10px">${esc((it.userName||"?")[0].toUpperCase())}</div>`;
+                const dateStr = it.ts ? new Date(it.ts).toLocaleDateString("ru-RU", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" }) : "";
+                const commentHtml = it.comment ? `<div class="review-text">${esc(it.comment)}</div>` : "";
+
+                return `<div class="review-card">
+                    <div class="review-header">
+                        <div class="review-author">${avatarContent}<span>${esc(it.userName || "Зритель")}</span></div>
+                        <div class="review-stars">${starsTxt}</div>
+                    </div>
+                    ${commentHtml}
+                    <div class="review-date">${dateStr}</div>
+                </div>`;
+            }).join("");
+        }
+    }
+
+    // Проверяем, оставлял ли текущий пользователь отзыв
+    checkUserExistingRating();
+}
+
+function checkUserExistingRating() {
+    const formSection = document.getElementById("rating-form-section");
+    const anonWarning = document.getElementById("rating-anon-warning");
+    const btn = document.getElementById("btn-submit-rating");
+    const statusMsg = document.getElementById("rating-status-msg");
+    const commentInp = document.getElementById("rating-comment-input");
+
+    if (!me || me.isAnon) {
+        if (formSection) formSection.style.display = "none";
+        if (anonWarning) anonWarning.style.display = "block";
+        return;
+    }
+
+    if (formSection) formSection.style.display = "block";
+    if (anonWarning) anonWarning.style.display = "none";
+
+    const userReview = (ratingsData && me.uid) ? ratingsData[me.uid] : null;
+    if (userReview) {
+        userSelectedStars = Number(userReview.stars) || 5;
+        highlightStars(userSelectedStars);
+        if (commentInp && !commentInp.value) commentInp.value = userReview.comment || "";
+        if (btn) btn.textContent = "Обновить оценку";
+        if (statusMsg) statusMsg.textContent = `Вы уже оценили на ${userReview.stars} ★`;
+    } else {
+        if (btn) btn.textContent = "Оценить";
+        if (statusMsg) statusMsg.textContent = "1 оценка от аккаунта";
+    }
+}
+
+function subscribeRatingsForStream(streamId) {
+    currentStreamRatingId = streamId;
+    const titleEl = document.getElementById("rating-modal-title");
+    const curTitle = document.getElementById("stream-title-display")?.textContent || "Прямой эфир";
+    if (titleEl) titleEl.textContent = curTitle;
+
+    if (!FB_OK) return;
+    onValue(ref(db, "ratings/" + streamId), snap => {
+        ratingsData = snap.val() || {};
+        updateStreamRatingUI(ratingsData);
+    });
+}
+
+function highlightStars(val) {
+    document.querySelectorAll("#interactive-stars .star").forEach(st => {
+        const sVal = Number(st.dataset.star);
+        st.classList.toggle("active", sVal <= val);
+    });
+    const label = document.getElementById("star-score-text");
+    const labels = ["", "1 звезда (Плохо)", "2 звезды (Нормально)", "3 звезды (Хорошо)", "4 звезды (Отлично!)", "5 звёзд (Шедевр!)"];
+    if (label) label.textContent = labels[val] || "Выбери звёзды";
+}
+
+// Слушатели звёзд рейтинга
+document.querySelectorAll("#interactive-stars .star").forEach(st => {
+    st.addEventListener("mouseenter", () => {
+        const val = Number(st.dataset.star);
+        document.querySelectorAll("#interactive-stars .star").forEach(s => {
+            s.classList.toggle("hover", Number(s.dataset.star) <= val);
+        });
+    });
+    st.addEventListener("mouseleave", () => {
+        document.querySelectorAll("#interactive-stars .star").forEach(s => s.classList.remove("hover"));
+    });
+    st.addEventListener("click", () => {
+        userSelectedStars = Number(st.dataset.star);
+        highlightStars(userSelectedStars);
+    });
+});
+
+// Открытие модалки рейтинга
+document.getElementById("stream-rating-badge")?.addEventListener("click", () => {
+    document.getElementById("rating-modal")?.classList.add("active");
+    checkUserExistingRating();
+});
+document.getElementById("rating-close")?.addEventListener("click", () => {
+    document.getElementById("rating-modal")?.classList.remove("active");
+});
+document.getElementById("btn-rating-login")?.addEventListener("click", () => {
+    document.getElementById("rating-modal")?.classList.remove("active");
+    document.getElementById("auth-modal")?.classList.add("active");
+});
+
+// Отправка оценки (нельзя анонимно, 1 оценка на аккаунт)
+document.getElementById("btn-submit-rating")?.addEventListener("click", async () => {
+    if (!me || me.isAnon) {
+        showStatus("Анонимные оценки отключены! Войдите в профиль", "error");
+        document.getElementById("rating-modal")?.classList.remove("active");
+        document.getElementById("auth-modal")?.classList.add("active");
+        return;
+    }
+    if (userSelectedStars < 1 || userSelectedStars > 5) {
+        showStatus("Пожалуйста, нажмите на звёзды от 1 до 5", "error");
+        return;
+    }
+
+    const comment = document.getElementById("rating-comment-input")?.value.trim() || "";
+    const curTitle = document.getElementById("stream-title-display")?.textContent || "Прямой эфир";
+
+    try {
+        await set(ref(db, `ratings/${currentStreamRatingId}/${me.uid}`), {
+            stars: userSelectedStars,
+            comment: comment,
+            userName: me.name || "Зритель",
+            userAvatar: me.avatar || "",
+            userId: me.uid,
+            streamTitle: curTitle,
+            ts: Date.now()
+        });
+        showStatus("Ваша оценка учтена! Спасибо за отзыв", "success");
+        const statusMsg = document.getElementById("rating-status-msg");
+        if (statusMsg) statusMsg.textContent = `Ваша оценка: ${userSelectedStars} ★ сохранена`;
+    } catch (e) {
+        showStatus("Ошибка: " + e.message, "error");
+    }
+});
+
+
+// ==========================================
+// СИСТЕМА ДРУЗЕЙ В ПРОФИЛЕ
+// ==========================================
+let myFriends = {};
+let myFriendRequests = {};
+
+function switchProfileTab(tab) {
+    document.querySelectorAll(".profile-tabs .p-tab").forEach(t => t.classList.remove("active"));
+    const btn = document.querySelector(`.profile-tabs .p-tab[data-ptab="${tab}"]`);
+    if (btn) btn.classList.add("active");
+
+    const infoEl = document.getElementById("ptab-content-info");
+    const friendsEl = document.getElementById("ptab-content-friends");
+
+    if (tab === "friends") {
+        if (infoEl) infoEl.style.display = "none";
+        if (friendsEl) friendsEl.style.display = "flex";
+        renderFriendsUI();
+    } else {
+        if (infoEl) infoEl.style.display = "block";
+        if (friendsEl) friendsEl.style.display = "none";
+    }
+}
+
+document.querySelectorAll(".profile-tabs .p-tab").forEach(tabBtn => {
+    tabBtn.addEventListener("click", () => {
+        switchProfileTab(tabBtn.dataset.ptab);
+    });
+});
+
+function subscribeFriends() {
+    if (!FB_OK || !me || me.isAnon) return;
+
+    // Слушаем список друзей
+    onValue(ref(db, `friends/${me.uid}`), snap => {
+        myFriends = snap.val() || {};
+        renderFriendsUI();
+    });
+
+    // Слушаем входящие заявки
+    onValue(ref(db, `friendRequests/${me.uid}`), snap => {
+        myFriendRequests = snap.val() || {};
+        renderFriendsUI();
+    });
+}
+
+function renderFriendsUI() {
+    const badge = document.getElementById("friends-badge");
+    const totalCount = document.getElementById("friends-total-count");
+    const reqCount = document.getElementById("friend-req-count");
+    const reqWrap = document.getElementById("friend-requests-wrap");
+    const reqList = document.getElementById("friend-requests-list");
+    const friendsList = document.getElementById("friends-list");
+
+    const friendsArr = Object.keys(myFriends).map(k => ({ uid: k, ...myFriends[k] }));
+    const reqArr = Object.keys(myFriendRequests).map(k => ({ fromUid: k, ...myFriendRequests[k] }));
+
+    if (badge) badge.textContent = friendsArr.length;
+    if (totalCount) totalCount.textContent = friendsArr.length;
+    if (reqCount) reqCount.textContent = reqArr.length;
+
+    // Входящие заявки
+    if (reqWrap && reqList) {
+        if (reqArr.length > 0) {
+            reqWrap.style.display = "block";
+            reqList.innerHTML = reqArr.map(req => {
+                const av = req.fromAvatar ? `<img src="${esc(req.fromAvatar)}" class="friend-avatar">` : `<div class="friend-avatar">${esc((req.fromName||"?")[0].toUpperCase())}</div>`;
+                return `<div class="friend-card">
+                    <div class="friend-info">
+                        ${av}
+                        <div>
+                            <div class="friend-name">${esc(req.fromName || "Зритель")}</div>
+                            <div style="font-size:11px;color:rgba(255,255,255,0.5)">Хочет добавить вас в друзья</div>
+                        </div>
+                    </div>
+                    <div class="friend-actions">
+                        <button class="btn-friend-action btn-friend-accept" onclick="window.acceptFriendReq('${req.fromUid}')">Принять</button>
+                        <button class="btn-friend-action" onclick="window.declineFriendReq('${req.fromUid}')">✕</button>
+                    </div>
+                </div>`;
+            }).join("");
+        } else {
+            reqWrap.style.display = "none";
+        }
+    }
+
+    // Список друзей
+    if (friendsList) {
+        if (friendsArr.length === 0) {
+            friendsList.innerHTML = `<div style="text-align:center;padding:24px 10px;color:rgba(255,255,255,0.4);font-size:13px">
+                У вас пока нет друзей.<br>Добавляйте зрителей по нику или из чата!
+            </div>`;
+        } else {
+            friendsList.innerHTML = friendsArr.map(f => {
+                const av = f.avatar ? `<img src="${esc(f.avatar)}" class="friend-avatar">` : `<div class="friend-avatar">${esc((f.name||"?")[0].toUpperCase())}</div>`;
+                return `<div class="friend-card">
+                    <div class="friend-info">
+                        ${av}
+                        <div>
+                            <div class="friend-name">${esc(f.name || "Друг")}</div>
+                            <div class="friend-status">● Друг MyTV</div>
+                        </div>
+                    </div>
+                    <div class="friend-actions">
+                        <button class="btn-friend-action" title="Удалить из друзей" onclick="window.removeFriend('${f.uid}')">Удалить</button>
+                    </div>
+                </div>`;
+            }).join("");
+        }
+    }
+}
+
+// Добавление в друзья по никнейму или ID
+document.getElementById("btn-add-friend")?.addEventListener("click", async () => {
+    const input = document.getElementById("friend-search-input");
+    const status = document.getElementById("friend-add-status");
+    if (!input || !status) return;
+
+    const query = input.value.trim();
+    if (!query) {
+        status.style.color = "#ff3b30";
+        status.textContent = "Введи никнейм или ID друга";
+        return;
+    }
+    if (!me || me.isAnon) {
+        status.style.color = "#ff3b30";
+        status.textContent = "Войдите в аккаунт, чтобы добавлять друзей!";
+        return;
+    }
+
+    status.style.color = "#007aff";
+    status.textContent = "Поиск пользователя...";
+
+    try {
+        const snap = await withTimeout(get(ref(db, "users")), 4000);
+        const users = snap?.val() || {};
+
+        let targetUid = null;
+        let targetUser = null;
+
+        for (const uid in users) {
+            const u = users[uid];
+            if (uid === query || (u.name && u.name.toLowerCase() === query.toLowerCase())) {
+                targetUid = uid;
+                targetUser = u;
+                break;
+            }
+        }
+
+        if (!targetUid) {
+            status.style.color = "#ff3b30";
+            status.textContent = "Пользователь с таким ником не найден";
+            return;
+        }
+
+        if (targetUid === me.uid) {
+            status.style.color = "#ff9500";
+            status.textContent = "Нельзя добавить в друзья самого себя!";
+            return;
+        }
+
+        if (myFriends && myFriends[targetUid]) {
+            status.style.color = "#ff9500";
+            status.textContent = `${targetUser.name || "Пользователь"} уже у вас в друзьях!`;
+            return;
+        }
+
+        // Отправляем заявку пользователю
+        await set(ref(db, `friendRequests/${targetUid}/${me.uid}`), {
+            fromUid: me.uid,
+            fromName: me.name || "Зритель",
+            fromAvatar: me.avatar || "",
+            ts: Date.now()
+        });
+
+        status.style.color = "#34c759";
+        status.textContent = `Заявка в друзья отправлена ${targetUser.name}!`;
+        input.value = "";
+    } catch (err) {
+        status.style.color = "#ff3b30";
+        status.textContent = "Ошибка: " + err.message;
+    }
+});
+
+// Глобальные методы управления заявками в друзья
+window.acceptFriendReq = async function(senderUid) {
+    if (!me || !FB_OK) return;
+    const req = myFriendRequests[senderUid];
+    if (!req) return;
+
+    try {
+        // Добавляем себе
+        await set(ref(db, `friends/${me.uid}/${senderUid}`), {
+            name: req.fromName || "Друг",
+            avatar: req.fromAvatar || "",
+            addedAt: Date.now()
+        });
+        // Добавляем отправителю
+        await set(ref(db, `friends/${senderUid}/${me.uid}`), {
+            name: me.name || "Друг",
+            avatar: me.avatar || "",
+            addedAt: Date.now()
+        });
+        // Удаляем заявку
+        await remove(ref(db, `friendRequests/${me.uid}/${senderUid}`));
+        showStatus(`Вы теперь друзья с ${req.fromName}!`, "success");
+    } catch (e) {
+        showStatus("Ошибка: " + e.message, "error");
+    }
+};
+
+window.declineFriendReq = async function(senderUid) {
+    if (!me || !FB_OK) return;
+    try {
+        await remove(ref(db, `friendRequests/${me.uid}/${senderUid}`));
+        showStatus("Заявка отклонена", "info");
+    } catch (e) {
+        showStatus("Ошибка: " + e.message, "error");
+    }
+};
+
+window.removeFriend = async function(friendUid) {
+    if (!me || !FB_OK) return;
+    if (!confirm("Удалить пользователя из списка друзей?")) return;
+    try {
+        await remove(ref(db, `friends/${me.uid}/${friendUid}`));
+        await remove(ref(db, `friends/${friendUid}/${me.uid}`));
+        showStatus("Пользователь удален из друзей", "info");
+    } catch (e) {
+        showStatus("Ошибка: " + e.message, "error");
+    }
+};
+
+// Функция быстрого добавления в друзья из чата
+window.addFriendFromChat = function(targetUid, targetName) {
+    if (!me || me.isAnon) {
+        showStatus("Сначала войдите в аккаунт, чтобы добавить в друзья!", "error");
+        document.getElementById("auth-modal")?.classList.add("active");
+        return;
+    }
+    if (targetUid === me.uid) {
+        showStatus("Это ваше собственное сообщение :)", "info");
+        return;
+    }
+    if (myFriends && myFriends[targetUid]) {
+        showStatus(`${targetName} уже у вас в друзьях!`, "info");
+        return;
+    }
+    set(ref(db, `friendRequests/${targetUid}/${me.uid}`), {
+        fromUid: me.uid,
+        fromName: me.name || "Зритель",
+        fromAvatar: me.avatar || "",
+        ts: Date.now()
+    }).then(() => {
+        showStatus(`Заявка в друзья отправлена ${targetName}!`, "success");
+    }).catch(e => showStatus("Ошибка: " + e.message, "error"));
+};
+
+
+
+// ==========================================
+// УПРАВЛЕНИЕ ПАУЗОЙ ДЛЯ ЗРИТЕЛЯ И ФОНОВЫМ РЕЖИМОМ
+// ==========================================
+let isViewerLocalPaused = false;
+
+function toggleViewerPause() {
+    isViewerLocalPaused = !isViewerLocalPaused;
+    const btnText = document.getElementById("viewer-pause-text");
+    const btnIcon = document.getElementById("viewer-pause-icon");
+    const overlay = document.getElementById("pause-overlay");
+
+    if (isViewerLocalPaused) {
+        // Ставим на паузу локально
+        if (btnText) btnText.textContent = "Эфир";
+        if (btnIcon) btnIcon.textContent = "▶";
+        if (overlay) overlay.classList.add("active");
+
+        // Пауза видео и звука
+        if (player && typeof player.pause === "function") {
+            try { player.pause(); } catch(e) {}
+        }
+        const yt = document.getElementById("yt-frame");
+        if (yt && yt.contentWindow) {
+            try {
+                yt.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'pauseVideo' }), '*');
+            } catch(e) {}
+        }
+        const v = document.querySelector("#stream-player video");
+        if (v) { try { v.pause(); } catch(e) {} }
+
+        if (navigator.mediaSession) {
+            navigator.mediaSession.playbackState = "paused";
+        }
+        showStatus("Трансляция на паузе", "info");
+    } else {
+        // Возобновляем и догоняем живой эфир
+        if (btnText) btnText.textContent = "Пауза";
+        if (btnIcon) btnIcon.textContent = "⏸";
+        if (overlay) overlay.classList.remove("active");
+
+        if (navigator.mediaSession) {
+            navigator.mediaSession.playbackState = "playing";
+        }
+        resumeLivePlayback();
+        showStatus("Синхронизация с прямым эфиром...", "info");
+    }
+}
+
+document.getElementById("viewer-pause-btn")?.addEventListener("click", toggleViewerPause);
+
 </script>
-<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a31e6ecbe913fe50',t:'MTc4Nzg2ODkwNA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a32228159be8fe50',t:'MTc4NzkwNzk1MA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
