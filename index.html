@@ -368,10 +368,6 @@ input[type="time"]{flex:0 0 auto}
             </div>
             <div class="stream-controls-group">
                 <div class="stream-timer-badge" id="stream-runtime" title="Время вещания">⏱ 00:00</div>
-                <button class="stream-btn" id="viewer-pause-btn" title="Пауза / Прямой эфир">
-                    <span id="viewer-pause-icon">⏸</span>
-                    <span id="viewer-pause-text">Пауза</span>
-                </button>
                 <button class="stream-btn" id="mute-btn" title="Вкл / выкл звук">
                     <svg viewBox="0 0 24 24" id="mute-icon" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
                     <span id="mute-btn-text">Звук</span>
@@ -3101,7 +3097,7 @@ document.getElementById("mute-btn")?.addEventListener("click", () => {
 
 // ПРИ КЛИКЕ НА ЭКРАННЫЙ ЗАМОК: АКТИВАЦИЯ ЗВУКА И ВИДЕО ПРИ ПЕРВОМ ТАПЕ
 document.getElementById("tv-screen-lock")?.addEventListener("click", () => {
-    if (isPaused || isViewerLocalPaused) return;
+    if (isPaused) return;
     if (localStorage.getItem("mytv_unmuted") !== "true") {
         unmuteTv();
     }
@@ -3302,7 +3298,7 @@ function updateMediaSession() {
 // При возвращении на вкладку / разблокировке экрана / переключении из другого приложения
 document.addEventListener("visibilitychange", async () => {
     if (document.visibilityState === "visible") {
-        if (isPaused || isViewerLocalPaused) return;
+        if (isPaused) return;
         resumeLivePlayback();
     } else if (document.visibilityState === "hidden") {
         // Если пользователь свернул вкладку, пробуем автоматический PiP (если поддерживается)
@@ -3316,12 +3312,12 @@ document.addEventListener("visibilitychange", async () => {
 });
 
 window.addEventListener("focus", () => {
-    if (isPaused || isViewerLocalPaused) return;
+    if (isPaused) return;
     resumeLivePlayback();
 });
 
 window.addEventListener("pageshow", () => {
-    if (isPaused || isViewerLocalPaused) return;
+    if (isPaused) return;
     resumeLivePlayback();
 });
 
@@ -3805,56 +3801,8 @@ window.addFriendFromChat = function(targetUid, targetName) {
 
 
 
-// ==========================================
-// УПРАВЛЕНИЕ ПАУЗОЙ ДЛЯ ЗРИТЕЛЯ И ФОНОВЫМ РЕЖИМОМ
-// ==========================================
-let isViewerLocalPaused = false;
 
-function toggleViewerPause() {
-    isViewerLocalPaused = !isViewerLocalPaused;
-    const btnText = document.getElementById("viewer-pause-text");
-    const btnIcon = document.getElementById("viewer-pause-icon");
-    const overlay = document.getElementById("pause-overlay");
-
-    if (isViewerLocalPaused) {
-        // Ставим на паузу локально
-        if (btnText) btnText.textContent = "Эфир";
-        if (btnIcon) btnIcon.textContent = "▶";
-        if (overlay) overlay.classList.add("active");
-
-        // Пауза видео и звука
-        if (player && typeof player.pause === "function") {
-            try { player.pause(); } catch(e) {}
-        }
-        const yt = document.getElementById("yt-frame");
-        if (yt && yt.contentWindow) {
-            try {
-                yt.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'pauseVideo' }), '*');
-            } catch(e) {}
-        }
-        const v = document.querySelector("#stream-player video");
-        if (v) { try { v.pause(); } catch(e) {} }
-
-        if (navigator.mediaSession) {
-            navigator.mediaSession.playbackState = "paused";
-        }
-        showStatus("Трансляция на паузе", "info");
-    } else {
-        // Возобновляем и догоняем живой эфир
-        if (btnText) btnText.textContent = "Пауза";
-        if (btnIcon) btnIcon.textContent = "⏸";
-        if (overlay) overlay.classList.remove("active");
-
-        if (navigator.mediaSession) {
-            navigator.mediaSession.playbackState = "playing";
-        }
-        resumeLivePlayback();
-        showStatus("Синхронизация с прямым эфиром...", "info");
-    }
-}
-
-document.getElementById("viewer-pause-btn")?.addEventListener("click", toggleViewerPause);
 
 </script>
-<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a32228159be8fe50',t:'MTc4NzkwNzk1MA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</body>
 </html>
