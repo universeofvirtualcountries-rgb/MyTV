@@ -84,7 +84,12 @@ body.theme-neon{background:radial-gradient(ellipse at top,#12001f 0%,#050510 100
 .fx-color-overlay.active{opacity:var(--fx-opacity,0.2)}
 .fx-image{position:absolute;opacity:0;pointer-events:none;background-size:contain;background-repeat:no-repeat;background-position:center center;background-image:var(--fx-img-url,none);width:var(--fx-img-size,80px);height:var(--fx-img-size,80px);z-index:24;transition:opacity .2s,width .15s,height .15s}
 .fx-image.active{opacity:var(--fx-opacity,0.85)}
-.tv-screen-lock{position:absolute;inset:0;width:100%;height:100%;z-index:26;background:transparent;pointer-events:auto;cursor:default;touch-action:manipulation;-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
+.player-wrapper{position:relative;width:100%;max-width:960px;background:#000;border-radius:20px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.5),0 0 0 1px rgba(255,255,255,0.06);aspect-ratio:16/9;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+.yt-player{position:absolute;inset:0;width:100%;height:100%;border:none;z-index:4;background:#000;pointer-events:none !important}
+.video-js{width:100% !important;height:100% !important;pointer-events:none !important}
+.video-js video{pointer-events:none !important}
+.video-js .vjs-control-bar,.video-js .vjs-big-play-button,.video-js .vjs-loading-spinner,.video-js .vjs-modal-dialog,.video-js .vjs-text-track-display{display:none !important;pointer-events:none !important}
+.tv-screen-lock{position:absolute;inset:0;width:100%;height:100%;z-index:85;background:rgba(0,0,0,0.001);pointer-events:auto !important;cursor:default !important;touch-action:none !important;-webkit-touch-callout:none !important;-webkit-user-select:none !important;user-select:none !important}
 .fx-marquee{position:absolute;bottom:8%;left:0;width:100%;height:44px;background:rgba(0,0,0,0.75);border-top:2px solid var(--fx-marquee-color,#ff3b30);border-bottom:2px solid var(--fx-marquee-color,#ff3b30);display:none;align-items:center;overflow:hidden}
 .fx-marquee.active{display:flex}
 .fx-marquee-track{display:inline-block;white-space:nowrap;color:var(--fx-marquee-color,#fff);font-size:20px;font-weight:700;letter-spacing:2px;padding-left:100%;animation:marqueeScroll var(--fx-marquee-speed,15s) linear infinite}
@@ -337,7 +342,7 @@ input[type="time"]{flex:0 0 auto}
     <div class="live-indicator" id="live-indicator"><span class="live-dot"></span><span id="live-text">ПРЯМОЙ ЭФИР</span></div>
     
     <div class="player-wrapper" id="player-wrapper">
-        <video id="stream-player" class="video-js vjs-default-skin" controls preload="auto" playsinline webkit-playsinline></video>
+        <video id="stream-player" class="video-js vjs-default-skin" preload="auto" playsinline webkit-playsinline></video>
         <iframe id="yt-frame" class="yt-player" sandbox="allow-scripts allow-same-origin allow-presentation" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" style="display:none"></iframe>
         <div id="tv-screen-lock" class="tv-screen-lock" title="Прямой эфир MyTV"></div>
         <div class="no-stream-msg" id="no-stream-msg" style="display:none">Трансляция недоступна</div>
@@ -3096,13 +3101,24 @@ document.getElementById("mute-btn")?.addEventListener("click", () => {
 });
 
 // ПРИ КЛИКЕ НА ЭКРАННЫЙ ЗАМОК: АКТИВАЦИЯ ЗВУКА И ВИДЕО ПРИ ПЕРВОМ ТАПЕ
-document.getElementById("tv-screen-lock")?.addEventListener("click", () => {
-    if (isPaused) return;
-    if (localStorage.getItem("mytv_unmuted") !== "true") {
-        unmuteTv();
-    }
-    resumeLivePlayback();
-});
+// ПОЛНАЯ БЛОКИРОВКА ЭКРАНА ВИДЕО ("ВИДЕО ИДЕТ И ВСЕ, НИКАКИХ ДЕЙСТВИЙ")
+const tvLockEl = document.getElementById("tv-screen-lock");
+if (tvLockEl) {
+    const blockEvents = [
+        "click", "dblclick", "mousedown", "mouseup", "mousemove",
+        "touchstart", "touchend", "touchmove", "touchcancel",
+        "pointerdown", "pointerup", "pointermove", "pointercancel",
+        "contextmenu", "selectstart", "dragstart"
+    ];
+    blockEvents.forEach(evName => {
+        tvLockEl.addEventListener(evName, (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+            return false;
+        }, { passive: false, capture: true });
+    });
+}
 
 // АВТО-РАСПИСАНИЕ ПО ДНЯМ НЕДЕЛИ И НА ВСЮ НЕДЕЛЮ (7 ДНЕЙ)
 document.getElementById("btn-auto-schedule")?.addEventListener("click", async () => {
@@ -3804,5 +3820,5 @@ window.addFriendFromChat = function(targetUid, targetName) {
 
 
 </script>
-</body>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a32337960b4e3f0f',t:'MTc4NzkxOTA3MQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
