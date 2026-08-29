@@ -373,6 +373,7 @@ input[type="time"]{flex:0 0 auto}
             </div>
             <div class="stream-controls-group">
                 <div class="stream-timer-badge" id="stream-runtime" title="Время вещания">⏱ 00:00</div>
+                <button class="stream-btn" id="subtitles-btn" title="Включить или выключить субтитры">💬 <span>Субтитры</span></button>
                 <button class="stream-btn" id="mute-btn" title="Вкл / выкл звук">
                     <svg viewBox="0 0 24 24" id="mute-icon" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
                     <span id="mute-btn-text">Звук</span>
@@ -651,7 +652,8 @@ input[type="time"]{flex:0 0 auto}
         <div class="admin-tab-content" data-content="platform">
             <div class="admin-section">
                 <label>Авто-выбор видео</label>
-                <div class="hint">Система сама выбирает случайное видео из списка.</div>
+                <div class="hint">Система сама выбирает случайное видео только из отмеченных источников.</div>
+                <div class="smart-feature" style="margin:10px 0;padding:10px;border-radius:10px;background:rgba(0,122,255,.12);border:1px solid rgba(0,122,255,.25)">✨ <b>Умная ротация</b><br><small>Отмеченные мультфильмы будут равномерно распределяться по неделе без повторов подряд.</small></div>
                 <div class="fx-row"><label>Режим</label><select id="platform-mode"><option value="manual">Ручной</option><option value="random">Случайный</option></select></div>
                 <div class="fx-row"><label>Интервал (мин)</label><input type="number" id="platform-interval" value="30" min="1" max="240"></div>
                 <div style="height:10px"></div>
@@ -2141,7 +2143,7 @@ document.getElementById("add-source-btn")?.addEventListener("click",()=>{
         showStatus("Заполни поля","error");
         return;
     }
-    push(ref(db,"sources"),{name:n,url:u,createdAt:Date.now()}).then(()=>{
+    push(ref(db,"sources"),{name:n,url:u,autoSchedule:true,createdAt:Date.now()}).then(()=>{
         document.getElementById("source-name").value="";
         document.getElementById("source-url").value="";
         showStatus("Добавлено","success");
@@ -2163,6 +2165,12 @@ function loadSources(){
                 const src=d[k];
                 const item=document.createElement("div");
                 item.className="list-item";
+                const pick=document.createElement("input");
+                pick.type="checkbox";
+                pick.checked=src.autoSchedule !== false;
+                pick.title="Добавлять в авто-расписание";
+                pick.style.cssText="width:18px;height:18px;accent-color:#007aff;flex:none";
+                pick.onchange=()=>update(ref(db,"sources/"+k),{autoSchedule:pick.checked});
                 const nm=document.createElement("span");
                 nm.className="li-name"+(src.url===cu?" active":"");
                 nm.textContent=src.name+(src.url===cu?" ●":"");
@@ -2173,6 +2181,7 @@ function loadSources(){
                 del.className="del";
                 del.textContent="Удалить";
                 del.onclick=()=>remove(ref(db,"sources/"+k));
+                item.appendChild(pick);
                 item.appendChild(nm);
                 item.appendChild(btn);
                 item.appendChild(del);
@@ -2252,7 +2261,7 @@ document.getElementById("load-default-sources")?.addEventListener("click",async(
                 if(vals[k].url===s.url){exists=true;break;}
             }
             if(!exists){
-                await push(ref(db,"sources"),{...s,createdAt:Date.now()});
+                await push(ref(db,"sources"),{...s,autoSchedule:true,createdAt:Date.now()});
             }
         }
         showStatus("Источники добавлены","success");
@@ -3059,7 +3068,7 @@ document.getElementById("load-cartoon-pack")?.addEventListener("click", async ()
                 if (vals[k].url === item.url) { exists = true; break; }
             }
             if (!exists) {
-                await push(ref(db, "sources"), { ...item, createdAt: Date.now() });
+                await push(ref(db, "sources"), { ...item, autoSchedule:true, createdAt: Date.now() });
                 addedCount++;
             }
         }
@@ -3134,7 +3143,7 @@ document.getElementById("btn-auto-schedule")?.addEventListener("click", async ()
             sourceList = Object.values(srcVals).filter(s => {
                 const n = (s.name || "").toLowerCase();
                 const u = (s.url || "").toLowerCase();
-                return !n.includes("mux") && !n.includes("test") && !u.includes("mux.dev") && !u.includes("akamaihd");
+                return s.autoSchedule !== false && !n.includes("mux") && !n.includes("test") && !u.includes("mux.dev") && !u.includes("akamaihd");
             });
         }
         if (sourceList.length === 0) {
@@ -3819,6 +3828,17 @@ window.addFriendFromChat = function(targetUid, targetName) {
 
 
 
+
+// Кнопка субтитров: работает с дорожками HTML5 и не открывает управление видео
+document.getElementById("subtitles-btn")?.addEventListener("click",()=>{
+    const video=document.querySelector("#stream-player video") || document.getElementById("stream-player");
+    const tracks=video?.textTracks;
+    if(!tracks || !tracks.length){ showStatus("Для этой передачи субтитры недоступны","error"); return; }
+    const b=document.getElementById("subtitles-btn");
+    const active=b?.dataset.subtitlesOn === "1";
+    for(let i=0;i<tracks.length;i++) tracks[i].mode=active?"disabled":"showing";
+    if(b){ b.dataset.subtitlesOn=active?"0":"1"; b.classList.toggle("active",!active); }
+});
 </script>
-<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a32337960b4e3f0f',t:'MTc4NzkxOTA3MQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</body>
 </html>
