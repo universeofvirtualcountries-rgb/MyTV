@@ -145,6 +145,7 @@ body.theme-neon{background:radial-gradient(ellipse at top,#12001f 0%,#050510 100
 /* MODALS */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);z-index:1500;display:none;align-items:center;justify-content:center;padding:16px}
 .modal-overlay.active{display:flex}
+.sched-remind{border:1px solid rgba(0,122,255,.35);background:rgba(0,122,255,.12);color:#8ecbff;border-radius:8px;padding:5px 8px;font-size:11px;cursor:pointer;white-space:nowrap}.sched-remind:hover{background:rgba(0,122,255,.3)}.reactions-bar{display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap}.reaction-btn{min-width:54px;justify-content:center;padding:5px 8px!important;font-size:14px!important}.reaction-btn b{font-size:11px;opacity:.75}.reaction-btn.voted{background:rgba(0,122,255,.35)!important;border-color:#4aa3ff!important}.no-reactions .reactions-bar{display:none!important}.radio-hidden{display:none!important}.radio-page{display:none;max-width:960px;margin:0 auto;padding:22px 16px 110px}.radio-page.active{display:block}.radio-hero{padding:28px;border-radius:24px;background:linear-gradient(135deg,#211b45,#102f4b);box-shadow:0 18px 55px rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.12)}.radio-disc{width:150px;height:150px;margin:20px auto;border-radius:50%;background:radial-gradient(circle,#fff 0 4%,#6d5dfc 5% 18%,#16162b 19% 30%,#b34cff 31% 48%,#111 49%);box-shadow:0 0 35px #6d5dfc88;animation:radioSpin 8s linear infinite;animation-play-state:paused}.radio-page.active.playing .radio-disc{animation-play-state:running}@keyframes radioSpin{to{transform:rotate(360deg)}}
 .modal-card{width:100%;max-width:440px;max-height:85vh;background:rgba(28,28,30,0.95);border:1px solid rgba(255,255,255,0.1);border-radius:24px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.6);display:flex;flex-direction:column;position:relative}
 .modal-header{display:flex;justify-content:space-between;align-items:center;padding:18px 22px;border-bottom:1px solid rgba(255,255,255,0.08)}
 .modal-header h3{font-size:17px;font-weight:700}
@@ -333,6 +334,97 @@ input[type="time"]{flex:0 0 auto}
 .btn-friend-action:hover{background:rgba(255,59,48,0.2);color:#ff3b30}
 .btn-friend-accept{background:rgba(52,199,89,0.2);color:#34c759}
 .btn-friend-accept:hover{background:rgba(52,199,89,0.35);color:#fff}
+.theme-aero body{}
+body.aero-theme{background:linear-gradient(180deg,#77d7f7 0%,#b7f1d5 55%,#5ac3d2 100%)!important;color:#063b55}body.aero-theme .glass,body.aero-theme .modal-content,body.aero-theme .admin-panel,body.aero-theme .radio-hero,body.aero-theme .stream-info-card{background:linear-gradient(135deg,rgba(255,255,255,.72),rgba(193,247,255,.38))!important;border:1px solid rgba(255,255,255,.8)!important;box-shadow:0 12px 32px rgba(0,105,150,.25),inset 0 1px rgba(255,255,255,.9)!important;backdrop-filter:blur(14px)}body.aero-theme .btn-primary,body.aero-theme .nav-btn.active{background:linear-gradient(180deg,#fff,#7de5f4 48%,#1aa7d2)!important;color:#063b55!important;border:1px solid rgba(255,255,255,.9)!important;box-shadow:inset 0 2px rgba(255,255,255,.9),0 4px 12px rgba(0,100,160,.28)}body.aero-theme .bottom-nav{background:rgba(230,255,255,.72)!important;border-top:1px solid rgba(255,255,255,.9)}
+.aero-transition{animation:aeroIn .45s ease both}@keyframes aeroIn{from{opacity:0;transform:translateY(12px) scale(.98);filter:blur(3px)}to{opacity:1;transform:none;filter:none}}.bottom-nav{overflow-x:auto;overflow-y:hidden;justify-content:flex-start;flex-wrap:nowrap;scrollbar-width:none;-webkit-overflow-scrolling:touch}.bottom-nav::-webkit-scrollbar{display:none}.bottom-nav .nav-btn{flex:0 0 auto;min-width:76px}.bottom-nav .nav-label{white-space:nowrap}.channel-card{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:14px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:inherit;cursor:pointer}.channel-card img{width:38px;height:38px;border-radius:10px;object-fit:cover}.channel-card small{display:block;opacity:.6;font-size:10px}.avatar-frame{border:3px solid #65d9ff;box-shadow:0 0 10px #65d9ff88}.avatar-frame.level-2{border-color:#72e6a0;box-shadow:0 0 14px #72e6a088}.avatar-frame.level-3{border-color:#ffd45c;box-shadow:0 0 18px #ffd45c99}.avatar-frame.level-4{border-color:#ff7ad9;box-shadow:0 0 24px #ff7ad9aa}.compact-frame-row{display:grid!important;grid-template-columns:auto minmax(120px,1fr) auto minmax(115px,1fr) auto minmax(110px,1fr);align-items:center;gap:6px;overflow:hidden}.compact-frame-row label{min-width:0!important;white-space:nowrap}.compact-frame-row input,.compact-frame-row select{min-width:0!important;width:100%!important;max-width:none!important;padding:6px 8px;box-sizing:border-box}.compact-frame-row button{white-space:nowrap;padding:7px 10px!important;width:auto!important}.compact-frame-row select:last-child{max-width:120px!important}@media(max-width:650px){.compact-frame-row{grid-template-columns:1fr 1fr}.compact-frame-row label{font-size:11px}.compact-frame-row button{width:100%!important}}.neon-frame{border-color:#00f6ff!important;box-shadow:0 0 8px #00f6ff,0 0 22px #ff00dd,0 0 38px #00f6ff!important;animation:neonPulse 1.8s ease-in-out infinite}.avatar-effects{position:absolute;inset:-18px;pointer-events:none;font-size:14px;z-index:3;animation:floatFx 2.4s ease-in-out infinite}.avatar-effects.butterflies:after{content:"✦  ❋  ✦";color:#ff73df}.avatar-effects.stars:after{content:"✦  ·  ✦";color:#ffe45c}.avatar-effects.bubbles:after{content:"○  °  ○";color:#6de8ff}@keyframes neonPulse{50%{filter:brightness(1.45)}}@keyframes floatFx{50%{transform:translateY(-5px) rotate(3deg)}}
+/* ===== Рамки аватаров 2.0: детальные кольца, блики и живые эффекты ===== */
+.avatar-frame{--fr:#65d9ff;--fr-glow:rgba(101,217,255,.6);--fr-time:4.6s;position:relative;border:none!important;box-shadow:none!important}
+.avatar-frame.level-2{--fr:#72e6a0;--fr-glow:rgba(114,230,160,.6);--fr-time:4.2s}
+.avatar-frame.level-3{--fr:#ffd45c;--fr-glow:rgba(255,212,92,.65);--fr-time:3.8s}
+.avatar-frame.level-4{--fr:#ff7ad9;--fr-glow:rgba(255,122,217,.7);--fr-time:3.2s}
+.avatar-frame.neon-frame{--fr:#00f6ff;--fr-glow:rgba(0,246,255,.75);--fr-time:2.4s}
+.avatar-frame::before,.avatar-frame::after{content:"";position:absolute;border-radius:50%;pointer-events:none}
+.avatar-frame::before{inset:-3px;border:3px solid var(--fr);box-shadow:0 0 12px var(--fr-glow),inset 0 0 8px var(--fr-glow);animation:frameBreath 3.4s ease-in-out infinite}
+.avatar-frame::after{inset:-7px;border:2px solid transparent;border-top-color:rgba(255,255,255,.92);border-right-color:rgba(255,255,255,.38);filter:drop-shadow(0 0 4px var(--fr-glow));animation:frameSpin var(--fr-time) linear infinite}
+.avatar-frame.neon-frame::after{border-right-color:rgba(255,0,221,.85);animation-duration:2.4s}
+.avatar-frame.neon-frame::before{box-shadow:0 0 10px #00f6ff,0 0 24px #ff00dd,0 0 40px rgba(0,246,255,.6),inset 0 0 10px rgba(0,246,255,.5);animation:neonPulse 1.8s ease-in-out infinite}
+img.avatar-frame{border:3px solid var(--fr)!important;box-shadow:0 0 12px var(--fr-glow)!important;animation:frameBreath 3.4s ease-in-out infinite}
+img.avatar-frame::before,img.avatar-frame::after{display:none}
+.frame-deco{position:absolute;inset:-10px;border-radius:50%;pointer-events:none;color:var(--fr);animation:frameSpin 6s linear infinite}
+.frame-deco::before,.frame-deco::after{content:"";position:absolute;left:50%;width:4px;height:4px;margin-left:-2px;border-radius:50%;background:currentColor;box-shadow:0 0 8px currentColor}
+.frame-deco::before{top:-2px}
+.frame-deco::after{bottom:-2px;width:3px;height:3px;margin-left:-1.5px;opacity:.65}
+.avatar-frame.level-3 .frame-deco{animation-duration:5.2s}
+.avatar-frame.level-4 .frame-deco{animation-duration:4.2s}
+.avatar-frame.level-4 .frame-deco::before,.avatar-frame.level-4 .frame-deco::after{animation:decoTwinkle 1.6s ease-in-out infinite}
+.avatar-frame.neon-frame .frame-deco{animation-duration:3s;color:#00f6ff}
+@keyframes frameSpin{to{transform:rotate(360deg)}}
+@keyframes frameBreath{0%,100%{box-shadow:0 0 10px var(--fr-glow),inset 0 0 6px var(--fr-glow)}50%{box-shadow:0 0 20px var(--fr-glow),inset 0 0 12px var(--fr-glow)}}
+@keyframes decoTwinkle{0%,100%{opacity:.35;transform:scale(.85)}50%{opacity:1;transform:scale(1.25)}}
+.avatar-effects{position:absolute;inset:-14px;pointer-events:none;font-size:13px;z-index:4;animation:none}
+.avatar-effects i{position:absolute;font-style:normal;line-height:1;opacity:.95;text-shadow:0 0 8px currentColor;animation:fxFloat 3.4s ease-in-out infinite}
+.avatar-effects i:nth-child(1){left:-1px;top:24%}
+.avatar-effects i:nth-child(2){right:-1px;top:6%;font-size:11px;animation-duration:4.2s;animation-delay:-1.4s}
+.avatar-effects i:nth-child(3){left:44%;bottom:-2px;animation-duration:3.9s;animation-delay:-2.2s}
+.avatar-effects.butterflies{color:#ff8ae2}
+.avatar-effects.stars{color:#ffe45c}
+.avatar-effects.bubbles{color:#6de8ff}
+.avatar-effects.stars i{animation-name:fxTwinkle}
+.avatar-effects.bubbles i{animation-name:fxRise}
+@keyframes fxFloat{0%,100%{transform:translate(0,0) rotate(-8deg);opacity:.6}50%{transform:translate(2px,-6px) rotate(8deg);opacity:1}}
+@keyframes fxTwinkle{0%,100%{transform:scale(.75) rotate(-10deg);opacity:.45}50%{transform:scale(1.2) rotate(10deg);opacity:1}}
+@keyframes fxRise{0%{transform:translateY(6px) scale(.7);opacity:0}30%{opacity:.9}100%{transform:translateY(-10px) scale(1.05);opacity:0}}
+
+/* ===== Рамки 3.0: свечение и эффекты внутри И снаружи аватарки ===== */
+.avatar-frame:not(img){container-type:inline-size;overflow:visible!important}
+.avatar-frame > img,.avatar-frame > svg{position:relative;z-index:2;border-radius:50%}
+.avatar-frame::before{z-index:1;box-shadow:0 0 10px var(--fr-glow),0 0 24px var(--fr-glow),0 0 42px var(--fr-glow),inset 0 0 9px var(--fr-glow)}
+.avatar-frame::after{z-index:1}
+.frame-deco{z-index:3}
+.frame-halo{position:absolute;inset:-42%;border-radius:50%;pointer-events:none;z-index:0;background:radial-gradient(circle at 50% 50%,rgba(255,255,255,0) 44%,var(--fr-glow) 59%,rgba(255,255,255,0) 84%);filter:blur(8cqw);opacity:.65;animation:haloBreath 3.6s ease-in-out infinite}
+@keyframes haloBreath{0%,100%{opacity:.4;transform:scale(.88)}50%{opacity:.92;transform:scale(1.1)}}
+.avatar-effects{--fxu:6px;--fxr:26px;position:absolute;inset:0;pointer-events:none;z-index:4;overflow:visible;font-size:var(--fxu);animation:none}
+.avatar-frame .avatar-effects{--fxu:calc(5px + 10cqw);--fxr:calc(10px + 34cqw)}
+.avatar-effects i{position:absolute;left:50%;top:50%;width:1em;height:1em;margin:-.5em 0 0 -.5em;font-style:normal;line-height:1em;text-align:center;opacity:0;text-shadow:0 0 .5em currentColor,0 0 1.3em rgba(255,255,255,.4);will-change:transform,opacity}
+.avatar-effects i.p1{--sx:-.5;--sy:-.35;animation-duration:3.4s;animation-delay:-.1s;font-size:.9em}
+.avatar-effects i.p2{--sx:.42;--sy:-.15;animation-duration:4.2s;animation-delay:-1.3s;font-size:1.15em}
+.avatar-effects i.p3{--sx:-.12;--sy:.4;animation-duration:3.8s;animation-delay:-2.2s}
+.avatar-effects i.p4{--sx:.68;--sy:-.3;animation-duration:4.6s;animation-delay:-3.1s;font-size:.85em}
+.avatar-effects i.p5{--sx:-.72;--sy:.2;animation-duration:4s;animation-delay:-2.7s;font-size:1.05em}
+.avatar-effects i.p6{--sx:.2;--sy:.42;animation-duration:3.2s;animation-delay:-1.8s;font-size:.95em}
+.avatar-effects.bubbles{color:#6de8ff}
+.avatar-effects.stars{color:#ffe45c}
+.avatar-effects.butterflies{color:#ff8ae2}
+.avatar-effects.bubbles i{animation-name:fxBubble;animation-timing-function:linear;animation-iteration-count:infinite}
+@keyframes fxBubble{0%{transform:translate(calc(var(--sx,0)*var(--fxr)),calc(var(--fxr)*.62)) scale(.5);opacity:0}18%{opacity:1}72%{opacity:.72}100%{transform:translate(calc(var(--sx,0)*var(--fxr)*1.5),calc(var(--fxr)*-1.3)) scale(1.2);opacity:0}}
+.avatar-effects.stars i:nth-child(-n+3){animation-name:fxOrbit;animation-timing-function:linear;animation-iteration-count:infinite}
+@keyframes fxOrbit{0%{transform:rotate(0deg) translateX(var(--fxr)) rotate(0deg);opacity:.3}50%{opacity:1}100%{transform:rotate(360deg) translateX(var(--fxr)) rotate(-360deg);opacity:.3}}
+.avatar-effects.stars i:nth-child(n+4){animation-name:fxTwinkleIn;animation-timing-function:ease-in-out;animation-iteration-count:infinite}
+@keyframes fxTwinkleIn{0%,100%{transform:translate(calc(var(--sx,0)*var(--fxr)*.55),calc(var(--sy,0)*var(--fxr)*.55)) scale(.55) rotate(-14deg);opacity:.3}50%{transform:translate(calc(var(--sx,0)*var(--fxr)*.55),calc(var(--sy,0)*var(--fxr)*.55)) scale(1.25) rotate(14deg);opacity:1}}
+.avatar-effects.butterflies i{animation-name:fxFlutter;animation-timing-function:ease-in-out;animation-iteration-count:infinite}
+@keyframes fxFlutter{0%{transform:translate(calc(var(--sx,0)*var(--fxr)*.95),calc(var(--fxr)*.58)) rotate(-14deg) scale(.6);opacity:0}18%{opacity:1}45%{transform:translate(calc(var(--sx,0)*var(--fxr)*-1.1),calc(var(--fxr)*-.18)) rotate(12deg) scale(1.05);opacity:1}78%{opacity:.85}100%{transform:translate(calc(var(--sx,0)*var(--fxr)*1.35),calc(var(--fxr)*-1.18)) rotate(-10deg) scale(.75);opacity:0}}
+/* ===== Аватарки в чате ===== */
+.chat-av{width:24px;height:24px;flex:0 0 auto;border-radius:50%;background:rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;position:relative;overflow:visible;margin-top:1px}
+.chat-av > span{position:relative;z-index:2}
+.chat-av .avatar-effects{display:none}
+.chat-messages{gap:10px}
+/* ===== Пометки в админке ===== */
+.req-dup{display:inline-block;margin-left:4px;padding:1px 7px;border-radius:100px;background:rgba(255,159,10,.22);border:1px solid rgba(255,159,10,.5);color:#ffd08a;font-size:11px;font-weight:700}
+.radio-check{font-size:11px}
+#import-box.drag{outline:2px dashed rgba(0,122,255,.7);outline-offset:3px;background:rgba(0,122,255,.08)}
+/* ===== Уважаем системную настройку «меньше движения» ===== */
+@media (prefers-reduced-motion: reduce){
+ .frame-halo{animation:none!important;opacity:.6;transform:none}
+ .avatar-frame::before,.avatar-frame::after,.frame-deco,.frame-deco::before,.frame-deco::after,.neon-frame{animation:none!important}
+ .avatar-effects i{animation:none!important;opacity:.8;transform:translate(calc(var(--sx,0)*var(--fxr)*.75),calc(var(--sy,0)*var(--fxr)*.75))}
+ .aero-transition{animation:none!important}
+}
+/* ===== Выбор рамки и эффекта в профиле ===== */
+.profile-frame-select{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:#fff;padding:12px 14px;border-radius:12px;font-size:14px;font-family:inherit;outline:none;margin-top:2px}
+.profile-frame-select:focus{border-color:rgba(0,122,255,.5)}
+.profile-frame-select option{background:#1c1c1e;color:#fff}
+.frame-hint{font-size:11px;line-height:1.45;opacity:.62;margin:-2px 0 10px}
+.frame-preview-row{display:flex;align-items:center;gap:12px;margin:2px 0 10px}
 </style>
 </head>
 <body class="theme-minimal">
@@ -341,7 +433,7 @@ input[type="time"]{flex:0 0 auto}
 <div class="app" id="app">
     <div class="live-indicator" id="live-indicator"><span class="live-dot"></span><span id="live-text">ПРЯМОЙ ЭФИР</span></div>
     
-    <div class="player-wrapper" id="player-wrapper">
+    <div class="player-wrapper" id="player-wrapper"><video id="bumper-video" muted playsinline style="display:none;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:80;pointer-events:none"></video>
         <video id="stream-player" class="video-js vjs-default-skin" preload="auto" playsinline webkit-playsinline></video>
         <iframe id="yt-frame" class="yt-player" sandbox="allow-scripts allow-same-origin allow-presentation" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" style="display:none"></iframe>
         <div id="tv-screen-lock" class="tv-screen-lock" title="Прямой эфир MyTV"></div>
@@ -359,12 +451,36 @@ input[type="time"]{flex:0 0 auto}
         </div>
     </div>
 
-    <!-- ИНФО-КАРТОЧКА ПОД ПЛЕЕРОМ -->
+    <!-- РАДИО MYTV -->
+    <section class="radio-page" id="radio-card">
+    <div class="radio-hero">
+      <div style="text-align:center;color:#9fa8ff;font-size:12px;letter-spacing:2px">MYTV RADIO</div><div class="radio-disc"></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+        <div><strong style="font-size:18px">Радио MyTV</strong><div id="radio-now" style="color:rgba(255,255,255,.6);font-size:13px;margin-top:4px">Радио выключено</div></div>
+        <button class="btn-primary" id="radio-toggle" style="width:auto;margin:0">Включить радио</button>
+      </div>
+      <audio id="radio-audio" preload="none"></audio>
+      <button class="btn-secondary" id="radio-close" style="width:100%;margin-top:12px">Вернуться к эфиру</button>
+      <div style="display:flex;gap:8px;margin-top:14px">
+        <button class="btn-secondary" id="radio-prev" style="width:auto;flex:1;margin:0">⏮ Предыдущий</button>
+        <button class="btn-secondary" id="radio-next" style="width:auto;flex:1;margin:0">Следующий ⏭</button>
+      </div>
+      <div id="radio-playlist" style="margin-top:14px;display:flex;flex-direction:column;gap:6px"></div>
+    </div>
+</section>
+
+    <div class="reactions-bar" id="reactions-bar" style="max-width:960px;margin:10px auto;padding:10px 14px;text-align:center;border-radius:16px;background:rgba(255,255,255,.05)"><span style="font-size:12px;opacity:.65">Реакция зрителей:</span> <button class="stream-btn reaction-btn" data-reaction="❤️">❤️ <b>0</b></button> <button class="stream-btn reaction-btn" data-reaction="🔥">🔥 <b>0</b></button> <button class="stream-btn reaction-btn" data-reaction="😂">😂 <b>0</b></button> <button class="stream-btn reaction-btn" data-reaction="👍">👍 <b>0</b></button></div>
+
+    <div class="modal-overlay" id="channel-detail-modal"><section style="width:100%;max-width:700px;padding:20px;border-radius:20px;background:#171923"><h2 id="channel-detail-title"></h2><div id="channel-detail-schedule"></div><button class="btn-secondary" id="channel-detail-close" style="width:auto">Выйти из канала</button></section></div>
+<div class="modal-overlay" id="channels-panel"><section style="width:100%;max-width:700px;max-height:85vh;overflow:auto;padding:20px;border-radius:20px;background:#171923"><h2>Тематические каналы</h2><div id="channels-list" style="display:flex;gap:8px;flex-wrap:wrap"></div><button class="btn-secondary" id="channels-close" style="width:auto;margin-top:16px">Выйти из канала</button></section></div>
+
+<!-- ИНФО-КАРТОЧКА ПОД ПЛЕЕРОМ -->
     <div class="stream-info-card">
         <div class="stream-info-top">
             <div class="stream-title-group">
                 <span class="stream-status-badge" id="stream-badge">LIVE</span>
                 <span class="stream-title" id="stream-title-display">Прямой эфир</span>
+                <button class="stream-btn" id="favorite-stream-btn" title="Добавить в избранное">Избранное</button>
                 <div class="stream-rating-badge" id="stream-rating-badge" title="Оценить передачу и почитать отзывы">
                     <span class="star-icon">★</span>
                     <span id="stream-rating-avg">—</span>
@@ -414,6 +530,11 @@ input[type="time"]{flex:0 0 auto}
     <span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
     <span class="nav-label">Чат</span>
   </button>
+  <button class="nav-btn" id="nav-requests"><span class="nav-icon">?</span><span class="nav-label">Запросы</span></button>
+  <button class="nav-btn" id="nav-reminders"><span class="nav-icon"><span style="font-size:14px">!</span></span><span class="nav-label">Напоминания</span></button>
+  <button class="nav-btn" id="nav-favorites"><span class="nav-icon"><span style="font-size:14px">+</span></span><span class="nav-label">Избранное</span></button>
+  <button class="nav-btn" id="nav-channels"><span class="nav-icon">C</span><span class="nav-label">Каналы</span></button>
+  <button class="nav-btn" id="nav-radio"><span class="nav-icon">R</span><span class="nav-label">Радио</span></button>
   <button class="nav-btn" id="nav-profile">
     <span class="nav-avatar" id="nav-avatar-slot"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
     <span class="nav-label">Профиль</span>
@@ -431,6 +552,12 @@ input[type="time"]{flex:0 0 auto}
     <div class="chat-input-row"><input type="text" class="chat-input" id="chat-input-viewer" placeholder="Сообщение..." maxlength="200"><button class="chat-send" id="chat-send-viewer">→</button></div>
 </div>
 
+<div class="modal-overlay" id="viewer-stats-modal"><div class="modal-content" style="max-width:620px;width:100%;padding:20px;background:#171923;border-radius:18px"><h2>Статистика зрителей</h2><div style="margin:10px 0"><button class="btn-secondary stats-period" data-days="1">Сегодня</button> <button class="btn-secondary stats-period" data-days="7">7 дней</button> <button class="btn-secondary stats-period" data-days="14">14 дней</button></div><div id="viewer-stats-body" style="margin:14px 0"></div><canvas id="viewer-stats-chart" width="560" height="240" style="width:100%;background:#0d1d2d;border-radius:12px"></canvas><button class="btn-primary" id="download-viewer-stats" style="width:auto">Скачать PNG</button> <button class="btn-secondary" id="close-viewer-stats" style="width:auto">Закрыть</button></div></div>
+
+<div class="modal-overlay" id="favorites-modal"><div class="modal-content" style="max-width:620px;width:100%;padding:20px;background:#171923;border-radius:18px"><h2>Избранное</h2><div id="favorites-list"></div><button class="btn-secondary" id="favorites-close" style="width:auto">Закрыть</button></div></div>
+
+<div class="modal-overlay" id="reminders-modal"><div class="modal-content" style="max-width:620px;width:100%;padding:20px;background:#171923;border-radius:18px"><h2>Напоминания</h2><div id="reminders-list"></div><button class="btn-secondary" id="reminders-close" style="width:auto">Закрыть</button></div></div>
+<div class="modal-overlay" id="request-modal"><div class="modal-content" style="max-width:620px;width:100%;padding:20px;background:#171923;border-radius:18px"><h2>Запрос передачи</h2><textarea id="request-text" maxlength="300" placeholder="Что добавить в эфир?" style="width:100%;min-height:90px"></textarea><button class="btn-primary" id="send-request" style="width:auto">Отправить</button> <button class="btn-secondary" id="request-close" style="width:auto">Закрыть</button><div id="requests-admin-list"></div></div></div>
 <!-- МОДАЛЬНОЕ ОКНО РЕЙТИНГА И ОТЗЫВОВ О ПЕРЕДАЧЕ -->
 <div class="modal-overlay" id="rating-modal">
     <div class="rating-modal-content">
@@ -579,6 +706,15 @@ input[type="time"]{flex:0 0 auto}
                         <input type="url" id="edit-banner-url" placeholder="Или ссылка на баннер">
                     </div>
                 </div>
+                <div class="edit-field">
+                    <label>Рамка аватара</label>
+                    <select id="edit-frame-select" class="profile-frame-select"></select>
+                </div>
+                <div class="edit-field">
+                    <label>Эффект рамки</label>
+                    <select id="edit-fx-select" class="profile-frame-select"></select>
+                </div>
+                <div class="frame-hint" id="frame-progress-hint"></div>
                 <button class="btn-primary" id="save-profile-btn">Сохранить изменения</button>
             </div>
         </div>
@@ -620,14 +756,17 @@ input[type="time"]{flex:0 0 auto}
             <div class="admin-tab" data-tab="schedule">Расписание</div>
             <div class="admin-tab" data-tab="chat">Чат</div>
             <div class="admin-tab" data-tab="sound">Звук</div>
+            <div class="admin-tab" data-tab="radio">Радио</div>
             <div class="admin-tab" data-tab="prefixes">Префиксы</div>
         </div>
         <div class="admin-tab-content active" data-content="stream">
             <div class="admin-section"><label>Онлайн сейчас</label><div class="admin-viewers" id="admin-viewers-count">--</div></div>
             <div class="admin-section">
+                <label>Каналы</label><div class="fx-row"><input id="channel-admin-name" placeholder="Название канала"><input id="channel-admin-icon" placeholder="Иконка URL"></div><button class="btn-secondary" id="add-channel-admin">Добавить канал</button><div id="channel-admin-list" style="margin:10px 0"></div>
                 <label>Источники</label>
                 <div class="hint">Поддерживаются HLS (.m3u8), прямые видеофайлы (.mp4), ссылки YouTube (shorts/watch/embed) или выбор файла с устройства.</div>
                 <input type="text" id="source-name" placeholder="Название">
+                <input type="text" id="source-channel-icon" placeholder="Ссылка на иконку канала"><input type="file" id="source-channel-icon-file" accept="image/*"><select id="source-channel"><option value="general">Общий канал</option><option value="music">Музыка</option><option value="family">Семейный</option><option value="education">Познавательный</option><option value="gaming">Игры</option></select>
                 <div style="height:8px"></div>
                 <div class="file-btn-wrap">
                     <input type="file" id="source-file" accept="video/*" style="display:none">
@@ -638,7 +777,7 @@ input[type="time"]{flex:0 0 auto}
                 <button class="btn-primary" id="add-source-btn">Добавить в список</button>
                 <div style="height:6px"></div>
                 <button class="btn-secondary" id="load-cartoon-pack">📺 Загрузить подборку мультфильмов (7 шт)</button>
-                <div id="saved-sources-list" style="margin-top:12px"></div>
+                <div class="admin-section" id="import-box" style="border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:12px;margin-bottom:6px"><label style="font-weight:600">📥 Импорт контента (JSON)</label><div style="font-size:11px;opacity:.6;margin:4px 0 8px;line-height:1.4">Вставьте список видео — можно плейлистом (ссылка вида <code>youtube.com/playlist?list=…</code>) или обычной ссылкой на видео. Поля: <b>sources</b> — video в библиотеку, <b>schedule</b> — в сетку (day 1…7, time «18:00»). В базу пишется только при нажатии кнопки.</div><textarea id="import-json" rows="7" placeholder='[{"name":"Мультик","url":"https://www.youtube.com/watch?v=…"}]' style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);color:#fff;border-radius:10px;padding:10px;font-family:monospace;font-size:12px"></textarea><div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap"><button class="btn-primary" id="import-run" style="width:auto;padding:8px 16px">Добавить в базу</button><button class="btn-secondary" id="import-file-btn" style="width:auto;padding:8px 14px">📁 Загрузить файл .json</button><button class="btn-secondary" id="import-sample" style="width:auto;padding:8px 12px">Пример</button><input type="file" id="import-file" accept=".json,application/json,text/plain" style="display:none"></div><div style="font-size:11px;opacity:.5;margin-top:6px">Можно просто перетащить файл .json в эту область — список подхватится сам.</div><pre id="import-log" style="white-space:pre-wrap;font-size:12px;opacity:.8;margin:8px 0 0"></pre></div><div id="saved-sources-list" style="margin-top:12px"></div>
                 <div style="height:10px"></div>
                 <select id="active-source-select"><option value="">-- Выбери --</option></select>
                 <div style="height:8px"></div>
@@ -657,9 +796,24 @@ input[type="time"]{flex:0 0 auto}
                 <div class="fx-row"><label>Режим</label><select id="platform-mode"><option value="manual">Ручной</option><option value="random">Случайный</option></select></div>
                 <div class="fx-row"><label>Интервал (мин)</label><input type="number" id="platform-interval" value="30" min="1" max="240"></div>
                 <div style="height:10px"></div>
-                <label>Источники по умолчанию</label>
+                <label>Оформление приложения</label><div class="fx-row"><label>Тема</label><select id="app-theme"><option value="dark">Тёмная</option><option value="aero">Frutiger Aero</option></select></div><div style="height:10px"></div><label>Источники по умолчанию</label>
                 <div class="hint">Тестовые HLS-стримы.</div>
                 <button class="btn-secondary" id="load-default-sources" style="background:rgba(0,122,255,0.2);border-color:rgba(0,122,255,0.4);color:#fff">⚡ Загрузить мультфильмы в источники</button>
+            </div>
+        </div>
+        <div class="admin-tab-content" data-content="radio">
+            <div class="admin-section">
+                <label>Заставки MyTV</label><div class="fx-row"><input id="bumper-text" placeholder="Текст заставки" style="flex:1"><input id="bumper-url" placeholder="Ссылка на короткое видео заставки" style="flex:1"><input id="bumper-duration" type="number" min="10" max="25" value="10" style="width:70px"><button class="btn-secondary" id="save-bumper" style="width:auto">Сохранить</button></div><div style="height:10px"></div><label>Радио MyTV</label>
+                <div class="fx-row"><label>Показывать раздел</label><div class="fx-toggle" id="radio-visibility-toggle"></div></div>
+                <div class="hint">Администратор может полностью убрать или вернуть кнопку «Радио» для зрителей.</div>
+                <div style="height:8px"></div><button class="btn-secondary" id="open-viewer-stats">Статистика зрителей</button>
+                <div class="hint">Добавляйте прямые ссылки на MP3, AAC или аудиопотоки. Ссылки на страницы YouTube и VK не являются аудиопотоками.</div>
+                <input type="text" id="radio-track-title" placeholder="Название трека">
+                <div style="height:8px"></div><input type="text" id="radio-track-artist" placeholder="Исполнитель">
+                <div style="height:8px"></div><input type="text" id="radio-track-url" placeholder="Прямая ссылка на аудио">
+                <div style="height:8px"></div><input type="text" id="radio-track-cover" placeholder="Ссылка на обложку (необязательно)"><input type="file" id="radio-track-cover-file" accept="image/*">
+                <div style="height:8px"></div><button class="btn-primary" id="add-radio-track">Добавить в радио</button><div style="height:8px"></div><button class="btn-secondary" id="load-radio-presets">Загрузить готовые радиостанции</button>
+                <div id="radio-tracks-list" style="margin-top:12px"></div>
             </div>
         </div>
         <div class="admin-tab-content" data-content="effects">
@@ -782,13 +936,14 @@ input[type="time"]{flex:0 0 auto}
                         <option value="6">Суббота</option>
                         <option value="7">Воскресенье</option>
                     </select>
+                    <select id="sched-channel"><option value="general">Общий канал</option><option value="music">Музыка</option><option value="family">Семейный</option><option value="education">Познавательный</option><option value="gaming">Игры</option></select>
                     <input type="time" id="sched-time" style="width:110px">
                     <input type="text" id="sched-url" placeholder="Ссылка (MP4/HLS/YT)" style="flex:1">
                 </div>
                 <div class="fx-row"><input type="text" id="sched-name" placeholder="Название программы"></div>
                 <button class="btn-primary" id="add-schedule-btn">Добавить в расписание</button>
                 <div style="height:14px"></div>
-                <label>Текущая сетка вещания:</label>
+                <label>Текущая сетка вещания:</label><div class="hint">Перетащите передачу на другую строку — время поменяется автоматически.</div>
                 <div class="sched-days-bar" id="admin-sched-days" style="margin-bottom:8px;border-radius:10px">
                     <button class="day-tab active" data-admin-day="all">Все</button>
                     <button class="day-tab" data-admin-day="1">Пн</button>
@@ -846,8 +1001,8 @@ input[type="time"]{flex:0 0 auto}
                 <div class="fx-row"><label>Цвет</label><input type="color" id="prefix-color" value="#007aff"></div>
                 <div class="fx-row"><label>Радуга</label><div class="fx-toggle" id="prefix-rainbow"></div></div>
                 <div class="prefix-preview" style="margin-bottom:12px">Превью: <span class="chat-prefix" id="prefix-preview-badge" style="background:#007aff;color:#fff">VIP</span> <span>Ник</span></div>
-                <button class="btn-primary" id="prefix-save-btn">Сохранить</button>
-                <div id="prefix-list" style="margin-top:12px"></div>
+                <button class="btn-primary" id="prefix-save-btn">Сохранить</button><div class="fx-row compact-frame-row" style="margin-top:10px;gap:6px;flex-wrap:wrap"><label>Email / UID</label><input id="avatar-target-id" placeholder="email или UID"><label>Рамка аватара</label><select id="avatar-frame-level"><option value="auto">Авто по дням</option><option value="none">Снять рамку</option><option value="1">Базовая</option><option value="2">Зелёная</option><option value="3">Золотая</option><option value="4">Розовая</option><option value="neon">Неоновая</option></select><button class="btn-secondary" id="avatar-frame-save" style="width:auto">Применить</button><select id="avatar-secret-effect" style="max-width:120px"><option value="none">Без эффекта</option><option value="butterflies">Бабочки</option><option value="stars">Звёзды</option><option value="bubbles">Пузыри</option></select></div>
+                <div id="prefix-list" style="margin-top:12px"></div><div id="avatar-frame-list" style="margin-top:10px"></div>
             </div>
         </div>
         <div class="admin-status" id="admin-status"></div>
@@ -1158,6 +1313,7 @@ const player=videojs("stream-player",{
 
 let isPaused=false;
 function loadStream(streamData){
+    runBumper();
     const sRatingKey = getCleanStreamRatingKey(
         typeof streamData === "object" ? (streamData?.name || streamData?.title) : "",
         typeof streamData === "string" ? streamData : streamData?.url
@@ -1213,15 +1369,17 @@ function loadStream(streamData){
 
     const elapsed = startedAt ? Math.max(0, Math.floor((Date.now() - startedAt) / 1000)) : 0;
     const ytId = parseYouTubeId(url);
+    const ytList = parseYouTubeList(url);
+    const ytKey = ytId || ytList;
 
-    if(ytId){
+    if(ytKey){
         player.pause();
         if(sp) sp.style.display = "none";
         if(yt){
             yt.style.display = "block";
             let shouldMute = localStorage.getItem("mytv_unmuted") !== "true";
-            const ytTarget = `https://www.youtube.com/embed/${ytId}?autoplay=1&mute=${shouldMute ? 1 : 0}&controls=0&disablekb=1&enablejsapi=1&rel=0&modestbranding=1&iv_load_policy=3&playsinline=1&start=${elapsed}`;
-            if(!yt.src || !yt.src.includes(ytId)){
+            const ytTarget = youtubeEmbed(url, { mute: shouldMute, start: elapsed });
+            if(!yt.src || !yt.src.includes(ytKey)){
                 yt.src = ytTarget;
                 yt.onload = () => {
                     setTimeout(() => {
@@ -1759,6 +1917,7 @@ function renderScheduleUI(){
                 return `<div class="${cls}">
                     <span class="sched-time">${dayTag}${esc(it.time)}</span>
                     <span class="sched-title">${esc(it.name || "")}</span>
+                    <button class="sched-remind" data-remind="${it.id}" title="Напоминание">${isReminderSaved(it.id)?"Отменить":"Напомнить"}</button>
                     ${badge}
                 </div>`;
             }).join("");
@@ -1831,6 +1990,15 @@ function subscribeChatSettings(){
     });
 }
 
+function chatAvatar(m){
+    const nm=esc(m&&m.name?String(m.name).trim().charAt(0).toUpperCase():'?');
+    if(!m||(m.frame===undefined&&m.fx===undefined))return '<span class="chat-av">'+nm+'</span>';
+    let cls='';
+    try{cls=frameClassesFor(m.frame||'auto',Number(m.days)||0);}catch(e){cls='';}
+    if(!cls)return '<span class="chat-av">'+nm+'</span>';
+    const deco=/level-3|level-4|neon-frame/.test(cls)?'<span class="frame-deco"></span>':'';
+    return '<span class="chat-av '+cls+'"><span class="frame-halo"></span>'+deco+'<span>'+nm+'</span></span>';
+}
 function renderChat(){
     const aEl=document.getElementById("chat-messages-admin"),
           vEl=document.getElementById("chat-messages-viewer");
@@ -1841,7 +2009,8 @@ function renderChat(){
         const cls="chat-msg"+(isOwn?" own":"")+(isMod?" mod":"")+(isAdmin?" admin":"");
         const canDel=me&&(me.role==="admin"||me.role==="moderator");
         const pfx=getPrefix(m.userId);
-        return `<div class="${cls}" data-id="${m.id}"><div class="chat-author-wrap">${pfx?`<span class="chat-prefix${pfx.rainbow?" rainbow":""}" style="${pfx.rainbow?"":"background:"+esc(pfx.color||"#007aff")+";color:#fff"}">${esc(pfx.text)}</span>`:""}<span class="chat-author">${esc(m.name||"Аноним")}</span></div><span class="chat-text">${esc(m.text)}</span><span class="chat-time">${fmtTime(m.ts)}</span>${canDel?`<button class="chat-del" onclick="window.delChatMsg('${m.id}')">✕</button>`:""}</div>`;
+        const av=chatAvatar(m);
+        return `<div class="${cls}" data-id="${m.id}">${av}<div class="chat-author-wrap">${pfx?`<span class="chat-prefix${pfx.rainbow?" rainbow":""}" style="${pfx.rainbow?"":"background:"+esc(pfx.color||"#007aff")+";color:#fff"}">${esc(pfx.text)}</span>`:""}<span class="chat-author">${esc(m.name||"Аноним")}</span></div><span class="chat-text">${esc(m.text)}</span><span class="chat-time">${fmtTime(m.ts)}</span>${canDel?`<button class="chat-del" onclick="window.delChatMsg('${m.id}')">✕</button>`:""}</div>`;
     }).join("");
 
     if(aEl)aEl.innerHTML=html;
@@ -1878,11 +2047,16 @@ function sendChat(text){
         }
     }
 
+    let _frame='auto',_fx='none',_days=0;
+    try{_frame=(myProfile&&myProfile.avatarFrame)||'auto';_fx=(myProfile&&myProfile.avatarFx)||'none';_days=myAccountDays();}catch(e){}
     push(ref(db,"chat"),{
         text:text.trim(),
         userId:me.uid,
         name:me.name,
         role:me.role,
+        frame:_frame,
+        fx:_fx,
+        days:_days,
         ts:Date.now()
     }).catch(e=>{
         console.error("Failed to send message:",e);
@@ -2038,6 +2212,8 @@ function updateProfileUI(){
         const diff = Math.floor((Date.now() - myProfile.createdAt) / (1000 * 60 * 60 * 24));
         daysEl.textContent = Math.max(1, diff);
     }
+
+    try { renderFrameChoices(); } catch (e) {}
 }
 function adjColor(hex,amt){
     if(!hex||hex[0]!=="#"||hex.length<7)return hex;
@@ -2143,7 +2319,7 @@ document.getElementById("add-source-btn")?.addEventListener("click",()=>{
         showStatus("Заполни поля","error");
         return;
     }
-    push(ref(db,"sources"),{name:n,url:u,autoSchedule:true,createdAt:Date.now()}).then(()=>{
+    push(ref(db,"sources"),{name:n,url:u,channel:document.getElementById("source-channel")?.value||"general",icon:document.getElementById("source-channel-icon")?.value||"",autoSchedule:true,createdAt:Date.now()}).then(()=>{
         document.getElementById("source-name").value="";
         document.getElementById("source-url").value="";
         showStatus("Добавлено","success");
@@ -2399,10 +2575,26 @@ function loadSchedule(){
 
         filtered.forEach(it=>{
             const row=document.createElement("div");
-            row.className="list-item";
+            row.className="list-item schedule-draggable";
+            row.draggable=true;
+            row.dataset.scheduleId=it.id;
             const dayLabel = (it.day && it.day !== "all") ? `<span class="day-badge">${DAY_NAMES_RU[it.day] || it.day}</span>` : `<span class="day-badge">Все дни</span>`;
             row.innerHTML=`<span class="li-name">${dayLabel}<strong>${esc(it.time)}</strong> — ${esc(it.name||"")}</span><button class="del">Удалить</button>`;
             row.querySelector("button").onclick=()=>remove(ref(db,"schedule/"+it.id));
+            row.addEventListener("dragstart",e=>{e.dataTransfer.setData("text/plain",it.id);row.style.opacity=".45";});
+            row.addEventListener("dragend",()=>row.style.opacity="1");
+            row.addEventListener("dragover",e=>{e.preventDefault();row.style.borderTop="2px solid #007aff";});
+            row.addEventListener("dragleave",()=>row.style.borderTop="");
+            row.addEventListener("drop",async e=>{
+                e.preventDefault(); row.style.borderTop="";
+                const from=e.dataTransfer.getData("text/plain"), to=it.id;
+                if(!from||from===to)return;
+                const a=items.find(x=>x.id===from), b=items.find(x=>x.id===to);
+                if(!a||!b)return;
+                await update(ref(db,"schedule/"+from),{time:b.time});
+                await update(ref(db,"schedule/"+to),{time:a.time});
+                showStatus("Порядок расписания изменён","success");
+            });
             list.appendChild(row);
         });
     });
@@ -2440,6 +2632,7 @@ document.getElementById("add-schedule-btn")?.addEventListener("click", () => {
 
     push(ref(db, "schedule"), {
         day: day === "all" ? "all" : Number(day),
+        channel: document.getElementById("sched-channel")?.value || "general",
         time,
         name,
         url: url || "",
@@ -2606,6 +2799,7 @@ document.getElementById("profile-btn")?.addEventListener("click",()=>{
 
 document.getElementById("profile-close")?.addEventListener("click",()=>{
     document.getElementById("profile-modal").classList.remove("active");
+    if(typeof resetFramePreview==='function')resetFramePreview();
 });
 document.getElementById("profile-bio-input")?.addEventListener("change",e=>{
     if(FB_OK&&me)set(ref(db,"users/"+me.uid+"/bio"),e.target.value).catch(()=>{});
@@ -2780,6 +2974,36 @@ function parseYouTubeId(url) {
     const match = url.match(regExp);
     return (match && match[2].length === 11) ? match[2] : null;
 }
+// Нормализуем ссылку: в базе иногда лежит HTML-экранированная (&amp;)
+function cleanUrl(u){ return String(u || '').trim().replace(/&amp;/g, '&'); }
+// Идентификатор плейлиста: параметр list= (настоящий плейлист, а не авто-микс)
+function parseYouTubeList(url) {
+    const u = cleanUrl(url);
+    if (!u) return null;
+    const m = u.match(/[?&]list=([^#&]+)/);
+    const id = m ? decodeURIComponent(m[1]) : '';
+    if (!id) return null;
+    if (/^(RD|UL|LL|WL|FL)/.test(id)) return null;   // авто-миксы и системные списки не считаем
+    return id.length >= 10 ? id : null;
+}
+// Готовый адрес для встраивания: одиночное видео, видео внутри плейлиста или весь плейлист
+function youtubeEmbed(url, opts) {
+    const o = opts || {};
+    const u = cleanUrl(url);
+    const vid = parseYouTubeId(u);
+    const list = parseYouTubeList(u);
+    if (!vid && !list) return null;
+    const base = vid
+        ? ('https://www.youtube.com/embed/' + vid)
+        : ('https://www.youtube.com/embed/videoseries');
+    const p = ['autoplay=1', 'mute=' + (o.mute ? 1 : 0), 'controls=0', 'disablekb=1',
+               'enablejsapi=1', 'rel=0', 'modestbranding=1', 'iv_load_policy=3', 'playsinline=1'];
+    if (vid) p.push('start=' + (Number(o.start) || 0));
+    else p.push('start=1');
+    if (list) p.push('list=' + encodeURIComponent(list));
+    if (vid && list) p.push('loop=0');
+    return base + '?' + p.join('&');
+}
 
 function fmtSecs(s) {
     const total = Math.max(0, Math.floor(s));
@@ -2877,17 +3101,32 @@ function setActiveNav(btn) {
     if (btn) btn.classList.add("active");
 }
 
+const navRadio = document.getElementById("nav-radio");
 const navStream = document.getElementById("nav-stream");
 const navSchedule = document.getElementById("nav-schedule");
 const navChat = document.getElementById("nav-chat");
 const navProfile = document.getElementById("nav-profile");
 const navAdmin = document.getElementById("nav-admin");
 
-navStream?.addEventListener("click", () => {
-    setActiveNav(navStream);
+navRadio?.addEventListener("click", () => {
+    setActiveNav(navRadio); document.body.classList.add('no-reactions');
     document.getElementById("chat-popup")?.classList.remove("active");
     document.getElementById("schedule-modal")?.classList.remove("active");
     document.getElementById("profile-modal")?.classList.remove("active");
+    const card=document.getElementById("radio-card");
+    if(card) card.classList.add("active");
+    document.querySelector(".player-wrapper")?.classList.add("radio-hidden");
+    document.querySelector(".stream-info-card")?.classList.add("radio-hidden");
+});
+
+navStream?.addEventListener("click", () => {
+    setActiveNav(navStream); document.body.classList.remove('no-reactions');
+    document.getElementById("chat-popup")?.classList.remove("active");
+    document.getElementById("schedule-modal")?.classList.remove("active");
+    document.getElementById("profile-modal")?.classList.remove("active");
+    const radioCard=document.getElementById("radio-card"); if(radioCard) radioCard.classList.remove("active");
+    document.querySelector(".player-wrapper")?.classList.remove("radio-hidden");
+    document.querySelector(".stream-info-card")?.classList.remove("radio-hidden"); if(typeof stopRadio==="function"&&radioOn)stopRadio();
     window.location.hash = "";
     window.scrollTo({ top: 0, behavior: "smooth" });
 });
@@ -2979,7 +3218,10 @@ document.getElementById("sound-file")?.addEventListener("change", (e) => {
 
 // Редактирование профиля (Аватар, Шапка, Ник, О себе)
 document.getElementById("btn-edit-profile")?.addEventListener("click", () => {
-    document.getElementById("profile-edit-box")?.classList.toggle("active");
+    const box = document.getElementById("profile-edit-box");
+    box?.classList.toggle("active");
+    if (box && !box.classList.contains("active") && typeof resetFramePreview === 'function') resetFramePreview();
+    try { renderFrameChoices(); } catch (e) {}
 });
 
 document.getElementById("btn-upload-avatar")?.addEventListener("click", () => {
@@ -3021,6 +3263,10 @@ document.getElementById("save-profile-btn")?.addEventListener("click", async () 
 
     try {
         const updates = { name: newName, bio: newBio, avatar: newAvatar, banner: newBanner };
+        const frameSel = document.getElementById("edit-frame-select");
+        const fxSel = document.getElementById("edit-fx-select");
+        if (frameSel) updates.avatarFrame = frameSel.value || "auto";
+        if (fxSel) updates.avatarFx = fxSel.value || "none";
         await update(ref(db, "users/" + me.uid), updates);
         if (auth.currentUser) {
             await updateProfile(auth.currentUser, { displayName: newName, photoURL: newAvatar || null });
@@ -3028,7 +3274,9 @@ document.getElementById("save-profile-btn")?.addEventListener("click", async () 
         me.name = newName;
         saveSession(me);
         myProfile = { ...myProfile, ...updates };
+        window.__framePreview = null;
         updateProfileUI();
+        try { applyUserAvatarFrame(); } catch (e) {}
         document.getElementById("profile-edit-box")?.classList.remove("active");
         showStatus("Профиль обновлён", "success");
     } catch (e) {
@@ -3839,6 +4087,609 @@ document.getElementById("subtitles-btn")?.addEventListener("click",()=>{
     for(let i=0;i<tracks.length;i++) tracks[i].mode=active?"disabled":"showing";
     if(b){ b.dataset.subtitlesOn=active?"0":"1"; b.classList.toggle("active",!active); }
 });
+
+// Радио MyTV: последовательное воспроизведение прямых аудиоссылок
+let radioTracks={}, radioIndex=0, radioOn=false, radioFails=0, radioCurrentId=null, radioAttempt=0;
+const radioAudio=document.getElementById("radio-audio");
+function radioList(){
+ if(!FB_OK)return;
+ onValue(ref(db,"radioTracks"), snap=>{ radioTracks=snap.val()||{}; renderRadioAdmin(); renderRadioPlaylist(); if(radioOn && !radioAudio.src) playRadioTrack(); });
+}
+function radioItems(){return Object.keys(radioTracks).map(k=>({id:k,...radioTracks[k]})).filter(x=>x.enabled!==false);}
+function radioTrackName(t){return (t&&t.artist?t.artist+" — ":"")+((t&&t.title)||"Без названия");}
+function radioNow(text){const n=document.getElementById("radio-now"); if(n&&text!=null)n.textContent=text;}
+function setRadioUI(on){
+    const b=document.getElementById("radio-toggle"), card=document.getElementById("radio-card");
+    if(card)card.classList.toggle("playing",!!on);
+    if(b)b.textContent=on?"Выключить радио":"Включить радио";
+}
+function updateRadioCover(t){
+    const disc=document.querySelector("#radio-card .radio-disc");
+    if(!disc)return;
+    if(t&&t.cover){disc.style.backgroundImage='url("'+t.cover+'")';disc.style.backgroundSize="cover";disc.style.backgroundPosition="center";}
+    else{disc.style.backgroundImage="";disc.style.backgroundSize="";disc.style.backgroundPosition="";}
+}
+function stopRadio(){
+    radioOn=false; radioCurrentId=null;
+    try{radioAudio.pause();}catch(e){}
+    try{radioAudio.removeAttribute("src");radioAudio.load();}catch(e){}
+    setRadioUI(false); radioNow("Радио выключено"); renderRadioPlaylist();
+}
+function playRadioTrack(){
+    const a=radioItems();
+    if(!a.length){showStatus("В радио пока нет треков","error");stopRadio();return;}
+    if(radioFails>a.length){showStatus("Треки радио недоступны","error");radioFails=0;stopRadio();return;}
+    const t=a[((radioIndex%a.length)+a.length)%a.length];
+    if(!t||!t.url){radioFails++;radioIndex++;playRadioTrack();return;}
+    const myAttempt=++radioAttempt;
+    radioCurrentId=t.id;
+    radioNow("Загрузка: "+radioTrackName(t));
+    renderRadioPlaylist();
+    try{radioAudio.pause();radioAudio.src=t.url;radioAudio.load();}catch(e){}
+    let p; try{p=radioAudio.play();}catch(e){p=Promise.reject(e);}
+    Promise.resolve(p).then(()=>{
+        radioFails=0; radioOn=true; setRadioUI(true);
+        radioNow(radioTrackName(t)); updateRadioCover(t); renderRadioPlaylist();
+    }).catch(()=>onRadioTrackError(myAttempt));
+}
+function onRadioTrackError(attempt){
+    if(attempt!=null&&attempt!==radioAttempt)return;   // та же ошибка пришла дважды — не перескакиваем два трека
+    radioAttempt++;
+    const a=radioItems();
+    radioFails++; radioIndex++;
+    if(!a.length||radioFails>a.length){showStatus("Не удалось включить радио","error");radioFails=0;stopRadio();return;}
+    showStatus("Трек недоступен, включаю следующий","error");
+    setTimeout(playRadioTrack,300);
+}
+radioAudio?.addEventListener("ended",()=>{radioIndex++;radioFails=0;playRadioTrack();});
+radioAudio?.addEventListener("playing",()=>{radioFails=0;if(radioOn){const t=radioItems().find(x=>x.id===radioCurrentId);if(t){radioNow(radioTrackName(t));updateRadioCover(t);}setRadioUI(true);}});
+radioAudio?.addEventListener("waiting",()=>{if(radioOn)radioNow("Буферизация…");});
+radioAudio?.addEventListener("error",()=>{if(radioOn||radioAudio.src)onRadioTrackError(radioAttempt);});
+function renderRadioPlaylist(){
+    const box=document.getElementById("radio-playlist");
+    if(!box)return;
+    const a=radioItems();
+    if(!a.length){box.innerHTML='<div style="opacity:.6;font-size:13px;text-align:center;padding:6px">Плейлист радио пуст</div>';return;}
+    box.innerHTML=a.map(t=>{
+        const cur=radioOn&&t.id===radioCurrentId;
+        return '<div class="list-item" data-radio-play="'+esc(t.id)+'" style="cursor:pointer'+(cur?";border-color:#6d5dfc;background:rgba(109,93,252,.18)":"")+'"><span class="li-name">'+(cur?"▶ ":"")+esc(radioTrackName(t))+'</span></div>';
+    }).join("");
+    box.querySelectorAll("[data-radio-play]").forEach(el=>{
+        el.onclick=()=>{const i=a.findIndex(x=>x.id===el.dataset.radioPlay); if(i>=0){radioIndex=i;radioFails=0;playRadioTrack();}};
+    });
+}
+document.getElementById("radio-close")?.addEventListener("click",()=>{document.getElementById("radio-card")?.classList.remove("active");document.querySelector(".player-wrapper")?.classList.remove("radio-hidden");document.querySelector(".stream-info-card")?.classList.remove("radio-hidden");stopRadio();setActiveNav(navStream);});
+document.getElementById("radio-toggle")?.addEventListener("click",()=>{if(radioOn){stopRadio();}else{radioFails=0;playRadioTrack();}});
+document.getElementById("radio-next")?.addEventListener("click",()=>{radioIndex++;radioFails=0;playRadioTrack();});
+document.getElementById("radio-prev")?.addEventListener("click",()=>{radioIndex--;radioFails=0;playRadioTrack();});
+// Массовый импорт: JSON соources/schedule — чтобы не добавлять видео по одному
+function parseImportJson(text){
+    let raw = String(text || '').trim();
+    if(!raw) return { err: 'Пусто' };
+    if(raw.charCodeAt(0) === 65279) raw = raw.slice(1);
+    let data;
+    try { data = JSON.parse(raw); }
+    catch(e){ return { err: 'Не JSON: ' + e.message }; }
+    if(data && !Array.isArray(data) && typeof data === 'object'){
+        if(Array.isArray(data.sources)) data = { sources: data.sources, schedule: data.schedule || [] };
+        else if(Array.isArray(data.schedule)) data = { sources: [], schedule: data.schedule };
+        else if(Array.isArray(data.items)) data = data.items;
+    }
+    let srcs = [], sched = [];
+    if(Array.isArray(data)){
+        data.forEach(function(it){
+            if(!it || typeof it !== 'object') return;
+            if(it.url && (it.time !== undefined || it.day !== undefined)) sched.push(it);
+            else if(it.url) srcs.push(it);
+        });
+    } else {
+        srcs = Array.isArray(data.sources) ? data.sources.filter(function(x){ return x && x.url; }) : [];
+        sched = Array.isArray(data.schedule) ? data.schedule.filter(function(x){ return x && x.url; }) : [];
+    }
+    srcs = srcs.map(function(x){
+        return { name: String(x.name || 'Без названия').slice(0, 120),
+                 url: cleanUrl(x.url), channel: String(x.channel || 'general'), icon: String(x.icon || '') };
+    });
+    sched = sched.map(function(x){
+        const day = Number(x.day);
+        return { name: String(x.name || 'Без названия').slice(0, 120),
+                 url: cleanUrl(x.url),
+                 time: /^\d{1,2}:\d{2}$/.test(String(x.time || '')) ? String(x.time) : '12:00',
+                 day: (day >= 1 && day <= 7) ? day : 1 };
+    });
+    if(!srcs.length && !sched.length) return { err: 'Не нашёл ни одного видео с полем url' };
+    return { sources: srcs, schedule: sched };
+}
+window.doImportContent=async function(){
+    const ta = document.getElementById('import-json');
+    const log = document.getElementById('import-log');
+    if(!ta) return;
+    if(!me || me.role !== 'admin'){ if(log) log.textContent = 'Нужны права администратора'; return; }
+    const parsed = parseImportJson(ta.value);
+    if(parsed.err){ if(log) log.textContent = 'Ошибка: ' + parsed.err; return; }
+    if(log) log.textContent = 'Добавляю: источников ' + parsed.sources.length + ', в расписание ' + parsed.schedule.length + '…';
+    let okS = 0, okT = 0, errs = [];
+    for(const it of parsed.sources){
+        try { await push(ref(db, 'sources'), { ...it, createdAt: Date.now() }); okS++; }
+        catch(e){ errs.push(it.name + ': ' + e.message); }
+    }
+    for(const it of parsed.schedule){
+        try { await push(ref(db, 'schedule'), it); okT++; }
+        catch(e){ errs.push(it.name + ': ' + e.message); }
+    }
+    if(log) log.textContent = 'Готово. Добавлено источников: ' + okS + ', в расписание: ' + okT +
+        (errs.length ? '\\nОшибки: ' + errs.slice(0, 5).join('; ') : '');
+    showStatus('Импорт завершён: +' + okS + ' источников, +' + okT + ' в расписании', 'success');
+};
+document.getElementById('import-run')?.addEventListener('click', () => { doImportContent(); });
+// Загрузка файла .json: выбрали (или перетащили) — сразу разобрали и показали, что будет записано
+window.handleImportFile = async function (file) {
+    const log = document.getElementById('import-log');
+    if (!file) return;
+    if (!me || me.role !== 'admin') { if (log) log.textContent = 'Нужны права администратора'; return; }
+    let text = '';
+    try { text = await file.text(); }
+    catch (e) {
+        try { text = await new Promise((res, rej) => { const r = new FileReader(); r.onload = () => res(String(r.result || '')); r.onerror = () => rej(r.error); r.readAsText(file); }); }
+        catch (e2) { if (log) log.textContent = 'Не прочитать файл: ' + (e2.message || e.message); return; }
+    }
+    const ta = document.getElementById('import-json');
+    if (ta) ta.value = text;
+    const parsed = parseImportJson(text);
+    if (parsed.err) { if (log) log.textContent = 'Ошибка в файле «' + file.name + '»: ' + parsed.err; return; }
+    const msg = 'Файл «' + file.name + '»:\nвидео в библиотеку — ' + parsed.sources.length +
+                '\nпередач в расписание — ' + parsed.schedule.length + '\nДобавить в базу?';
+    if (!window.confirm(msg)) { if (log) log.textContent = 'Отменено. Файл разобран, но ничего не записано.'; return; }
+    await doImportContent();
+};
+document.getElementById('import-file-btn')?.addEventListener('click', () => document.getElementById('import-file')?.click());
+let importBusy = false;
+async function importFileFromInput(el) {
+    if (importBusy) return;
+    const f = el && el.files && el.files[0];
+    if (!f) return;
+    importBusy = true;
+    try { await handleImportFile(f); }
+    finally { importBusy = false; try { el.value = ''; } catch (e) {} }   // тот же файл можно выбрать снова
+}
+['change', 'input'].forEach(function (ev) {
+    document.getElementById('import-file')?.addEventListener(ev, function (e) { importFileFromInput(e.target); });
+});
+(function () {
+    const box = document.getElementById('import-box');
+    if (!box) return;
+    const on = () => box.classList.add('drag');
+    const off = () => box.classList.remove('drag');
+    ['dragenter', 'dragover'].forEach(ev => box.addEventListener(ev, e => { e.preventDefault(); e.stopPropagation(); on(); }));
+    ['dragleave', 'dragend'].forEach(ev => box.addEventListener(ev, e => { e.preventDefault(); off(); }));
+    box.addEventListener('drop', async e => {
+        e.preventDefault(); e.stopPropagation(); off();
+        const f = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
+        if (f) await handleImportFile(f);
+    });
+})();
+document.getElementById('import-sample')?.addEventListener('click', () => {
+    const ta = document.getElementById('import-json');
+    if(!ta) return;
+    ta.value = JSON.stringify({
+        sources: [{ name: 'Пример — передача', url: 'https://www.youtube.com/watch?v=XXXXXXXXXXX', channel: 'мультики' }],
+        schedule: [{ day: 1, time: '18:00', name: 'Пример — передача', url: 'https://www.youtube.com/watch?v=XXXXXXXXXXX' }]
+    }, null, 2);
+});
+function renderRadioAdmin(){const l=document.getElementById("radio-tracks-list");if(!l)return;l.innerHTML="";Object.keys(radioTracks).forEach(k=>{const t=radioTracks[k],row=document.createElement("div");row.className="list-item";row.innerHTML=`<span class="li-name"><strong>${esc(t.title||"Без названия")}</strong>${t.artist?" — "+esc(t.artist):""}<br><small class="radio-check" data-url="${esc(t.url||"")}">⏳ проверяю ссылку…</small></span><button class="check-radio" title="Проверить, что ссылка — прямое аудио">Проверить</button><button class="edit-radio">Изменить</button><button class="del">Удалить</button>`;
+
+row.querySelector(".edit-radio").onclick=()=>{const title=prompt("Название трека",t.title||"");if(title===null)return;const artist=prompt("Исполнитель",t.artist||"");if(artist===null)return;const cover=prompt("Ссылка на обложку",t.cover||"");if(cover===null)return;update(ref(db,"radioTracks/"+k),{title:title.trim()||t.title,artist:artist.trim(),cover:cover.trim()}).catch(e=>showStatus("Ошибка: "+e.message,"error"));};
+row.querySelector(".del").onclick=()=>remove(ref(db,"radioTracks/"+k));l.appendChild(row);});
+window.__radioChecks=window.__radioChecks||{};
+paintRadioChecks(l);
+Object.keys(radioTracks).forEach(function(k){radioCheckUrl((radioTracks[k]||{}).url||"",false,function(){paintRadioChecks(l);});});
+}
+function radioCheckUrl(url,force,cb){
+    window.__radioChecks=window.__radioChecks||{};
+    if(!url){window.__radioChecks[url]='bad';cb&&cb();return;}
+    if(!force&&window.__radioChecks[url]&&window.__radioChecks[url]!=='checking'){cb&&cb();return;}
+    window.__radioChecks[url]='checking';cb&&cb();
+    let a=null,done=false;
+    function fin(v){if(done)return;done=true;window.__radioChecks[url]=v;try{if(a){a.removeAttribute('src');a.load();}}catch(e){}cb&&cb();}
+    try{
+        a=new Audio();a.preload='metadata';
+        a.addEventListener('loadedmetadata',()=>fin('ok'));
+        a.addEventListener('canplay',()=>fin('ok'));
+        a.addEventListener('error',()=>fin('bad'));
+        a.src=url;
+        setTimeout(()=>{if(!done)fin('bad')},9000);
+    }catch(e){fin('bad')}
+}
+function paintRadioChecks(host){
+    const l2=host||document.getElementById("radio-tracks-list");if(!l2)return;
+    window.__radioChecks=window.__radioChecks||{};
+    l2.querySelectorAll(".radio-check").forEach(el=>{
+        const st=window.__radioChecks[el.dataset.url||""]||"checking";
+        el.textContent=st==="ok"?"✅ ссылка работает":(st==="bad"?"⚠️ не аудио — на этом треке радио замолчит":"⏳ проверяю ссылку…");
+        el.style.color=st==="ok"?"#7ee787":(st==="bad"?"#ff9f9f":"rgba(255,255,255,.55)");
+    });
+}
+document.getElementById("add-radio-track")?.addEventListener("click",()=>{if(!me||me.role!=="admin")return;const title=document.getElementById("radio-track-title").value.trim(),artist=document.getElementById("radio-track-artist").value.trim(),url=document.getElementById("radio-track-url").value.trim(),cover=document.getElementById("radio-track-cover").value.trim();if(!url){showStatus("Вставьте прямую ссылку на аудио","error");return;} if(!/\.(mp3|m4a|aac|ogg|oga|opus|wav|flac)(\?|#|$)/i.test(url)&&!/(stream|live|radio|icecast|shoutcast|\/128k|\/64k|\/320k|\.pls|\.m3u8)/i.test(url)){showStatus("Осторожно: похоже, это не прямая ссылка на аудио","error");}const guessed=title||decodeURIComponent(url.split("/").pop().split("?")[0]).replace(/\.[^.]+$/," ").trim()||"Без названия";push(ref(db,"radioTracks"),{title:guessed,artist,url,cover,enabled:true,createdAt:Date.now()}).then(()=>{["radio-track-title","radio-track-artist","radio-track-url","radio-track-cover"].forEach(id=>document.getElementById(id).value="");showStatus("Трек добавлен в радио","success");});});
+document.getElementById("load-radio-presets")?.addEventListener("click",async()=>{if(!me||me.role!=="admin"){showStatus("Нужны права администратора","error");return;}const presets=[{title:"Jazz24",artist:"Jazz",url:"https://knkx-live-a.edge.audiocdn.com/6285_128k",cover:"",enabled:true},{title:"WRTI Classical",artist:"Classical",url:"https://wrti-live.streamguys1.com/classical-mp3",cover:"",enabled:true},{title:"WRTI Jazz",artist:"Jazz",url:"https://wrti-live.streamguys1.com/jazz-mp3",cover:"",enabled:true},{title:"SmoothJazz",artist:"Smooth Jazz",url:"https://smoothjazz.cdnstream1.com/2585_128.mp3",cover:"",enabled:true},{title:"SmoothLounge",artist:"Lounge",url:"https://smoothjazz.cdnstream1.com/2586_128.mp3",cover:"",enabled:true}];for(const t of presets)await push(ref(db,"radioTracks"),{...t,createdAt:Date.now()});showStatus("Готовые радиостанции добавлены","success");});
+radioList();
+
+// Переключаемая тема: менять её может только администратор
+function applyAppTheme(theme){document.body.classList.toggle("aero-theme",theme==="aero");const sel=document.getElementById("app-theme");if(sel)sel.value=theme||"dark";}
+document.getElementById("app-theme")?.addEventListener("change",e=>{if(!me||me.role!=="admin"){e.target.value=document.body.classList.contains("aero-theme")?"aero":"dark";return;}set(ref(db,"settings/theme"),e.target.value).catch(err=>showStatus("Ошибка Firebase: "+err.message,"error"));});
+if(FB_OK)onValue(ref(db,"settings/theme"),snap=>applyAppTheme(snap.val()||"dark"));
+
+
+// Избранное: сохраняется локально на устройстве, убрать можно прямо из списка
+function getFavorites(){try{const a=JSON.parse(localStorage.getItem('mytv_favorites')||'[]');return Array.isArray(a)?a:[];}catch(e){return[];}}
+function saveFavorites(a){try{localStorage.setItem('mytv_favorites',JSON.stringify(a));}catch(e){}}
+function refreshFavorite(){
+    const b=document.getElementById('favorite-stream-btn'),n=document.getElementById('stream-title-display')?.textContent?.trim();
+    if(!b)return;
+    const on=!!n&&n!=='Прямой эфир'&&getFavorites().some(x=>x&&x.name===n);
+    b.textContent=on?'В избранном':'Избранное';
+    b.classList.toggle('active',on);
+}
+document.getElementById('favorite-stream-btn')?.addEventListener('click',()=>{
+    const n=document.getElementById('stream-title-display')?.textContent?.trim();
+    if(!n||n==='Прямой эфир')return;
+    const a=getFavorites(),i=a.findIndex(x=>x&&x.name===n);
+    if(i>=0){a.splice(i,1);showStatus('Удалено из избранного','success');}
+    else{a.push({name:n,ts:Date.now()});showStatus('Добавлено в избранное','success');}
+    saveFavorites(a); refreshFavorite();
+});
+
+// Реакции зрителей: общий счётчик в Firebase; если запись недоступна — локальный на устройстве
+const RX_LOCAL='mytv_reactions', RX_VOTED='mytv_reaction_voted';
+let rxKey=null, rxGlobal={}, rxRemoteVote=null, rxSync=false, rxUnsub=[];
+function rxName(){return document.getElementById('stream-title-display')?.textContent?.trim()||'default';}
+function rxKeyOf(n){return String(n||'default').replace(/[.#$/\[\]]/g,'_');}
+function rxLocalAll(){try{return JSON.parse(localStorage.getItem(RX_LOCAL)||'{}')||{}}catch(e){return{}}}
+function rxVotedAll(){try{return JSON.parse(localStorage.getItem(RX_VOTED)||'{}')||{}}catch(e){return{}}}
+function rxUid(){return (me&&me.uid)||null;}
+function updateReactions(){
+    const n=rxName(), l=rxLocalAll()[n]||{}, v=rxVotedAll()[n]||null;
+    const voted = rxSync ? rxRemoteVote : v;
+    document.querySelectorAll('.reaction-btn').forEach(b=>{
+        const e=b.dataset.reaction;
+        const val = rxSync ? Math.max(0,Number(rxGlobal[e]||0)) : Math.max(0,Number(l[e]||0));
+        if(b.querySelector('b'))b.querySelector('b').textContent=val;
+        b.classList.toggle('voted', voted===e);
+    });
+}
+function syncReactionsFor(name){
+    const k=rxKeyOf(name);
+    if(!FB_OK){rxSync=false;updateReactions();return;}
+    if(k===rxKey){updateReactions();return;}
+    rxUnsub.forEach(f=>{try{f();}catch(e){}}); rxUnsub=[];
+    rxKey=k; rxGlobal={}; rxRemoteVote=null; rxSync=false;
+    try{
+        const cRef=ref(db,'reactions/'+rxKey+'/counts');
+        const cCb=s=>{const val=s.val();rxGlobal=val||{};rxSync=!!val;updateReactions();};
+        onValue(cRef,cCb); rxUnsub.push(()=>{try{cRef.off('value',cCb);}catch(e){}});
+        const uid=rxUid();
+        if(uid){
+            const vRef=ref(db,'reactions/'+rxKey+'/voters/'+uid);
+            const vCb=s=>{rxRemoteVote=s.val()||null;updateReactions();};
+            onValue(vRef,vCb); rxUnsub.push(()=>{try{vRef.off('value',vCb);}catch(e){}});
+        }
+    }catch(e){rxSync=false;}
+    updateReactions();
+}
+document.querySelectorAll('.reaction-btn').forEach(b=>b.addEventListener('click',()=>{
+    const n=rxName(), e=b.dataset.reaction;
+    const prev = rxSync ? rxRemoteVote : (rxVotedAll()[n]||null);
+    const next = (prev===e)?null:e;
+    const d=rxLocalAll(), v=rxVotedAll();
+    d[n]=d[n]||{};
+    if(prev===e){ d[n][e]=Math.max(0,(d[n][e]||0)-1); delete v[n]; }
+    else { if(prev)d[n][prev]=Math.max(0,(d[n][prev]||0)-1); d[n][e]=(d[n][e]||0)+1; v[n]=e; }
+    try{localStorage.setItem(RX_LOCAL,JSON.stringify(d));localStorage.setItem(RX_VOTED,JSON.stringify(v));}catch(err){}
+    const uid=rxUid();
+    if(FB_OK&&uid){
+        try{
+            const inc=firebase.database.ServerValue.increment, k=rxKeyOf(n), upd={};
+            if(prev===e){ upd['reactions/'+k+'/counts/'+e]=inc(-1); upd['reactions/'+k+'/voters/'+uid]=null; }
+            else { if(prev)upd['reactions/'+k+'/counts/'+prev]=inc(-1); upd['reactions/'+k+'/counts/'+e]=inc(1); upd['reactions/'+k+'/voters/'+uid]=e; }
+            update(ref(db),upd).then(()=>{rxSync=true;}).catch(()=>{rxSync=false;}).then(()=>updateReactions());
+            rxRemoteVote=next;
+        }catch(err){}
+    }
+    updateReactions();
+}));
+updateReactions();
+setTimeout(()=>{try{syncReactionsFor(rxName());}catch(e){}},2500);
+// с любого раздела, кроме радио, реакции снова видны
+document.querySelectorAll('.nav-btn').forEach(b=>b.addEventListener('click',()=>{if(b.id!=='nav-radio')document.body.classList.remove('no-reactions');}));
+
+// Напоминания о передачах сохраняются на устройстве
+function loadReminders(){
+    let a=[]; try{a=JSON.parse(localStorage.getItem('mytv_reminders')||'[]')||[];}catch(e){a=[];}
+    if(!Array.isArray(a))a=[];
+    a.forEach(x=>{if(x&&('notified' in x))delete x.notified;});   // старый флаг больше не мешает повторам
+    return a;
+}
+function saveReminders(a){try{localStorage.setItem('mytv_reminders',JSON.stringify(a));}catch(e){}}
+function isReminderSaved(id){return loadReminders().some(x=>x&&String(x.id)===String(id));}
+function todayKey(){const d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();}
+function reminderDayMatches(x){
+    if(!x||x.day===undefined||x.day===null||x.day==='all'||x.day==='')return true;
+    const w=new Date().getDay(); const today=(w===0?7:w);
+    return Number(x.day)===today;
+}
+window.toggleScheduleReminder=function(id,name,time,day){
+    const a=loadReminders(), i=a.findIndex(x=>x&&String(x.id)===String(id));
+    if(i>=0){a.splice(i,1);showStatus('Напоминание отменено','success');}
+    else{
+        a.push({id:String(id),name:name||'',time:time||'',day:(day===undefined||day===null||day==='')?'all':String(day)});
+        if('Notification' in window&&Notification.permission==='default'){try{Notification.requestPermission();}catch(e){}}
+        showStatus('Напоминание сохранено','success');
+    }
+    saveReminders(a);
+    if(typeof renderScheduleUI==='function')renderScheduleUI();
+};
+document.addEventListener('click',e=>{const b=e.target.closest('.sched-remind');if(!b)return;e.preventDefault();const id=b.dataset.remind;const d=schedData||{};const it=d[id]||{};toggleScheduleReminder(id,it.name||'',it.time||'',it.day||'all')});
+
+// Управление видимостью радио и статистика текущей сессии
+function applyRadioVisibility(v){const n=document.getElementById('nav-radio'),t=document.getElementById('radio-visibility-toggle');if(n)n.style.display=v?'flex':'none';if(t)t.classList.toggle('on',v)}
+if(FB_OK)onValue(ref(db,'settings/radioEnabled'),x=>applyRadioVisibility(x.val()!==false));
+document.getElementById('radio-visibility-toggle')?.addEventListener('click',()=>{if(!me||me.role!=='admin')return;const on=!document.getElementById('radio-visibility-toggle').classList.contains('on');set(ref(db,'settings/radioEnabled'),on).catch(e=>showStatus('Ошибка Firebase: '+e.message,'error'))});
+function renderViewerStats(){const body=document.getElementById('viewer-stats-body');if(!body)return;get(ref(db,'analytics/viewers')).then(s=>{const a=Object.values(s.val()||{}).sort((x,y)=>(x.ts||0)-(y.ts||0)),days=Number(window.statsDays||1),cut=Date.now()-days*86400000,rows=a.filter(x=>(x.ts||0)>=cut),counts=rows.map(x=>Number(x.count)||0),max=counts.length?Math.max(...counts):0,avg=counts.length?(counts.reduce((q,n)=>q+n,0)/counts.length).toFixed(1):'0';body.innerHTML='<p><b>Период:</b> '+days+' дн. &nbsp; <b>Максимум:</b> '+max+' &nbsp; <b>Среднее:</b> '+avg+'</p>';window.__viewerStats=rows;const c=document.getElementById('viewer-stats-chart'),x=c?.getContext('2d');if(x){x.clearRect(0,0,c.width,c.height);x.fillStyle='#55c9ff';rows.slice(-20).forEach((q,i)=>{const h=Math.max(8,Math.min(180,(q.count||0)*8));x.fillRect(20+i*26,c.height-h-25,16,h);x.fillStyle='#fff';x.font='10px Arial';x.fillText(new Date(q.ts||Date.now()).toLocaleDateString([], {day:'2-digit',month:'2-digit'}),18+i*26,c.height-5);x.fillStyle='#55c9ff'})}}).catch(e=>{body.textContent='Ошибка: '+e.message})}
+document.getElementById('open-viewer-stats')?.addEventListener('click',()=>{document.getElementById('viewer-stats-modal')?.classList.add('active');renderViewerStats()});document.getElementById('close-viewer-stats')?.addEventListener('click',()=>document.getElementById('viewer-stats-modal')?.classList.remove('active'));
+document.getElementById('download-viewer-stats')?.addEventListener('click',()=>{const c=document.createElement('canvas');c.width=1000;c.height=500;const x=c.getContext('2d');x.fillStyle='#102b45';x.fillRect(0,0,c.width,c.height);x.fillStyle='#fff';x.font='bold 32px Arial';x.fillText('MyTV — статистика зрителей',40,70);x.font='24px Arial';x.fillText('Онлайн сейчас: '+(window.__viewerStats?.length||0),40,130);x.fillText('Самый ранний текущий зритель: '+(window.__viewerStats?.[0]?.name||'нет данных'),40,180);const a=document.createElement('a');a.download='mytv-viewer-stats.png';a.href=c.toDataURL('image/png');a.click()});
+
+function renderFavorites(){const l=document.getElementById('favorites-list');if(!l)return;const a=getFavorites();
+l.innerHTML=a.length?a.map(x=>`<div class="list-item"><span class="li-name">${esc((x&&x.name)||'')}</span><button class="del" data-fav="${esc((x&&x.name)||'')}">Убрать</button></div>`).join(''):'<p style="opacity:.6">Избранное пока пусто</p>';
+l.querySelectorAll('[data-fav]').forEach(b=>b.onclick=()=>{saveFavorites(getFavorites().filter(x=>String((x&&x.name)||'')!==b.dataset.fav));renderFavorites();refreshFavorite();});}
+document.getElementById('nav-favorites')?.addEventListener('click',()=>{setActiveNav(document.getElementById('nav-favorites'));renderFavorites();document.getElementById('favorites-modal')?.classList.add('active')});document.getElementById('favorites-close')?.addEventListener('click',()=>{document.getElementById('favorites-modal')?.classList.remove('active');setActiveNav(navStream)});
+
+function renderReminders(){const l=document.getElementById('reminders-list');if(!l)return;const a=loadReminders();
+const dn=(x)=>{if(!x.day||x.day==='all')return '';const n=Number(x.day);return (typeof DAY_NAMES_RU!=='undefined'&&DAY_NAMES_RU[n])?' ('+DAY_NAMES_RU[n]+')':'';};
+l.innerHTML=a.length?a.map(x=>`<div class="list-item"><span class="li-name">${esc(x.time||'')} — ${esc(x.name||'')}<small style="opacity:.6">${esc(dn(x))}</small></span><button class="del" data-rid="${esc(x.id)}">Отменить</button></div>`).join(''):'<p style="opacity:.6">Напоминаний нет</p>';
+l.querySelectorAll('[data-rid]').forEach(b=>b.onclick=()=>{saveReminders(loadReminders().filter(x=>String(x.id)!==b.dataset.rid));renderReminders();if(typeof renderScheduleUI==='function')renderScheduleUI();});}
+document.getElementById('nav-reminders')?.addEventListener('click',()=>{setActiveNav(document.getElementById('nav-reminders'));renderReminders();document.getElementById('reminders-modal')?.classList.add('active')});document.getElementById('reminders-close')?.addEventListener('click',()=>{document.getElementById('reminders-modal')?.classList.remove('active');setActiveNav(navStream)});
+document.getElementById('save-bumper')?.addEventListener('click',()=>{if(me?.role!=='admin')return;set(ref(db,'settings/bumper'),{text:document.getElementById('bumper-text').value.trim(),url:document.getElementById('bumper-url').value.trim(),duration:Math.max(10,Math.min(25,Number(document.getElementById('bumper-duration').value)||10))}).then(()=>showStatus('Заставка сохранена','success'))});
+document.getElementById('request-close')?.addEventListener('click',()=>{document.getElementById('request-modal')?.classList.remove('active');try{setActiveNav(navStream);}catch(e){}});
+document.getElementById('request-modal')?.addEventListener('click',e=>{if(e.target.id==='request-modal'){e.currentTarget.classList.remove('active');try{setActiveNav(navStream);}catch(err){}}});
+document.getElementById('send-request')?.addEventListener('click',async()=>{const t=document.getElementById('request-text')?.value.trim();if(!t){showStatus('Введите запрос','error');return}if(!FB_OK||!me){showStatus('Войдите в профиль','error');return}try{await push(ref(db,'requests'),{text:t,name:me.name||'Зритель',uid:me.uid,ts:Date.now(),status:'new'});document.getElementById('request-text').value='';document.getElementById('request-modal')?.classList.remove('active');showStatus('Запрос отправлен администратору','success');refreshRequests()}catch(e){showStatus('Ошибка Firebase: '+e.message,'error')}});
+if(FB_OK)onValue(ref(db,'requests'),snap=>{const l=document.getElementById('requests-admin-list');if(!l||!me||me.role!=='admin')return;const v=snap.val()||{};l.innerHTML='<h3 style=\"margin-top:18px\">Запросы пользователей</h3>'+Object.entries(v).map(([k,x])=>`<div class=\"list-item\"><span class=\"li-name\"><b>${esc(x.name||'Зритель')}</b>: ${esc(x.text||'')}</span><button class=\"del\" data-request=\"${k}\">Удалить</button></div>`).join('');l.querySelectorAll('[data-request]').forEach(b=>b.onclick=()=>remove(ref(db,'requests/'+b.dataset.request)))});
+const REQ_STATUS={new:'новый',work:'в работе',done:'выполнен'};
+function fmtDateShort(ts){if(!ts)return '';const d=new Date(ts),p=n=>String(n).padStart(2,'0');return p(d.getDate())+'.'+p(d.getMonth()+1)+' '+p(d.getHours())+':'+p(d.getMinutes());}
+function renderRequests(snap){
+    const l=document.getElementById('requests-admin-list');
+    if(!l)return;
+    const v=(snap&&typeof snap.val==='function')?(snap.val()||{}):{};
+    const arr=Object.keys(v).map(k=>Object.assign({id:k},v[k]||{})).sort((a,b)=>(b.ts||0)-(a.ts||0));
+    if(me&&me.role==='admin'){
+        // одинаковые жалобы складываем в одну строку, иначе админ видит три копии про радио
+        const norm=t=>String(t||'').toLowerCase().replace(/[^a-z0-9а-яё\s]/g,' ').replace(/\s+/g,' ').trim()||'—';
+        const groups=[],byKey={};
+        arr.forEach(x=>{const k=norm(x.text);if(!byKey[k]){byKey[k]=[];groups.push(byKey[k]);}byKey[k].push(x);});
+        l.innerHTML='<h3 style="margin-top:18px">Запросы пользователей</h3>'+(groups.length?groups.map(g=>{
+            const x=g[0],n=g.length,ids=g.map(y=>y.id).join(',');
+            return '<div class="list-item"><span class="li-name"><b>'+esc(x.name||'Зритель')+'</b>: '+esc(x.text||'')+
+            (n>1?' <span class="req-dup" title="Похожих запросов: '+n+'">×'+n+'</span>':'')+
+            '<br><small style="opacity:.55">'+esc(fmtDateShort(x.ts))+(n>1?' · ещё '+(n-1)+' похожих':'')+' · '+esc(REQ_STATUS[x.status]||'новый')+'</small></span>'+
+            '<select class="req-status" data-reqs="'+esc(ids)+'" style="width:auto;padding:4px 6px;background:rgba(255,255,255,.08);color:inherit;border:1px solid rgba(255,255,255,.2);border-radius:8px">'+
+            ['new','work','done'].map(s2=>'<option value="'+s2+'"'+(((x.status||'new')===s2)?' selected':'')+'>'+REQ_STATUS[s2]+'</option>').join('')+'</select>'+
+            '<button class="del" data-requests="'+esc(ids)+'">Удалить'+(n>1?' ('+n+')':'')+'</button></div>';
+        }).join(''):'<p style="opacity:.6">Запросов нет</p>');
+        l.querySelectorAll('[data-requests]').forEach(b=>b.onclick=()=>{b.dataset.requests.split(',').forEach(id=>remove(ref(db,'requests/'+id)).catch(()=>{}));});
+        l.querySelectorAll('.req-status').forEach(sl=>sl.onchange=()=>{sl.dataset.reqs.split(',').forEach(id=>update(ref(db,'requests/'+id),{status:sl.value}).catch(()=>{}));});
+        l.querySelectorAll('.req-status').forEach(s=>s.onchange=()=>update(ref(db,'requests/'+s.dataset.req),{status:s.value}).catch(()=>{}));
+    }else{
+        const uid=me&&me.uid;
+        const mine=uid?arr.filter(x=>x.uid===uid):[];
+        l.innerHTML='<h3 style="margin-top:18px">Мои запросы</h3>'+(mine.length?mine.map(x=>
+            '<div class="list-item"><span class="li-name">'+esc(x.text||'')+'<br><small style="opacity:.55">'+esc(fmtDateShort(x.ts))+' · статус: '+esc(REQ_STATUS[x.status]||'новый')+'</small></span></div>').join('')
+            :('<p style="opacity:.6">'+(uid?'Вы ещё не отправляли запросы':'Войдите в профиль, чтобы видеть статус своих запросов')+'</p>'));
+    }
+}
+function refreshRequests(){if(!FB_OK)return;get(ref(db,'requests')).then(renderRequests).catch(()=>{});}
+if(FB_OK)onValue(ref(db,'requests'),renderRequests);
+document.getElementById('nav-requests')?.addEventListener('click',()=>{setActiveNav(document.getElementById('nav-requests'));document.getElementById('request-modal')?.classList.add('active');refreshRequests();});
+document.querySelectorAll('.radio-page,.stream-info-card,.player-wrapper').forEach(x=>x.classList.add('aero-transition'));
+
+// Короткая заставка перед эфиром
+function runBumper(){get(ref(db,'settings/bumper')).then(x=>{const b=x.val();if(!b||!b.url)return;const v=document.getElementById('bumper-video');if(!v)return;v.src=b.url;v.style.display='block';v.play().catch(()=>{});setTimeout(()=>{v.pause();v.removeAttribute('src');v.style.display='none'},Math.max(10,Math.min(25,Number(b.duration)||10))*1000)}).catch(()=>{})}
+// Каналы строятся из источников, назначенных администратором
+function renderChannels(){if(!FB_OK)return;get(ref(db,'sources')).then(x=>{const v=x.val()||{},groups={};Object.values(v).forEach(a=>{const g=a.channel||'general';(groups[g]??={items:[],icon:a.icon||''}).items.push(a);if(a.icon)groups[g].icon=a.icon});const l=document.getElementById('channels-list');if(l)l.innerHTML=Object.entries(groups).map(([g,a])=>`<button class="btn-secondary" data-channel="${g}">${g} (${a.items.length})</button>`).join('');l?.querySelectorAll('[data-channel]').forEach(b=>b.onclick=()=>{const a=groups[b.dataset.channel].items[0];activateStream(a.url,a.name)})})}
+renderChannels();
+// Запись реальных контрольных точек статистики начиная с текущего обновления
+setInterval(()=>{if(FB_OK&&me){get(ref(db,'viewers')).then(x=>push(ref(db,'analytics/viewers'),{ts:Date.now(),count:Object.keys(x.val()||{}).length})).catch(()=>{})}},60000);
+
+document.getElementById('nav-channels')?.addEventListener('click',()=>{showStatus('Раздел каналов находится в разработке','error');setActiveNav(navStream)});
+
+window.statsDays=1;document.querySelectorAll('.stats-period').forEach(b=>b.addEventListener('click',()=>{window.statsDays=Number(b.dataset.days);renderViewerStats()}));
+
+// Проверка напоминаний: не пропускаем нужную минуту и корректно повторяем по дням недели
+let lastReminderCheck=Date.now();
+setInterval(()=>{
+    try{
+        const a=loadReminders();
+        if(!a.length){lastReminderCheck=Date.now();return;}
+        const now=new Date(), nowMin=now.getHours()*60+now.getMinutes();
+        const last=new Date(lastReminderCheck||Date.now()), lastMin=last.getHours()*60+last.getMinutes();
+        const gapMin=Math.round((now.getTime()-(lastReminderCheck||now.getTime()))/60000);
+        let changed=false;
+        a.forEach(x=>{
+            if(!x||!x.time)return;
+            const p=String(x.time).split(':').map(Number);
+            const t=(p[0]||0)*60+(p[1]||0);
+            const hit=(gapMin>0&&gapMin<1440)?((lastMin<nowMin)?(t>lastMin&&t<=nowMin):(t>lastMin||t<=nowMin)):false;
+            if(!hit)return;
+            if(!reminderDayMatches(x))return;
+            if(x.lastNotified===todayKey())return;
+            if('Notification' in window&&Notification.permission==='granted'){
+                try{new Notification('MyTV: '+(x.name||'передача'),{body:'Начало в '+x.time});}catch(e){}
+                x.lastNotified=todayKey(); changed=true;
+            }
+        });
+        if(changed)saveReminders(a);
+        lastReminderCheck=Date.now();
+    }catch(e){lastReminderCheck=Date.now();}
+},30000);
+
+document.getElementById('channels-close')?.addEventListener('click',()=>{document.getElementById('channels-panel')?.classList.remove('active');setActiveNav(navStream)});
+
+document.getElementById('source-channel-icon-file')?.addEventListener('change',e=>{const f=e.target.files?.[0];if(!f)return;const r=new FileReader();r.onload=()=>{document.getElementById('source-channel-icon').value=r.result};r.readAsDataURL(f)});
+document.getElementById('channel-detail-close')?.addEventListener('click',()=>document.getElementById('channel-detail-modal')?.classList.remove('active'));
+document.addEventListener('click',e=>{const b=e.target.closest('[data-channel]');if(!b)return;const title=document.getElementById('channel-detail-title'),list=document.getElementById('channel-detail-schedule');if(!title||!list)return;title.textContent=b.dataset.channel;get(ref(db,'sources')).then(x=>{const a=Object.values(x.val()||{}).filter(v=>(v.channel||'general')===b.dataset.channel);list.innerHTML=a.map(v=>`<div class="list-item"><span class="li-name">${esc(v.name||'Без названия')}</span><button class="btn-secondary" data-channel-play="${esc(v.url||'')}">Открыть</button></div>`).join('');document.getElementById('channel-detail-modal').classList.add('active')})});
+document.addEventListener('click',e=>{const b=e.target.closest('[data-channel-play]');if(b){activateStream(b.dataset.channelPlay,b.closest('.list-item')?.querySelector('.li-name')?.textContent||'Канал');document.getElementById('channel-detail-modal')?.classList.remove('active')}});
+
+function applyAvatarFrame(el,days=0){if(!el)return;el.classList.remove('avatar-frame','level-2','level-3','level-4');const d=Number(days)||0;if(d>=90)el.classList.add('avatar-frame','level-4');else if(d>=30)el.classList.add('avatar-frame','level-3');else if(d>=7)el.classList.add('avatar-frame','level-2');else if(d>=1)el.classList.add('avatar-frame')}
+
+function renderChannelAdmin(){if(!FB_OK)return;const l=document.getElementById('channel-admin-list');if(!l)return;get(ref(db,'channels')).then(x=>{const d=x.val()||{};l.innerHTML=Object.entries(d).map(([k,v])=>`<div class="list-item"><span class="li-name">${esc(v.name||k)}</span><button class="edit-channel" data-id="${k}">Изменить</button><button class="del" data-del-channel="${k}">Удалить</button></div>`).join('');l.querySelectorAll('[data-del-channel]').forEach(b=>b.onclick=()=>remove(ref(db,'channels/'+b.dataset.delChannel)));l.querySelectorAll('.edit-channel').forEach(b=>b.onclick=()=>{const v=d[b.dataset.id],n=prompt('Название канала',v.name);if(n)update(ref(db,'channels/'+b.dataset.id),{name:n})})})}
+document.getElementById('add-channel-admin')?.addEventListener('click',()=>{if(me?.role!=='admin')return;const n=document.getElementById('channel-admin-name').value.trim(),i=document.getElementById('channel-admin-icon').value.trim();if(n)push(ref(db,'channels'),{name:n,icon:i,order:Date.now()}).then(renderChannelAdmin)});renderChannelAdmin();
+
+function frameForDays(days){return days>=90?'avatar-frame level-4':days>=30?'avatar-frame level-3':days>=7?'avatar-frame level-2':days>=1?'avatar-frame':''}
+// ===== Витрина рамок: что открыто зрителю (по выслуге дней или по выдаче админа) =====
+const FRAME_META=[
+    {id:'auto', label:'Автоматически (по дням)', days:0},
+    {id:'none', label:'Без рамки', days:0},
+    {id:'1',    label:'\u00b7'+' Базовая (голубая)', days:1},
+    {id:'2',    label:'\u00b7'+' Зелёная', days:7},
+    {id:'3',    label:'\u00b7'+' Золотая', days:30},
+    {id:'4',    label:'\u00b7'+' Розовая', days:90},
+    {id:'neon', label:'\u00b7'+' Неоновая', days:180}
+];
+const FX_META=[
+    {id:'none',        label:'Без эффекта', days:0},
+    {id:'bubbles',     label:'Пузыри', days:7},
+    {id:'stars',       label:'Звёзды', days:30},
+    {id:'butterflies', label:'Бабочки', days:90}
+];
+function myAccountDays(){
+    const created=Number((myProfile&&myProfile.createdAt)||me?.createdAt||Date.now());
+    return Math.max(0,Math.floor((Date.now()-created)/86400000));
+}
+function frameIsOpen(id,days,granted){
+    if(id==='auto'||id==='none')return true;
+    if(granted&&granted===id)return true;      // выдано администратором
+    const m=FRAME_META.find(x=>x.id===id);
+    return !!m&&days>=m.days;
+}
+function fxIsOpen(id,days,granted){
+    if(!id||id==='none')return true;
+    if(granted&&granted===id)return true;
+    const m=FX_META.find(x=>x.id===id);
+    return !!m&&days>=m.days;
+}
+function renderFrameChoices(){
+    const fs=document.getElementById('edit-frame-select'), xs=document.getElementById('edit-fx-select');
+    if(!fs||!xs)return;
+    const u=(typeof myProfile!=='undefined'&&myProfile)||{};
+    const days=myAccountDays();
+    const granted=(u.avatarFrame&&u.avatarFrame!=='auto'&&u.avatarFrame!=='none')?u.avatarFrame:null;
+    const grantedFx=(u.avatarFx&&u.avatarFx!=='none')?u.avatarFx:null;
+    const curFrame=u.avatarFrame||'auto', curFx=u.avatarFx||'none';
+    const fill=(sel,meta,isOpen,cur)=>{
+        const list=meta.filter(m=>isOpen(m.id,days,m.id===curFrame?granted:(m.id===curFx?grantedFx:null))||isOpen(m.id,days,null));
+        const opts=meta.filter(m=>{
+            if(m.id==='auto'||m.id==='none')return true;
+            if(cur===m.id)return true;                    // текущее всегда в списке
+            return isOpen(m.id,days,(meta===FRAME_META?granted:grantedFx));
+        });
+        sel.innerHTML=opts.map(m=>{
+            const lock=(m.days&&days<m.days&&!((meta===FRAME_META?granted:grantedFx)===m.id))?' (с '+m.days+' дн.)':'';
+            return '<option value="'+m.id+'"'+(cur===m.id?' selected':'')+'>'+m.label+(meta===FRAME_META?lock:lock)+'</option>';
+        }).join('');
+        const has=[...opts].filter(m=>m.id!=='auto'&&m.id!=='none').length;
+        return has;
+    };
+    const openFrames=fill(fs,FRAME_META,frameIsOpen,curFrame);
+    fill(xs,FX_META,fxIsOpen,curFx);
+    const hint=document.getElementById('frame-progress-hint');
+    if(hint){
+        const total=FRAME_META.filter(m=>m.id!=='auto'&&m.id!=='none').length;
+        const nextLocked=FRAME_META.filter(m=>m.id!=='auto'&&m.id!=='none'&&!frameIsOpen(m.id,days,granted)).sort((a,b)=>a.days-b.days)[0];
+        hint.textContent='Открыто рамок: '+openFrames+' из '+total+'.'+
+            (nextLocked?(' Следующая «'+nextLocked.label.replace(/^[^A-Za-zА-Яа-я]+/,'')+'» откроется через '+Math.max(1,nextLocked.days-days)+' дн.'):' Все рамки открыты!')+
+            (me&&me.isAnon?' Сохранить выбор можно с аккаунтом.':'');
+    }
+}
+function frameClassesFor(forced,days){
+    if(forced==='none')return '';
+    if(forced==='neon')return 'avatar-frame neon-frame';
+    if(forced&&forced!=='auto'){
+        const n=Number(forced);
+        return (n>=2&&n<=4)?('avatar-frame level-'+n):'avatar-frame';
+    }
+    return frameForDays(days);
+}
+function applyUserAvatarFrame(){
+    if(!me?.uid)return;
+    get(ref(db,'users/'+me.uid)).then(x=>{
+        const u=x.val()||{};
+        const created=Number(u.createdAt||u.joinedAt||me.createdAt||me.joinedAt||Date.now());
+        const days=Math.floor((Date.now()-created)/86400000);
+        const pv=window.__framePreview;
+        const cls=frameClassesFor((pv&&pv.frame)||u.avatarFrame||'auto',days);
+        // не вешаем рамку дважды: слот + картинка внутри него
+        const found=[...document.querySelectorAll('.nav-avatar,.nav-avatar-img,.profile-avatar')];
+        const set=new Set(found);
+        found.forEach(el=>{let p=el.parentElement;while(p){if(set.has(p)){set.delete(el);break;}p=p.parentElement;}});
+        set.forEach(el=>{
+            el.classList.remove('avatar-frame','level-2','level-3','level-4','neon-frame');
+            if(cls)cls.split(' ').forEach(c=>el.classList.add(c));
+            const host=el.parentElement;
+            if(host){
+                host.querySelectorAll('.avatar-effects').forEach(n=>{if(n.parentElement===host)n.remove();});
+                                    const framed=el.classList.contains('avatar-frame');
+                    let halo=el.querySelector(':scope > .frame-halo');
+                    if(framed&&!halo&&el.tagName!=='IMG'){halo=document.createElement('span');halo.className='frame-halo';el.appendChild(halo);}
+                    if((!framed||el.tagName==='IMG')&&halo){halo.remove();}
+                    const needDeco=el.classList.contains('level-3')||el.classList.contains('level-4')||el.classList.contains('neon-frame');
+                    let deco=el.querySelector(':scope > .frame-deco');
+                    if(needDeco&&!deco&&el.tagName!=='IMG'){deco=document.createElement('span');deco.className='frame-deco';el.appendChild(deco);}
+                    if(!needDeco&&deco){deco.remove();}
+                    [el,host].forEach(c=>{if(c)c.querySelectorAll('.avatar-effects').forEach(n=>{if(n.parentElement===c)n.remove();});});
+                    const fxId=(pv&&pv.fx)||u.avatarFx||'none';
+                    if(fxId&&fxId!=='none'){
+                        const fxHost=(el.tagName==='IMG')?(el.parentElement||el):el;
+                        fxHost.style.position='relative';
+                        const fx=document.createElement('span');
+                        fx.className='avatar-effects '+fxId;
+                        const glyphs=(fxId==='stars')?['✦','✧','✦','✶','✦','✧']:(u.avatarFx==='bubbles')?['○','●','○','◦','○','●']:['❋','✿','❃','✾','❋','✿'];
+                        glyphs.forEach((g,k)=>{const i=document.createElement('i');i.className='p'+(k+1);i.textContent=g;fx.appendChild(i);});
+                        fxHost.appendChild(fx);
+                }
+            }
+        });
+    }).catch(()=>{});
+}
+document.getElementById('avatar-frame-save')?.addEventListener('click',()=>{if(me?.role!=='admin')return;const target=document.getElementById('avatar-target-id')?.value.trim()||document.getElementById('prefix-email')?.value.trim();const level=document.getElementById('avatar-frame-level')?.value;const effect=document.getElementById('avatar-secret-effect')?.value||'none';if(!target||!level)return;get(ref(db,'users')).then(x=>{const v=x.val()||{},entry=Object.entries(v).find(([id,u])=>id===target||u.email===target);if(!entry){showStatus('Пользователь не найден','error');return}return update(ref(db,'users/'+entry[0]),{avatarFrame:level,avatarFx:effect})}).then(()=>showStatus('Рамка применена','success')).catch(e=>showStatus('Ошибка: '+e.message,'error'))});
+if(me)applyUserAvatarFrame();setInterval(()=>{if(me)applyUserAvatarFrame()},60000);
+// Живой предпросмотр рамки и эффекта: меняем список — аватарка меняется сразу, без сохранения
+['edit-frame-select','edit-fx-select'].forEach(function(id){
+    var el=document.getElementById(id);
+    if(!el||el.dataset.pvBound)return;
+    el.dataset.pvBound='1';
+    el.addEventListener('change',function(){
+        var f=document.getElementById('edit-frame-select'),x=document.getElementById('edit-fx-select');
+        window.__framePreview={frame:(f&&f.value)||'auto',fx:(x&&x.value)||'none'};
+        try{applyUserAvatarFrame();}catch(e){}
+    });
+});
+function resetFramePreview(){if(window.__framePreview){window.__framePreview=null;try{applyUserAvatarFrame()}catch(e){}}}
+
+function renderAvatarFrameList(){const l=document.getElementById('avatar-frame-list');if(!l||!FB_OK||me?.role!=='admin')return;get(ref(db,'users')).then(x=>{const a=Object.entries(x.val()||{}).filter(([,u])=>u.avatarFrame&&u.avatarFrame!=='auto'&&u.avatarFrame!=='none');l.innerHTML='<b>Выданные рамки</b>'+a.map(([id,u])=>`<div class="list-item"><span class="li-name">${esc(u.name||u.email||id)} — ${esc(u.avatarFrame)}</span><button class="del" data-clear-frame="${id}">Снять</button></div>`).join('');l.querySelectorAll('[data-clear-frame]').forEach(b=>b.onclick=()=>update(ref(db,'users/'+b.dataset.clearFrame),{avatarFrame:'auto',avatarFx:'none'}).then(renderAvatarFrameList))})}
+renderAvatarFrameList();
+
+// Следим за сменой передачи: обновляем «Избранное» и реакции
+(function(){
+    const el=document.getElementById('stream-title-display');
+    if(!el)return;
+    let last=null;
+    const onChange=()=>{
+        const t=el.textContent?el.textContent.trim():'';
+        if(t===last)return;
+        last=t;
+        try{refreshFavorite();}catch(e){}
+        try{syncReactionsFor(t||'default');}catch(e){}
+    };
+    try{new MutationObserver(onChange).observe(el,{childList:true,characterData:true,subtree:true});}catch(e){}
+    setTimeout(onChange,1500);
+})();
 </script>
-</body>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a3af0824fed93391',t:'MTc4OTM4NTEzNA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
