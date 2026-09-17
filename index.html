@@ -1394,11 +1394,17 @@ body.aero-theme #share-stream-btn{background:linear-gradient(180deg,#ffffff,#cfe
                 <label>🎬 Трейлеры и заставки — слоты (вижу только я)</label>
                 <div class="hint">Слоты живут <b>вне расписания</b> — зритель никогда не увидит их строкой в сетке программ.
                     Ссылка: YouTube (в том числе «доступно по ссылке») или прямой mp4. Длительность <b>от 10 до 300 сек</b>.
-                    У зрителя есть кнопка «Пропустить ▶». Стрелки ↑ ↓ меняют порядок показа.<br>
+                    Пока трейлер идёт, <b>основное видео у всех стоит на паузе</b> и после продолжается с того же места.
+                    Стрелки ↑ ↓ меняют порядок показа.<br>
                     <b>В паузе</b> — при каждой смене эфира. <b>Перед передачей</b> — ровно за свою длительность до времени старта по сетке.
                     <b>После передачи</b> — когда видео закончилось (mp4 — всегда, YouTube — если плеер сообщил о конце).
                     <b>Каждый час</b> — в указанную минуту.</div>
                 <div id="bumper-slots-list" style="margin:8px 0 10px"></div>
+                <div class="fx-row" style="margin:0 0 10px;border-top:1px solid rgba(255,255,255,.08);padding-top:10px">
+                    <label style="flex:1">Показывать зрителям кнопку «Пропустить ▶»<br>
+                        <span style="font-size:11px;opacity:.6">Сейчас: <b id="bumper-skip-state">выключено</b></span></label>
+                    <div class="fx-toggle" id="bumper-skip-toggle" title="Включить или выключить кнопку «Пропустить» у трейлера"></div>
+                </div>
                 <div class="fx-row" style="flex-wrap:wrap">
                     <input id="bumper-text" placeholder="Название / подпись" style="flex:1;min-width:130px">
                     <input id="bumper-url" placeholder="Ссылка: YouTube или прямой mp4" style="flex:2;min-width:190px">
@@ -4578,6 +4584,7 @@ document.getElementById("btn-clear-schedule")?.addEventListener("click", async (
 
 function resumeLivePlayback() {
     if (isPaused) return; // Если эфир официально на паузе от администратора, не запускаем
+    if (typeof bsPlaying !== "undefined" && bsPlaying) return; // идёт трейлер — эфир intentionally стоит
 
     const elapsed = currentBroadcastStartedAt ? Math.max(0, Math.floor((Date.now() - currentBroadcastStartedAt) / 1000)) : 0;
     const yt = document.getElementById("yt-frame");
@@ -5919,6 +5926,61 @@ function bsSlots(pos){
 }
 function bsLoad(){ return get(ref(db, "settings/bumperSlots")).then(x => x.val() || {}).catch(() => ({})); }
 
+/* ================= ТРЕЙЛЕР: ПАУЗА ОСНОВНОГО ЭФИРА (v14) =================
+   Пауза локальная: в базу не пишем, плашку «НА ПАУЗЕ» не показываем —
+   зритель видит только сам трейлер, а потом эфир продолжается с того же места. */
+let bumperSkipEnabled = false;      /* settings/bumperSkipEnabled */
+let bsMainPaused = false;
+
+function bsPauseMain(){
+    if(bsMainPaused) return;
+    bsMainPaused = true;
+    try{ if(typeof player !== "undefined" && player && player.pause) player.pause(); }catch(e){}
+    try{ const nv = document.querySelector("#stream-player video"); if(nv && nv.pause) nv.pause(); }catch(e){}
+    try{
+        const yt = document.getElementById("yt-frame");
+        if(yt && yt.contentWindow) yt.contentWindow.postMessage(JSON.stringify({event:"command",func:"pauseVideo"}), "*");
+    }catch(e){}
+}
+function bsResumeMain(){
+    if(!bsMainPaused) return;
+    bsMainPaused = false;
+    try{ if(typeof isPaused !== "undefined" && isPaused) return; }catch(e){}   /* админскую паузу не трогаем */
+    try{
+        const yt = document.getElementById("yt-frame");
+        if(yt && getComputedStyle(yt).display !== "none" && yt.contentWindow){
+            yt.contentWindow.postMessage(JSON.stringify({event:"command",func:"playVideo"}), "*");
+            return;
+        }
+    }catch(e){}
+    try{ if(typeof player !== "undefined" && player && player.play) player.play().catch(function(){}); }catch(e){}
+}
+
+/* тумблер «Показывать кнопку Пропустить» в админке */
+function bsSyncSkipToggle(){
+    const t = document.getElementById("bumper-skip-toggle");
+    if(t) t.classList.toggle("on", !!bumperSkipEnabled);
+    const st = document.getElementById("bumper-skip-state");
+    if(st) st.textContent = bumperSkipEnabled ? "включено" : "выключено";
+}
+if(FB_OK){
+    try{
+        onValue(ref(db, "settings/bumperSkipEnabled"), function(x){
+            bumperSkipEnabled = (x.val() === true);
+            bsSyncSkipToggle();
+            const btn = document.getElementById("bumper-skip-btn");
+            if(btn && !bumperSkipEnabled) btn.style.display = "none";
+        });
+    }catch(e){}
+}
+document.getElementById("bumper-skip-toggle")?.addEventListener("click", function(){
+    if(!me || me.role !== "admin"){ showStatus("Нужны права администратора", "error"); return; }
+    const next = !bumperSkipEnabled;
+    set(ref(db, "settings/bumperSkipEnabled"), next).then(function(){
+        showStatus(next ? "Кнопка «Пропустить» включена" : "Кнопка «Пропустить» выключена", "success");
+    }).catch(function(e){ showStatus("Ошибка Firebase: " + e.message, "error"); });
+});
+
 function bsEnsureSkipBtn(){
     let btn = document.getElementById("bumper-skip-btn");
     if(!btn){
@@ -5944,11 +6006,13 @@ function bsStop(skipped){
     if(bumperHadSound){ try{ if(typeof unmuteTv === "function") unmuteTv(); }catch(e){} }
     bumperHadSound = false;
     bsPlaying = false;
+    if(!window.__bumperChain) bsResumeMain();   /* последний трейлер в цепочке — продолжаем эфир с того же места */
     const next = window.__bumperNext;
     window.__bumperNext = null;
     if(typeof next === "function"){ setTimeout(next, 200); }
 }
-function bsPlayOne(slot, next){
+function bsPlayOne(slot, next, chained){
+    window.__bumperChain = !!chained;    /* за этим трейлером будет ещё один — паузу не снимаем */
     const wrap = document.getElementById("player-wrapper");
     if(!wrap || !slot || !slot.url){ if(next) next(); return; }
     const vid = (typeof parseYouTubeId === "function") ? parseYouTubeId(slot.url) : null;
@@ -5969,8 +6033,9 @@ function bsPlayOne(slot, next){
     if(bumperHadSound){ try{ if(typeof muteTv === "function") muteTv(); }catch(e){} }
 
     bsPlaying = true;
+    bsPauseMain();                       /* основной эфир встаёт на паузу, чтобы не играл под трейлером */
     const btn = bsEnsureSkipBtn();
-    btn.style.display = "inline-flex";
+    btn.style.display = bumperSkipEnabled ? "inline-flex" : "none";
     btn.title = slot.name || slot.text || "Трейлер";
     window.__bumperNext = next || null;
 
@@ -5997,7 +6062,7 @@ function bsPlayOne(slot, next){
 function bsPlayList(list, done){
     if(bsPlaying){ if(done) done(); return; }
     if(!list || !list.length){ if(done) done(); return; }
-    bsPlayOne(list[0], function(){ bsPlayList(list.slice(1), done); });
+    bsPlayOne(list[0], function(){ bsPlayList(list.slice(1), done); }, list.length > 1);
 }
 function bsRun(pos, done){
     try{
@@ -6973,6 +7038,11 @@ renderAvatarFrameList();
 
   /* ---------- 3.5 ТАП-ЗАПУСК и бейдж звука ---------- */
   function updatePlayHints() {
+    if (typeof bsPlaying !== "undefined" && bsPlaying) {   // идёт трейлер — подсказки не нужны
+      if (tapPlay) tapPlay.style.display = 'none';
+      if (soundBadge) soundBadge.style.display = 'none';
+      return;
+    }
     const t = streamTitle();
     const live = streamIsLive();
     const yt = $('#yt-frame');
@@ -7000,6 +7070,7 @@ renderAvatarFrameList();
      ============================================================ */
   const mini = { on: false, manual: null };
   function streamPlaying() {
+    if (typeof bsPlaying !== "undefined" && bsPlaying) return true;   // во время трейлера эфир считаем идущим
     const yt = $('#yt-frame');
     if (yt && getComputedStyle(yt).display !== 'none') return true;
     const v = $('#stream-player video');
