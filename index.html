@@ -3,6 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<link rel="manifest" href="MyTV-manifest.webmanifest">
+<meta name="theme-color" content="#0b0e17">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="MyTV">
 <meta property="og:type" content="website">
 <meta property="og:title" content="MyTV — прямой эфир">
 <meta property="og:description" content="MyTV — бесплатный телеканал: мультики, передачи и радио в прямом эфире.">
@@ -1097,6 +1102,30 @@ body.aero-theme #viewer-stats-modal .modal-content{background:linear-gradient(18
 body.aero-theme .stat-periods .stats-period.active{background:linear-gradient(180deg,#ffffff,#dff1ff)!important;color:#0a3a52!important;border-color:#7fd4ff!important}
 /* окна должны быть выше админской панели (у неё z-index 2000), но ниже объявлений (3000) */
 .modal-overlay{z-index:2500}
+/* v22: плавающий мини-плеер радио */
+#radio-mini{display:none;position:fixed;left:8px;right:8px;bottom:74px;z-index:1250;align-items:center;gap:10px;
+  padding:8px 10px;border-radius:16px;background:rgba(16,20,34,.94);border:1px solid rgba(255,255,255,.14);
+  box-shadow:0 12px 34px rgba(0,0,0,.5);backdrop-filter:blur(14px)}
+#radio-mini.on{display:flex;animation:rmIn .28s cubic-bezier(.2,1.2,.4,1) both}
+@keyframes rmIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+#radio-mini-cover{width:38px;height:38px;border-radius:10px;flex:0 0 auto;background-size:cover;background-position:center;
+  background-color:rgba(255,255,255,.08);box-shadow:0 2px 10px rgba(0,0,0,.35)}
+#radio-mini .rm-text{flex:1;min-width:0}
+#radio-mini-title{font-size:13px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#radio-mini-sub{font-size:11px;opacity:.6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#radio-mini button{width:34px;height:34px;flex:0 0 auto;border-radius:10px;border:1px solid rgba(255,255,255,.14);
+  background:rgba(255,255,255,.06);color:inherit;font-size:14px;line-height:1;cursor:pointer;padding:0}
+#radio-mini button:active{transform:scale(.94)}
+body.aero-theme #radio-mini{background:linear-gradient(180deg,rgba(255,255,255,.92),rgba(214,240,255,.82))!important;
+  color:#0a3a52!important;border-color:#9fd6f2!important}
+body.aero-theme #radio-mini button{background:rgba(255,255,255,.75)!important;border-color:rgba(0,90,130,.25)!important}
+/* v22: список песен плейлиста */
+.yt-pl-box{margin-top:10px;border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:8px;max-height:240px;overflow:auto}
+.yt-pl-row{display:flex;align-items:center;gap:8px;padding:5px 2px;font-size:13px;border-bottom:1px solid rgba(255,255,255,.06)}
+.yt-pl-row:last-child{border-bottom:0}
+.yt-pl-row input{width:auto;flex:0 0 auto}
+.yt-pl-row span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.yt-pl-acts{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
 </style>
 </head>
 <body class="theme-minimal">
@@ -1134,7 +1163,10 @@ body.aero-theme .stat-periods .stats-period.active{background:linear-gradient(18
       </div>
       <audio id="radio-audio" preload="none"></audio>
       <div id="radio-yt" aria-hidden="true"></div>
-      <button class="btn-secondary" id="radio-close" style="width:100%;margin-top:12px">Вернуться к эфиру</button>
+      <div style="display:flex;gap:8px;margin-top:12px">
+        <button class="btn-primary" id="radio-minimize" style="width:auto;flex:1;margin:0">📻 Свернуть и слушать</button>
+        <button class="btn-secondary" id="radio-close" style="width:auto;margin:0">Вернуться к эфиру</button>
+      </div>
       <div style="display:flex;gap:8px;margin-top:14px">
         <button class="btn-secondary" id="radio-prev" style="width:auto;flex:1;margin:0">⏮ Предыдущий</button>
         <button class="btn-secondary" id="radio-next" style="width:auto;flex:1;margin:0">Следующий ⏭</button>
@@ -1217,6 +1249,18 @@ body.aero-theme .stat-periods .stats-period.active{background:linear-gradient(18
 </div>
 
 <!-- НИЖНЯЯ НАВИГАЦИОННАЯ ПАНЕЛЬ (БЕЗ ЭМОДЗИ) -->
+<div id="radio-mini">
+  <div id="radio-mini-cover"></div>
+  <div class="rm-text">
+    <div id="radio-mini-title">Радио MyTV</div>
+    <div id="radio-mini-sub">играет в фоне</div>
+  </div>
+  <button id="radio-mini-prev" title="Предыдущая">⏮</button>
+  <button id="radio-mini-play" title="Пауза">⏸</button>
+  <button id="radio-mini-next" title="Следующая">⏭</button>
+  <button id="radio-mini-open" title="Открыть радио">📻</button>
+</div>
+
 <nav class="bottom-nav" id="bottom-nav">
   <button class="nav-btn active" id="nav-stream">
     <span class="nav-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="15" rx="2"/><polyline points="17 2 12 7 7 2"/></svg></span>
@@ -1700,7 +1744,12 @@ body.aero-theme .stat-periods .stats-period.active{background:linear-gradient(18
                 <div style="height:8px"></div><button class="btn-primary" id="add-radio-track">Добавить в радио</button><div style="height:8px"></div><button class="btn-secondary" id="load-radio-presets">Загрузить готовые радиостанции</button>
                 <div class="hint" style="margin-top:14px">Или добавьте песни с YouTube / YouTube Music: вставьте одну ссылку или сразу несколько (по одной на строку). Можно дать ссылку на плейлист — развернём его в список песен. Играет встроенный плеер YouTube (картинку мы прячем), поэтому песня должна быть разрешена для встраивания: каждую добавленную песню приложение проверяет само и помечает те, что не играются.</div>
                 <textarea id="radio-yt-url" rows="3" placeholder="Ссылка на песню: YouTube или YouTube Music. Можно несколько сразу — по одной на строку"></textarea>
-                <div style="height:8px"></div><button class="btn-secondary" id="add-radio-yt">▶ Добавить песни с YouTube</button>
+                <div style="height:8px"></div><button class="btn-secondary" id="add-radio-yt">▶ Развернуть в список</button>
+                <div id="yt-pl-list" style="margin-top:8px"></div>
+                <div style="height:10px"></div>
+                <div class="hint">Ключ YouTube Data API — только если нужно разворачивать альбомы-подборки YouTube Music (ссылки с <b>OLAK</b>). Бесплатный ключ берётся в Google Cloud Console, он хранится только в этом браузере и в базу не уходит; для обычных плейлистов (PL…) он не нужен.</div>
+                <input type="text" id="yt-api-key" placeholder="Ключ YouTube Data API (необязательно)">
+                <div style="height:8px"></div><button class="btn-secondary" id="yt-key-save" style="width:auto">Сохранить ключ</button>
                 <div id="radio-tracks-list" style="margin-top:12px"></div>
             </div>
         </div>
@@ -5453,11 +5502,15 @@ function radioList(){
 }
 function radioItems(){return Object.keys(radioTracks).map(k=>({id:k,...radioTracks[k]})).filter(x=>x.enabled!==false);}
 function radioTrackName(t){return (t&&t.artist?t.artist+" — ":"")+((t&&t.title)||"Без названия");}
-function radioNow(text){const n=document.getElementById("radio-now"); if(n&&text!=null)n.textContent=text;}
+function radioNow(text){
+    const n=document.getElementById("radio-now"); if(n&&text!=null)n.textContent=text;
+    try{ if(text!=null&&text.indexOf("Загрузка")!==0){ radioMiniText(text,"радио MyTV"); const t=radioItems().find(function(x){ return x.id===radioCurrentId; }); const cv=document.getElementById("radio-mini-cover"); if(cv&&t&&t.cover) cv.style.backgroundImage='url("'+(t.cover+"").replace(/[\"\\]/g,"")+'")'; } }catch(e){}
+}
 function setRadioUI(on){
     const b=document.getElementById("radio-toggle"), card=document.getElementById("radio-card");
     if(card)card.classList.toggle("playing",!!on);
     if(b)b.textContent=on?"Выключить радио":"Включить радио";
+    try{ radioMiniShow(!!on); if(!on){ radioMediaSession(null); radioPausedSoft=false; } }catch(e){}
 }
 function updateRadioCover(t){
     const disc=document.querySelector("#radio-card .radio-disc");
@@ -5501,6 +5554,7 @@ function playRadioTrack(){
     Promise.resolve(p).then(()=>{
         radioFails=0; radioOn=true; setRadioUI(true); try{ eqStart(t.url); }catch(e){}
         radioNow(radioTrackName(t)); updateRadioCover(t); renderRadioPlaylist();
+        radioPausedSoft=false; radioMiniShow(true); radioMediaSession(t);
     }).catch(()=>onRadioTrackError(myAttempt));
 }
 function onRadioTrackError(attempt){
@@ -5578,7 +5632,7 @@ function radioYtEnsure(){
                                 if(d===1){
                                     radioFails=0; radioOn=true; setRadioUI(true);
                                     const t=radioItems().find(function(x){ return x.id===radioCurrentId; });
-                                    if(t){ radioNow(radioTrackName(t)); updateRadioCover(t); }
+                                    if(t){ radioNow(radioTrackName(t)); updateRadioCover(t); radioMediaSession(t); }
                                     try{ eqIdle(true); }catch(err){}
                                     try{ e.target.unMute(); e.target.setVolume(100); }catch(err){}
                                 }else if(d===0){
@@ -5615,6 +5669,186 @@ function radioYtPlay(t){
 function radioYtHide(){
     try{ if(radioYt&&radioYt.pauseVideo) radioYt.pauseVideo(); }catch(e){}
 }
+/* ---------- ФОНОВОЕ РАДИО: мини-плеер, экран блокировки, шторка ---------- */
+function radioMiniEl(){ return document.getElementById("radio-mini"); }
+function radioMiniShow(on){
+    const m=radioMiniEl(); if(!m) return;
+    m.classList.toggle("on",!!on);
+    const p=document.getElementById("radio-mini-play");
+    if(p) p.textContent = radioPausedSoft ? "▶" : "⏸";
+}
+function radioMiniText(name,sub){
+    const t=document.getElementById("radio-mini-title"), sb=document.getElementById("radio-mini-sub");
+    if(t&&name) t.textContent=name;
+    if(sb&&sub) sb.textContent=sub;
+}
+function radioMediaSession(t){
+    if(!("mediaSession" in navigator)) return;
+    try{
+        if(!t){ navigator.mediaSession.metadata=null; navigator.mediaSession.playbackState="none"; return; }
+        if(window.MediaMetadata){
+            navigator.mediaSession.metadata=new window.MediaMetadata({
+                title:(t.videoId?"":"")+(t.title||"Радио MyTV"),
+                artist:t.artist||"Радио MyTV",
+                album:"Радио MyTV",
+                artwork:t.cover?[{src:t.cover,sizes:"480x480",type:"image/jpeg"}]:[]
+            });
+        }
+        navigator.mediaSession.playbackState = radioPausedSoft ? "paused" : "playing";
+    }catch(e){}
+}
+let radioPausedSoft=false;
+function radioResume(){
+    try{
+        const t=radioItems().find(function(x){ return x.id===radioCurrentId; });
+        if(t&&t.videoId){ if(radioYt&&radioYt.playVideo) radioYt.playVideo(); }
+        else if(radioAudio) radioAudio.play().catch(function(){});
+        radioPausedSoft=false; radioMiniShow(true); radioMediaSession(t||null);
+    }catch(e){}
+}
+function radioPauseSoft(){
+    try{
+        const t=radioItems().find(function(x){ return x.id===radioCurrentId; });
+        if(t&&t.videoId){ if(radioYt&&radioYt.pauseVideo) radioYt.pauseVideo(); }
+        else if(radioAudio) radioAudio.pause();
+        radioPausedSoft=true; radioMiniShow(true); radioMediaSession(t||null);
+    }catch(e){}
+}
+function mediaHandlersInit(){
+    if(!("mediaSession" in navigator)) return;
+    try{
+        navigator.mediaSession.setActionHandler("play", function(){ if(radioOn) radioResume(); else { try{ resumeLivePlayback(); }catch(e){} } });
+        navigator.mediaSession.setActionHandler("pause", function(){ if(radioOn) radioPauseSoft(); });
+        navigator.mediaSession.setActionHandler("nexttrack", function(){ if(radioOn){ radioPausedSoft=false; radioIndex++; radioFails=0; playRadioTrack(); } });
+        navigator.mediaSession.setActionHandler("previoustrack", function(){ if(radioOn){ radioPausedSoft=false; radioIndex--; radioFails=0; playRadioTrack(); } });
+        navigator.mediaSession.setActionHandler("stop", function(){ if(radioOn) stopRadio(); });
+    }catch(e){}
+}
+mediaHandlersInit();
+document.getElementById("radio-mini-play")?.addEventListener("click", function(){
+    if(!radioOn) return;
+    if(radioPausedSoft) radioResume(); else radioPauseSoft();
+});
+document.getElementById("radio-mini-next")?.addEventListener("click", function(){
+    if(!radioOn) return; radioPausedSoft=false; radioIndex++; radioFails=0; playRadioTrack();
+});
+document.getElementById("radio-mini-prev")?.addEventListener("click", function(){
+    if(!radioOn) return; radioPausedSoft=false; radioIndex--; radioFails=0; playRadioTrack();
+});
+document.getElementById("radio-mini-open")?.addEventListener("click", function(){
+    document.getElementById("radio-card")?.classList.add("active");
+});
+document.getElementById("radio-minimize")?.addEventListener("click", function(){
+    /* музыка остаётся, карточка уезжает, сверху — плавающий мини-плеер */
+    const card=document.getElementById("radio-card");
+    if(card) card.classList.remove("active");
+    document.querySelector(".player-wrapper")?.classList.remove("radio-hidden");
+    document.querySelector(".stream-info-card")?.classList.remove("radio-hidden");
+    radioMiniShow(!!radioOn);
+    if(typeof setActiveNav==="function"&&typeof navStream!=="undefined") setActiveNav(navStream);
+    showStatus("Радио играет в фоне — управление в плавающем плеере","success");
+});
+/* если браузер приостановил скрытый плеер YouTube — возвращаем звук */
+document.addEventListener("visibilitychange", function(){
+    if(document.visibilityState!=="visible") return;
+    if(!radioOn||radioPausedSoft) return;
+    const t=radioItems().find(function(x){ return x.id===radioCurrentId; });
+    if(!t||!t.videoId||!radioYt) return;
+    setTimeout(function(){
+        try{ if(radioYt.getPlayerState()!==1) radioYt.playVideo(); }catch(e){}
+    },400);
+});
+/* установка приложения на телефон (PWA) */
+try{
+    if("serviceWorker" in navigator){
+        window.addEventListener("load", function(){ navigator.serviceWorker.register("MyTV-sw.js").catch(function(){}); });
+    }
+}catch(e){}
+
+/* ---------- ПЛЕЙЛИСТЫ СПИСКОМ ---------- */
+function ytKeyGet(){ try{ return localStorage.getItem("mytv_yt_key")||""; }catch(e){ return ""; } }
+function ytKeySet(v){ try{ if(v) localStorage.setItem("mytv_yt_key",v); else localStorage.removeItem("mytv_yt_key"); }catch(e){} }
+function ytApiPlaylist(listId){
+    const key=ytKeyGet();
+    if(!key) return Promise.resolve(null);
+    const out=[]; let page="";
+    const step=function(){
+        const u="https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50"
+              + "&playlistId="+encodeURIComponent(listId)+(page?("&pageToken="+encodeURIComponent(page)):"")
+              + "&key="+encodeURIComponent(key);
+        return fetch(u).then(function(r){ return r.json(); }).then(function(j){
+            if(j&&j.error) throw new Error((j.error&&j.error.message)||"ошибка API");
+            (j.items||[]).forEach(function(it){
+                const sn=it.snippet||{}, vid=sn.resourceId&&sn.resourceId.videoId;
+                if(vid) out.push({id:vid,title:sn.title||""});
+            });
+            page=j.nextPageToken||"";
+            if(page&&out.length<200) return step();
+            return out;
+        });
+    };
+    return step();
+}
+function ytPlaylistViaPlayer(listId){
+    return ytApiLoad().then(function(ok){
+        if(!ok) return [];
+        return new Promise(function(res){
+            const host=document.createElement("div");
+            host.style.cssText="position:fixed;left:-9999px;top:0;width:2px;height:2px;opacity:0;pointer-events:none";
+            document.body.appendChild(host);
+            let done=false, pl=null;
+            const fin=function(ids){
+                if(done) return; done=true;
+                setTimeout(function(){
+                    try{ if(pl&&pl.destroy) pl.destroy(); }catch(e){}
+                    try{ host.remove(); }catch(e){}
+                },300);
+                res((ids||[]).map(function(id){ return {id:id,title:""}; }));
+            };
+            try{
+                pl=new window.YT.Player(host,{
+                    width:2, height:2,
+                    playerVars:{listType:"playlist",list:listId,controls:0,playsinline:1,origin:location.origin},
+                    events:{
+                        onReady:function(e){ setTimeout(function(){ let a=[]; try{ a=e.target.getPlaylist()||[]; }catch(err){} fin(a.slice(0,200)); },3000); },
+                        onError:function(){ fin([]); }
+                    }
+                });
+            }catch(e){ fin([]); }
+            setTimeout(function(){ let a=[]; try{ a=pl&&pl.getPlaylist?pl.getPlaylist():[]; }catch(e){} fin(a||[]); },13000);
+        });
+    });
+}
+function ytRenderList(items,note){
+    const box=document.getElementById("yt-pl-list"); if(!box) return;
+    window.__ytPl=items||[];
+    if(note&&!items.length){ box.innerHTML='<div class="hint">'+note+'</div>'; return; }
+    if(!items.length){ box.innerHTML=""; return; }
+    box.innerHTML='<div class="yt-pl-box">'+items.map(function(it,i){
+        return '<label class="yt-pl-row"><input type="checkbox" checked data-i="'+i+'">'
+             + '<span>'+(it.title?esc(it.title):("Песня "+(i+1)+" · "+it.id))+'</span></label>';
+    }).join('')+'</div>'
+      + '<div class="yt-pl-acts">'
+      + '<button class="btn-secondary" id="yt-pl-all" style="width:auto">Выбрать все</button>'
+      + '<button class="btn-secondary" id="yt-pl-none" style="width:auto">Снять все</button>'
+      + '<button class="btn-primary" id="yt-pl-add" style="width:auto">Добавить выбранные ('+items.length+')</button>'
+      + '</div>';
+    const upd=function(){
+        const n=box.querySelectorAll('input[data-i]:checked').length;
+        const b=document.getElementById("yt-pl-add"); if(b) b.textContent="Добавить выбранные ("+n+")";
+    };
+    box.querySelectorAll('input[data-i]').forEach(function(c){ c.onchange=upd; });
+    document.getElementById("yt-pl-all").onclick=function(){ box.querySelectorAll('input[data-i]').forEach(function(c){ c.checked=true; }); upd(); };
+    document.getElementById("yt-pl-none").onclick=function(){ box.querySelectorAll('input[data-i]').forEach(function(c){ c.checked=false; }); upd(); };
+    document.getElementById("yt-pl-add").onclick=function(){
+        const sel=[...box.querySelectorAll('input[data-i]:checked')].map(function(c){ return window.__ytPl[Number(c.dataset.i)]; });
+        if(!sel.length){ showStatus("Ничего не выбрано","error"); return; }
+        box.innerHTML="";
+        ytAddMany(sel);
+    };
+    upd();
+}
+
 function radioYtRow(id){
     if(!radioTracks) return null;
     const keys=Object.keys(radioTracks).filter(function(k){ return (radioTracks[k]||{}).videoId===id; });
@@ -6870,68 +7104,36 @@ function ytIdsFromText(txt){
 }
 /* разворот плейлиста в список id — самим плеером YouTube, без ключа API */
 function ytPlaylistIds(listId){
-    return ytApiLoad().then(function(ok){
-        if(!ok) return [];
-        return new Promise(function(res){
-            const host=document.createElement("div");
-            host.style.cssText="position:fixed;left:-9999px;top:0;width:2px;height:2px;opacity:0;pointer-events:none";
-            document.body.appendChild(host);
-            let done=false, pl=null;
-            const fin=function(ids){
-                if(done) return; done=true;
-                setTimeout(function(){
-                    try{ if(pl&&pl.destroy) pl.destroy(); }catch(e){}
-                    try{ host.remove(); }catch(e){}
-                },300);
-                res(ids||[]);
-            };
-            try{
-                pl=new window.YT.Player(host,{
-                    width:2, height:2,
-                    playerVars:{listType:"playlist",list:listId,controls:0,playsinline:1,origin:location.origin},
-                    events:{
-                        onReady:function(e){
-                            setTimeout(function(){
-                                let a=[]; try{ a=e.target.getPlaylist()||[]; }catch(err){}
-                                fin(a.slice(0,200));
-                            },3000);
-                        },
-                        onError:function(){ fin([]); }
-                    }
-                });
-            }catch(e){ fin([]); }
-            setTimeout(function(){
-                let a=[]; try{ a=pl&&pl.getPlaylist?pl.getPlaylist():[]; }catch(e){}
-                fin(a||[]);
-            },13000);
-        });
-    });
+    return ytApiPlaylist(listId).then(function(r){ if(r&&r.length) return r; return ytPlaylistViaPlayer(listId); })
+        .catch(function(){ return ytPlaylistViaPlayer(listId); });
 }
 /* добавляем пачку песен, потом по очереди проверяем каждую */
-function ytAddMany(ids){
+function ytAddMany(items){
+    const list=(items||[]).map(function(x){ return (typeof x==="string")?{id:x,title:""}:x; }).filter(function(x){ return x&&x.id; });
     const tTitle=document.getElementById("radio-track-title"), tArtist=document.getElementById("radio-track-artist");
-    const one=ids.length===1;
+    const one=list.length===1;
     const nm=one?((tTitle&&tTitle.value||"").trim()):"";
     let i=0, added=0, failed=0;
-    showStatus("Добавляю песни: 0 из "+ids.length+"…");
+    if(!list.length) return;
+    showStatus("Добавляю песни: 0 из "+list.length+"…");
     const step=function(){
-        if(i>=ids.length){
+        if(i>=list.length){
             if(tTitle) tTitle.value="";
             if(tArtist) tArtist.value="";
             showStatus("Добавлено: "+added+(failed?(", не удалось: "+failed):"")+". Проверяю, какие играют…","success");
-            ytProbeQueue(ids);
+            ytProbeQueue(list.map(function(x){ return x.id; }));
             return;
         }
-        const id=ids[i++];
-        const row={ title:one&&nm?nm:"Песня с YouTube",
+        const it=list[i++];
+        const row={ title:(one&&nm)?nm:(it.title||"Песня с YouTube"),
                     artist:one?((tArtist&&tArtist.value||"").trim()):"",
-                    url:ytWatch(id), videoId:id, yt:true, ytBad:false,
-                    cover:ytCover(id), enabled:true, createdAt:Date.now() };
+                    url:ytWatch(it.id), videoId:it.id, yt:true, ytBad:false,
+                    cover:ytCover(it.id), enabled:true, createdAt:Date.now() };
         push(ref(db,"radioTracks"),row)
             .then(function(){ added++; })
             .catch(function(){ failed++; })
             .then(function(){
-                showStatus("Добавляю песни: "+i+" из "+ids.length+"…");
+                showStatus("Добавляю песни: "+i+" из "+list.length+"…");
                 setTimeout(step,220);
             });
     };
@@ -6950,28 +7152,50 @@ function ytProbeQueue(ids){
 document.getElementById("add-radio-yt")?.addEventListener("click", function(){
     if(!me||me.role!=="admin"){ showStatus("Нужны права администратора","error"); return; }
     const inp=document.getElementById("radio-yt-url"), raw=(inp&&inp.value||"").trim();
-    if(!raw){ showStatus("Вставьте ссылку на песню (или несколько — по одной на строку)","error"); return; }
-    const onlyList=raw.match(/[?&]list=([A-Za-z0-9_-]+)/);
-    if(onlyList&&!ytId(raw)){
-        const lid=onlyList[1];
-        if(/^OLAK/.test(lid)){
-            showStatus("Это альбом YouTube Music: развернуть его в список песен можно только с ключом API. Вставьте ссылки на песни по одной.","error");
+    if(!raw){ showStatus("Вставьте ссылку на песню или плейлист","error"); return; }
+    const listM=raw.match(/[?&]list=([A-Za-z0-9_-]+)/);
+    const one=ytId(raw);
+    if(listM&&!one){
+        const lid=listM[1];
+        showStatus("Разворачиваю плейлист…");
+        if(/^OLAK/.test(lid)&&!ytKeyGet()){
+            ytRenderList([], "Это альбом-подборка YouTube Music. Плеер YouTube такие списки не отдаёт — "
+                + "вставьте ключ YouTube Data API в поле ниже или дайте ссылки на песни по одной.");
             return;
         }
-        showStatus("Разворачиваю плейлист…");
-        ytPlaylistIds(lid).then(function(ids){
-            if(!ids.length){ showStatus("Плейлист не открылся. Вставьте ссылки на песни по одной.","error"); return; }
+        ytPlaylistIds(lid).then(function(items){
+            if(!items.length){
+                ytRenderList([], "Плейлист не открылся. Проверьте, что он публичный, либо вставьте ссылки на песни по одной.");
+                return;
+            }
             if(inp) inp.value="";
-            showStatus("В плейлисте песен: "+ids.length+". Добавляю…","success");
-            ytAddMany(ids);
+            showStatus("В плейлисте песен: "+items.length+". Отметьте нужные и нажмите «Добавить выбранные»","success");
+            ytRenderList(items);
         });
         return;
     }
-    const ids=ytIdsFromText(raw);
-    if(!ids.length){ showStatus("Не вижу в этом ссылку на YouTube","error"); return; }
+    if(!one){
+        const lst=ytIdsFromText(raw);
+        if(!lst.length){ showStatus("Не вижу в этом ссылку на YouTube","error"); return; }
+        if(inp) inp.value="";
+        ytRenderList(lst.map(function(id){ return {id:id,title:""}; }));
+        showStatus("Песен: "+lst.length+". Отметьте нужные и нажмите «Добавить выбранные»","success");
+        return;
+    }
     if(inp) inp.value="";
-    ytAddMany(ids);
+    showStatus("Разворачиваю плейлист…");
+    ytPlaylistIds(one).then(function(items){
+        if(items.length>1){ ytRenderList(items); showStatus("Песен: "+items.length+". Отметьте нужные","success"); return; }
+        ytRenderList([{id:one,title:""}]);
+    });
 });
+document.getElementById("yt-key-save")?.addEventListener("click", function(){
+    if(!me||me.role!=="admin"){ showStatus("Нужны права администратора","error"); return; }
+    const el=document.getElementById("yt-api-key"), v=(el&&el.value||"").trim();
+    ytKeySet(v);
+    showStatus(v?"Ключ сохранён в этом браузере":"Ключ удалён","success");
+});
+(function(){ try{ const el=document.getElementById("yt-api-key"); if(el) el.value=ytKeyGet(); }catch(e){} })();
 
 document.getElementById("load-radio-presets")?.addEventListener("click",async()=>{if(!me||me.role!=="admin"){showStatus("Нужны права администратора","error");return;}const presets=[{title:"Jazz24",artist:"Jazz",url:"https://knkx-live-a.edge.audiocdn.com/6285_128k",cover:"",enabled:true},{title:"WRTI Classical",artist:"Classical",url:"https://wrti-live.streamguys1.com/classical-mp3",cover:"",enabled:true},{title:"WRTI Jazz",artist:"Jazz",url:"https://wrti-live.streamguys1.com/jazz-mp3",cover:"",enabled:true},{title:"SmoothJazz",artist:"Smooth Jazz",url:"https://smoothjazz.cdnstream1.com/2585_128.mp3",cover:"",enabled:true},{title:"SmoothLounge",artist:"Lounge",url:"https://smoothjazz.cdnstream1.com/2586_128.mp3",cover:"",enabled:true}];for(const t of presets)await push(ref(db,"radioTracks"),{...t,createdAt:Date.now()});showStatus("Готовые радиостанции добавлены","success");});
 radioList();
@@ -9709,5 +9933,5 @@ window.checkDbRights = async function () {
 })();
 </script>
 <div class="aero-bubbles" id="aero-bubbles" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a3ce33797e2fe616',t:'MTc4OTcxMTk2OA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</body>
 </html>
