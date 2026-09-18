@@ -1,0 +1,26 @@
+{
+  "name": "MyTV — прямой эфир и радио",
+  "short_name": "MyTV",
+  "description": "Бесплатный телеканал MyTV: прямой эфир, мультики, передачи, викторины и радио",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0b0e17",
+  "theme_color": "#0b0e17",
+  "lang": "ru",
+  "icons": [
+    {
+      "src": "MyTV-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "MyTV-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
