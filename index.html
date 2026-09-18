@@ -177,7 +177,11 @@ body.theme-neon{background:radial-gradient(ellipse at top,#12001f 0%,#050510 100
 /* MODALS */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);z-index:1500;display:none;align-items:center;justify-content:center;padding:16px}
 .modal-overlay.active{display:flex}
-.sched-remind{border:1px solid rgba(0,122,255,.35);background:rgba(0,122,255,.12);color:#8ecbff;border-radius:8px;padding:5px 8px;font-size:11px;cursor:pointer;white-space:nowrap}.sched-remind:hover{background:rgba(0,122,255,.3)}.reactions-bar{display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap}.reaction-btn{min-width:54px;justify-content:center;padding:5px 8px!important;font-size:14px!important}.reaction-btn b{font-size:11px;opacity:.75}.reaction-btn.voted{background:rgba(0,122,255,.35)!important;border-color:#4aa3ff!important}.no-reactions .reactions-bar{display:none!important}.radio-hidden{display:none!important}.radio-page{display:none;max-width:960px;margin:0 auto;padding:22px 16px 110px}.radio-page.active{display:block}.radio-hero{padding:28px;border-radius:24px;background:linear-gradient(135deg,#211b45,#102f4b);box-shadow:0 18px 55px rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.12)}.radio-disc{width:150px;height:150px;margin:20px auto;border-radius:50%;background:radial-gradient(circle,#fff 0 4%,#6d5dfc 5% 18%,#16162b 19% 30%,#b34cff 31% 48%,#111 49%);box-shadow:0 0 35px #6d5dfc88;animation:radioSpin 8s linear infinite;animation-play-state:paused}.radio-page.active.playing .radio-disc{animation-play-state:running}@keyframes radioSpin{to{transform:rotate(360deg)}}
+.sched-remind{border:1px solid rgba(0,122,255,.35);background:rgba(0,122,255,.12);color:#8ecbff;border-radius:8px;padding:5px 8px;font-size:11px;cursor:pointer;white-space:nowrap}.sched-remind:hover{background:rgba(0,122,255,.3)}.reactions-bar{display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap}.reaction-btn{min-width:54px;justify-content:center;padding:5px 8px!important;font-size:14px!important}.reaction-btn b{font-size:11px;opacity:.75}.reaction-btn.voted{background:rgba(0,122,255,.35)!important;border-color:#4aa3ff!important}.no-reactions .reactions-bar{display:none!important}.radio-hidden{display:none!important}.radio-page{display:none;max-width:960px;width:100%;min-width:0;margin:0 auto;padding:22px 16px 110px;overflow-x:clip}.radio-page.active{display:block}
+.radio-page .list-item{min-width:0;overflow:hidden;gap:6px}
+.radio-page .list-item .li-name{min-width:0;flex:1 1 auto}
+.radio-page .yt-badge{flex:0 0 auto;font-size:11px;opacity:.6;white-space:nowrap}
+.radio-page .yt-badge.bad{opacity:.95;color:#ff9f9f}.radio-hero{padding:28px;border-radius:24px;min-width:0;max-width:100%;overflow:hidden;background:linear-gradient(135deg,#211b45,#102f4b);box-shadow:0 18px 55px rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.12)}.radio-disc{width:150px;height:150px;margin:20px auto;border-radius:50%;background:radial-gradient(circle,#fff 0 4%,#6d5dfc 5% 18%,#16162b 19% 30%,#b34cff 31% 48%,#111 49%);box-shadow:0 0 35px #6d5dfc88;animation:radioSpin 8s linear infinite;animation-play-state:paused}.radio-page.active.playing .radio-disc{animation-play-state:running}@keyframes radioSpin{to{transform:rotate(360deg)}}
 .modal-card{width:100%;max-width:440px;max-height:85vh;background:rgba(28,28,30,0.95);border:1px solid rgba(255,255,255,0.1);border-radius:24px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.6);display:flex;flex-direction:column;position:relative}
 .modal-header{display:flex;justify-content:space-between;align-items:center;padding:18px 22px;border-bottom:1px solid rgba(255,255,255,0.08)}
 .modal-header h3{font-size:17px;font-weight:700}
@@ -369,6 +373,7 @@ input[type="time"]{flex:0 0 auto}
 
 @media(max-width:600px){
 .app{padding:10px;gap:8px;padding-bottom:80px}
+#app>*{min-width:0;max-width:100%}
 .stream-info-card{padding:12px 14px}
 .stream-title{font-size:15px}
 .stream-btn span{display:none}
@@ -1012,7 +1017,7 @@ body.aero-theme #save-bumper{background:linear-gradient(180deg,#8ff0ff,#35b9ea)!
   border-color:#fff!important;box-shadow:0 8px 22px rgba(0,120,170,.30),inset 0 1px 0 rgba(255,255,255,.9)!important}
 
 /* ---- 27. ЭКВАЛАЙЗЕР РАДИО + ПОДЕЛИТЬСЯ (v12) ---- */
-#radio-eq{width:100%;height:152px;display:block;margin:16px auto 2px;border-radius:16px;
+#radio-eq{width:100%;max-width:100%;min-width:0;height:152px;display:block;margin:16px auto 2px;border-radius:16px;
   background:linear-gradient(180deg,rgba(0,0,0,.42),rgba(0,0,0,.12));
   border:1px solid rgba(255,255,255,.09);box-shadow:inset 0 1px 0 rgba(255,255,255,.06)}
 #share-stream-btn{background:linear-gradient(180deg,rgba(0,183,255,.28),rgba(0,110,200,.18));
@@ -1022,6 +1027,76 @@ body.aero-theme #radio-eq{background:linear-gradient(180deg,rgba(255,255,255,.62
   border-color:#fff;box-shadow:0 8px 20px rgba(0,90,130,.18)}
 body.aero-theme #share-stream-btn{background:linear-gradient(180deg,#ffffff,#cfeeff)!important;
   color:#06445e!important;border-color:#fff!important}
+
+/* ---- 28. ЭФИРНЫЕ ФИШКИ: эмодзи-дождь, праздник, викторина (v15) ---- */
+.fx-emoji-layer{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:78}
+.emj{position:absolute;bottom:-46px;line-height:1;will-change:transform,opacity;
+  animation:emjUp linear forwards;filter:drop-shadow(0 2px 6px rgba(0,0,0,.45))}
+@keyframes emjUp{0%{transform:translate(0,0) scale(.5) rotate(0deg);opacity:0}
+  14%{opacity:1;transform:translate(var(--dx,6px),-14%) scale(1.05) rotate(-8deg)}
+  70%{opacity:.95}
+  100%{transform:translate(calc(var(--dx,6px) * 2.2),-780px) scale(1.1) rotate(var(--rot,16deg));opacity:0}}
+@keyframes partyPop{0%{transform:scale(.7) translateY(24px);opacity:0}60%{transform:scale(1.06);opacity:1}100%{transform:scale(1)}}
+.quiz-opt{text-align:left;padding:10px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.16);
+  background:rgba(255,255,255,.07);color:#fff;font-size:14px;font-weight:600;cursor:pointer;
+  font-family:inherit;transition:all .18s;display:flex;gap:8px;align-items:flex-start}
+.quiz-opt:hover:not(:disabled){background:rgba(0,183,255,.22);border-color:#00b7ff}
+.quiz-opt .qb{font-weight:800;opacity:.6;flex:0 0 auto}
+.quiz-opt.mine{border-color:#6d5dfc;background:rgba(109,93,252,.3)}
+.quiz-opt.right{border-color:#4ade80!important;background:rgba(74,222,128,.28)!important}
+.quiz-opt.wrong{border-color:#ff6b6b!important;background:rgba(255,107,107,.22)!important}
+.quiz-opt:disabled{cursor:default}
+.quiz-opt .pct{margin-left:auto;opacity:.8;font-variant-numeric:tabular-nums}
+body.aero-theme #quiz-card{background:linear-gradient(160deg,#ffffff,#dff2ff)!important;color:#0b3a52!important;border-color:#fff!important}
+body.aero-theme .quiz-opt{background:rgba(255,255,255,.85)!important;color:#0b3a52!important;border-color:rgba(0,90,130,.25)!important}
+body.aero-theme #quiz-q{color:#0b3a52!important}
+.party-btn.active{background:rgba(0,183,255,.35)!important;border-color:#00b7ff!important}
+
+/* ---- 29. Расписание праздников и викторина в чате (v16) ---- */
+.quiz-chat-card{background:linear-gradient(160deg,#1b2140,#141a2e);border:1px solid rgba(0,183,255,.4);
+  border-radius:14px;padding:10px 10px 8px;margin:0 0 8px;box-shadow:0 6px 18px rgba(0,0,0,.3)}
+.quiz-chat-card .qch{display:flex;justify-content:space-between;align-items:center;gap:6px;margin-bottom:6px}
+.quiz-chat-card .qch b{font-size:11px;letter-spacing:1.4px;color:#8ecbff}
+.quiz-chat-card .qct{font-size:11px;font-weight:800;background:rgba(255,255,255,.1);padding:2px 8px;border-radius:20px;font-variant-numeric:tabular-nums}
+.quiz-chat-card .qcq{font-size:14px;font-weight:700;line-height:1.3;margin-bottom:8px}
+.quiz-chat-card .quiz-opt{padding:8px 10px;font-size:13px}
+.ps-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:8px 10px;border-radius:12px;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);margin-bottom:6px}
+.ps-row.off{opacity:.45}
+.ps-time{font-weight:800;font-variant-numeric:tabular-nums;font-size:15px}
+.ps-type{font-size:18px}
+.ps-what{flex:1;min-width:120px;font-size:13px;line-height:1.25}
+.ps-what small{display:block;opacity:.65;font-size:11px}
+.ps-days{font-size:11px;opacity:.7;white-space:nowrap}
+.ps-del{background:rgba(255,80,80,.2);border:1px solid rgba(255,80,80,.4);color:#ffb3b3;border-radius:8px;
+  padding:3px 8px;cursor:pointer;font-size:12px;font-family:inherit}
+body.aero-theme .quiz-chat-card{background:linear-gradient(160deg,#ffffff,#e4f4ff)!important;border-color:#7fd4ff!important;color:#0b3a52!important}
+body.aero-theme .ps-row{background:rgba(255,255,255,.7)!important;color:#0b3a52!important}
+#radio-yt{position:absolute!important;left:-9999px!important;top:0!important;width:2px!important;height:2px!important;opacity:0!important;pointer-events:none!important;border:0!important;overflow:hidden!important}
+/* v19: статистика */
+.stat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:12px 0}
+.stat-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:12px 14px}
+.stat-card .n{font-size:26px;font-weight:800;line-height:1.1;font-variant-numeric:tabular-nums}
+.stat-card .l{font-size:11px;opacity:.65;margin-top:4px}
+.stat-hours{display:flex;align-items:flex-end;gap:3px;height:64px;margin:6px 0 2px}
+.stat-hours i{flex:1;background:linear-gradient(180deg,#55c9ff,#2f7bd6);border-radius:3px 3px 0 0;min-height:2px;display:block}
+.stat-row{display:flex;justify-content:space-between;gap:8px;font-size:13px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.07)}
+.stat-row:last-child{border-bottom:0}
+body.aero-theme .stat-card{background:linear-gradient(180deg,rgba(255,255,255,.8),rgba(214,242,255,.55))!important;border-color:#9fd6f2!important;color:#0a3a52!important}
+body.aero-theme .stat-card .l{opacity:.75}
+body.aero-theme .stat-hours i{background:linear-gradient(180deg,#7fdcff,#2b8fd0)}
+body.aero-theme #viewer-stats-modal .modal-content{background:linear-gradient(180deg,#eaf7ff,#cfe9fb)!important;color:#0a3a52!important}
+/* v21: периоды статистики, прокрутка окон, вид окна статистики */
+.modal-overlay{overflow-y:auto;-webkit-overflow-scrolling:touch;align-items:flex-start;z-index:2500}
+.modal-overlay>.modal-content{margin:auto}
+#viewer-stats-modal .modal-content{background:linear-gradient(180deg,#1a2032,#121826)!important;color:#fff!important;max-height:none}
+body.aero-theme #viewer-stats-modal .modal-content{background:linear-gradient(180deg,#eaf7ff,#cfe9fb)!important;color:#0a3a52!important}
+
+.stat-periods .stats-period{opacity:.62}
+.stat-periods .stats-period.active{opacity:1;border-color:rgba(0,122,255,.6);background:rgba(0,122,255,.16)}
+body.aero-theme .stat-periods .stats-period.active{background:linear-gradient(180deg,#ffffff,#dff1ff)!important;color:#0a3a52!important;border-color:#7fd4ff!important}
+/* окна должны быть выше админской панели (у неё z-index 2000), но ниже объявлений (3000) */
+.modal-overlay{z-index:2500}
 </style>
 </head>
 <body class="theme-minimal">
@@ -1030,7 +1105,7 @@ body.aero-theme #share-stream-btn{background:linear-gradient(180deg,#ffffff,#cfe
 <div class="app" id="app">
     <div class="live-indicator" id="live-indicator"><span class="live-dot"></span><span id="live-text">ПРЯМОЙ ЭФИР</span></div>
     
-    <div class="player-wrapper" id="player-wrapper"><video id="bumper-video" muted playsinline style="display:none;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:80;pointer-events:none"></video>
+    <div class="player-wrapper" id="player-wrapper"><div class="fx-emoji-layer" id="fx-emoji-layer"></div><video id="bumper-video" muted playsinline style="display:none;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:80;pointer-events:none"></video>
         <video id="stream-player" class="video-js vjs-default-skin" preload="auto" playsinline webkit-playsinline></video>
         <iframe id="yt-frame" class="yt-player" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" referrerpolicy="origin-when-cross-origin" style="display:none"></iframe>
         <div id="tv-screen-lock" class="tv-screen-lock" title="Прямой эфир MyTV"></div>
@@ -1058,12 +1133,13 @@ body.aero-theme #share-stream-btn{background:linear-gradient(180deg,#ffffff,#cfe
         <button class="btn-primary" id="radio-toggle" style="width:auto;margin:0">Включить радио</button>
       </div>
       <audio id="radio-audio" preload="none"></audio>
+      <div id="radio-yt" aria-hidden="true"></div>
       <button class="btn-secondary" id="radio-close" style="width:100%;margin-top:12px">Вернуться к эфиру</button>
       <div style="display:flex;gap:8px;margin-top:14px">
         <button class="btn-secondary" id="radio-prev" style="width:auto;flex:1;margin:0">⏮ Предыдущий</button>
         <button class="btn-secondary" id="radio-next" style="width:auto;flex:1;margin:0">Следующий ⏭</button>
       </div>
-      <div id="radio-playlist" style="margin-top:14px;display:flex;flex-direction:column;gap:6px"></div>
+      <div id="radio-playlist" style="margin-top:14px;display:flex;flex-direction:column;gap:6px;max-height:38vh;overflow-y:auto;-webkit-overflow-scrolling:touch"></div>
     </div>
 </section>
 
@@ -1071,6 +1147,31 @@ body.aero-theme #share-stream-btn{background:linear-gradient(180deg,#ffffff,#cfe
 
     <div class="modal-overlay" id="channel-detail-modal"><section style="width:100%;max-width:700px;padding:20px;border-radius:20px;background:#171923"><h2 id="channel-detail-title"></h2><div id="channel-detail-schedule"></div><button class="btn-secondary" id="channel-detail-close" style="width:auto">Выйти из канала</button></section></div>
 <div class="modal-overlay" id="channels-panel"><section style="width:100%;max-width:700px;max-height:85vh;overflow:auto;padding:20px;border-radius:20px;background:#171923"><h2>Тематические каналы</h2><div id="channels-list" style="display:flex;gap:8px;flex-wrap:wrap"></div><button class="btn-secondary" id="channels-close" style="width:auto;margin-top:16px">Выйти из канала</button></section></div>
+
+<!-- ЭФИРНЫЕ ФИШКИ (v15) -->
+<canvas id="party-canvas" style="position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:900;display:none"></canvas>
+<div id="party-banner" style="display:none;position:fixed;left:0;right:0;top:22%;z-index:901;pointer-events:none;text-align:center;padding:0 16px">
+  <div id="party-banner-text" style="display:inline-block;font-weight:800;font-size:clamp(24px,6vw,54px);line-height:1.15;color:#fff;text-shadow:0 0 24px rgba(0,180,255,.8),0 6px 30px rgba(0,0,0,.55);animation:partyPop .7s cubic-bezier(.2,1.5,.4,1) both"></div>
+</div>
+<div id="poll-card" style="display:none;position:fixed;left:50%;transform:translateX(-50%);bottom:86px;z-index:906;width:min(430px,calc(100% - 24px));max-height:62vh;overflow:auto;background:linear-gradient(160deg,#152040,#121a2e);border-radius:18px;padding:14px 14px 12px;box-shadow:0 18px 50px rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.14);font-family:inherit">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px">
+    <span style="font-size:11px;letter-spacing:1.6px;color:#8effc1;font-weight:700">📊 ОПРОС В ЭФИРЕ</span>
+    <span id="poll-timer" style="font-size:12px;font-weight:800;font-variant-numeric:tabular-nums;background:rgba(255,255,255,.1);padding:3px 9px;border-radius:20px">60</span>
+  </div>
+  <div id="poll-q" style="font-size:16px;font-weight:700;line-height:1.32;margin-bottom:10px"></div>
+  <div id="poll-opts"></div>
+  <div id="poll-foot" style="font-size:12px;opacity:.7;margin-top:8px"></div>
+</div>
+<div id="quiz-card" style="display:none;position:fixed;left:50%;transform:translateX(-50%);bottom:86px;z-index:905;width:min(430px,calc(100% - 24px));max-height:62vh;overflow:auto;background:linear-gradient(160deg,#1b2140,#141a2e);border-radius:18px;padding:14px 14px 12px;box-shadow:0 18px 50px rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.14);font-family:inherit">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px">
+    <span style="font-size:11px;letter-spacing:1.6px;color:#8ecbff;font-weight:700">🎮 ВОПРОС В ЭФИРЕ</span>
+    <span id="quiz-timer" style="font-size:12px;font-weight:800;font-variant-numeric:tabular-nums;background:rgba(255,255,255,.1);padding:3px 9px;border-radius:20px">30</span>
+  </div>
+  <div id="quiz-q" style="font-size:16px;font-weight:700;line-height:1.32;margin-bottom:10px"></div>
+  <div id="quiz-opts" style="display:flex;flex-direction:column;gap:6px"></div>
+  <div style="height:6px;border-radius:6px;background:rgba(255,255,255,.1);margin-top:10px;overflow:hidden"><i id="quiz-bar" style="display:block;height:100%;width:100%;background:linear-gradient(90deg,#00b7ff,#6d5dfc);transition:width .3s linear"></i></div>
+  <div id="quiz-foot" style="margin-top:8px;font-size:12px;opacity:.75;line-height:1.35"></div>
+</div>
 
 <!-- ИНФО-КАРТОЧКА ПОД ПЛЕЕРОМ -->
     <div class="stream-info-card">
@@ -1151,7 +1252,38 @@ body.aero-theme #share-stream-btn{background:linear-gradient(180deg,#ffffff,#cfe
     <div class="chat-input-row"><input type="text" class="chat-input" id="chat-input-viewer" placeholder="Сообщение..." maxlength="200"><button class="chat-send" id="chat-send-viewer">→</button></div>
 </div>
 
-<div class="modal-overlay" id="viewer-stats-modal"><div class="modal-content" style="max-width:620px;width:100%;padding:20px;background:#171923;border-radius:18px"><h2>Статистика зрителей</h2><div style="margin:10px 0"><button class="btn-secondary stats-period" data-days="1">Сегодня</button> <button class="btn-secondary stats-period" data-days="7">7 дней</button> <button class="btn-secondary stats-period" data-days="14">14 дней</button></div><div id="viewer-stats-body" style="margin:14px 0"></div><canvas id="viewer-stats-chart" width="560" height="240" style="width:100%;background:#0d1d2d;border-radius:12px"></canvas><button class="btn-primary" id="download-viewer-stats" style="width:auto">Скачать PNG</button> <button class="btn-secondary" id="close-viewer-stats" style="width:auto">Закрыть</button></div></div>
+<div class="modal-overlay" id="viewer-stats-modal"><div class="modal-content" style="max-width:620px;width:100%;padding:20px;background:#171923;border-radius:18px">
+  <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px">
+    <div>
+      <h2 style="margin-bottom:2px">Статистика зрителей</h2>
+      <div style="opacity:.6;font-size:12px">Живые цифры: в счёте — те, кто был в эфире последние 2,5 минуты</div>
+    </div>
+    <button class="btn-secondary" id="refresh-viewer-stats" style="width:auto;white-space:nowrap">Обновить</button>
+  </div>
+  <div class="stat-periods" id="stats-periods" style="display:flex;gap:6px;flex-wrap:wrap;margin:12px 0 4px">
+    <button class="btn-secondary stats-period active" data-days="1" style="width:auto">Сегодня</button>
+    <button class="btn-secondary stats-period" data-days="7" style="width:auto">7 дней</button>
+    <button class="btn-secondary stats-period" data-days="14" style="width:auto">14 дней</button>
+    <button class="btn-secondary stats-period" data-days="30" style="width:auto">30 дней</button>
+  </div>
+  <div class="stat-grid" id="viewer-stats-cards"></div>
+  <div style="font-size:12px;opacity:.65;margin:6px 0 2px">Зрители онлайн по времени</div>
+  <canvas id="viewer-stats-chart" width="1120" height="420" style="width:100%;height:210px;background:#0d1d2d;border-radius:12px"></canvas>
+  <div style="font-size:12px;opacity:.65;margin:12px 0 2px">Когда смотрят чаще всего (среднее по часам)</div>
+  <div class="stat-hours" id="viewer-stats-hours"></div>
+  <div style="display:flex;justify-content:space-between;font-size:10px;opacity:.5"><span>0:00</span><span>12:00</span><span>23:00</span></div>
+  <div style="font-size:12px;opacity:.65;margin:12px 0 2px">Регистрации</div>
+  <div id="viewer-stats-reg"></div>
+  <div style="font-size:12px;opacity:.65;margin:12px 0 2px">Сейчас в эфире</div>
+  <div id="viewer-stats-body" style="max-height:130px;overflow:auto"></div>
+  <div style="font-size:12px;opacity:.65;margin:12px 0 2px">Кто заходил (уникальные)</div>
+  <div id="viewer-stats-visitors" style="max-height:150px;overflow:auto"></div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px">
+    <button class="btn-primary" id="download-viewer-stats" style="width:auto">Скачать PNG</button>
+    <button class="btn-secondary" id="download-viewer-csv" style="width:auto">Скачать CSV</button>
+    <button class="btn-secondary" id="close-viewer-stats" style="width:auto">Закрыть</button>
+  </div>
+</div></div>
 
 <div class="modal-overlay" id="favorites-modal"><div class="modal-content" style="max-width:620px;width:100%;padding:20px;background:#171923;border-radius:18px"><h2>Избранное</h2><div id="favorites-list"></div><button class="btn-secondary" id="favorites-close" style="width:auto">Закрыть</button></div></div>
 
@@ -1448,6 +1580,98 @@ body.aero-theme #share-stream-btn{background:linear-gradient(180deg,#ffffff,#cfe
                 </div>
                 <div class="upd-state" id="bumper-state"></div>
             </div>
+
+            <div class="admin-section">
+                <label>🎉 Эфирные фишки: праздник и викторина</label>
+                <div class="hint"><b>Праздник</b> — конфетти, салют, снег, сердечки или звёзды летят по экрану у всех зрителей.
+                    <b>Викторина</b> — вопрос поверх эфира, зрители отвечают и копят очки.</div>
+                <div class="fx-row" style="flex-wrap:wrap;gap:6px">
+                    <button class="btn-secondary party-btn active" data-party="confetti" style="width:auto;flex:1">🎊 Конфетти</button>
+                    <button class="btn-secondary party-btn" data-party="fireworks" style="width:auto;flex:1">🎆 Салют</button>
+                    <button class="btn-secondary party-btn" data-party="snow" style="width:auto;flex:1">❄️ Снег</button>
+                    <button class="btn-secondary party-btn" data-party="hearts" style="width:auto;flex:1">💗 Сердечки</button>
+                    <button class="btn-secondary party-btn" data-party="stars" style="width:auto;flex:1">✨ Звёзды</button>
+                </div>
+                <div class="fx-row" style="flex-wrap:wrap;gap:6px;margin-top:8px">
+                    <input id="party-text" placeholder="Надпись на экране (необязательно)" style="flex:2;min-width:150px">
+                    <input id="party-dur" type="number" min="3" max="120" value="12" style="width:84px" title="Длительность, сек">
+                    <button class="btn-primary" id="party-go" style="width:auto">▶ Запустить праздник</button>
+                    <button class="btn-danger" id="party-stop" style="width:auto">■ Остановить</button>
+                </div>
+                <div style="height:10px"></div>
+                <div class="fx-row"><label style="min-width:100%">📅 Расписание праздников (срабатывает само)</label></div>
+                <div id="ps-list" style="margin:6px 0 8px"></div>
+                <div class="fx-row" style="flex-wrap:wrap;gap:6px">
+                    <input id="ps-time" type="time" style="width:auto;min-width:110px">
+                    <select id="ps-type" style="flex:1;min-width:130px">
+                        <option value="confetti">🎊 Конфетти</option>
+                        <option value="fireworks">🎆 Салют</option>
+                        <option value="snow">❄️ Снег</option>
+                        <option value="hearts">💗 Сердечки</option>
+                        <option value="stars">✨ Звёзды</option>
+                    </select>
+                    <input id="ps-text" placeholder="Надпись (необязательно)" style="flex:2;min-width:140px">
+                    <input id="ps-dur" type="number" min="3" max="120" value="12" style="width:80px" title="Секунд">
+                </div>
+                <div class="fx-row" id="ps-days" style="flex-wrap:wrap;gap:6px">
+                    <span style="font-size:12px;opacity:.6;width:100%">Дни (ничего не отмечено — каждый день):</span>
+                    <label class="bs-day"><input type="checkbox" value="1"> Пн</label><label class="bs-day"><input type="checkbox" value="2"> Вт</label><label class="bs-day"><input type="checkbox" value="3"> Ср</label><label class="bs-day"><input type="checkbox" value="4"> Чт</label><label class="bs-day"><input type="checkbox" value="5"> Пт</label><label class="bs-day"><input type="checkbox" value="6"> Сб</label><label class="bs-day"><input type="checkbox" value="7"> Вс</label>
+                </div>
+                <div class="fx-row" style="flex-wrap:wrap;gap:6px;margin-top:6px">
+                    <button class="btn-primary" id="ps-add" style="width:auto;flex:1">➕ Добавить в расписание</button>
+                    <button class="btn-secondary" id="ps-preset" style="width:auto" title="Готовый список: утро, полдень, вечер, полночь, пятница">📅 Мой список</button>
+                </div>
+                <div style="height:14px"></div>
+                <div class="fx-row"><label style="min-width:100%">Викторина в эфире</label></div>
+                <textarea id="quiz-q-in" rows="2" placeholder="Вопрос: например «Кто озвучивал Кота Леопольда?»" style="width:100%;margin-bottom:6px"></textarea>
+                <div class="fx-row" style="flex-wrap:wrap;gap:6px">
+                    <input id="quiz-o0" placeholder="Вариант 1" style="flex:1;min-width:120px">
+                    <input id="quiz-o1" placeholder="Вариант 2" style="flex:1;min-width:120px">
+                    <input id="quiz-o2" placeholder="Вариант 3" style="flex:1;min-width:120px">
+                    <input id="quiz-o3" placeholder="Вариант 4" style="flex:1;min-width:120px">
+                </div>
+                <div class="fx-row" style="flex-wrap:wrap;gap:6px;margin-top:6px">
+                    <label style="min-width:auto">Верный:</label>
+                    <select id="quiz-correct" style="width:auto"><option value="0">1</option><option value="1">2</option><option value="2">3</option><option value="3">4</option></select>
+                    <label style="min-width:auto;margin-left:8px">Время, сек:</label>
+                    <input id="quiz-dur" type="number" min="10" max="180" value="30" style="width:84px">
+                    <button class="btn-secondary" id="quiz-bank" style="width:auto">📚 Из банка</button>
+                </div>
+                <div class="fx-row" style="flex-wrap:wrap;gap:6px;margin-top:6px">
+                    <button class="btn-primary" id="quiz-go" style="width:auto;flex:1">▶ Запустить вопрос</button>
+                    <button class="btn-danger" id="quiz-stop" style="width:auto">■ Завершить</button>
+                </div>
+                <div id="quiz-results" style="margin-top:10px;font-size:13px;line-height:1.45"></div>
+                <div style="height:14px"></div>
+                <div class="fx-row"><label style="min-width:100%">📊 Опрос в эфире (без правильного ответа)</label></div>
+                <textarea id="poll-q-in" rows="2" placeholder="Вопрос: например «Что включим следующим?»" style="width:100%;margin-bottom:6px"></textarea>
+                <div class="fx-row" style="flex-wrap:wrap;gap:6px">
+                    <input id="poll-o0" placeholder="Вариант 1" style="flex:1;min-width:120px">
+                    <input id="poll-o1" placeholder="Вариант 2" style="flex:1;min-width:120px">
+                    <input id="poll-o2" placeholder="Вариант 3" style="flex:1;min-width:120px">
+                    <input id="poll-o3" placeholder="Вариант 4" style="flex:1;min-width:120px">
+                </div>
+                <div class="fx-row" style="flex-wrap:wrap;gap:6px;margin-top:6px">
+                    <label style="min-width:auto">Время, сек:</label>
+                    <input id="poll-dur" type="number" min="20" max="600" value="90" style="width:84px">
+                    <button class="btn-secondary" id="poll-bank" style="width:auto">📚 Из банка</button>
+                </div>
+                <div class="fx-row" style="flex-wrap:wrap;gap:6px;margin-top:6px">
+                    <button class="btn-primary" id="poll-go" style="width:auto;flex:1">▶ Запустить опрос</button>
+                    <button class="btn-danger" id="poll-stop" style="width:auto">■ Завершить</button>
+                </div>
+                <div id="poll-results" style="margin-top:10px;font-size:13px;line-height:1.45"></div>
+                <div style="height:14px"></div>
+                <div class="fx-row"><label style="min-width:100%">🎮 Автовикторина (сама задаёт вопросы из банка)</label></div>
+                <div class="fx-row" style="flex-wrap:wrap;gap:6px">
+                    <div class="fx-toggle" id="quiz-auto-toggle"></div>
+                    <label style="min-width:auto;margin-left:8px">Каждые, мин:</label>
+                    <input id="quiz-auto-every" type="number" min="2" max="180" value="15" style="width:84px">
+                    <button class="btn-secondary" id="quiz-top-send" style="width:auto;margin-left:auto">📣 Отправить топ в чат</button>
+                </div>
+                <div id="quiz-top" style="margin-top:10px;font-size:13px;line-height:1.45"></div>
+            </div>
+
         </div>
         <div class="admin-tab-content" data-content="platform">
             <div class="admin-section">
@@ -1474,6 +1698,9 @@ body.aero-theme #share-stream-btn{background:linear-gradient(180deg,#ffffff,#cfe
                 <div style="height:8px"></div><input type="text" id="radio-track-url" placeholder="Прямая ссылка на аудио">
                 <div style="height:8px"></div><input type="text" id="radio-track-cover" placeholder="Ссылка на обложку (необязательно)"><input type="file" id="radio-track-cover-file" accept="image/*">
                 <div style="height:8px"></div><button class="btn-primary" id="add-radio-track">Добавить в радио</button><div style="height:8px"></div><button class="btn-secondary" id="load-radio-presets">Загрузить готовые радиостанции</button>
+                <div class="hint" style="margin-top:14px">Или добавьте песни с YouTube / YouTube Music: вставьте одну ссылку или сразу несколько (по одной на строку). Можно дать ссылку на плейлист — развернём его в список песен. Играет встроенный плеер YouTube (картинку мы прячем), поэтому песня должна быть разрешена для встраивания: каждую добавленную песню приложение проверяет само и помечает те, что не играются.</div>
+                <textarea id="radio-yt-url" rows="3" placeholder="Ссылка на песню: YouTube или YouTube Music. Можно несколько сразу — по одной на строку"></textarea>
+                <div style="height:8px"></div><button class="btn-secondary" id="add-radio-yt">▶ Добавить песни с YouTube</button>
                 <div id="radio-tracks-list" style="margin-top:12px"></div>
             </div>
         </div>
@@ -1746,7 +1973,19 @@ const set = (r, val) => (r ? r.set(val) : Promise.reject(new Error("DB not ready
 const update = (r, val) => (r ? r.update(val) : Promise.reject(new Error("DB not ready")));
 const get = (r) => (r ? r.once("value") : Promise.reject(new Error("DB not ready")));
 const remove = (r) => (r ? r.remove() : Promise.reject(new Error("DB not ready")));
-const push = (r, val) => (r ? (val !== undefined ? r.push(val) : r.push()) : null);
+const push = (r, val) => {
+  const t = (r ? (val !== undefined ? r.push(val) : r.push()) : null);
+  if (!t) return null;
+  let p;
+  try {
+    p = new Promise(function (res, rej) {
+      try { t.then(function () { res(t); }, function (e) { rej(e); }); } catch (e) { res(t); }
+    });
+  } catch (e) { return t; }
+  try { p.catch(function () {}); } catch (e) {}
+  try { p.key = t.key; } catch (e) {}
+  return p;
+};
 const onValue = (r, cb) => (r ? r.on("value", cb) : null);
 const onDisconnect = (r) => (r ? r.onDisconnect() : { remove: () => {} });
 const signInWithEmailAndPassword = (a, em, pw) => a.signInWithEmailAndPassword(em, pw);
@@ -2054,6 +2293,41 @@ async function doLogout(){
 
 let prevUid = null;
 let viewerRegistered = false;
+let viewerBeatTimer=0;
+function viewersHeartbeat(){
+    if(viewerBeatTimer) clearInterval(viewerBeatTimer);
+    const beat=function(){
+        try{ if(FB_OK&&me) update(ref(db,"viewers/"+me.uid),{lastSeen:Date.now()}).catch(function(){}); }catch(e){}
+        /* архив: кто вообще заходил — чтобы «всего зашло» не терялось после уборки */
+        try{
+            if(FB_OK&&me) get(ref(db,"stats/visitors/"+me.uid)).then(function(sn){
+                const v=sn.val()||{}, now=Date.now();
+                set(ref(db,"stats/visitors/"+me.uid),{
+                    name:me.name||"Гость",
+                    anon: !!( (typeof auth!=="undefined" && auth && auth.currentUser && auth.currentUser.isAnonymous) || me.isAnon ),
+                    firstSeen:v.firstSeen||now, lastSeen:now, seen:Number(v.seen||0)+1
+                }).catch(function(){});
+            }).catch(function(){});
+        }catch(e){}
+    };
+    beat();
+    viewerBeatTimer=setInterval(beat,45000);
+    document.addEventListener("visibilitychange",function(){ if(!document.hidden) beat(); });
+}
+/* убираем записи зрителей, которые уже ушли и не отметились */
+function viewersCleanup(){
+    if(!FB_OK) return;
+    get(ref(db,"viewers")).then(function(sn){
+        const d=sn.val()||{}, now=Date.now(), upd={};
+        let stale=0;
+        Object.keys(d).forEach(function(k){
+            const v=d[k]||{};
+            if(now-(v.lastSeen||v.joinedAt||0) > 7200000){ upd["viewers/"+k]=null; stale++; }
+        });
+        if(stale){ update(ref(db),upd).catch(function(){}); }
+    }).catch(function(){});
+}
+
 
 async function switchViewer(){
     try{
@@ -2079,6 +2353,7 @@ async function registerViewer(){
             role: me.role || "viewer"
         });
         onDisconnect(vRef).remove();
+        viewersHeartbeat();
     }catch(e){}
 }
 
@@ -2396,10 +2671,11 @@ function subscribeViewers(){
     if(!FB_OK)return;
     onValue(ref(db,"viewers"),s=>{
         const d=s.val()||{};
+        window.__viewersRaw=d;
         const now=Date.now();
         let count=0;
         Object.values(d).forEach(v=>{
-            if(v && (now - (v.lastSeen || v.joinedAt || 0) < 90000)){
+            if(v && (now - (v.lastSeen || v.joinedAt || 0) < 150000)){
                 count++;
             }
         });
@@ -5192,16 +5468,30 @@ function updateRadioCover(t){
 function stopRadio(){
     radioOn=false; radioCurrentId=null;
     try{ eqStop(); }catch(e){}
+    try{ radioYtHide(); }catch(e){}
+    try{ eqIdle(false); }catch(e){}
     try{radioAudio.pause();}catch(e){}
     try{radioAudio.removeAttribute("src");radioAudio.load();}catch(e){}
     setRadioUI(false); radioNow("Радио выключено"); renderRadioPlaylist();
 }
+let radioManual=false;
 function playRadioTrack(){
     const a=radioItems();
     if(!a.length){showStatus("В радио пока нет треков","error");stopRadio();return;}
     if(radioFails>a.length){showStatus("Треки радио недоступны","error");radioFails=0;stopRadio();return;}
     const t=a[((radioIndex%a.length)+a.length)%a.length];
-    if(!t||!t.url){radioFails++;radioIndex++;playRadioTrack();return;}
+    if(!t||(!t.url&&!t.videoId)){radioFails++;radioIndex++;playRadioTrack();return;}
+    if(t.videoId&&t.ytBad===true&&a.length>1){radioFails++;radioIndex++;playRadioTrack();return;}
+    if(t.videoId){
+        const myYt=++radioAttempt;
+        radioCurrentId=t.id;
+        radioNow("Загрузка: "+radioTrackName(t));
+        updateRadioCover(t);
+        renderRadioPlaylist();
+        radioYtPlay(t);
+        return;
+    }
+    radioYtHide();
     const myAttempt=++radioAttempt;
     radioCurrentId=t.id;
     radioNow("Загрузка: "+radioTrackName(t));
@@ -5216,6 +5506,13 @@ function playRadioTrack(){
 function onRadioTrackError(attempt){
     if(attempt!=null&&attempt!==radioAttempt)return;   // та же ошибка пришла дважды — не перескакиваем два трека
     radioAttempt++;
+    if(radioManual){    /* вы сами выбрали песню — на следующую не убегаем, а говорим, что не так */
+        radioManual=false;
+        const t=radioItems().find(function(x){ return x.id===radioCurrentId; });
+        showStatus(t&&t.videoId?"Эта песня не играется во встроенном плеере YouTube — оставлю её на месте, выберите другую":"Трек недоступен","error");
+        stopRadio();
+        return;
+    }
     const a=radioItems();
     radioFails++; radioIndex++;
     if(!a.length||radioFails>a.length){showStatus("Не удалось включить радио","error");radioFails=0;stopRadio();return;}
@@ -5226,6 +5523,169 @@ radioAudio?.addEventListener("ended",()=>{radioIndex++;radioFails=0;playRadioTra
 radioAudio?.addEventListener("playing",()=>{radioFails=0;try{eqStart(radioAudio.currentSrc||radioAudio.src);}catch(e){} if(radioOn){const t=radioItems().find(x=>x.id===radioCurrentId);if(t){radioNow(radioTrackName(t));updateRadioCover(t);}setRadioUI(true);}});
 radioAudio?.addEventListener("waiting",()=>{if(radioOn)radioNow("Буферизация…");});
 radioAudio?.addEventListener("error",()=>{if(radioOn||radioAudio.src)onRadioTrackError(radioAttempt);});
+/* ---------- РАДИО: ПЕСНИ С YOUTUBE / YOUTUBE MUSIC ---------- */
+let radioYt=null, radioYtP=null, radioApiP=null;
+
+function ytId(u){
+    if(!u) return "";
+    const x=String(u).trim();
+    let m=x.match(/(?:youtube(?:-nocookie)?\.com\/(?:watch\?(?:[^#]*&)?v=|embed\/|shorts\/|live\/|v\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/);
+    if(!m) m=x.match(/[?&]v=([A-Za-z0-9_-]{11})/);
+    if(!m) m=x.match(/(?:^|\/)([A-Za-z0-9_-]{11})(?:$|[?&#])/);
+    return m?m[1]:"";
+}
+function ytCover(id){ return id?("https://i.ytimg.com/vi/"+id+"/hqdefault.jpg"):""; }
+function ytWatch(id){ return "https://www.youtube.com/watch?v="+id; }
+
+function ytApiLoad(){
+    if(radioApiP) return radioApiP;
+    if(window.YT&&window.YT.Player&&window.YT.Player!==null){ radioApiP=Promise.resolve(true); return radioApiP; }
+    radioApiP=new Promise(function(res){
+        let done=false;
+        const fin=function(v){ if(done)return; done=true; res(v); };
+        const prev=window.onYouTubeIframeAPIReady;
+        window.onYouTubeIframeAPIReady=function(){
+            if(window.YT&&window.YT.Player) fin(true);
+            try{ if(typeof prev==="function") prev(); }catch(e){}
+        };
+        const sc=document.createElement("script");
+        sc.src="https://www.youtube.com/iframe_api"; sc.async=true;
+        sc.onerror=function(){ fin(false); };
+        document.head.appendChild(sc);
+        setTimeout(function(){ fin(!!(window.YT&&window.YT.Player)); }, 12000);
+    });
+    return radioApiP;
+}
+
+function radioYtEnsure(){
+    if(radioYtP) return radioYtP;
+    radioYtP=ytApiLoad().then(function(ok){
+        if(!ok) return null;
+        const host=document.getElementById("radio-yt");
+        if(!host) return null;
+        return new Promise(function(res){
+            let settled=false;
+            const give=function(pl){ if(settled)return; settled=true; res(pl); };
+            try{
+                radioYt=new window.YT.Player(host,{
+                    width:2, height:2,
+                    playerVars:{controls:0,rel:0,modestbranding:1,playsinline:1,disablekb:1,fs:0,iv_load_policy:3,origin:location.origin},
+                    events:{
+                        onReady:function(e){ give(e.target); },
+                        onStateChange:function(e){
+                            try{
+                                const d=e.data;
+                                if(d===1){
+                                    radioFails=0; radioOn=true; setRadioUI(true);
+                                    const t=radioItems().find(function(x){ return x.id===radioCurrentId; });
+                                    if(t){ radioNow(radioTrackName(t)); updateRadioCover(t); }
+                                    try{ eqIdle(true); }catch(err){}
+                                    try{ e.target.unMute(); e.target.setVolume(100); }catch(err){}
+                                }else if(d===0){
+                                    radioIndex++; radioFails=0; playRadioTrack();
+                                }
+                            }catch(err){}
+                        },
+                        onError:function(e){
+                            try{
+                                radioYtMarkBad(e.data);
+                                onRadioTrackError(radioAttempt);
+                            }catch(err){}
+                        }
+                    }
+                });
+            }catch(e){ give(null); }
+            setTimeout(function(){ give(radioYt&&radioYt.playVideo?radioYt:null); }, 14000);
+        });
+    });
+    return radioYtP;
+}
+
+function radioYtPlay(t){
+    try{ radioAudio.pause(); }catch(e){}
+    try{ if(radioAudio.src){ radioAudio.removeAttribute("src"); radioAudio.load(); } }catch(e){}
+    return radioYtEnsure().then(function(pl){
+        if(!pl){ showStatus("Плеер YouTube не загрузился","error"); onRadioTrackError(radioAttempt); return; }
+        try{ eqIdle(true); }catch(e){}
+        try{ pl.loadVideoById(t.videoId); }catch(e){}
+        try{ pl.unMute(); pl.setVolume(100); }catch(e){}
+        try{ pl.playVideo(); }catch(e){}
+    }).catch(function(){ onRadioTrackError(radioAttempt); });
+}
+function radioYtHide(){
+    try{ if(radioYt&&radioYt.pauseVideo) radioYt.pauseVideo(); }catch(e){}
+}
+function radioYtRow(id){
+    if(!radioTracks) return null;
+    const keys=Object.keys(radioTracks).filter(function(k){ return (radioTracks[k]||{}).videoId===id; });
+    return keys.length?keys[keys.length-1]:null;
+}
+function radioYtPatch(id,upd){
+    if(!FB_OK||!me||me.role!=="admin") return;
+    const k=radioYtRow(id); if(!k) return;
+    try{ update(ref(db,"radioTracks/"+k),upd).catch(function(){}); }catch(e){}
+}
+function radioYtMarkBad(code){
+    const t=radioItems().find(function(x){ return x.id===radioCurrentId; });
+    if(!t||!t.videoId) return;
+    radioYtPatch(t.videoId,{ytBad:true});
+}
+/* проверка одной песни: играет ли она во встроенном плеере + забираем название */
+function radioYtProbe(id, quick, done){
+    ytApiLoad().then(function(ok){
+        if(!ok){ showStatus("Не удалось подключить плеер YouTube","error"); if(done) setTimeout(done,60); return; }
+        const host=document.createElement("div");
+        host.style.cssText="position:fixed;left:-9999px;top:0;width:2px;height:2px;opacity:0;pointer-events:none";
+        document.body.appendChild(host);
+        let done2=false, pl=null;
+        const finish=function(err){
+            if(done2) return; done2=true;
+            let data=null;
+            try{ data=pl&&pl.getVideoData?pl.getVideoData():null; }catch(e){}
+            setTimeout(function(){
+                try{ if(pl&&pl.destroy) pl.destroy(); }catch(e){}
+                try{ host.remove(); }catch(e){}
+            },300);
+            if(err){
+                radioYtPatch(id,{ytBad:true});
+                if(!done) showStatus("Эта песня не играется во встроенном плеере (код "+err+") — в радио она будет пропускаться","error");
+            }else{
+                const upd={ytBad:false};
+                if(data&&data.title) upd.title=data.title;
+                if(data&&data.author) upd.artist=data.author;
+                radioYtPatch(id,upd);
+                if(!done) showStatus("Песня играет: "+((data&&data.title)||id),"success");
+            }
+            if(done) setTimeout(done,60);
+        };
+        try{
+            pl=new window.YT.Player(host,{
+                videoId:id, width:2, height:2,
+                playerVars:{controls:0,rel:0,modestbranding:1,playsinline:1,origin:location.origin},
+                events:{
+                    onReady:function(e){
+                        try{ e.target.mute(); }catch(err){}
+                        try{ e.target.playVideo(); }catch(err){}
+                        setTimeout(function(){
+                            let st=-1, tt=0;
+                            try{ st=e.target.getPlayerState(); tt=e.target.getCurrentTime(); }catch(err){}
+                            if(st===1||tt>0) finish(0);
+                        }, quick?2500:4000);
+                    },
+                    onStateChange:function(e){ if(e.data===1) setTimeout(function(){ finish(0); },1200); },
+                    onError:function(e){ finish(e.data||1); }
+                }
+            });
+        }catch(e){ finish(1); }
+        setTimeout(function(){
+            if(done2) return;
+            let st=-1, tt=0;
+            try{ st=pl.getPlayerState(); tt=pl.getCurrentTime(); }catch(e){}
+            finish((st===1||tt>0)?0:1);
+        }, quick?6500:11000);
+    });
+}
+
 function renderRadioPlaylist(){
     const box=document.getElementById("radio-playlist");
     if(!box)return;
@@ -5233,10 +5693,10 @@ function renderRadioPlaylist(){
     if(!a.length){box.innerHTML='<div style="opacity:.6;font-size:13px;text-align:center;padding:6px">Плейлист радио пуст</div>';return;}
     box.innerHTML=a.map(t=>{
         const cur=radioOn&&t.id===radioCurrentId;
-        return '<div class="list-item" data-radio-play="'+esc(t.id)+'" style="cursor:pointer'+(cur?";border-color:#6d5dfc;background:rgba(109,93,252,.18)":"")+'"><span class="li-name">'+(cur?"▶ ":"")+esc(radioTrackName(t))+'</span></div>';
+        return '<div class="list-item" data-radio-play="'+esc(t.id)+'" style="cursor:pointer'+(cur?";border-color:#6d5dfc;background:rgba(109,93,252,.18)":"")+'"><span class="li-name">'+(cur?"▶ ":"")+esc(radioTrackName(t))+'</span>'+(t.videoId?'<small class="yt-badge'+(t.ytBad?' bad':'')+'">'+(t.ytBad?'⚠ не играет':'▶ YouTube')+'</small>':'')+'</div>';
     }).join("");
     box.querySelectorAll("[data-radio-play]").forEach(el=>{
-        el.onclick=()=>{const i=a.findIndex(x=>x.id===el.dataset.radioPlay); if(i>=0){radioIndex=i;radioFails=0;playRadioTrack();}};
+        el.onclick=()=>{const i=a.findIndex(x=>x.id===el.dataset.radioPlay); if(i>=0){radioManual=true;radioIndex=i;radioFails=0;playRadioTrack();}};
     });
 }
 document.getElementById("radio-close")?.addEventListener("click",()=>{document.getElementById("radio-card")?.classList.remove("active");document.querySelector(".player-wrapper")?.classList.remove("radio-hidden");document.querySelector(".stream-info-card")?.classList.remove("radio-hidden");stopRadio();setActiveNav(navStream);});
@@ -5301,6 +5761,10 @@ function eqStop(){
     if(eqRaf){ cancelAnimationFrame(eqRaf); eqRaf = 0; }
     try{ if(eqTap) eqTap.pause(); }catch(e){}
     eqUrl = ""; eqReal = false; eqFrames = 0;
+}
+function eqIdle(on){
+    if(on){ try{ eqInit(); }catch(e){} if(!eqRaf) eqLoop(); }
+    else { try{ eqStop(); }catch(e){} }
 }
 function eqLevels(){
     const N = 44, out = new Array(N);
@@ -5518,6 +5982,724 @@ try{
     }
 }catch(e){}
 
+/* ================= ЭФИРНЫЕ ФИШКИ (v15) ================= */
+
+/* ---------- A. ЭМОДЗИ-ДОЖДЬ ПОВЕРХ ЭФИРА ---------- */
+let emjLayer=null, emjLive=0, emjReady=false;
+function emojiLayer(){ if(!emjLayer) emjLayer=document.getElementById("fx-emoji-layer"); return emjLayer; }
+function spawnEmoji(ch, n){
+    const L=emojiLayer(); if(!L || !ch) return;
+    n = Math.max(1, Math.min(n||1, 8));
+    for(let i=0;i<n;i++){
+        if(emjLive > 60) return;
+        const sp=document.createElement("span");
+        sp.className="emj"; sp.textContent=ch;
+        sp.style.left=(5+Math.random()*90).toFixed(1)+"%";
+        sp.style.setProperty("--dx", (Math.random()*44-22).toFixed(0)+"px");
+        sp.style.setProperty("--rot", (Math.random()*70-35).toFixed(0)+"deg");
+        sp.style.fontSize=(20+Math.random()*20).toFixed(0)+"px";
+        sp.style.animationDuration=(3.4+Math.random()*2.4).toFixed(2)+"s";
+        sp.style.animationDelay=(Math.random()*0.45).toFixed(2)+"s";
+        L.appendChild(sp); emjLive++;
+        setTimeout(function(){ try{ sp.remove(); }catch(e){} emjLive--; }, 6500);
+    }
+}
+/* чужие реакции: прислушиваемся к росту счётчиков */
+function emojiFromCounts(oldV, newV){
+    const o=oldV||{}, n=newV||{};
+    if(!emjReady){ emjReady=true; return; }          /* первая загрузка — не сыпем */
+    Object.keys(n).forEach(function(k){
+        const d=Number(n[k]||0)-Number(o[k]||0);
+        if(d>0) spawnEmoji(k, Math.min(d,5));
+    });
+}
+
+/* ---------- B. ПРАЗДНИК НА ВСЕХ ЭКРАНАХ ---------- */
+let partyCv=null, partyCx=null, partyRaf=0, partyParts=[], partyUntil=0, partyType="confetti", partyBurstAt=0, partyLastStart=0;
+const PARTY_COLORS=["#ff5f6d","#ffc371","#6d5dfc","#00b7ff","#4ade80","#ffd45c","#ff7ad9","#ffffff"];
+function partyCanvas(){
+    if(!partyCv){
+        partyCv=document.getElementById("party-canvas");
+        if(!partyCv) return null;
+        partyCx=partyCv.getContext("2d");
+    }
+    return partyCv;
+}
+function partySize(){
+    const c=partyCanvas(); if(!c) return;
+    const d=Math.min(window.devicePixelRatio||1, 2);
+    c.width=Math.floor(innerWidth*d); c.height=Math.floor(innerHeight*d);
+    partyCx.setTransform(d,0,0,d,0,0);
+}
+function partySpawn(n){
+    const W=innerWidth, H=innerHeight, t=partyType;
+    for(let i=0;i<n;i++){
+        const p={ t:t, x:Math.random()*W, y:-20-Math.random()*H*0.4, vx:(Math.random()-.5)*1.6,
+                  vy:0, r:3+Math.random()*6, rot:Math.random()*6.28, vr:(Math.random()-.5)*.3,
+                  col:PARTY_COLORS[(Math.random()*PARTY_COLORS.length)|0], life:1 };
+        if(t==="confetti"){ p.vy=1.6+Math.random()*2.6; p.w=4+Math.random()*7; p.h=8+Math.random()*10; }
+        else if(t==="snow"){ p.vy=.7+Math.random()*1.1; p.r=2+Math.random()*4; p.col="#ffffff"; p.vx=(Math.random()-.5)*.9; }
+        else if(t==="hearts"||t==="stars"){ p.vy=1.1+Math.random()*1.7; p.glyph=(t==="hearts"?"💗":"✨"); p.r=10+Math.random()*14; }
+        else if(t==="fireworks"){ p.vy=0; p.vx=0; p.burst=true; p.life=0; }
+        partyParts.push(p);
+    }
+}
+function partyBurst(x,y){
+    const n=34;
+    for(let i=0;i<n;i++){
+        const a=(i/n)*6.2832, sp=1.8+Math.random()*3.4;
+        partyParts.push({ t:"spark", x:x, y:y, vx:Math.cos(a)*sp, vy:Math.sin(a)*sp,
+                          col:PARTY_COLORS[(Math.random()*PARTY_COLORS.length)|0],
+                          r:2+Math.random()*2.6, life:1, decay:.006+Math.random()*.012 });
+    }
+}
+function partyLoop(){
+    partyRaf=requestAnimationFrame(partyLoop);
+    const c=partyCanvas(); if(!c||!partyCx) return;
+    const W=innerWidth, H=innerHeight, now=Date.now();
+    partyCx.clearRect(0,0,W,H);
+    if(now>partyUntil){ partyStop(); return; }
+    if(partyType==="fireworks" && now>partyBurstAt){
+        partyBurst(W*(.15+Math.random()*.7), H*(.15+Math.random()*.45));
+        partyBurstAt=now+380+Math.random()*520;
+    } else if(partyParts.length<160 && Math.random()<.5){
+        partySpawn(partyType==="fireworks"?0:(partyType==="snow"?4:5));
+    }
+    for(let i=partyParts.length-1;i>=0;i--){
+        const p=partyParts[i];
+        p.x+=p.vx; p.y+=p.vy; p.rot+=p.vr||0;
+        if(p.t==="spark"){ p.vy+=0.045; p.vx*=0.985; p.vy*=0.985; p.life-=(p.decay||.01); if(p.life<=0){ partyParts.splice(i,1); continue; } }
+        else if(p.t==="fireworks"){ partyParts.splice(i,1); continue; }
+        else if(p.t==="snow"){ p.x+=Math.sin((now/900)+p.rot)*0.5; }
+        else { p.vy+=0.006; }
+        if(p.y>H+60 || p.x<-80 || p.x>W+80 || p.life<=0){ partyParts.splice(i,1); continue; }
+        partyCx.save();
+        partyCx.globalAlpha=Math.max(0,Math.min(1,p.life||1));
+        if(p.glyph){ partyCx.font=p.r+"px system-ui,sans-serif"; partyCx.textAlign="center"; partyCx.fillText(p.glyph,p.x,p.y); }
+        else if(p.t==="confetti"){
+            partyCx.translate(p.x,p.y); partyCx.rotate(p.rot);
+            partyCx.fillStyle=p.col; partyCx.fillRect(-p.w/2,-p.h/2,p.w,p.h);
+        } else {
+            partyCx.fillStyle=p.col; partyCx.beginPath(); partyCx.arc(p.x,p.y,p.r,0,6.2832); partyCx.fill();
+        }
+        partyCx.restore();
+    }
+}
+function partyStart(type, sec, text){
+    partyType=type||"confetti";
+    partyUntil=Date.now()+Math.max(1,Math.min(180,Number(sec)||12))*1000;
+    partyParts=[]; partyBurstAt=0;
+    const c=partyCanvas(); if(!c) return;
+    partySize(); c.style.display="block";
+    if(partyType!=="fireworks") partySpawn(70); else partyBurstAt=Date.now()+120;
+    const bn=document.getElementById("party-banner"), bt=document.getElementById("party-banner-text");
+    if(bn&&bt){
+        bt.textContent=text||"";
+        bt.style.animation="none"; void bt.offsetWidth; bt.style.animation="";
+        bn.style.display=text?"block":"none";
+    }
+    if(!partyRaf) partyLoop();
+}
+function partyStop(){
+    if(partyRaf){ cancelAnimationFrame(partyRaf); partyRaf=0; }
+    partyParts=[];
+    const c=partyCanvas(); if(c){ partyCx&&partyCx.clearRect(0,0,innerWidth,innerHeight); c.style.display="none"; }
+    const bn=document.getElementById("party-banner"); if(bn) bn.style.display="none";
+}
+addEventListener("resize", function(){ if(partyRaf) partySize(); });
+if(FB_OK){
+    try{
+        onValue(ref(db,"settings/party"), function(s){
+            const p=s.val()||null;
+            if(!p || !p.startedAt){ partyStop(); return; }
+            if(p.startedAt===partyLastStart) return;
+            partyLastStart=p.startedAt;
+            const left=(Number(p.duration)||12)-(Date.now()-p.startedAt)/1000;
+            if(left<=0.5){ partyStop(); return; }
+            partyStart(p.type, left, p.text);
+        });
+    }catch(e){}
+}
+
+/* ---------- C. ВИКТОРИНА В ЭФИРЕ ---------- */
+const QUIZ_BANK=[
+ {q:"Как зовут кота из мультфильма, который всех мирил и говорил «Ребята, давайте жить дружно»?",o:["Леопольд","Матроскин","Гарфилд","Том"],c:0},
+ {q:"В каком городе живут герои «Ну, погоди!»?",o:["В Москве","В открытом море","В городе без названия","В Санкт-Петербурге"],c:0},
+ {q:"Сколько богатырей в мультфильмах студии «Мельница»?",o:["Один","Два","Три","Четыре"],c:2},
+ {q:"Кто озвучивал Карлсона в советском мультфильме?",o:["Василий Ливанов","Иннокентий Смоктуновский","Олег Табаков","Юрий Никулин"],c:0},
+ {q:"Какая планета ближе всех к Солнцу?",o:["Венера","Меркурий","Марс","Земля"],c:1},
+ {q:"Сколько континентов на Земле?",o:["Пять","Шесть","Семь","Восемь"],c:1},
+ {q:"Какой океан самый большой?",o:["Атлантический","Индийский","Северный Ледовитый","Тихий"],c:3},
+ {q:"Сколько минут в одном тайме футбольного матча?",o:["30","40","45","60"],c:2},
+ {q:"Из чего делают стекло?",o:["Из песка","Из глины","Из угля","Из соли"],c:0},
+ {q:"Кто написал «Евгения Онегина»?",o:["Толстой","Пушкин","Достоевский","Чехов"],c:1},
+ {q:"Сколько планет в Солнечной системе?",o:["7","8","9","10"],c:1},
+ {q:"Какая самая длинная река в России?",o:["Волга","Лена","Обь","Енисей"],c:1}
+];
+let quizState=null, quizTimer=0, quizAnswers={}, quizUnsub=[];
+function quizUid(){ return (me&&me.uid)||null; }
+function quizName(){ return (me&&(me.name||me.email))||"Гость"; }
+function quizCard(){ return document.getElementById("quiz-card"); }
+function quizHide(){ quizTickStop(); const c=quizCard(); if(c) c.style.display="none"; quizState=null; }
+function quizUnsubAnswers(){ quizUnsub.forEach(function(f){ try{f();}catch(e){} }); quizUnsub=[]; }
+function quizAnswersWatch(qid){
+    quizUnsubAnswers();
+    if(!FB_OK||!qid) return;
+    try{
+        const r=ref(db,"stats/quiz/"+qid), cb=function(s){ quizAnswers=s.val()||{}; quizPaint(); };
+        onValue(r,cb); quizUnsub.push(function(){ try{r.off("value",cb);}catch(e){} });
+    }catch(e){}
+}
+function quizPaint(){
+    if(!quizState) return;
+    const q=quizState, box=document.getElementById("quiz-opts");
+    if(!box) return;
+    const left=Math.max(0,(q.endsAt-Date.now())/1000);
+    const total=Number(q.duration)||30;
+    const mine=quizAnswers[quizUid()]?quizAnswers[quizUid()].idx:null;
+    const closed=left<=0;
+    const counts=[0,0,0,0]; let all=0;
+    Object.keys(quizAnswers).forEach(function(k){
+        const i=Number(quizAnswers[k]&&quizAnswers[k].idx);
+        if(i>=0&&i<4){ counts[i]++; all++; }
+    });
+    box.innerHTML="";
+    q.options.forEach(function(o,i){
+        if(!o) return;
+        const b=document.createElement("button");
+        b.className="quiz-opt"+(mine===i?" mine":"")+((closed&&i===q.correct)?" right":"")+((closed&&mine===i&&i!==q.correct)?" wrong":"");
+        const pct=all?Math.round(counts[i]/all*100):0;
+        b.innerHTML='<span class="qb">'+String.fromCharCode(65+i)+'</span><span>'+String(o).replace(/[<>&]/g,"")+'</span>'+(closed?'<span class="pct">'+pct+'%</span>':'');
+        b.disabled=closed||mine!==null;
+        if(!b.disabled) b.onclick=function(){ quizAnswer(i); };
+        box.appendChild(b);
+    });
+    const tm=document.getElementById("quiz-timer"); if(tm) tm.textContent=closed?"0":Math.ceil(left);
+    const bar=document.getElementById("quiz-bar"); if(bar) bar.style.width=Math.max(0,Math.min(100,left/total*100))+"%";
+    const ft=document.getElementById("quiz-foot");
+    if(ft){
+        if(!closed) ft.textContent=(mine!==null?"Ответ принят — ждём остальных":"Выберите вариант, ответ засчитывается один раз");
+        else ft.innerHTML=(mine===q.correct?"✅ Верно!":"✖ Мимо — правильный ответ: <b>"+String.fromCharCode(65+q.correct)+"</b>")
+            + " · ответили: "+all+" чел.";
+    }
+    if(closed){ quizTickStop(); quizPostResults(); }
+    try{ quizChatPlace(); }catch(e){}
+}
+/* один линейный интервал на вопрос — никаких цепочек rAF+setTimeout,
+   иначе таймеры размножаются и вкладка замирает */
+function quizTickStart(){
+    if(quizTimer) return;
+    quizTimer=setInterval(function(){
+        quizPaint();
+        if(!quizState || quizState.endsAt<=Date.now()) quizTickStop();
+    }, 200);
+}
+function quizTickStop(){ if(quizTimer){ clearInterval(quizTimer); quizTimer=0; } }
+function quizAnswer(idx){
+    const q=quizState; if(!q||!FB_OK) return;
+    const uid=quizUid(); if(!uid){ showStatus("Войдите, чтобы отвечать","error"); return; }
+    const inc=(window.firebase&&firebase.database&&firebase.database.ServerValue)?firebase.database.ServerValue.increment:null;
+    const upd={};
+    upd["stats/quiz/"+q.id+"/"+uid]={name:quizName(),idx:idx,ts:Date.now()};
+    if(idx===q.correct&&inc) upd["stats/quizScores/"+uid+"/score"]=inc(1);
+    if(idx===q.correct&&inc) upd["stats/quizScores/"+uid+"/right"]=inc(1);
+    if(inc) upd["stats/quizScores/"+uid+"/asked"]=inc(1);
+    upd["stats/quizScores/"+uid+"/name"]=quizName();
+    update(ref(db),upd).then(function(){
+        if(idx===q.correct) showStatus("Верно! +1 очко","success"); else showStatus("Ответ принят","success");
+    }).catch(function(e){ showStatus("Не удалось отправить ответ","error"); });
+}
+function quizShow(q){
+    const c=quizCard(); if(!c) return;
+    /* на странице радио вопрос не показываем — там свой режим */
+    if(document.getElementById("radio-card")?.classList.contains("active")){ quizHide(); return; }
+    const left=(Number(q.duration)||30)-(Date.now()-(q.startedAt||0))/1000;
+    if(!q.q||!q.options||left<=-25){ quizHide(); return; }
+    quizState={id:String(q.startedAt||0),q:q.q,options:q.options.filter(Boolean),correct:Number(q.correct)||0,
+               endsAt:(q.startedAt||0)+(Number(q.duration)||30)*1000,duration:Number(q.duration)||30};
+    document.getElementById("quiz-q").textContent=q.q;
+    c.style.display="block";
+    quizAnswersWatch(quizState.id);
+    quizPaint();
+    quizTickStart();
+}
+if(FB_OK){ try{ onValue(ref(db,"settings/quiz"), function(s){ const q=s.val()||null; if(!q||!q.startedAt||!q.q){ quizHide(); quizUnsubAnswers(); return; } quizShow(q); }); }catch(e){} }
+
+/* ---------- E. РАСПИСАНИЕ ПРАЗДНИКОВ (v16) ---------- */
+const PARTY_ICON={confetti:"🎊",fireworks:"🎆",snow:"❄️",hearts:"💗",stars:"✨"};
+const PARTY_PRESETS=[
+ {time:"08:00",type:"stars",    text:"Доброе утро!",            duration:12,days:[]},
+ {time:"12:00",type:"confetti", text:"Полдень — хорошего дня!",  duration:12,days:[]},
+ {time:"15:00",type:"hearts",   text:"Продолжаем эфир",          duration:10,days:[]},
+ {time:"18:00",type:"confetti", text:"Вечерний эфир!",           duration:14,days:[]},
+ {time:"21:00",type:"snow",     text:"Спокойной ночи",           duration:14,days:[]},
+ {time:"00:00",type:"fireworks",text:"Полночь!",                 duration:16,days:[]},
+ {time:"19:00",type:"hearts",   text:"Спасибо, что с нами",      duration:12,days:[1]},
+ {time:"20:00",type:"confetti", text:"Пятница!",                 duration:18,days:[5]},
+ {time:"20:30",type:"fireworks",text:"Выходные начинаются!",     duration:16,days:[6]},
+ {time:"10:00",type:"stars",    text:"Хорошего воскресенья",     duration:14,days:[7]}
+];
+let PS={};
+if(FB_OK){ try{ onValue(ref(db,"settings/partySchedule"), function(s){ PS=s.val()||{}; renderPS(); }); }catch(e){} }
+function psDaysTxt(d){
+    const a=(d||[]).map(Number);
+    if(!a.length) return "каждый день";
+    const N=["","пн","вт","ср","чт","пт","сб","вс"];
+    return a.slice().sort().map(function(x){ return N[x]||""; }).join(" ");
+}
+function renderPS(){
+    const box=document.getElementById("ps-list"); if(!box) return;
+    const keys=Object.keys(PS||{});
+    if(!keys.length){ box.innerHTML='<div style="opacity:.6;font-size:12px;padding:4px">Расписание пусто — нажмите «📅 Мой список», чтобы взять готовое</div>'; return; }
+    box.innerHTML=keys.sort(function(a,b){ return String(PS[a].time||"").localeCompare(String(PS[b].time||"")); }).map(function(k){
+        const e=PS[k]||{}, off=e.enabled===false;
+        return '<div class="ps-row'+(off?" off":"")+'" data-ps="'+k+'">'
+          + '<span class="ps-time">'+(e.time||"--:--")+'</span>'
+          + '<span class="ps-type">'+(PARTY_ICON[e.type]||"🎊")+'</span>'
+          + '<span class="ps-what">'+ (e.text?String(e.text).replace(/[<>&]/g,""):"без надписи") +'<small>'+psDaysTxt(e.days)+' · '+(Number(e.duration)||12)+' сек</small></span>'
+          + '<span class="ps-days"></span>'
+          + '<button class="stream-btn" data-ps-toggle="'+k+'" style="padding:4px 8px;font-size:11px">'+(off?"Выкл":"Вкл")+'</button>'
+          + '<button class="ps-del" data-ps-del="'+k+'">✕</button></div>';
+    }).join("");
+    box.querySelectorAll("[data-ps-toggle]").forEach(function(b){
+        b.onclick=function(){ if(!me||me.role!=="admin"){showStatus("Нужны права администратора","error");return;}
+            const k=b.dataset.psToggle; update(ref(db,"settings/partySchedule/"+k),{enabled:(PS[k]||{}).enabled===false})
+              .catch(function(e){ showStatus("Ошибка Firebase: "+e.message,"error"); }); };
+    });
+    box.querySelectorAll("[data-ps-del]").forEach(function(b){
+        b.onclick=function(){ if(!me||me.role!=="admin"){showStatus("Нужны права администратора","error");return;}
+            if(!confirm("Удалить строку расписания?")) return;
+            remove(ref(db,"settings/partySchedule/"+b.dataset.psDel)).catch(function(e){ showStatus("Ошибка: "+e.message,"error"); }); };
+    });
+}
+document.getElementById("ps-add")?.addEventListener("click", function(){
+    if(!FB_OK||!me||me.role!=="admin"){ showStatus("Нужны права администратора","error"); return; }
+    const time=(document.getElementById("ps-time")?.value||"").trim();
+    if(!time){ showStatus("Укажите время","error"); return; }
+    const days=[...document.querySelectorAll("#ps-days input:checked")].map(function(i){ return Number(i.value); });
+    push(ref(db,"settings/partySchedule"),{
+        time:time,
+        type:document.getElementById("ps-type")?.value||"confetti",
+        text:(document.getElementById("ps-text")?.value||"").trim(),
+        duration:Math.max(3,Math.min(120,Number(document.getElementById("ps-dur")?.value)||12)),
+        days:days, enabled:true, createdAt:Date.now()
+    }).then(function(){
+        ["ps-time","ps-text"].forEach(function(id){ const el=document.getElementById(id); if(el) el.value=""; });
+        showStatus("Добавлено в расписание праздников","success");
+    }).catch(function(e){ showStatus("Ошибка Firebase: "+e.message,"error"); });
+});
+document.getElementById("ps-preset")?.addEventListener("click", function(){
+    if(!FB_OK||!me||me.role!=="admin"){ showStatus("Нужны права администратора","error"); return; }
+    if(!confirm("Добавить готовый список праздников на 10 времён суток? Дубли не проверяю — потом можно удалить лишнее.")) return;
+    Promise.all(PARTY_PRESETS.map(function(t){ return push(ref(db,"settings/partySchedule"),Object.assign({},t,{enabled:true,createdAt:Date.now()})); }))
+      .then(function(){ showStatus("Готовый список добавлен: 10 праздников","success"); })
+      .catch(function(e){ showStatus("Ошибка Firebase: "+e.message,"error"); });
+});
+/* тик расписания: пишет праздник в базу с клиента администратора, как планировщик сетки */
+function psPad(n){ return String(n).padStart(2,"0"); }
+function psFiredKey(k){ return "mytv_party_fired_"+new Date().toDateString()+"_"+k; }
+function psCleanup(){
+    const today=new Date().toDateString();
+    try{
+        Object.keys(localStorage).filter(function(k){ return k.indexOf("mytv_party_fired_")===0 && k.indexOf(today)<0; })
+          .forEach(function(k){ localStorage.removeItem(k); });
+    }catch(e){}
+}
+function psTick(){
+    if(!FB_OK||!me||me.role!=="admin") return;
+    const now=new Date();
+    const day=now.getDay()===0?7:now.getDay();
+    const hhmm=psPad(now.getHours())+":"+psPad(now.getMinutes());
+    Object.keys(PS||{}).forEach(function(k){
+        const e=PS[k]||{};
+        if(e.enabled===false||!e.time||e.time!==hhmm) return;
+        const d=(e.days||[]).map(Number);
+        if(d.length&&d.indexOf(day)<0) return;
+        const fk=psFiredKey(k);
+        try{ if(localStorage.getItem(fk)) return; localStorage.setItem(fk,"1"); }catch(e){}
+        set(ref(db,"settings/party"),{type:e.type||"confetti",text:e.text||"",
+            duration:Math.max(3,Math.min(120,Number(e.duration)||12)),startedAt:Date.now(),by:me.name||me.email||"",from:k})
+          .catch(function(){});
+    });
+    psCleanup();
+}
+setInterval(psTick, 25000);
+setTimeout(psTick, 8000);
+
+/* ---------- F. ВИКТОРИНА В ЧАТЕ (v16) ---------- */
+function quizChatCard(){
+    let c=document.getElementById("quiz-chat-card-tpl");
+    if(!c){
+        c=document.createElement("div");
+        c.id="quiz-chat-card-tpl"; c.className="quiz-chat-card"; c.style.display="none";
+        document.body.appendChild(c);
+    }
+    return c;
+}
+/* ---------- ОПРОС В ЭФИРЕ (без правильного ответа) ---------- */
+let pollState=null, pollAnswers={}, pollTimer=0, pollUnsub=[], pollBankIdx=0, pollPosted={};
+const POLL_BANK=[
+    {q:'Что включим следующим?',options:['Мультики','Музыку','Кино','Новости']},
+    {q:'Как вам сегодняшний эфир?',options:['Супер','Нормально','Так себе','Скучно']},
+    {q:'Во сколько вам удобнее смотреть?',options:['Утром','Днём','Вечером','Ночью']},
+    {q:'Что добавить в эфир?',options:['Больше музыки','Больше мультиков','Викторины','Обзоры']},
+    {q:'Смотрите сейчас с телефона?',options:['Да, с телефона','С компьютера','С телевизора','С планшета']},
+    {q:'Какой жанр больше нравится?',options:['Комедия','Приключения','Фантастика','Детектив']},
+    {q:'Сколько времени вы с нами?',options:['Первый раз','Несколько дней','Месяц','С самого начала']},
+    {q:'Нужны ли опросы в эфире?',options:['Да, почаще','Иногда','Редко','Не нужны']},
+    {q:'Что важнее в чате?',options:['Общение','Новости эфира','Игры и викторины','Музыкальные заявки']},
+    {q:'Какой длины вам удобны передачи?',options:['Короткие, до 10 мин','15–20 минут','Полчаса','Не важно']}
+];
+function pollUid(){ return (me&&me.uid)||(auth&&auth.currentUser&&auth.currentUser.uid)||""; }
+function pollShow(p){
+    if(!p||!p.q){ pollHide(); return; }
+    if(document.getElementById("radio-card")?.classList.contains("active")){ pollHide(); return; }
+    const started=Number(p.startedAt)||Date.now();
+    pollState={ id:String(started), q:p.q, options:(p.options||[]).filter(Boolean), duration:Number(p.duration)||60, endsAt:started+((Number(p.duration)||60)*1000) };
+    const card=document.getElementById("poll-card"); if(card) card.style.display="block";
+    const qEl=document.getElementById("poll-q"); if(qEl) qEl.textContent=pollState.q;
+    pollWatchAnswers(pollState.id);
+    pollTickStart(); pollPaint();
+}
+function pollHide(){
+    pollTickStop(); pollState=null; pollAnswers={};
+    pollUnsub.forEach(function(f){ try{f();}catch(e){} }); pollUnsub=[];
+    const card=document.getElementById("poll-card"); if(card) card.style.display="none";
+    try{ pollChatPlace(); }catch(e){}
+}
+function pollWatchAnswers(id){
+    pollUnsub.forEach(function(f){ try{f();}catch(e){} }); pollUnsub=[];
+    if(!FB_OK) return;
+    pollUnsub.push(onValue(ref(db,"stats/polls/"+id), function(s){ pollAnswers=s.val()||{}; pollPaint(); try{ pollChatPlace(); }catch(e){} }));
+}
+function pollTickStart(){ pollTickStop(); pollTimer=setInterval(pollTick,250); }
+function pollTickStop(){ if(pollTimer){ clearInterval(pollTimer); pollTimer=0; } }
+function pollTick(){
+    if(!pollState) return;
+    pollPaint();
+    if(Date.now()>=pollState.endsAt){ pollTickStop(); pollPaint(); pollPostResults(); }
+}
+function pollCounts(){
+    const counts=[0,0,0,0]; let all=0;
+    Object.keys(pollAnswers).forEach(function(k){
+        const i=Number(pollAnswers[k]&&pollAnswers[k].idx);
+        if(i>=0&&i<4){ counts[i]++; all++; }
+    });
+    return {counts:counts, all:all};
+}
+function pollPaint(){
+    if(!pollState) return;
+    const box=document.getElementById("poll-opts"); if(!box) return;
+    const q=pollState, left=Math.max(0,(q.endsAt-Date.now())/1000), closed=left<=0;
+    const mine=pollAnswers[pollUid()]?pollAnswers[pollUid()].idx:null;
+    const c=pollCounts();
+    box.innerHTML="";
+    q.options.forEach(function(o,i){
+        if(!o) return;
+        const b=document.createElement("button");
+        b.className="quiz-opt"+(mine===i?" mine":"");
+        const pct=c.all?Math.round(c.counts[i]/c.all*100):0;
+        b.innerHTML='<span class="qb">'+String.fromCharCode(65+i)+'</span><span>'+String(o).replace(/[<>&]/g,"")+'</span>'+(closed?'<span class="pct">'+pct+'%</span>':'');
+        b.disabled=closed||mine!==null;
+        if(!b.disabled) b.onclick=function(){ pollVote(i); };
+        box.appendChild(b);
+    });
+    const tm=document.getElementById("poll-timer"); if(tm) tm.textContent=closed?"0":Math.ceil(left);
+    const ft=document.getElementById("poll-foot");
+    if(ft) ft.textContent = closed ? ("Проголосовало: "+c.all+" чел.") : (mine!==null?"Голос принят — ждём остальных":"Выберите вариант, голосуем один раз");
+    try{ pollChatPlace(); }catch(e){}
+}
+function pollVote(i){
+    if(!pollState) return;
+    if(!me){ showStatus("Войдите, чтобы голосовать","error"); return; }
+    if(pollAnswers[pollUid()]) return;
+    const upd={}; upd["stats/polls/"+pollState.id+"/"+pollUid()]={name:me.name||"Гость",idx:i,ts:Date.now()};
+    update(ref(db),upd).then(function(){
+        showStatus(i===0?"Голос принят":"Голос принят","success");
+    }).catch(function(){ showStatus("Не удалось отправить голос","error"); });
+}
+function pollChatPlace(){
+    ["chat-messages-viewer","chat-messages-admin"].forEach(function(id){
+        const box=document.getElementById(id); if(!box) return;
+        let c=box.querySelector(".poll-chat-card");
+        if(!c){
+            if(!pollState) return;
+            c=document.createElement("div"); c.className="quiz-chat-card poll-chat-card";
+            box.insertBefore(c, box.firstChild);
+        }
+        if(!pollState){ c.remove(); return; }
+        const q=pollState, left=Math.max(0,(q.endsAt-Date.now())/1000), closed=left<=0;
+        const mine=pollAnswers[pollUid()]?pollAnswers[pollUid()].idx:null;
+        const cc=pollCounts();
+        c.innerHTML='<div class="qch"><b>📊 ОПРОС</b><span class="qct">'+(closed?"0":Math.ceil(left))+'</span></div>'
+          + '<div class="qcq">'+String(q.q).replace(/[<>&]/g,"")+'</div>'
+          + q.options.map(function(o,i){
+                const pct=cc.all?Math.round(cc.counts[i]/cc.all*100):0;
+                return '<button class="quiz-opt'+(mine===i?" mine":"")+'"'+(closed||mine!==null?" disabled":"")+' data-pi="'+i+'">'
+                  + '<span class="qb">'+String.fromCharCode(65+i)+'</span><span>'+String(o).replace(/[<>&]/g,"")+'</span>'
+                  + (closed?'<span class="pct">'+pct+'%</span>':'')+'</button>';
+            }).join('')
+          + '<div style="font-size:11px;opacity:.65;margin-top:4px">'+(closed?("Проголосовало: "+cc.all+" чел."):(mine!==null?"Голос принят":"Выберите вариант"))+'</div>';
+        c.querySelectorAll("[data-pi]").forEach(function(b){
+            if(b.disabled) return;
+            b.onclick=function(){ pollVote(Number(b.dataset.pi)); };
+        });
+    });
+}
+function pollResultsText(){
+    if(!pollState) return "";
+    const q=pollState, c=pollCounts();
+    if(!c.all) return "";
+    let t="📊 Опрос: «"+q.q+"» — проголосовало "+c.all+" чел. ";
+    t+=q.options.map(function(o,i){ return String.fromCharCode(65+i)+") "+o+" — "+Math.round(c.counts[i]/c.all*100)+"%"; }).join("; ");
+    if(t.length>190) t=t.slice(0,187)+"...";
+    return t;
+}
+function pollPostResults(){
+    if(!FB_OK||!me||me.role!=="admin"||!pollState) return;
+    const key="mytv_poll_posted_"+pollState.id;
+    try{ if(pollPosted[key]) return; const txt=pollResultsText(); if(!txt) return; pollPosted[key]=1; localStorage.setItem(key,"1"); }catch(e){}
+    try{ sendChat(pollResultsText()); }catch(e){}
+}
+if(FB_OK){ try{ onValue(ref(db,"settings/poll"), function(s){ const p=s.val()||null; if(!p||!p.q){ pollHide(); return; } pollShow(p); }); }catch(e){} }
+
+function quizChatPlace(){
+    const card=quizChatCard();
+    ["chat-messages-viewer","chat-messages-admin"].forEach(function(id){
+        const box=document.getElementById(id); if(!box) return;
+        let c=box.querySelector(".quiz-chat-card");
+        if(!c){
+            if(!quizState) return;
+            c=document.createElement("div"); c.className="quiz-chat-card";
+            box.insertBefore(c, box.firstChild);
+        }
+        if(!quizState){ c.remove(); return; }
+        const q=quizState;
+        const left=Math.max(0,(q.endsAt-Date.now())/1000);
+        const closed=left<=0;
+        const mine=quizAnswers[quizUid()]?quizAnswers[quizUid()].idx:null;
+        const counts=[0,0,0,0]; let all=0;
+        Object.keys(quizAnswers).forEach(function(k){
+            const i=Number(quizAnswers[k]&&quizAnswers[k].idx); if(i>=0&&i<4){ counts[i]++; all++; }
+        });
+        c.innerHTML='<div class="qch"><b>🎮 ВОПРОС В ЭФИРЕ</b><span class="qct">'+(closed?"0":Math.ceil(left))+'</span></div>'
+          + '<div class="qcq">'+String(q.q).replace(/[<>&]/g,"")+'</div>'
+          + q.options.map(function(o,i){
+              const pct=all?Math.round(counts[i]/all*100):0;
+              return '<button class="quiz-opt'+(mine===i?" mine":"")+((closed&&i===q.correct)?" right":"")+((closed&&mine===i&&i!==q.correct)?" wrong":"")+'"'
+                + (closed||mine!==null?" disabled":"") + ' data-qi="'+i+'">'
+                + '<span class="qb">'+String.fromCharCode(65+i)+'</span><span>'+String(o).replace(/[<>&]/g,"")+'</span>'
+                + (closed?'<span class="pct">'+pct+'%</span>':'') + '</button>';
+          }).join("")
+          + '<div style="margin-top:7px;font-size:11px;opacity:.75">'+(closed
+              ? ((mine===q.correct?"✅ Верно!":"✖ Мимо — верный ответ: "+String.fromCharCode(65+q.correct))+" · ответили: "+all)
+              : (mine!==null?"Ответ принят — ждём остальных":"Ответить можно прямо здесь"))+'</div>';
+        c.querySelectorAll("[data-qi]").forEach(function(b){
+            b.onclick=function(){ quizAnswer(Number(b.dataset.qi)); };
+        });
+    });
+    if(!quizState) card.style.display="none";
+}
+/* перерисовываем карточку чата вместе с сообщениями */
+try{
+    const _renderChat = (typeof renderChat === "function") ? renderChat : null;
+    if(_renderChat){
+        renderChat = function(){ _renderChat.apply(this, arguments); try{ quizChatPlace(); }catch(e){} try{ pollChatPlace(); }catch(e){} };
+    }
+}catch(e){}
+/* итоги вопроса — сообщением в чат (однажды, с клиента администратора) */
+function quizResultsText(){
+    if(!quizState) return "";
+    const q=quizState, counts=[0,0,0,0]; let all=0;
+    Object.keys(quizAnswers).forEach(function(k){
+        const i=Number(quizAnswers[k]&&quizAnswers[k].idx); if(i>=0&&i<4){ counts[i]++; all++; }
+    });
+    if(!all) return "";
+    let t="\uD83C\uDFAE Викторина: \u00AB"+q.q+"\u00BB - верный ответ "+String.fromCharCode(65+q.correct)+") "+q.options[q.correct]
+         + ". Ответили "+all+" чел., угадали "+counts[q.correct]+".";
+    if(t.length>190) t=t.slice(0,187)+"...";
+    return t;
+}
+function quizPostResults(){
+    if(!FB_OK||!me||me.role!=="admin"||!quizState) return;
+    const key="mytv_quiz_posted_"+quizState.id;
+    try{ if(localStorage.getItem(key)) return; if(!quizResultsText()) return; localStorage.setItem(key,"1"); }catch(e){}
+    try{ sendChat(quizResultsText()); }catch(e){}
+}
+
+/* ---------- D. АДМИН: праздник и викторина ---------- */
+/* ---------- ОПРОС: админка ---------- */
+document.getElementById("poll-bank")?.addEventListener("click", function(){
+    const it=POLL_BANK[pollBankIdx%POLL_BANK.length]; pollBankIdx++;
+    const qi=document.getElementById("poll-q-in"); if(qi) qi.value=it.q;
+    it.options.forEach(function(o,i){ const el=document.getElementById("poll-o"+i); if(el) el.value=o||""; });
+    showStatus("Вопрос из банка: "+it.q,"success");
+});
+document.getElementById("poll-go")?.addEventListener("click", function(){
+    if(!me||me.role!=="admin"){ showStatus("Нужны права администратора","error"); return; }
+    const q=(document.getElementById("poll-q-in")?.value||"").trim();
+    const opts=[0,1,2,3].map(function(i){ return (document.getElementById("poll-o"+i)?.value||"").trim(); }).filter(Boolean);
+    const dur=Math.max(20,Math.min(600,Number(document.getElementById("poll-dur")?.value)||90));
+    if(!q){ showStatus("Введите вопрос","error"); return; }
+    if(opts.length<2){ showStatus("Нужно минимум два варианта","error"); return; }
+    set(ref(db,"settings/poll"),{q:q,options:opts,duration:dur,startedAt:Date.now(),by:me.name||me.email||""})
+      .then(function(){ showStatus("Опрос в эфире: "+dur+" сек","success"); })
+      .catch(function(e){ showStatus("Ошибка Firebase: "+e.message,"error"); });
+});
+document.getElementById("poll-stop")?.addEventListener("click", function(){
+    if(!me||me.role!=="admin"){ showStatus("Нужны права администратора","error"); return; }
+    set(ref(db,"settings/poll"),null).then(function(){ showStatus("Опрос завершён","success"); const b=document.getElementById("poll-results"); if(b) b.innerHTML=""; })
+      .catch(function(e){ showStatus("Ошибка Firebase: "+e.message,"error"); });
+});
+/* живые итоги опроса в админке */
+setInterval(function(){
+    const box=document.getElementById("poll-results"); if(!box) return;
+    if(!pollState){ if(box.innerHTML) box.innerHTML=""; return; }
+    const c=pollCounts();
+    box.innerHTML="<b>"+String(pollState.q).replace(/[<>&]/g,"")+"</b><br>"
+      + pollState.options.map(function(o,i){
+          const pct=c.all?Math.round(c.counts[i]/c.all*100):0;
+          return '<div class="stat-row"><span>'+String.fromCharCode(65+i)+') '+String(o).replace(/[<>&]/g,"")+'</span><span><b>'+pct+'%</b> · '+c.counts[i]+'</span></div>';
+      }).join('') + '<div style="opacity:.6;margin-top:4px">Проголосовало: '+c.all+' чел.</div>';
+},1000);
+
+/* ---------- АВТОВИКТОРИНА И ТОП ИГРОКОВ ---------- */
+let quizAuto={enabled:false,everyMin:15}, quizAutoLast=0;
+if(FB_OK){ try{ onValue(ref(db,"settings/quizAuto"), function(s){ quizAuto=s.val()||{enabled:false,everyMin:15}; const tg=document.getElementById("quiz-auto-toggle"); if(tg) tg.classList.toggle("on",!!quizAuto.enabled); const ev=document.getElementById("quiz-auto-every"); if(ev&&quizAuto.everyMin) ev.value=quizAuto.everyMin; }); }catch(e){} }
+document.getElementById("quiz-auto-toggle")?.addEventListener("click", function(){
+    if(!me||me.role!=="admin"){ showStatus("Нужны права администратора","error"); return; }
+    const on=!quizAuto.enabled;
+    set(ref(db,"settings/quizAuto"),{enabled:on,everyMin:Math.max(2,Math.min(180,Number(document.getElementById("quiz-auto-every")?.value)||15))})
+      .then(function(){ showStatus(on?"Автовикторина включена":"Автовикторина выключена","success"); })
+      .catch(function(e){ showStatus("Ошибка Firebase: "+e.message,"error"); });
+});
+document.getElementById("quiz-auto-every")?.addEventListener("change", function(){
+    if(!me||me.role!=="admin"||!quizAuto.enabled) return;
+    set(ref(db,"settings/quizAuto"),{enabled:true,everyMin:Math.max(2,Math.min(180,Number(this.value)||15))}).catch(function(){});
+});
+function quizAutoTick(){
+    if(!FB_OK||!me||me.role!=="admin"||!quizAuto||!quizAuto.enabled) return;
+    if(quizState) return;
+    if(document.getElementById("radio-card")?.classList.contains("active")) return;
+    const every=Math.max(2,Number(quizAuto.everyMin)||15)*60000;
+    if(Date.now()-quizAutoLast < every) return;
+    if(Date.now()-quizAutoLast < 60000) return;
+    const it=QUIZ_BANK[Math.floor(Math.random()*QUIZ_BANK.length)];
+    if(!it) return;
+    quizAutoLast=Date.now();
+    set(ref(db,"settings/quiz"),{q:it.q,options:it.options,correct:it.correct,duration:Math.max(15,Math.min(120,Number(it.duration)||30)),startedAt:Date.now(),by:me.name||""})
+      .then(function(){ showStatus("Автовикторина: вопрос в эфире","success"); })
+      .catch(function(e){ showStatus("Ошибка Firebase: "+e.message,"error"); });
+}
+setInterval(quizAutoTick,30000);
+/* таблица лучших */
+function renderQuizTop(){
+    const box=document.getElementById("quiz-top"); if(!box) return;
+    if(!FB_OK) return;
+    get(ref(db,"stats/quizScores")).then(function(sn){
+        const d=sn.val()||{};
+        const rows=Object.keys(d).map(function(k){ return {name:(d[k]||{}).name||"Гость",score:Number((d[k]||{}).score)||0,right:Number((d[k]||{}).right)||0}; })
+            .sort(function(a,b){ return b.score-a.score; }).slice(0,5);
+        box.innerHTML = rows.length
+            ? rows.map(function(r,i){ return '<div class="stat-row"><span>'+(i===1?"🥇":i===2?"🥈":i===3?"🥉":(i+1)+".")+' '+esc(r.name)+'</span><span><b>'+r.score+'</b> очков · '+r.right+' верных</span></div>'; }).join('')
+            : '<div style="opacity:.6">Пока никто не отвечал</div>';
+        window.__quizTop=rows;
+    }).catch(function(){});
+}
+setInterval(renderQuizTop,5000);
+document.getElementById("quiz-top-send")?.addEventListener("click", function(){
+    if(!me||me.role!=="admin"){ showStatus("Нужны права администратора","error"); return; }
+    const rows=window.__quizTop||[];
+    if(!rows.length){ showStatus("Топ пока пуст","error"); return; }
+    const txt="🏆 Топ знатоков: "+rows.map(function(r,i){ return (i+1)+") "+r.name+" — "+r.score; }).join(", ");
+    try{ sendChat(txt.slice(0,190)); showStatus("Топ отправлен в чат","success"); }catch(e){ showStatus("Не удалось отправить","error"); }
+});
+
+let partyTypeSel="confetti";
+document.querySelectorAll(".party-btn").forEach(function(b){
+    b.addEventListener("click", function(){
+        document.querySelectorAll(".party-btn").forEach(function(x){ x.classList.remove("active"); });
+        b.classList.add("active"); partyTypeSel=b.dataset.party||"confetti";
+    });
+});
+document.getElementById("party-go")?.addEventListener("click", function(){
+    if(!FB_OK||!me||me.role!=="admin"){ showStatus("Нужны права администратора","error"); return; }
+    const dur=Math.max(3,Math.min(120,Number(document.getElementById("party-dur")?.value)||12));
+    const text=(document.getElementById("party-text")?.value||"").trim();
+    set(ref(db,"settings/party"),{type:partyTypeSel,text:text,duration:dur,startedAt:Date.now(),by:me.name||me.email||""})
+      .then(function(){ showStatus("Праздник запущен у всех зрителей","success"); })
+      .catch(function(e){ showStatus("Ошибка Firebase: "+e.message,"error"); });
+});
+document.getElementById("party-stop")?.addEventListener("click", function(){
+    if(!FB_OK||!me||me.role!=="admin"){ showStatus("Нужны права администратора","error"); return; }
+    set(ref(db,"settings/party"),null).then(function(){ showStatus("Праздник остановлен","success"); })
+      .catch(function(e){ showStatus("Ошибка Firebase: "+e.message,"error"); });
+});
+let quizBankIdx=0;
+document.getElementById("quiz-bank")?.addEventListener("click", function(){
+    const it=QUIZ_BANK[quizBankIdx%QUIZ_BANK.length]; quizBankIdx++;
+    const qi=document.getElementById("quiz-q-in"); if(qi) qi.value=it.q;
+    for(let i=0;i<4;i++){ const el=document.getElementById("quiz-o"+i); if(el) el.value=it.o[i]||""; }
+    const cs=document.getElementById("quiz-correct"); if(cs) cs.value=String(it.c);
+    showStatus("Вопрос из банка — можно править и запускать","success");
+});
+document.getElementById("quiz-go")?.addEventListener("click", function(){
+    if(!FB_OK||!me||me.role!=="admin"){ showStatus("Нужны права администратора","error"); return; }
+    const q=(document.getElementById("quiz-q-in")?.value||"").trim();
+    const opts=[0,1,2,3].map(function(i){ return (document.getElementById("quiz-o"+i)?.value||"").trim(); }).filter(Boolean);
+    const correct=Number(document.getElementById("quiz-correct")?.value)||0;
+    const dur=Math.max(10,Math.min(180,Number(document.getElementById("quiz-dur")?.value)||30));
+    if(!q){ showStatus("Введите вопрос","error"); return; }
+    if(opts.length<2){ showStatus("Нужно минимум два варианта ответа","error"); return; }
+    if(correct>=opts.length){ showStatus("Верный вариант за пределами списка","error"); return; }
+    set(ref(db,"settings/quiz"),{q:q,options:opts,correct:correct,duration:dur,startedAt:Date.now(),by:me.name||me.email||""})
+      .then(function(){ showStatus("Вопрос в эфире: "+dur+" сек","success"); quizResultsWatch(String(Date.now())); })
+      .catch(function(e){ showStatus("Ошибка Firebase: "+e.message,"error"); });
+});
+document.getElementById("quiz-stop")?.addEventListener("click", function(){
+    if(!FB_OK||!me||me.role!=="admin"){ showStatus("Нужны права администратора","error"); return; }
+    set(ref(db,"settings/quiz"),null).then(function(){ showStatus("Викторина завершена","success");
+        const box=document.getElementById("quiz-results"); if(box) box.innerHTML=""; })
+      .catch(function(e){ showStatus("Ошибка Firebase: "+e.message,"error"); });
+});
+let quizResUnsub=[];
+function quizResultsWatch(qid){
+    quizResUnsub.forEach(function(f){ try{f();}catch(e){} }); quizResUnsub=[];
+    if(!FB_OK) return;
+    try{
+        const ra=ref(db,"stats/quiz/"+qid), cba=function(s){
+            const v=s.val()||{}, counts=[0,0,0,0]; let all=0;
+            Object.keys(v).forEach(function(k){ const i=Number(v[k]&&v[k].idx); if(i>=0&&i<4){counts[i]++;all++;} });
+            paintResults(counts,all);
+        };
+        onValue(ra,cba); quizResUnsub.push(function(){ try{ra.off("value",cba);}catch(e){} });
+        paintResults([0,0,0,0],0);
+        const rs=ref(db,"stats/quizScores"), cbs=function(s){
+            const sc=Object.values(s.val()||{}).filter(function(x){ return x&&x.score; })
+                .sort(function(a,b){ return (b.score||0)-(a.score||0); }).slice(0,5);
+            const box=document.getElementById("quiz-results");
+            if(box){
+                const top=sc.length?'<div style="margin-top:8px"><b>🏆 Топ игроков:</b><br>'+sc.map(function(x,i){
+                    return (i+1)+'. '+String(x.name||"игрок").slice(0,24)+' — '+(x.score||0)+' очков';
+                }).join('<br>')+'</div>':'';
+                box.innerHTML=(box.dataset.head||'')+top;
+            }
+        };
+        onValue(rs,cbs); quizResUnsub.push(function(){ try{rs.off("value",cbs);}catch(e){} });
+    }catch(e){}
+}
+function paintResults(counts,all){
+    const box=document.getElementById("quiz-results"); if(!box||!quizState&&!all) { if(!box) return; }
+    const opts=[0,1,2,3].map(function(i){ const el=document.getElementById("quiz-o"+i); return el?(el.value||"").trim():""; }).filter(Boolean);
+    const head='<div><b>Ответили: '+all+' чел.</b><br>'+counts.slice(0,opts.length).map(function(c,i){
+        const pct=all?Math.round(c/all*100):0;
+        return String.fromCharCode(65+i)+') '+String(opts[i]||"").slice(0,34)+' — <b>'+c+'</b> ('+pct+'%)';
+    }).join('<br>')+'</div>';
+    box.dataset.head=head;
+    const top=box.innerHTML.indexOf('<div style="margin-top:8px">');
+    box.innerHTML=head+(top>=0?box.innerHTML.slice(top):'');
+}
+
 // Массовый импорт: JSON соources/schedule — чтобы не добавлять видео по одному
 function parseImportJson(text){
     let raw = String(text || '').trim();
@@ -5635,10 +6817,18 @@ document.getElementById('import-sample')?.addEventListener('click', () => {
 function renderRadioAdmin(){const l=document.getElementById("radio-tracks-list");if(!l)return;l.innerHTML="";Object.keys(radioTracks).forEach(k=>{const t=radioTracks[k],row=document.createElement("div");row.className="list-item";row.innerHTML=`<span class="li-name"><strong>${esc(t.title||"Без названия")}</strong>${t.artist?" — "+esc(t.artist):""}<br><small class="radio-check" data-url="${esc(t.url||"")}">⏳ проверяю ссылку…</small></span><button class="check-radio" title="Проверить, что ссылка — прямое аудио">Проверить</button><button class="edit-radio">Изменить</button><button class="del">Удалить</button>`;
 
 row.querySelector(".edit-radio").onclick=()=>{const title=prompt("Название трека",t.title||"");if(title===null)return;const artist=prompt("Исполнитель",t.artist||"");if(artist===null)return;const cover=prompt("Ссылка на обложку",t.cover||"");if(cover===null)return;update(ref(db,"radioTracks/"+k),{title:title.trim()||t.title,artist:artist.trim(),cover:cover.trim()}).catch(e=>showStatus("Ошибка: "+e.message,"error"));};
+row.querySelector(".check-radio").onclick=()=>{if(t.videoId){ showStatus("Проверяю песню…"); radioYtProbe(t.videoId,false); }else { radioCheckUrl(t.url||"",true,()=>paintRadioChecks(l)); } };
 row.querySelector(".del").onclick=()=>remove(ref(db,"radioTracks/"+k));l.appendChild(row);});
 window.__radioChecks=window.__radioChecks||{};
+Object.keys(radioTracks).forEach(function(k){
+    const tr=radioTracks[k]||{};
+    if(tr.videoId) window.__radioChecks[tr.url||("yt:"+tr.videoId)]=tr.ytBad?"ytbad":"ytok";
+});
 paintRadioChecks(l);
-Object.keys(radioTracks).forEach(function(k){radioCheckUrl((radioTracks[k]||{}).url||"",false,function(){paintRadioChecks(l);});});
+Object.keys(radioTracks).forEach(function(k){
+    if((radioTracks[k]||{}).videoId) return;          /* песни с YouTube звуковым файлом не проверяем */
+    radioCheckUrl((radioTracks[k]||{}).url||"",false,function(){paintRadioChecks(l);});
+});
 }
 function radioCheckUrl(url,force,cb){
     window.__radioChecks=window.__radioChecks||{};
@@ -5661,11 +6851,128 @@ function paintRadioChecks(host){
     window.__radioChecks=window.__radioChecks||{};
     l2.querySelectorAll(".radio-check").forEach(el=>{
         const st=window.__radioChecks[el.dataset.url||""]||"checking";
-        el.textContent=st==="ok"?"✅ ссылка работает":(st==="bad"?"⚠️ не аудио — на этом треке радио замолчит":"⏳ проверяю ссылку…");
-        el.style.color=st==="ok"?"#7ee787":(st==="bad"?"#ff9f9f":"rgba(255,255,255,.55)");
+        el.textContent=st==="ok"?"✅ ссылка работает":(st==="bad"?"⚠️ не аудио — на этом треке радио замолчит":(st==="ytok"?"▶ YouTube — играет встроенным плеером":(st==="ytbad"?"⚠️ YouTube: песня не проигрывается, пропускаем":"⏳ проверяю ссылку…")));
+        el.style.color=(st==="ok"||st==="ytok")?"#7ee787":((st==="bad"||st==="ytbad")?"#ff9f9f":"rgba(255,255,255,.55)");
     });
 }
-document.getElementById("add-radio-track")?.addEventListener("click",()=>{if(!me||me.role!=="admin")return;const title=document.getElementById("radio-track-title").value.trim(),artist=document.getElementById("radio-track-artist").value.trim(),url=document.getElementById("radio-track-url").value.trim(),cover=document.getElementById("radio-track-cover").value.trim();if(!url){showStatus("Вставьте прямую ссылку на аудио","error");return;} if(!/\.(mp3|m4a|aac|ogg|oga|opus|wav|flac)(\?|#|$)/i.test(url)&&!/(stream|live|radio|icecast|shoutcast|\/128k|\/64k|\/320k|\.pls|\.m3u8)/i.test(url)){showStatus("Осторожно: похоже, это не прямая ссылка на аудио","error");}const guessed=title||decodeURIComponent(url.split("/").pop().split("?")[0]).replace(/\.[^.]+$/," ").trim()||"Без названия";push(ref(db,"radioTracks"),{title:guessed,artist,url,cover,enabled:true,createdAt:Date.now()}).then(()=>{["radio-track-title","radio-track-artist","radio-track-url","radio-track-cover"].forEach(id=>document.getElementById(id).value="");showStatus("Трек добавлен в радио","success");});});
+document.getElementById("add-radio-track")?.addEventListener("click",()=>{if(!me||me.role!=="admin")return;const title=document.getElementById("radio-track-title").value.trim(),artist=document.getElementById("radio-track-artist").value.trim(),url=document.getElementById("radio-track-url").value.trim(),cover=document.getElementById("radio-track-cover").value.trim();if(!url){showStatus("Вставьте прямую ссылку на аудио","error");return;}
+    if(ytId(url)){ const _yi=document.getElementById("radio-yt-url"); if(_yi){ _yi.value=url; document.getElementById("add-radio-yt")?.click(); } return; }
+    if(!/\.(mp3|m4a|aac|ogg|oga|opus|wav|flac)(\?|#|$)/i.test(url)&&!/(stream|live|radio|icecast|shoutcast|\/128k|\/64k|\/320k|\.pls|\.m3u8)/i.test(url)){showStatus("Осторожно: похоже, это не прямая ссылка на аудио","error");}const guessed=title||decodeURIComponent(url.split("/").pop().split("?")[0]).replace(/\.[^.]+$/," ").trim()||"Без названия";push(ref(db,"radioTracks"),{title:guessed,artist,url,cover,enabled:true,createdAt:Date.now()}).then(()=>{["radio-track-title","radio-track-artist","radio-track-url","radio-track-cover"].forEach(id=>document.getElementById(id).value="");showStatus("Трек добавлен в радио","success");});});
+/* ссылки текстом → список id песен (по одной на строку, можно через запятую) */
+function ytIdsFromText(txt){
+    const parts=String(txt||"").split(/[\n\r,;]+/).map(function(x){ return x.trim(); }).filter(Boolean);
+    const ids=[], seen={};
+    parts.forEach(function(p){
+        const id=ytId(p);
+        if(id&&!seen[id]){ seen[id]=1; ids.push(id); }
+    });
+    return ids;
+}
+/* разворот плейлиста в список id — самим плеером YouTube, без ключа API */
+function ytPlaylistIds(listId){
+    return ytApiLoad().then(function(ok){
+        if(!ok) return [];
+        return new Promise(function(res){
+            const host=document.createElement("div");
+            host.style.cssText="position:fixed;left:-9999px;top:0;width:2px;height:2px;opacity:0;pointer-events:none";
+            document.body.appendChild(host);
+            let done=false, pl=null;
+            const fin=function(ids){
+                if(done) return; done=true;
+                setTimeout(function(){
+                    try{ if(pl&&pl.destroy) pl.destroy(); }catch(e){}
+                    try{ host.remove(); }catch(e){}
+                },300);
+                res(ids||[]);
+            };
+            try{
+                pl=new window.YT.Player(host,{
+                    width:2, height:2,
+                    playerVars:{listType:"playlist",list:listId,controls:0,playsinline:1,origin:location.origin},
+                    events:{
+                        onReady:function(e){
+                            setTimeout(function(){
+                                let a=[]; try{ a=e.target.getPlaylist()||[]; }catch(err){}
+                                fin(a.slice(0,200));
+                            },3000);
+                        },
+                        onError:function(){ fin([]); }
+                    }
+                });
+            }catch(e){ fin([]); }
+            setTimeout(function(){
+                let a=[]; try{ a=pl&&pl.getPlaylist?pl.getPlaylist():[]; }catch(e){}
+                fin(a||[]);
+            },13000);
+        });
+    });
+}
+/* добавляем пачку песен, потом по очереди проверяем каждую */
+function ytAddMany(ids){
+    const tTitle=document.getElementById("radio-track-title"), tArtist=document.getElementById("radio-track-artist");
+    const one=ids.length===1;
+    const nm=one?((tTitle&&tTitle.value||"").trim()):"";
+    let i=0, added=0, failed=0;
+    showStatus("Добавляю песни: 0 из "+ids.length+"…");
+    const step=function(){
+        if(i>=ids.length){
+            if(tTitle) tTitle.value="";
+            if(tArtist) tArtist.value="";
+            showStatus("Добавлено: "+added+(failed?(", не удалось: "+failed):"")+". Проверяю, какие играют…","success");
+            ytProbeQueue(ids);
+            return;
+        }
+        const id=ids[i++];
+        const row={ title:one&&nm?nm:"Песня с YouTube",
+                    artist:one?((tArtist&&tArtist.value||"").trim()):"",
+                    url:ytWatch(id), videoId:id, yt:true, ytBad:false,
+                    cover:ytCover(id), enabled:true, createdAt:Date.now() };
+        push(ref(db,"radioTracks"),row)
+            .then(function(){ added++; })
+            .catch(function(){ failed++; })
+            .then(function(){
+                showStatus("Добавляю песни: "+i+" из "+ids.length+"…");
+                setTimeout(step,220);
+            });
+    };
+    step();
+}
+function ytProbeQueue(ids){
+    let i=0;
+    const next=function(){
+        if(i>=ids.length){ showStatus("Готово. Проверено песен: "+ids.length,"success"); return; }
+        const id=ids[i++];
+        showStatus("Проверяю песню "+i+" из "+ids.length+"…");
+        radioYtProbe(id,true,next);
+    };
+    setTimeout(next,400);
+}
+document.getElementById("add-radio-yt")?.addEventListener("click", function(){
+    if(!me||me.role!=="admin"){ showStatus("Нужны права администратора","error"); return; }
+    const inp=document.getElementById("radio-yt-url"), raw=(inp&&inp.value||"").trim();
+    if(!raw){ showStatus("Вставьте ссылку на песню (или несколько — по одной на строку)","error"); return; }
+    const onlyList=raw.match(/[?&]list=([A-Za-z0-9_-]+)/);
+    if(onlyList&&!ytId(raw)){
+        const lid=onlyList[1];
+        if(/^OLAK/.test(lid)){
+            showStatus("Это альбом YouTube Music: развернуть его в список песен можно только с ключом API. Вставьте ссылки на песни по одной.","error");
+            return;
+        }
+        showStatus("Разворачиваю плейлист…");
+        ytPlaylistIds(lid).then(function(ids){
+            if(!ids.length){ showStatus("Плейлист не открылся. Вставьте ссылки на песни по одной.","error"); return; }
+            if(inp) inp.value="";
+            showStatus("В плейлисте песен: "+ids.length+". Добавляю…","success");
+            ytAddMany(ids);
+        });
+        return;
+    }
+    const ids=ytIdsFromText(raw);
+    if(!ids.length){ showStatus("Не вижу в этом ссылку на YouTube","error"); return; }
+    if(inp) inp.value="";
+    ytAddMany(ids);
+});
+
 document.getElementById("load-radio-presets")?.addEventListener("click",async()=>{if(!me||me.role!=="admin"){showStatus("Нужны права администратора","error");return;}const presets=[{title:"Jazz24",artist:"Jazz",url:"https://knkx-live-a.edge.audiocdn.com/6285_128k",cover:"",enabled:true},{title:"WRTI Classical",artist:"Classical",url:"https://wrti-live.streamguys1.com/classical-mp3",cover:"",enabled:true},{title:"WRTI Jazz",artist:"Jazz",url:"https://wrti-live.streamguys1.com/jazz-mp3",cover:"",enabled:true},{title:"SmoothJazz",artist:"Smooth Jazz",url:"https://smoothjazz.cdnstream1.com/2585_128.mp3",cover:"",enabled:true},{title:"SmoothLounge",artist:"Lounge",url:"https://smoothjazz.cdnstream1.com/2586_128.mp3",cover:"",enabled:true}];for(const t of presets)await push(ref(db,"radioTracks"),{...t,createdAt:Date.now()});showStatus("Готовые радиостанции добавлены","success");});
 radioList();
 
@@ -5760,7 +7067,7 @@ function syncReactionsFor(name){
     rxKey=k; rxGlobal={}; rxRemoteVote=null; rxSync=false;
     try{
         const cRef=ref(db,'reactions/'+rxKey+'/counts');
-        const cCb=s=>{const val=s.val();rxGlobal=val||{};rxSync=!!val;updateReactions();};
+        const cCb=s=>{const val=s.val(); try{ emojiFromCounts(rxGlobal,val); }catch(e){} rxGlobal=val||{};rxSync=!!val;updateReactions();};
         onValue(cRef,cCb); rxUnsub.push(()=>{try{cRef.off('value',cCb);}catch(e){}});
         const uid=rxUid();
         if(uid){
@@ -5772,6 +7079,7 @@ function syncReactionsFor(name){
     updateReactions();
 }
 document.querySelectorAll('.reaction-btn').forEach(b=>b.addEventListener('click',()=>{
+    try{ const q=(rxSync?rxRemoteVote:(rxVotedAll()[rxName()]||null)); if(q!==b.dataset.reaction) spawnEmoji(b.dataset.reaction,4); }catch(e){}
     const n=rxName(), e=b.dataset.reaction;
     const prev = rxSync ? rxRemoteVote : (rxVotedAll()[n]||null);
     const next = (prev===e)?null:e;
@@ -5829,9 +7137,238 @@ document.addEventListener('click',e=>{const b=e.target.closest('.sched-remind');
 function applyRadioVisibility(v){const n=document.getElementById('nav-radio'),t=document.getElementById('radio-visibility-toggle');if(n)n.style.display=v?'flex':'none';if(t)t.classList.toggle('on',v)}
 if(FB_OK)onValue(ref(db,'settings/radioEnabled'),x=>applyRadioVisibility(x.val()!==false));
 document.getElementById('radio-visibility-toggle')?.addEventListener('click',()=>{if(!me||me.role!=='admin')return;const on=!document.getElementById('radio-visibility-toggle').classList.contains('on');set(ref(db,'settings/radioEnabled'),on).catch(e=>showStatus('Ошибка Firebase: '+e.message,'error'))});
-function renderViewerStats(){const body=document.getElementById('viewer-stats-body');if(!body)return;get(ref(db,'analytics/viewers')).then(s=>{const a=Object.values(s.val()||{}).sort((x,y)=>(x.ts||0)-(y.ts||0)),days=Number(window.statsDays||1),cut=Date.now()-days*86400000,rows=a.filter(x=>(x.ts||0)>=cut),counts=rows.map(x=>Number(x.count)||0),max=counts.length?Math.max(...counts):0,avg=counts.length?(counts.reduce((q,n)=>q+n,0)/counts.length).toFixed(1):'0';body.innerHTML='<p><b>Период:</b> '+days+' дн. &nbsp; <b>Максимум:</b> '+max+' &nbsp; <b>Среднее:</b> '+avg+'</p>';window.__viewerStats=rows;const c=document.getElementById('viewer-stats-chart'),x=c?.getContext('2d');if(x){x.clearRect(0,0,c.width,c.height);x.fillStyle='#55c9ff';rows.slice(-20).forEach((q,i)=>{const h=Math.max(8,Math.min(180,(q.count||0)*8));x.fillRect(20+i*26,c.height-h-25,16,h);x.fillStyle='#fff';x.font='10px Arial';x.fillText(new Date(q.ts||Date.now()).toLocaleDateString([], {day:'2-digit',month:'2-digit'}),18+i*26,c.height-5);x.fillStyle='#55c9ff'})}}).catch(e=>{body.textContent='Ошибка: '+e.message})}
+function statNum(n,label,sub){
+    return '<div class="stat-card"><div class="n">'+n+'</div><div class="l">'+label+'</div>'+(sub?'<div style="font-size:11px;opacity:.55;margin-top:2px">'+sub+'</div>':'')+'</div>';
+}
+function statNum(n,label,sub){
+    return '<div class="stat-card"><div class="n">'+n+'</div><div class="l">'+label+'</div>'+(sub?'<div style="font-size:11px;opacity:.55;margin-top:2px">'+sub+'</div>':'')+'</div>';
+}
+function statEmpty(text){ return '<div style="opacity:.55;font-size:12px;padding:6px 0">'+text+'</div>'; }
+function fmtAgo(ts){
+    const m=Math.max(0,Math.round((Date.now()-(ts||0))/60000));
+    if(m<1) return 'только что';
+    if(m<60) return m+' мин назад';
+    if(m<1440) return Math.round(m/60)+' ч назад';
+    return Math.round(m/1440)+' дн. назад';
+}
+function fmtDate(ts){
+    if(!ts) return '—';
+    const d=new Date(ts), f=function(n){ return (n<10?'0':'')+n; };
+    return f(d.getDate())+'.'+f(d.getMonth()+1)+'.'+d.getFullYear()+' '+f(d.getHours())+':'+f(d.getMinutes());
+}
+/* сколько зарегистрировались: /accounts — там уже есть createdAt */
+function regStats(){
+    return new Promise(function(res){
+        if(!FB_OK){ res({total:0,today:0,week:0,list:[],denied:true}); return; }
+        get(ref(db,'accounts')).then(function(sn){
+            const d=sn.val()||{}, now=Date.now(), day=now-86400000, week=now-7*86400000;
+            const list=Object.keys(d).map(function(k){
+                const v=d[k]||{};
+                return { name:v.name||'Без имени', createdAt:Number(v.createdAt)||0 };
+            }).sort(function(a,b){ return b.createdAt-a.createdAt; });
+            res({ total:list.length,
+                  today:list.filter(function(x){ return x.createdAt>=day; }).length,
+                  week:list.filter(function(x){ return x.createdAt>=week; }).length,
+                  list:list.slice(0,6), denied:false });
+        }).catch(function(){ res({total:0,today:0,week:0,list:[],denied:true}); });
+    });
+}
+/* сколько зашло: архив уникальных посетителей */
+function visitorStats(){
+    return new Promise(function(res){
+        if(!FB_OK){ res({total:0,today:0,guests:0,list:[],denied:true}); return; }
+        get(ref(db,'stats/visitors')).then(function(sn){
+            const d=sn.val()||{}, now=Date.now(), day=now-86400000;
+            const list=Object.keys(d).map(function(k){
+                const v=d[k]||{};
+                return { name:v.name||'Гость', anon:!!v.anon, first:Number(v.firstSeen)||0, last:Number(v.lastSeen)||0 };
+            }).sort(function(a,b){ return b.last-a.last; });
+            res({ total:list.length,
+                  today:list.filter(function(x){ return x.last>=day; }).length,
+                  guests:list.filter(function(x){ return x.anon; }).length,
+                  list:list.slice(0,10), denied:false });
+        }).catch(function(){ res({total:0,today:0,guests:0,list:[],denied:true}); });
+    });
+}
+function renderViewerStats(){
+    const body=document.getElementById('viewer-stats-body');
+    const cards=document.getElementById('viewer-stats-cards');
+    const hoursBox=document.getElementById('viewer-stats-hours');
+    const regBox=document.getElementById('viewer-stats-reg');
+    const visBox=document.getElementById('viewer-stats-visitors');
+    if(hoursBox) hoursBox.innerHTML='';
+    if(cards) cards.innerHTML=statNum('…','загружаю');
+
+    const live=viewersFresh();
+    const d=window.__viewersRaw||{}, now=Date.now();
+    const live5=Object.keys(d).filter(function(k){ return now-((d[k]||{}).lastSeen||0) < 300000; }).length;
+
+    if(body){
+        const rows=Object.keys(d).map(function(k){
+            const v=d[k]||{};
+            return { name:v.name||'Гость', role:v.role||'viewer', last:(v.lastSeen||v.joinedAt||0), fresh: now-(v.lastSeen||0) < 180000 };
+        }).sort(function(a,b){ return b.last-a.last; });
+        const on=rows.filter(function(r){ return r.fresh; });
+        body.innerHTML = (on.length?on:rows.slice(0,6)).map(function(r){
+            return '<div class="stat-row"><span>'+esc(r.name)+(r.role==='admin'?' <small style="opacity:.6">(админ)</small>':'')+'</span>'
+                 + '<span style="opacity:.7">'+fmtAgo(r.last)+'</span></div>';
+        }).join('') || statEmpty('Никого нет');
+    }
+
+    Promise.all([
+        new Promise(function(res){ if(!FB_OK) return res({}); get(ref(db,'analytics/viewers')).then(function(sn){ res(sn.val()||{}); }).catch(function(){ res({}); }); }),
+        visitorStats(),
+        regStats()
+    ]).then(function(r){
+        const an=r[0], v=r[1], reg=r[2];
+        window.__visStat=v; window.__regStat=reg.denied?null:reg.total; window.__regFull=reg;
+
+        const days=Number(window.statsDays||1), cut=Date.now()-days*86400000;
+        const rows=Object.values(an).filter(function(x){ return (x.ts||0)>=cut; }).sort(function(x,y){ return (x.ts||0)-(y.ts||0); });
+        const counts=rows.map(function(x){ return Number(x.count)||0; });
+        const max=counts.length?Math.max.apply(null,counts):0;
+        const avg=counts.length?(counts.reduce(function(q,n){ return q+n; },0)/counts.length):0;
+        window.__viewerStats=rows;
+
+        if(cards){
+            cards.innerHTML=statNum(live,'сейчас в эфире',('5 минут назад: '+live5))
+                + statNum(v.total,'зашло','уникальных · сегодня '+v.today+' · гостей '+v.guests)
+                + statNum(reg.denied?'—':reg.total,'зарегистрировались','сегодня '+reg.today+' · за 7 дней '+reg.week)
+                + statNum(max,'максимум онлайн',(days===1?'сегодня':('за '+days+' дн.'))+(avg?' · среднее '+avg.toFixed(1):''));
+        }
+        if(regBox){
+            regBox.innerHTML = reg.denied
+                ? statEmpty('Список регистраций доступен администратору')
+                : (reg.total
+                    ? '<div class="stat-row"><span><b>Всего аккаунтов</b></span><span><b>'+reg.total+'</b></span></div>'
+                      + reg.list.map(function(x){
+                          return '<div class="stat-row"><span>'+esc(x.name)+'</span><span style="opacity:.7">'+fmtDate(x.createdAt)+'</span></div>';
+                        }).join('')
+                    : statEmpty('Регистраций пока нет'));
+        }
+        if(visBox){
+            visBox.innerHTML = v.list.length
+                ? v.list.map(function(x){
+                    return '<div class="stat-row"><span>'+esc(x.name)
+                      + ' <small style="opacity:.5">'+(/^Гость/.test(x.name)?'гость':(x.anon?'гость':'аккаунт'))+'</small></span>'
+                      + '<span style="opacity:.7">'+fmtAgo(x.last)+'</span></div>';
+                  }).join('')
+                : statEmpty('Пока нет данных — раздел начнёт копить их с этого обновления');
+        }
+
+        const c=document.getElementById('viewer-stats-chart'), x=c&&c.getContext('2d');
+        if(x){
+            const W=c.width, H=c.height, pad=54, ph=H-46;
+            x.clearRect(0,0,W,H);
+            x.strokeStyle='rgba(255,255,255,.08)'; x.lineWidth=2; x.font='20px Arial'; x.fillStyle='rgba(255,255,255,.45)';
+            const top=Math.max(4,max+1);
+            for(let g=0;g<=3;g++){
+                const y=24+ph-(ph*g/3);
+                x.beginPath(); x.moveTo(pad,y); x.lineTo(W-14,y); x.stroke();
+                x.fillText(String(Math.round(top*g/3)),8,y+7);
+            }
+            if(rows.length){
+                const step=(W-pad-20)/Math.max(1,rows.length-1);
+                const pts=rows.map(function(q,i){ return [pad+i*step, 24+ph-Math.min(ph,(Number(q.count)||0)/top*ph)]; });
+                const grd=x.createLinearGradient(0,24,0,24+ph);
+                grd.addColorStop(0,'rgba(85,201,255,.55)'); grd.addColorStop(1,'rgba(85,201,255,.02)');
+                x.beginPath(); x.moveTo(pts[0][0],24+ph);
+                pts.forEach(function(p){ x.lineTo(p[0],p[1]); });
+                x.lineTo(pts[pts.length-1][0],24+ph); x.closePath(); x.fillStyle=grd; x.fill();
+                x.beginPath(); pts.forEach(function(p,i){ i?x.lineTo(p[0],p[1]):x.moveTo(p[0],p[1]); });
+                x.strokeStyle='#55c9ff'; x.lineWidth=4; x.lineJoin='round'; x.stroke();
+                x.fillStyle='rgba(255,255,255,.5)'; x.font='18px Arial';
+                const f2=function(n){ return (n<10?'0':'')+n; };
+                const first=new Date(rows[0].ts||Date.now()), last=new Date(rows[rows.length-1].ts||Date.now());
+                x.fillText(f2(first.getDate())+'.'+f2(first.getMonth()+1)+' '+f2(first.getHours())+':'+f2(first.getMinutes()),pad,H-12);
+                x.fillText(f2(last.getDate())+'.'+f2(last.getMonth()+1)+' '+f2(last.getHours())+':'+f2(last.getMinutes()),W-160,H-12);
+            }else{
+                x.fillStyle='rgba(255,255,255,.4)'; x.font='22px Arial'; x.fillText('за этот период ещё нет данных',pad,H/2);
+            }
+        }
+        if(hoursBox){
+            const sum=new Array(24).fill(0), cnt=new Array(24).fill(0);
+            rows.forEach(function(q){ const h=new Date(q.ts||Date.now()).getHours(); sum[h]+=Number(q.count)||0; cnt[h]++; });
+            const vals=sum.map(function(v2,i){ return cnt[i]?v2/cnt[i]:0; });
+            const mx=Math.max.apply(null,vals.concat([1]));
+            hoursBox.innerHTML=vals.map(function(v2){ return '<i style="height:'+Math.max(2,Math.round(v2/mx*100))+'%"></i>'; }).join('');
+        }
+    }).catch(function(e){ if(body) body.textContent='Ошибка: '+e.message; });
+}
+document.querySelectorAll('.stats-period').forEach(b=>b.onclick=()=>{
+    window.statsDays=b.dataset.days;
+    document.querySelectorAll('.stats-period').forEach(x=>x.classList.toggle('active',x===b));
+    renderViewerStats();
+});
+document.getElementById('refresh-viewer-stats')?.addEventListener('click',()=>renderViewerStats());
+document.getElementById('download-viewer-csv')?.addEventListener('click',()=>{
+    const rows=window.__viewerStats||[];
+    const f=function(n){ return (n<10?'0':'')+n; };
+    const lines=['дата;время;онлайн'];
+    rows.forEach(function(r){
+        const d=new Date(r.ts||Date.now());
+        lines.push(f(d.getDate())+'.'+f(d.getMonth()+1)+'.'+d.getFullYear()+';'+f(d.getHours())+':'+f(d.getMinutes())+';'+(Number(r.count)||0));
+    });
+    const v=window.__visStat, g=window.__regStat;
+    lines.push('');
+    lines.push('зашло уникальных;'+(v?v.total:''));
+    lines.push('зашли сегодня;'+(v?v.today:''));
+    lines.push('из них гостей;'+(v?v.guests:''));
+    lines.push('зарегистрировано;'+(g!=null?g:''));
+    try{
+        const blob=new Blob(['\ufeff'+lines.join('\n')],{type:'text/csv;charset=utf-8'});
+        const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='mytv-statistika.csv';
+        a.style.display='none'; document.body.appendChild(a); a.click();
+        setTimeout(function(){ try{ a.remove(); }catch(e){} URL.revokeObjectURL(a.href); },4000);
+    }catch(e){ showStatus('Не удалось сохранить файл','error'); }
+});
+setInterval(function(){
+    const m=document.getElementById('viewer-stats-modal');
+    if(m&&m.classList.contains('active')) renderViewerStats();
+},20000);
+
 document.getElementById('open-viewer-stats')?.addEventListener('click',()=>{document.getElementById('viewer-stats-modal')?.classList.add('active');renderViewerStats()});document.getElementById('close-viewer-stats')?.addEventListener('click',()=>document.getElementById('viewer-stats-modal')?.classList.remove('active'));
-document.getElementById('download-viewer-stats')?.addEventListener('click',()=>{const c=document.createElement('canvas');c.width=1000;c.height=500;const x=c.getContext('2d');x.fillStyle='#102b45';x.fillRect(0,0,c.width,c.height);x.fillStyle='#fff';x.font='bold 32px Arial';x.fillText('MyTV — статистика зрителей',40,70);x.font='24px Arial';x.fillText('Онлайн сейчас: '+(window.__viewerStats?.length||0),40,130);x.fillText('Самый ранний текущий зритель: '+(window.__viewerStats?.[0]?.name||'нет данных'),40,180);const a=document.createElement('a');a.download='mytv-viewer-stats.png';a.href=c.toDataURL('image/png');a.click()});
+document.getElementById('download-viewer-stats')?.addEventListener('click',()=>{
+    const rows=window.__viewerStats||[], days=Number(window.statsDays||1);
+    const v=window.__visStat, reg=window.__regStat;
+    const c=document.createElement('canvas'); c.width=1000; c.height=620;
+    const x=c.getContext('2d');
+    const g=x.createLinearGradient(0,0,0,620); g.addColorStop(0,'#142c46'); g.addColorStop(1,'#0b1a2b');
+    x.fillStyle=g; x.fillRect(0,0,c.width,c.height);
+    x.fillStyle='#fff'; x.font='bold 34px Arial'; x.fillText('MyTV — статистика зрителей',40,64);
+    x.font='20px Arial'; x.fillStyle='rgba(255,255,255,.6)';
+    x.fillText('Период: '+(days===1?'сегодня':days+' дн.')+'   •   сейчас в эфире: '+viewersFresh(),40,100);
+    const counts=rows.map(r=>Number(r.count)||0);
+    const max=counts.length?Math.max.apply(null,counts):0;
+    const avg=counts.length?(counts.reduce((q,n)=>q+n,0)/counts.length).toFixed(1):'0';
+    const box=function(v2,l,sub,cx){
+        x.fillStyle='rgba(255,255,255,.08)'; if(x.roundRect){ x.beginPath(); x.roundRect(cx,130,220,112,16); x.fill(); }
+        x.fillStyle='#fff'; x.font='bold 40px Arial'; x.fillText(String(v2),cx+18,182);
+        x.font='15px Arial'; x.fillStyle='rgba(255,255,255,.7)'; x.fillText(l,cx+18,208);
+        if(sub){ x.font='13px Arial'; x.fillStyle='rgba(255,255,255,.5)'; x.fillText(sub,cx+18,230); }
+    };
+    box(viewersFresh(),'сейчас в эфире','живые последние 2,5 мин',40);
+    box(v?v.total:'—','зашло','уникальных'+(v?(' · сегодня '+v.today+' · гостей '+v.guests):''),280);
+    box(reg!=null?reg:'—','зарегистрировались','всего аккаунтов',520);
+    box(max,'максимум онлайн','среднее '+avg,760);
+    const pad=54, top=Math.max(4,max+1), bx=40, by=280, bw=920, bh=250;
+    x.strokeStyle='rgba(255,255,255,.12)'; x.lineWidth=2;
+    for(let k=0;k<=3;k++){ const y=by+bh-(bh*k/3); x.beginPath(); x.moveTo(pad,y); x.lineTo(bx+bw,y); x.stroke(); }
+    if(rows.length){
+        const step=(bw-70)/Math.max(1,rows.length-1);
+        const pts=rows.map(function(q,i){ return [pad+i*step, by+bh-Math.min(bh,(Number(q.count)||0)/top*bh)]; });
+        const grd=x.createLinearGradient(0,by,0,by+bh); grd.addColorStop(0,'rgba(85,201,255,.6)'); grd.addColorStop(1,'rgba(85,201,255,.02)');
+        x.beginPath(); x.moveTo(pts[0][0],by+bh); pts.forEach(function(p){ x.lineTo(p[0],p[1]); });
+        x.lineTo(pts[pts.length-1][0],by+bh); x.closePath(); x.fillStyle=grd; x.fill();
+        x.beginPath(); pts.forEach(function(p,i){ i?x.lineTo(p[0],p[1]):x.moveTo(p[0],p[1]); });
+        x.strokeStyle='#55c9ff'; x.lineWidth=4; x.lineJoin='round'; x.stroke();
+    }
+    x.fillStyle='rgba(255,255,255,.7)'; x.font='16px Arial';
+    x.fillText('MyTV • '+new Date().toLocaleString(),40,600);
+    const a=document.createElement('a'); a.download='mytv-viewer-stats.png'; a.href=c.toDataURL('image/png');
+    a.style.display='none'; document.body.appendChild(a); a.click();
+    setTimeout(function(){ try{ a.remove(); }catch(e){} },2000);
+});
 
 function renderFavorites(){const l=document.getElementById('favorites-list');if(!l)return;const a=getFavorites();
 l.innerHTML=a.length?a.map(x=>`<div class="list-item"><span class="li-name">${esc((x&&x.name)||'')}</span><button class="del" data-fav="${esc((x&&x.name)||'')}">Убрать</button></div>`).join(''):'<p style="opacity:.6">Избранное пока пусто</p>';
@@ -6367,7 +7904,15 @@ window.mytvDeleteSource = mytvDeleteSource;
 function renderChannels(){if(!FB_OK)return;get(ref(db,'sources')).then(x=>{const v=x.val()||{},groups={};Object.values(v).forEach(a=>{const g=a.channel||'general';(groups[g]??={items:[],icon:a.icon||''}).items.push(a);if(a.icon)groups[g].icon=a.icon});const l=document.getElementById('channels-list');if(l)l.innerHTML=Object.entries(groups).map(([g,a])=>`<button class="btn-secondary" data-channel="${g}">${g} (${a.items.length})</button>`).join('');l?.querySelectorAll('[data-channel]').forEach(b=>b.onclick=()=>{const a=groups[b.dataset.channel].items[0];activateStream(a.url,a.name)})})}
 renderChannels();
 // Запись реальных контрольных точек статистики начиная с текущего обновления
-setInterval(()=>{if(FB_OK&&me){get(ref(db,'viewers')).then(x=>push(ref(db,'analytics/viewers'),{ts:Date.now(),count:Object.keys(x.val()||{}).length})).catch(()=>{})}},60000);
+function viewersFresh(){
+    const d=window.__viewersRaw||{}, now=Date.now();
+    let n=0;
+    Object.keys(d).forEach(function(k){ const v=d[k]||{}; if(now-(v.lastSeen||v.joinedAt||0)<150000) n++; });
+    return n;
+}
+setInterval(()=>{ if(FB_OK&&me){ try{ push(ref(db,'analytics/viewers'),{ts:Date.now(),count:viewersFresh()}).catch(()=>{}); }catch(e){} } },60000);
+setTimeout(viewersCleanup,8000);
+setInterval(viewersCleanup,600000);
 
 // Раздел каналов: панель и рендер уже есть — просто открываем (раньше была заглушка «в разработке»)
 document.getElementById('nav-channels')?.addEventListener('click',()=>{
@@ -8164,6 +9709,5 @@ window.checkDbRights = async function () {
 })();
 </script>
 <div class="aero-bubbles" id="aero-bubbles" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon='{"version":"2024.11.0","token":"1954b47c125f43f8b4338b3c4f804e4f","spa":2}' crossorigin="anonymous"></script>
-</body>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a3ce33797e2fe616',t:'MTc4OTcxMTk2OA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
