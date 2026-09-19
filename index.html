@@ -1126,6 +1126,193 @@ body.aero-theme #radio-mini button{background:rgba(255,255,255,.75)!important;bo
 .yt-pl-row input{width:auto;flex:0 0 auto}
 .yt-pl-row span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .yt-pl-acts{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+
+/* ── Раздел «Каналы» (v25): компактные строки ── */
+.ch-list{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.ch-item{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:14px;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);transition:border-color .2s,background .2s}
+.ch-item.on{border-color:#6d5dfc;background:rgba(109,93,252,.16)}
+.ch-item-main{display:flex;align-items:center;gap:10px;flex:1;min-width:0;cursor:pointer;background:none;border:0;color:inherit;text-align:left;padding:0}
+.ch-icon{width:38px;height:38px;flex:none;border-radius:11px;display:flex;align-items:center;justify-content:center;
+  font-size:19px;background:rgba(255,255,255,.09);overflow:hidden}
+.ch-icon img{width:100%;height:100%;object-fit:cover}
+.ch-text{min-width:0;flex:1}
+.ch-name{font-weight:600;font-size:14px;display:flex;align-items:center;gap:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ch-live{font-size:9px;font-weight:500;padding:2px 6px;border-radius:20px;background:#ff4d4d;color:#fff;letter-spacing:.04em;flex:none}
+.ch-meta{display:flex;align-items:center;gap:8px;margin-top:3px;font-size:11px;opacity:.62;min-width:0}
+.ch-now-text{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:60%}
+.ch-now-text b{opacity:.85}
+.ch-chips{display:flex;align-items:center;gap:5px;flex:none;margin-left:auto}
+.ch-chip{font-style:normal;font-size:10px;padding:1px 6px;border-radius:20px;background:rgba(255,255,255,.1);white-space:nowrap}
+.ch-week{display:flex;gap:2px;margin-left:2px}
+.ch-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.2)}
+.ch-dot.on{background:#6ee7a8}
+.ch-item-actions{display:flex;gap:4px;flex:none}
+.ch-btn{width:30px;height:30px;padding:0;border-radius:9px;border:1px solid rgba(255,255,255,.16);
+  background:rgba(255,255,255,.08);color:inherit;font-size:13px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.ch-btn.play{color:#7ee787}
+.ch-btn.danger{color:#ff9f9f}
+.ch-menu,.ch-edit,.ch-del{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:-2px 0 4px;
+  padding:8px 10px;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);font-size:12px}
+.ch-menu button{padding:6px 10px;border-radius:9px;border:1px solid rgba(255,255,255,.16);
+  background:rgba(255,255,255,.07);color:inherit;font-size:12px;cursor:pointer;white-space:nowrap}
+.ch-menu button.danger{color:#ff9f9f;border-color:rgba(255,120,120,.35)}
+.ch-edit-row{display:flex;gap:6px;width:100%;flex-wrap:wrap}
+.ch-edit-row input{flex:1;min-width:120px;padding:7px 9px;font-size:13px;border-radius:9px;
+  border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.07);color:inherit}
+.ch-del{gap:8px}
+.ch-add{margin-top:10px;padding:9px;border-radius:12px;border:1px dashed rgba(255,255,255,.22);
+  background:transparent;color:inherit;font-size:13px;cursor:pointer;opacity:.8;width:100%}
+.ch-add:hover{opacity:1}
+/* программа канала */
+.ch-prow{display:flex;align-items:center;gap:8px;padding:7px 8px;border-radius:11px;background:rgba(255,255,255,.05);margin-bottom:5px}
+.ch-prow.on{background:rgba(109,93,252,.16)}
+.ch-ptime{font-weight:600;font-size:13px;flex:none;opacity:.9}
+.ch-pname{flex:1;min-width:0;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ch-pform{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 10px}
+.ch-pform input{flex:1;min-width:110px;padding:7px 9px;font-size:13px;border-radius:9px;
+  border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.07);color:inherit}
+.ch-pform input[type=time]{max-width:96px;flex:none}
+.ch-empty-state{opacity:.55;font-size:12px;padding:4px 0}
+/* Frutiger Aero */
+.aero-theme .ch-item{background:rgba(255,255,255,.72);border:1px solid rgba(255,255,255,.9);
+  box-shadow:0 4px 14px rgba(31,86,140,.13);backdrop-filter:blur(8px)}
+.aero-theme .ch-item.on{border-color:#3fa9f5;background:rgba(190,230,255,.72)}
+.aero-theme .ch-icon{background:linear-gradient(160deg,#dff2ff,#bfe3ff)}
+.aero-theme .ch-chip{background:rgba(255,255,255,.75);color:#053a65}
+.aero-theme .ch-dot{background:rgba(5,58,101,.22)}
+.aero-theme .ch-dot.on{background:#1f9d55}
+.aero-theme .ch-btn{border-color:rgba(31,86,140,.22);background:rgba(255,255,255,.75);color:#053a65}
+.aero-theme .ch-btn.play{color:#0a7a3d}
+.aero-theme .ch-btn.danger{color:#b3261e}
+.aero-theme .ch-menu,.aero-theme .ch-edit,.aero-theme .ch-del,
+.aero-theme .ch-prow{background:rgba(255,255,255,.66);border-color:rgba(255,255,255,.85);color:#053a65}
+.aero-theme .ch-menu button,.aero-theme .ch-edit-row input,
+.aero-theme .ch-pform input{border-color:rgba(31,86,140,.22);background:rgba(255,255,255,.8);color:#053a65}
+.aero-theme .ch-menu button.danger{color:#b3261e}
+.aero-theme .ch-live{background:linear-gradient(180deg,#ff6a6a,#e33b3b)}
+.aero-theme .ch-add{border-color:rgba(31,86,140,.3);color:#053a65}
+.aero-theme .ch-sub{opacity:.75}
+
+/* ── Каналы: логотип, эффекты, цвет (v26) ── */
+.ch-icon{position:relative}
+.ch-icon::after{content:"";position:absolute;inset:-3px;border-radius:14px;pointer-events:none;opacity:0}
+.ch-fx-stars::after{box-shadow:0 0 0 1px var(--ch-color,#6d5dfc),0 0 14px var(--ch-color,#6d5dfc);
+  animation:chGlow 3.4s ease-in-out infinite}
+.ch-fx-bubbles::after{box-shadow:0 0 0 1px var(--ch-color,#6d5dfc),0 0 12px var(--ch-color,#6d5dfc);
+  animation:chBreath 4.6s ease-in-out infinite}
+.ch-fx-butterflies::after{box-shadow:0 0 0 1px var(--ch-color,#6d5dfc),0 0 16px var(--ch-color,#6d5dfc);
+  animation:chSway 5.2s ease-in-out infinite}
+.ch-fx-neon::after{box-shadow:0 0 0 1px var(--ch-color,#6d5dfc),0 0 10px var(--ch-color,#6d5dfc),0 0 22px var(--ch-color,#6d5dfc);
+  animation:chNeon 2.8s ease-in-out infinite}
+@keyframes chGlow{0%,100%{opacity:.35;transform:scale(1)}50%{opacity:.9;transform:scale(1.04)}}
+@keyframes chBreath{0%,100%{opacity:.3;transform:scale(1)}50%{opacity:.75;transform:scale(1.06)}}
+@keyframes chSway{0%,100%{opacity:.35;transform:scale(1) rotate(-1.5deg)}50%{opacity:.85;transform:scale(1.05) rotate(1.5deg)}}
+@keyframes chNeon{0%,100%{opacity:.5;filter:brightness(1)}50%{opacity:1;filter:brightness(1.5)}}
+.ch-file{display:inline-flex;align-items:center;gap:6px;padding:7px 10px;border-radius:9px;cursor:pointer;
+  border:1px dashed rgba(255,255,255,.28);font-size:12px;white-space:nowrap}
+.ch-file input{display:none}
+.ch-logo-prev{width:56px;height:56px;border-radius:12px;object-fit:cover;background:rgba(255,255,255,.08)}
+.ch-edit-row select{flex:1;min-width:120px;padding:7px 9px;font-size:13px;border-radius:9px;
+  border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.07);color:inherit}
+.ch-edit-row input[type=color]{width:44px;height:34px;padding:2px;border-radius:9px;
+  border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.07);flex:none}
+.ch-check{display:inline-flex;align-items:center;gap:6px;font-size:12px;white-space:nowrap;opacity:.85}
+.aero-theme .ch-fx-stars::after,.aero-theme .ch-fx-bubbles::after,
+.aero-theme .ch-fx-butterflies::after,.aero-theme .ch-fx-neon::after{
+  box-shadow:0 0 0 1px var(--ch-color,#3fa9f5),0 0 16px var(--ch-color,#3fa9f5)}
+.aero-theme .ch-file{border-color:rgba(31,86,140,.35);color:#053a65}
+.aero-theme .ch-edit-row select,.aero-theme .ch-edit-row input[type=color]{
+  border-color:rgba(31,86,140,.25);background:rgba(255,255,255,.8);color:#053a65}
+
+/* ── Канал как отдельный телеканал (v27) ── */
+.ch-tvbar{display:flex;align-items:center;gap:10px;padding:9px 11px;margin:2px 0 10px;border-radius:14px;
+  border:1px solid rgba(255,255,255,.16);background:linear-gradient(135deg,rgba(255,255,255,.10),rgba(255,255,255,.04));
+  box-shadow:0 0 0 1px rgba(255,158,196,.12) inset}
+.ch-tvbar .ch-tv-ic{width:34px;height:34px;flex:none;border-radius:10px;display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,.10);font-size:19px;overflow:hidden}
+.ch-tvbar .ch-tv-ic img{width:100%;height:100%;object-fit:cover}
+.ch-tvbar .ch-tv-txt{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.ch-tvbar .ch-tv-txt b{font-size:14px;line-height:1.2}
+.ch-tvbar .ch-tv-txt i{font-style:normal;font-size:11px;opacity:.7}
+.ch-tvbar .ch-tv-txt small{font-size:11px;opacity:.62;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ch-tvbar .ch-btn{width:32px;height:32px}
+.ch-tools{display:flex;gap:6px;flex-wrap:wrap;margin:2px 0 10px}
+.ch-tools button{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);color:inherit;
+  border-radius:9px;padding:7px 10px;font-size:12px;cursor:pointer}
+.ch-tools button:hover{background:rgba(255,158,196,.22)}
+.ch-tools button.danger{border-color:rgba(255,90,110,.4)}
+.ch-tool-form{border:1px dashed rgba(255,255,255,.2);border-radius:12px;padding:10px;margin:0 0 10px}
+.ch-tool-form textarea{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);
+  color:inherit;border-radius:9px;padding:8px 10px;font-size:12.5px;font-family:ui-monospace,Menlo,Consolas,monospace;box-sizing:border-box}
+.ch-mini{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;opacity:.8;white-space:nowrap}
+.ch-mini input{padding:6px 8px;font-size:13px;border-radius:9px;border:1px solid rgba(255,255,255,.16);
+  background:rgba(255,255,255,.07);color:inherit}
+.ch-tool-note{font-size:11px;opacity:.55;margin-top:6px;line-height:1.45}
+.ch-days{display:flex;gap:5px;flex-wrap:wrap}
+.ch-day{display:inline-flex;align-items:center;gap:4px;padding:6px 9px;border-radius:9px;font-size:12px;cursor:pointer;
+  border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.05)}
+.ch-day.on{opacity:.4}
+.ch-day input{width:14px;height:14px}
+.ch-btn.on{background:rgba(255,158,196,.28);border-color:rgba(255,158,196,.45)}
+.aero-theme .ch-tvbar{border-color:rgba(31,86,140,.22);background:linear-gradient(135deg,rgba(255,255,255,.92),rgba(233,246,255,.86));color:#053a65}
+.aero-theme .ch-tvbar .ch-tv-txt small{opacity:.7}
+.aero-theme .ch-tools button{border-color:rgba(31,86,140,.25);background:rgba(255,255,255,.8);color:#053a65}
+.aero-theme .ch-tools button:hover{background:rgba(120,200,255,.55)}
+.aero-theme .ch-tool-form textarea,.aero-theme .ch-mini input{border-color:rgba(31,86,140,.25);
+  background:rgba(255,255,255,.9);color:#053a65}
+.aero-theme .ch-day{border-color:rgba(31,86,140,.25);background:rgba(255,255,255,.8);color:#053a65}
+
+/* ── живая аудитория (v28) ── */
+.online-now{display:flex;align-items:center;justify-content:center;gap:7px;margin:10px auto 0;padding:7px 15px;width:max-content;
+  max-width:96%;border-radius:999px;font-size:12.5px;letter-spacing:.01em;
+  background:linear-gradient(135deg,rgba(255,255,255,.12),rgba(255,255,255,.05));
+  border:1px solid rgba(255,255,255,.16);color:inherit;cursor:default;
+  box-shadow:0 6px 22px rgba(0,0,0,.28),0 0 0 1px rgba(255,158,196,.10) inset;
+  animation:onlineIn .5s ease both}
+@keyframes onlineIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+.online-now b{font-size:14px;font-weight:800}
+.online-now .on-dot{width:7px;height:7px;border-radius:50%;background:#65d9ff;
+  box-shadow:0 0 8px rgba(101,217,255,.75);animation:onPulse 2.6s ease-in-out infinite}
+.online-now.busy .on-dot{background:#ff7ad9;box-shadow:0 0 10px rgba(255,122,217,.85)}
+@keyframes onPulse{0%,100%{opacity:.55;transform:scale(1)}50%{opacity:1;transform:scale(1.18)}}
+.aero-theme .online-now{background:linear-gradient(135deg,rgba(255,255,255,.94),rgba(226,244,255,.88));
+  border-color:rgba(31,86,140,.24);color:#053a65;box-shadow:0 8px 24px rgba(24,96,150,.18)}
+.aero-theme .online-now .on-dot{background:#1f8fd6;box-shadow:0 0 8px rgba(31,143,214,.7)}
+.aero-theme .online-now.busy .on-dot{background:#e0459a;box-shadow:0 0 10px rgba(224,69,154,.75)}
+
+/* ── канал как контекст экрана (v29) ── */
+.ch-strip{display:flex;gap:8px;overflow-x:auto;margin:10px auto 0;padding:2px 4px 6px;max-width:100%;
+  scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.ch-strip::-webkit-scrollbar{display:none}
+.ch-strip-item{flex:0 0 auto;display:flex;align-items:center;gap:7px;padding:7px 13px 7px 8px;border-radius:999px;
+  border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.06);color:inherit;font-size:12.5px;cursor:pointer;
+  white-space:nowrap;transition:transform .2s ease,background .25s ease,border-color .25s ease}
+.ch-strip-item:hover{background:rgba(255,255,255,.12);transform:translateY(-1px)}
+.ch-strip-item.on{border-color:var(--ch-color,#6d5dfc);background:rgba(255,158,196,.16);font-weight:700;
+  box-shadow:0 0 0 1px var(--ch-color,#6d5dfc) inset,0 4px 16px rgba(0,0,0,.28)}
+.ch-strip-ic{width:24px;height:24px;border-radius:8px;display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,.12);font-size:14px;overflow:hidden;flex:none}
+.ch-strip-ic img{width:100%;height:100%;object-fit:cover}
+.ch-switch-wrap{display:flex;gap:6px;overflow-x:auto;padding:2px 0 8px;scrollbar-width:none}
+.ch-switch-wrap::-webkit-scrollbar{display:none}
+.ch-chip2{display:inline-flex;align-items:center;gap:6px;flex:0 0 auto;padding:6px 11px;border-radius:999px;
+  border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.06);color:inherit;font-size:12px;cursor:pointer;white-space:nowrap}
+.ch-chip2:hover{background:rgba(255,255,255,.12)}
+.ch-chip2.on{border-color:var(--ch-color,#6d5dfc);background:rgba(255,158,196,.18);font-weight:700}
+.ch-sw-ic{width:20px;height:20px;border-radius:7px;display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,.12);font-size:12px;overflow:hidden;flex:none}
+.ch-sw-ic img{width:100%;height:100%;object-fit:cover}
+.ch-inline{font-size:12px;opacity:.65;font-weight:400;letter-spacing:0}
+.aero-theme .ch-strip-item,.aero-theme .ch-chip2{border-color:rgba(31,86,140,.25);background:rgba(255,255,255,.75);color:#053a65}
+.aero-theme .ch-strip-item:hover,.aero-theme .ch-chip2:hover{background:rgba(255,255,255,.95)}
+.aero-theme .ch-strip-item.on,.aero-theme .ch-chip2.on{background:rgba(120,200,255,.45);border-color:var(--ch-color,#1f8fd6)}
+.aero-theme .ch-strip-ic,.aero-theme .ch-sw-ic{background:rgba(255,255,255,.7)}
+
+/* ── видео по каналам (v30) ── */
+.src-ch-badge{flex:none;font-size:10px;padding:2px 7px;border-radius:999px;white-space:nowrap;
+  border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.08);opacity:.85}
+.aero-theme .src-ch-badge{border-color:rgba(31,86,140,.25);background:rgba(255,255,255,.8);color:#053a65}
 </style>
 </head>
 <body class="theme-minimal">
@@ -1151,6 +1338,10 @@ body.aero-theme #radio-mini button{background:rgba(255,255,255,.75)!important;bo
             <div class="fx-marquee" id="fx-marquee"><div class="fx-marquee-track" id="fx-marquee-track"></div></div>
         </div>
     </div>
+    <div class="online-now" id="online-now" style="display:none" title="Сейчас на сайте">
+        <span class="on-dot"></span><b id="online-count">1</b><span id="online-word">смотрят</span>
+    </div>
+    <div class="ch-strip" id="ch-strip" style="display:none"></div>
 
     <!-- РАДИО MYTV -->
     <section class="radio-page" id="radio-card">
@@ -1177,8 +1368,35 @@ body.aero-theme #radio-mini button{background:rgba(255,255,255,.75)!important;bo
 
     <div class="reactions-bar" id="reactions-bar" style="max-width:960px;margin:10px auto;padding:10px 14px;text-align:center;border-radius:16px;background:rgba(255,255,255,.05)"><span style="font-size:12px;opacity:.65">Реакция зрителей:</span> <button class="stream-btn reaction-btn" data-reaction="❤️">❤️ <b>0</b></button> <button class="stream-btn reaction-btn" data-reaction="🔥">🔥 <b>0</b></button> <button class="stream-btn reaction-btn" data-reaction="😂">😂 <b>0</b></button> <button class="stream-btn reaction-btn" data-reaction="👍">👍 <b>0</b></button></div>
 
-    <div class="modal-overlay" id="channel-detail-modal"><section style="width:100%;max-width:700px;padding:20px;border-radius:20px;background:#171923"><h2 id="channel-detail-title"></h2><div id="channel-detail-schedule"></div><button class="btn-secondary" id="channel-detail-close" style="width:auto">Выйти из канала</button></section></div>
-<div class="modal-overlay" id="channels-panel"><section style="width:100%;max-width:700px;max-height:85vh;overflow:auto;padding:20px;border-radius:20px;background:#171923"><h2>Тематические каналы</h2><div id="channels-list" style="display:flex;gap:8px;flex-wrap:wrap"></div><button class="btn-secondary" id="channels-close" style="width:auto;margin-top:16px">Выйти из канала</button></section></div>
+    <div class="modal-overlay" id="channels-panel">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>Каналы</h3>
+                <button class="modal-close" id="channels-close">✕</button>
+            </div>
+            <div class="hint">Канал — отдельный телеканал со своей сеткой. ▶ — передача, которая идёт сейчас; 📺 — смотреть канал как телевизор (передачи идут по сетке сами); ▤ — программа и редактор сетки; ⋯ — настройки канала.</div>
+            <div id="ch-tvbar" class="ch-tvbar" style="display:none"></div>
+            <div class="ch-grid" id="channels-list"></div>
+            <div class="ch-admin-box" id="ch-admin-box" style="display:none">
+                <div class="ch-sub">Добавить канал</div>
+                <div class="fx-row"><input id="ch-new-name" placeholder="Название канала"><input id="ch-new-icon" placeholder="Иконка: ссылка или смайл"></div>
+                <div class="fx-row"><input id="ch-new-desc" placeholder="Описание (необязательно)"><button class="btn-secondary" id="ch-new-add">+ Добавить канал</button></div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-overlay" id="channel-detail-modal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 id="channel-detail-title">Канал</h3>
+                <button class="modal-close" id="channel-detail-close">✕</button>
+            </div>
+            <div class="ch-now" id="channel-detail-now"></div>
+            <div class="sched-days-bar" id="ch-detail-days"></div>
+            <div id="channel-detail-schedule"></div>
+            <div class="ch-sub">Передачи канала</div>
+            <div id="channel-detail-shelf"></div>
+        </div>
+    </div>
 
 <!-- ЭФИРНЫЕ ФИШКИ (v15) -->
 <canvas id="party-canvas" style="position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:900;display:none"></canvas>
@@ -1390,9 +1608,10 @@ body.aero-theme #radio-mini button{background:rgba(255,255,255,.75)!important;bo
 <div class="modal-overlay" id="schedule-modal">
   <div class="modal-card">
     <div class="modal-header">
-      <h3>Телепрограмма</h3>
+      <h3>Телепрограмма <span class="ch-inline" id="sched-ch-name"></span></h3>
       <button class="modal-close" id="schedule-close">✕</button>
     </div>
+    <div class="ch-switch-wrap" id="ch-switch-user"></div>
     <div class="sched-days-bar" id="user-sched-days">
       <button class="day-tab" data-day="1">Пн</button>
       <button class="day-tab" data-day="2">Вт</button>
@@ -1541,11 +1760,19 @@ body.aero-theme #radio-mini button{background:rgba(255,255,255,.75)!important;bo
         <div class="admin-tab-content active" data-content="stream">
             <div class="admin-section"><label>Онлайн сейчас</label><div class="admin-viewers" id="admin-viewers-count">--</div></div>
             <div class="admin-section">
-                <label>Каналы</label><div class="fx-row"><input id="channel-admin-name" placeholder="Название канала"><input id="channel-admin-icon" placeholder="Иконка URL"></div><button class="btn-secondary" id="add-channel-admin">Добавить канал</button><div id="channel-admin-list" style="margin:10px 0"></div>
+                <label>Каналы</label>
+                <div class="hint">Канал — отдельный телеканал со своей сеткой вещания. Иконку можно вставить ссылкой на картинку или просто смайлом (📺 🎬 🧸 🎮).</div>
+                <div class="fx-row"><input id="channel-admin-name" placeholder="Название канала"><input id="channel-admin-icon" placeholder="Иконка: ссылка или смайл"></div>
+                <div class="fx-row"><input id="channel-admin-desc" placeholder="Описание канала"><button class="btn-secondary" id="add-channel-admin">Добавить канал</button></div>
+                <div id="channel-admin-list" style="margin:10px 0"></div>
+                <div id="channel-admin-migrate" style="margin:6px 0"></div>
                 <label>Источники</label>
                 <div class="hint">Поддерживаются HLS (.m3u8), прямые видеофайлы (.mp4), ссылки YouTube (shorts/watch/embed) или выбор файла с устройства.</div>
+                <div class="fx-row"><label style="min-width:104px">Канал видео:</label><select id="source-channel" style="flex:1"></select></div>
+                <div class="fx-row"><label style="min-width:104px">Показывать видео всех каналов</label><input type="checkbox" id="show-all-sources" style="width:auto"></div>
+                <div style="font-size:11px;opacity:.6;margin:-4px 0 6px">В списке ниже: <span id="src-count">—</span>. Новое видео попадёт в выбранный канал.</div>
                 <input type="text" id="source-name" placeholder="Название">
-                <input type="text" id="source-channel-icon" placeholder="Ссылка на иконку канала"><input type="file" id="source-channel-icon-file" accept="image/*"><select id="source-channel"><option value="general">Общий канал</option><option value="music">Музыка</option><option value="family">Семейный</option><option value="education">Познавательный</option><option value="gaming">Игры</option></select>
+                <input type="text" id="source-channel-icon" placeholder="Ссылка на иконку канала"><input type="file" id="source-channel-icon-file" accept="image/*"><select id="source-channel"><option value="general">Общий канал</option></select>
                 <div style="height:8px"></div>
                 <div class="file-btn-wrap">
                     <input type="file" id="source-file" accept="video/*" style="display:none">
@@ -1736,6 +1963,10 @@ body.aero-theme #radio-mini button{background:rgba(255,255,255,.75)!important;bo
                 <div class="fx-row"><label>Показывать раздел</label><div class="fx-toggle" id="radio-visibility-toggle"></div></div>
                 <div class="hint">Администратор может полностью убрать или вернуть кнопку «Радио» для зрителей.</div>
                 <div style="height:8px"></div><button class="btn-secondary" id="open-viewer-stats">Статистика зрителей</button>
+                <div style="height:10px"></div>
+                <div class="fx-row"><label>Счётчик «смотрят» под плеером</label><div class="fx-toggle" id="toggle-online-counter"></div></div>
+                <div class="fx-row"><label>Кнопка статистики в «Ещё»</label><div class="fx-toggle" id="toggle-stats-btn"></div></div>
+                <div class="hint">Счётчик показывает живых зрителей — тех, кто на сайте последние 2,5 минуты. Обе кнопки можно выключить: счётчик скроется у всех, кнопка статистики — только у вас.</div>
                 <div class="hint">Добавляйте прямые ссылки на MP3, AAC или аудиопотоки. Ссылки на страницы YouTube и VK не являются аудиопотоками.</div>
                 <input type="text" id="radio-track-title" placeholder="Название трека">
                 <div style="height:8px"></div><input type="text" id="radio-track-artist" placeholder="Исполнитель">
@@ -1830,6 +2061,13 @@ body.aero-theme #radio-mini button{background:rgba(255,255,255,.75)!important;bo
             </div>
         </div>
         <div class="admin-tab-content" data-content="schedule">
+            <div class="ch-switch-wrap" id="ch-switch-admin"></div>
+            <div class="fx-row" style="gap:8px;flex-wrap:wrap;margin-bottom:8px">
+                <button class="btn-secondary" id="btn-backup-db">⬇ Скачать резервную копию</button>
+                <button class="btn-secondary" id="btn-restore-db">♻ Восстановить из копии</button>
+                <input type="file" id="restore-db-file" accept=".json" style="display:none">
+            </div>
+            <div class="hint" id="backup-hint">Копия — расписание и видео в одном файле. Перед любой массовой перезаписью сетки старая копия сохраняется сама: 3 последние лежат здесь же, в браузере.</div>
             <!-- БЛОК АВТО-РАСПИСАНИЯ НА НЕДЕЛИ / ВЕСЬ ДЕНЬ -->
             <div class="admin-section" style="background:rgba(0,122,255,0.08);border:1px solid rgba(0,122,255,0.25);border-radius:14px;padding:14px;margin-bottom:20px">
                 <label style="color:#007aff;font-size:12px;letter-spacing:1.5px;margin-bottom:6px">⚡ АВТО-РАСПИСАНИЕ ПО ДНЯМ НЕДЕЛИ И НА НЕДЕЛИ ВПЕРЁД</label>
@@ -1881,7 +2119,7 @@ body.aero-theme #radio-mini button{background:rgba(255,255,255,.75)!important;bo
                         <option value="6">Суббота</option>
                         <option value="7">Воскресенье</option>
                     </select>
-                    <select id="sched-channel"><option value="general">Общий канал</option><option value="music">Музыка</option><option value="family">Семейный</option><option value="education">Познавательный</option><option value="gaming">Игры</option></select>
+                    <select id="sched-channel"><option value="general">Общий канал</option></select>
                     <input type="time" id="sched-time" style="width:110px">
                     <input type="text" id="sched-url" placeholder="Ссылка (MP4/HLS/YT)" style="flex:1">
                 </div>
@@ -2986,6 +3224,7 @@ function subscribeSchedule(){
         schedData=s.val()||{};
         evaluateSchedule();
         renderScheduleUI();
+        try{ if(typeof chRefresh==="function") chRefresh(); }catch(e){}
     });
 }
 
@@ -3039,6 +3278,74 @@ function evaluateSchedule(){
     }
 }
 
+/* ══════════ выбранный канал: контекст всего экрана ══════════ */
+let chCur = null;
+function chCurGet(){
+    try{
+        if(!chCur){ const v = localStorage.getItem('mytv.chCur'); if(v) chCur = v; }
+    }catch(e){}
+    if(!chCur){
+        let main = '';
+        try { main = (typeof chMainCh !== 'undefined' && chMainCh) ? chMainCh : ''; }catch(e){}
+        chCur = main || CH_DEFAULT;
+    }
+    return chCur;
+}
+function chSetCur(id, quiet){
+    chCur = id || CH_DEFAULT;
+    try{ localStorage.setItem('mytv.chCur', chCur); }catch(e){}
+    chRenderSwitch();
+    chRenderStrip();
+    try{ if(typeof renderScheduleUI === 'function') renderScheduleUI(); }catch(e){}
+    try{ if(typeof renderScheduleAdmin === 'function') renderScheduleAdmin(); }catch(e){}
+    if(!quiet) showStatus('Канал: ' + chGet(chCur).name, 'success');
+}
+function chSwitchHtml(){
+    const cur = chCurGet();
+    const list = chList().filter(function(c){ return chIsAdmin() || !c.hidden; });
+    if(list.length < 2) return '';
+    return list.map(function(c){
+        const on = (c.id === cur);
+        return '<button class="ch-chip2' + (on ? ' on' : '') + '" data-chsw="' + esc(c.id) + '"'
+             + (on && c.color ? ' style="--ch-color:' + esc(c.color) + '"' : '') + '>'
+             + '<span class="ch-sw-ic">' + chIconHtml(c) + '</span>' + esc(c.name) + '</button>';
+    }).join('');
+}
+function chRenderSwitch(){
+    ['ch-switch-user', 'ch-switch-admin'].forEach(function(id){
+        const box = document.getElementById(id);
+        if(!box) return;
+        box.innerHTML = chSwitchHtml();
+        box.querySelectorAll('[data-chsw]').forEach(function(b){
+            b.onclick = function(){ chSetCur(b.dataset.chsw); };
+        });
+    });
+    try{ chFillSourceSelect(); renderSourcesList(); }catch(e){}
+    const nameEl = document.getElementById('sched-ch-name');
+    if(nameEl){
+        const c = chGet(chCurGet());
+        nameEl.textContent = '· ' + c.name;
+    }
+}
+/* полоса каналов под плеером — как на настоящем телевизоре */
+function chRenderStrip(){
+    const box = document.getElementById('ch-strip');
+    if(!box) return;
+    const list = chList().filter(function(c){ return chIsAdmin() || !c.hidden; });
+    if(list.length < 2){ box.style.display = 'none'; return; }
+    box.style.display = '';
+    const cur = chCurGet();
+    box.innerHTML = list.map(function(c){
+        const on = (c.id === cur);
+        return '<button class="ch-strip-item' + (on ? ' on' : '') + '" data-chstrip="' + esc(c.id) + '"'
+             + (c.color ? ' style="--ch-color:' + esc(c.color) + '"' : '') + '>'
+             + '<span class="ch-strip-ic">' + chIconHtml(c) + '</span>'
+             + '<span class="ch-strip-n">' + esc(c.name) + '</span></button>';
+    }).join('');
+    box.querySelectorAll('[data-chstrip]').forEach(function(b){
+        b.onclick = function(){ chSetCur(b.dataset.chstrip, true); chFollow(b.dataset.chstrip); };
+    });
+}
 function renderScheduleUI(){
     const userList = document.getElementById("schedule-user-list");
     const nextEl = document.getElementById("stream-next-display");
@@ -3054,6 +3361,7 @@ function renderScheduleUI(){
     });
 
     const allItems = Object.keys(currentSched).map(k => ({ id: k, ...currentSched[k] }))
+        .filter(it => chOf(it) === chCurGet())
         .sort((a, b) => t2m(a.time) - t2m(b.time));
 
     // Находим "Далее" для сегодняшнего дня
@@ -3079,6 +3387,13 @@ function renderScheduleUI(){
     const displayItems = allItems.filter(it => !it.day || it.day === "all" || Number(it.day) === userSelectedDay);
 
     if(userList){
+        if(!displayItems.length){
+            userList.innerHTML = '<div class="ch-empty-state">У канала «' + esc(chGet(chCurGet()).name)
+                + '» на этот день передач нет' + (chIsAdmin() ? ' — добавьте их в админке на вкладке «Расписание»' : '')
+                + '</div>';
+            try{ chRenderSwitch(); }catch(e){}
+            return;
+        }
         if(displayItems.length === 0){
             userList.innerHTML = `<div style="text-align:center;padding:28px 16px;color:rgba(255,255,255,0.4)">
                 На <strong>${DAY_FULL_RU[userSelectedDay]}</strong> передач не запланировано
@@ -3365,6 +3680,7 @@ function updateProfileUI(){
     if (navAdminBtn) {
         navAdminBtn.style.display = (me && (me.role === "admin" || me.role === "mod" || me.role === "moderator")) ? "flex" : "none";
     }
+    try{ applyStatsToggles(); }catch(e){}
 
     if (myProfile.avatar) {
         if (avatar) avatar.innerHTML = `<img src="${esc(myProfile.avatar)}" style="width:100%;height:100%;object-fit:cover">`;
@@ -3512,6 +3828,7 @@ document.querySelectorAll(".admin-tab").forEach(tab=>tab.addEventListener("click
     tab.classList.add("active");
     const target=document.querySelector(`[data-content="${tab.dataset.tab}"]`);
     if(target)target.classList.add("active");
+    try{ chRenderSwitch(); }catch(e){}
 }));
 
 document.getElementById("add-source-btn")?.addEventListener("click",()=>{
@@ -3531,47 +3848,20 @@ document.getElementById("add-source-btn")?.addEventListener("click",()=>{
 function loadSources(){
     if(!FB_OK)return;
     onValue(ref(db,"sources"),s=>{
-        const d=s.val()||{},
-              list=document.getElementById("saved-sources-list"),
-              sel=document.getElementById("active-source-select");
-        if(!list||!sel)return;
-        list.innerHTML="";
-        sel.innerHTML='<option value="">-- Выбери --</option>';
-        get(ref(db,"currentStream")).then(cs=>{
-            const cu=cs.val()?.url||"";
-            Object.keys(d).forEach(k=>{
-                const src=d[k];
-                const item=document.createElement("div");
-                item.className="list-item";
-                const pick=document.createElement("input");
-                pick.type="checkbox";
-                pick.checked=src.autoSchedule !== false;
-                pick.title="Добавлять в авто-расписание";
-                pick.style.cssText="width:18px;height:18px;accent-color:#007aff;flex:none";
-                pick.onchange=()=>update(ref(db,"sources/"+k),{autoSchedule:pick.checked});
-                const nm=document.createElement("span");
-                nm.className="li-name"+(src.url===cu?" active":"");
-                nm.textContent=src.name+(src.url===cu?" ●":"");
-                const btn=document.createElement("button");
-                btn.textContent="Включить";
-                btn.onclick=()=>activateStream(src.url,src.name);
-                const del=document.createElement("button");
-                del.className="del";
-                del.textContent="Удалить";
-                del.onclick=()=>{ if(typeof mytvDeleteSource==="function") mytvDeleteSource(k); else remove(ref(db,"sources/"+k)); };
-                item.appendChild(pick);
-                item.appendChild(nm);
-                item.appendChild(btn);
-                item.appendChild(del);
-                list.appendChild(item);
-
-                const opt=document.createElement("option");
-                opt.value=src.url;
-                opt.textContent=src.name;
-                if(src.url===cu)opt.selected=true;
-                sel.appendChild(opt);
-            });
-        }).catch(()=>{});
+        window.__srcRaw=s.val()||{};
+        renderSourcesList();
+        chFillSourceSelect();
+    });
+    document.getElementById('show-all-sources')?.addEventListener('change',function(){
+        showAllSources = this.checked;
+        renderSourcesList();
+    });
+    document.getElementById('btn-backup-db')?.addEventListener('click',function(){ chDownloadBackup(); });
+    document.getElementById('btn-restore-db')?.addEventListener('click',function(){ document.getElementById('restore-db-file')?.click(); });
+    document.getElementById('restore-db-file')?.addEventListener('change',function(e){
+        const f = e.target.files && e.target.files[0];
+        if(f) chRestoreBackupFile(f);
+        try{ e.target.value=''; }catch(err){}
     });
 }
 
@@ -3737,7 +4027,7 @@ document.getElementById("add-schedule-btn")?.addEventListener("click",()=>{
         showStatus("Укажи время и ссылку","error");
         return;
     }
-    push(ref(db,"schedule"),{time:t,url:u,name:n||"Программа",createdAt:Date.now()}).then(()=>{
+    push(ref(db,"schedule"),{time:t,url:u,name:n||"Программа",channel:chCurGet(),createdAt:Date.now()}).then(()=>{
         document.getElementById("sched-time").value="";
         document.getElementById("sched-url").value="";
         document.getElementById("sched-name").value="";
@@ -3794,10 +4084,13 @@ function renderScheduleAdmin(){
     const list = document.getElementById("schedule-list");
     if(!list) return;
     const all = scheduleItemsAdmin();
+    const curCh = chCurGet();
     const filtered = all.filter(function(it){
+        if(it.__kind !== "slot" && chOf(it) !== curCh) return false;
         if(adminSelectedDay === "all") return true;
         return it.day === "all" || Number(it.day) === Number(adminSelectedDay);
     });
+    try{ chRenderSwitch(); }catch(e){}
     list.innerHTML = "";
     if(!filtered.length){
         list.innerHTML = '<div style="color:rgba(255,255,255,0.4);font-size:13px;padding:8px">На выбранный день передач нет</div>';
@@ -4691,6 +4984,111 @@ function autoNormUrl(u){
 }
 function autoGcd(a, b){ return b ? autoGcd(b, a % b) : a; }
 
+/* ══════════ видео по каналам и защита сетки ══════════ */
+let showAllSources = false, srcRenderToken = 0;
+function chFillSourceSelect(){
+    const sel = document.getElementById('source-channel');
+    if(!sel) return;
+    const cur = chCurGet();
+    const list = chList().filter(function(c){ return chIsAdmin() || !c.hidden; });
+    sel.innerHTML = list.map(function(c){
+        return '<option value="' + esc(c.id) + '"' + (c.id === cur ? ' selected' : '') + '>' + esc(c.name) + '</option>';
+    }).join('');
+    if(!sel.onchange){
+        sel.onchange = function(){ chSetCur(sel.value, true); chFillSourceSelect(); renderSourcesList(); };
+    }
+}
+function renderSourcesList(){
+    const d = window.__srcRaw || {},
+          list = document.getElementById('saved-sources-list'),
+          sel = document.getElementById('active-source-select');
+    if(!list || !sel) return;
+    const cur = chCurGet();
+    const token = ++srcRenderToken;
+    list.innerHTML = '';
+    sel.innerHTML = '<option value="">-- Выбери --</option>';
+    get(ref(db, 'currentStream')).then(function(cs){
+        if(token !== srcRenderToken) return;          // пока ждали ответ — могли перерисовать заново
+        const cu = (cs.val() || {}).url || '';
+        const keys = Object.keys(d).filter(function(k){ return showAllSources || chOf(d[k] || {}) === cur; });
+        keys.forEach(function(k){
+            const src = d[k];
+            const item = document.createElement('div');
+            item.className = 'list-item';
+            const pick = document.createElement('input');
+            pick.type = 'checkbox';
+            pick.checked = src.autoSchedule !== false;
+            pick.title = 'Добавлять в авто-расписание';
+            pick.style.cssText = 'width:18px;height:18px;accent-color:#007aff;flex:none';
+            pick.onchange = function(){ update(ref(db, 'sources/' + k), { autoSchedule: pick.checked }); };
+            const badge = document.createElement('span');
+            badge.className = 'src-ch-badge';
+            badge.textContent = chGet(chOf(src)).name;
+            const nm = document.createElement('span');
+            nm.className = 'li-name' + (src.url === cu ? ' active' : '');
+            nm.textContent = src.name + (src.url === cu ? ' ●' : '');
+            const btn = document.createElement('button');
+            btn.textContent = 'Включить';
+            btn.onclick = function(){ activateStream(src.url, src.name); };
+            const del = document.createElement('button');
+            del.className = 'del';
+            del.textContent = 'Удалить';
+            del.onclick = function(){ if(typeof mytvDeleteSource === 'function') mytvDeleteSource(k); else remove(ref(db, 'sources/' + k)); };
+            item.appendChild(pick);
+            item.appendChild(badge);
+            item.appendChild(nm);
+            item.appendChild(btn);
+            item.appendChild(del);
+            list.appendChild(item);
+            const opt = document.createElement('option');
+            opt.value = src.url;
+            opt.textContent = src.name;
+            if(src.url === cu) opt.selected = true;
+            sel.appendChild(opt);
+        });
+        const cnt = document.getElementById('src-count');
+        if(cnt) cnt.textContent = keys.length + ' из ' + Object.keys(d).length;
+    }).catch(function(){});
+}
+/* резервные копии: 3 последние — в браузере */
+function chBackupSnapshot(data, why){
+    try{
+        const arr = JSON.parse(localStorage.getItem('mytv.backups') || '[]');
+        arr.unshift({ ts: Date.now(), why: why || '', data: data });
+        while(arr.length > 3) arr.pop();
+        localStorage.setItem('mytv.backups', JSON.stringify(arr));
+        chBackupHint();
+    }catch(e){}
+}
+function chBackupHint(){
+    const el = document.getElementById('backup-hint');
+    if(!el) return;
+    let arr = [];
+    try{ arr = JSON.parse(localStorage.getItem('mytv.backups') || '[]'); }catch(e){}
+    const base = 'Копия — расписание и видео в одном файле. Перед любой массовой перезаписью сетки старая копия сохраняется сама. ';
+    el.textContent = base + (arr.length
+        ? 'Автокопий в браузере: ' + arr.length + ' (последняя — ' + new Date(arr[0].ts).toLocaleString('ru-RU') + ', ' + (arr[0].why || '') + ')'
+        : 'Автокопий пока нет.');
+}
+function chDownloadBackup(){
+    if(!FB_OK) return;
+    Promise.all([get(ref(db, 'schedule')), get(ref(db, 'sources')), get(ref(db, 'channels'))]).then(function(r){
+        const out = { schedule: r[0].val() || {}, sources: r[1].val() || {}, channels: r[2].val() || {},
+                      savedAt: Date.now() };
+        const blob = new Blob([JSON.stringify(out, null, 1)], { type: 'application/json' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'MyTV-резервная-копия-' + new Date().toISOString().slice(0, 10) + '.json';
+        document.body.appendChild(a); a.click(); a.remove();
+        chBackupSnapshot({ schedule: out.schedule, sources: out.sources }, 'ручная копия');
+        showStatus('Резервная копия скачана', 'success');
+    }).catch(function(e){ showStatus('Ошибка: ' + e.message, 'error'); });
+}
+function chRestoreBackupFile(file){
+    if(typeof handleImportFile === 'function'){ handleImportFile(file); return; }
+    showStatus('Импорт недоступен — обновите страницу', 'error');
+}
+/* Пул передач без дублей: одинаковые ссылки и одинаковые названия выкидываем. */
 /* Пул передач без дублей: одинаковые ссылки и одинаковые названия выкидываем. */
 function autoPool(list){
     const seenU = new Set(), seenN = new Set(), pool = [];
@@ -4762,7 +5160,9 @@ function autoPlan(opt){
 
 /* Что удалить в сетке, чтобы не было дублей (для кнопки «Убрать дубли»). */
 function autoDedupePlan(cur){
-    const keys = Object.keys(cur || {}).sort();   // push-ключи растут по времени: первый = самый старый
+    const dedupeCh = chCurGet();
+    const keys = Object.keys(cur || {}).filter(function(k){ return chOf(cur[k] || {}) === dedupeCh; }).sort();
+   // push-ключи растут по времени: первый = самый старый
     const bySlot = {}, byShow = {}, upd = {};
     let stacked = 0, repeats = 0;
     keys.forEach(function(k){
@@ -4800,13 +5200,19 @@ document.getElementById("btn-auto-schedule")?.addEventListener("click", async ()
         const srcSnap = await withTimeout(get(ref(db, "sources")), 20000).catch(() => null);
         let sourceList = [];
         if(srcSnap){
+            const poolCh = chCurGet();
             sourceList = Object.values(srcSnap.val() || {}).filter(s => {
                 const n = (s.name || "").toLowerCase();
                 const u = (s.url || "").toLowerCase();
-                return s.autoSchedule !== false && !n.includes("mux") && !n.includes("test") && !u.includes("mux.dev") && !u.includes("akamaihd");
+                return chOf(s) === poolCh && s.autoSchedule !== false
+                    && !n.includes("mux") && !n.includes("test") && !u.includes("mux.dev") && !u.includes("akamaihd");
             });
         }
-        if(!sourceList.length) sourceList = CARTOON_PACK;
+        if(!sourceList.length) sourceList = (chCurGet() === CH_DEFAULT) ? CARTOON_PACK : [];
+        if(!sourceList.length){
+            showStatus("У канала «" + chGet(chCurGet()).name + "» нет своих видео — добавьте их выше (поле «Канал видео»)", "error");
+            return;
+        }
         const { pool, skipped } = autoPool(sourceList);
         if(!pool.length){ showStatus("В библиотеке нет ни одной годной передачи", "error"); return; }
 
@@ -4827,8 +5233,10 @@ document.getElementById("btn-auto-schedule")?.addEventListener("click", async ()
               они всё равно показываются каждый день и наезжают на сетку */
         const upd = {};
         let removedOld = 0, removedDaily = 0;
+        const myCh = chCurGet();
         Object.keys(cur).forEach(function(k){
             const r = cur[k] || {};
+            if(chOf(r) !== myCh) return;              // чужие каналы не трогаем
             const d = r.day;
             const isDaily = (d === undefined || d === null || d === "" || d === "all");
             if(target === "week" || isDaily || Number(d) === Number(target)){
@@ -4838,7 +5246,17 @@ document.getElementById("btn-auto-schedule")?.addEventListener("click", async ()
             }
         });
 
-        /* 4. новое — одной атомарной записью вместе с удалением */
+        /* 4. подтверждение — называем канал и число строк */
+        plan.forEach(function(row){ row.channel = myCh; });
+        const chName = chGet(myCh).name;
+        const okGo = confirm("Заполнить сетку канала «" + chName + "»?\n\n"
+            + "Удалю старых строк ЭТОГО канала: " + removedOld + " (из них «на все дни»: " + removedDaily + ")\n"
+            + "Новых передач: " + plan.length + "\n\n"
+            + "Передачи других каналов не трогаю.");
+        if(!okGo){ showStatus("Отменено — ничего не менял", "error"); return; }
+        chBackupSnapshot(cur, "перед заполнением: " + chName);
+
+        /* 5. новое — одной атомарной записью вместе с удалением */
         plan.forEach(function(row){
             upd["schedule/" + push(ref(db, "schedule")).key] = row;
         });
@@ -5819,6 +6237,107 @@ function ytPlaylistViaPlayer(listId){
         });
     });
 }
+/* ---- названия песен прямо из ссылки ----
+   Есть ключ Data API — забираем пачкой по 50 штук. Нет ключа — спрашиваем
+   встроенный плеер YouTube: он отдаёт название, как только ролик загрузился. */
+function ytApiTitles(ids){
+    const key=ytKeyGet();
+    if(!key) return Promise.resolve(null);
+    const all=(ids||[]).slice(0,200), out={};
+    const chunk=function(rest){
+        if(!rest.length) return Promise.resolve(out);
+        const part=rest.splice(0,50);
+        const u="https://www.googleapis.com/youtube/v3/videos?part=snippet&maxResults=50"
+              + "&id="+encodeURIComponent(part.join(","))+"&key="+encodeURIComponent(key);
+        return fetch(u).then(function(r){ return r.json(); }).then(function(j){
+            if(j&&j.error) throw new Error((j.error&&j.error.message)||"ошибка API");
+            (j.items||[]).forEach(function(it){
+                if(!it||!it.id) return;
+                const sn=it.snippet||{};
+                out[it.id]={title:sn.title||"",channel:sn.channelTitle||""};
+            });
+            return chunk(rest);
+        }).catch(function(){ return out; });
+    };
+    return chunk(all.slice());
+}
+function ytTitleViaPlayer(id){
+    return ytApiLoad().then(function(ok){
+        if(!ok) return null;
+        return new Promise(function(res){
+            const host=document.createElement("div");
+            host.style.cssText="position:fixed;left:-9999px;top:0;width:2px;height:2px;opacity:0;pointer-events:none";
+            document.body.appendChild(host);
+            let done=false, pl=null;
+            const fin=function(){
+                if(done) return; done=true;
+                let d=null;
+                try{ d=pl&&pl.getVideoData?pl.getVideoData():null; }catch(e){}
+                setTimeout(function(){
+                    try{ if(pl&&pl.destroy) pl.destroy(); }catch(e){}
+                    try{ host.remove(); }catch(e){}
+                },300);
+                res(d&&d.title?{title:d.title,channel:d.author||""}:null);
+            };
+            try{
+                pl=new window.YT.Player(host,{
+                    videoId:id, width:2, height:2,
+                    playerVars:{controls:0,rel:0,modestbranding:1,playsinline:1,origin:location.origin},
+                    events:{ onReady:function(){ setTimeout(fin,700); }, onError:function(){ fin(); } }
+                });
+            }catch(e){ fin(); }
+            setTimeout(fin,7000);
+        });
+    });
+}
+/* заполняем пустые названия в списке {id,title} — по одному, чтобы не грузить телефон */
+function ytTitlesFor(items,onProgress){
+    const list=items||[];
+    const need=list.filter(function(x){ return x&&x.id&&!x.title; });
+    if(!need.length) return Promise.resolve(list);
+    return ytApiTitles(need.map(function(x){ return x.id; })).then(function(map){
+        let left;
+        if(map){
+            need.forEach(function(x){ const m=map[x.id]; if(m&&m.title){ x.title=m.title; if(m.channel) x.artist=x.artist||m.channel; } });
+            left=need.filter(function(x){ return !x.title; });
+        }else{
+            left=need.slice(0,30);
+        }
+        if(!left.length) return list;
+        let i=0;
+        const step=function(){
+            if(i>=left.length) return Promise.resolve(list);
+            const it=left[i++];
+            if(onProgress) onProgress(i,left.length);
+            return ytTitleViaPlayer(it.id).then(function(d){
+                if(d&&d.title){ it.title=d.title; if(d.channel) it.artist=it.artist||d.channel; }
+                return step();
+            });
+        };
+        return step();
+    });
+}
+/* у уже добавленных песен дотягиваем названия, если их нет (только для админа) */
+let ytFillDone=false;
+function ytFillExistingTitles(){
+    if(ytFillDone) return;
+    if(!FB_OK||!me||me.role!=="admin") return;
+    const bad=function(t){ const n=String(t||"").trim();
+        return !n||n==="Песня с YouTube"||n==="Без названия"||/^Песня \d+ · /.test(n); };
+    const need=Object.keys(radioTracks).filter(function(k){ const t=radioTracks[k]||{}; return t.videoId&&bad(t.title); });
+    if(!need.length) return;
+    ytFillDone=true;
+    const items=need.slice(0,25).map(function(k){ return {id:radioTracks[k].videoId,title:""}; });
+    ytTitlesFor(items).then(function(){
+        let n=0;
+        items.forEach(function(it){
+            if(!it.title) return;
+            const k=need.filter(function(kk){ return (radioTracks[kk]||{}).videoId===it.id; })[0];
+            if(k){ n++; try{ update(ref(db,"radioTracks/"+k),{title:it.title}).catch(function(){}); }catch(e){} }
+        });
+        if(n) showStatus("Названия песен обновлены: "+n,"success");
+    }).catch(function(){});
+}
 function ytRenderList(items,note){
     const box=document.getElementById("yt-pl-list"); if(!box) return;
     window.__ytPl=items||[];
@@ -5927,7 +6446,7 @@ function renderRadioPlaylist(){
     if(!a.length){box.innerHTML='<div style="opacity:.6;font-size:13px;text-align:center;padding:6px">Плейлист радио пуст</div>';return;}
     box.innerHTML=a.map(t=>{
         const cur=radioOn&&t.id===radioCurrentId;
-        return '<div class="list-item" data-radio-play="'+esc(t.id)+'" style="cursor:pointer'+(cur?";border-color:#6d5dfc;background:rgba(109,93,252,.18)":"")+'"><span class="li-name">'+(cur?"▶ ":"")+esc(radioTrackName(t))+'</span>'+(t.videoId?'<small class="yt-badge'+(t.ytBad?' bad':'')+'">'+(t.ytBad?'⚠ не играет':'▶ YouTube')+'</small>':'')+'</div>';
+        return '<div class="list-item" data-radio-play="'+esc(t.id)+'" style="cursor:pointer'+(cur?";border-color:#6d5dfc;background:rgba(109,93,252,.18)":"")+'"><span class="li-name">'+(cur?"▶ ":"")+esc(radioTrackName(t))+'</span>'+((t.videoId&&t.ytBad)?'<small class="yt-badge bad">⚠ не играет</small>':'')+'</div>';
     }).join("");
     box.querySelectorAll("[data-radio-play]").forEach(el=>{
         el.onclick=()=>{const i=a.findIndex(x=>x.id===el.dataset.radioPlay); if(i>=0){radioManual=true;radioIndex=i;radioFails=0;playRadioTrack();}};
@@ -5937,6 +6456,1028 @@ document.getElementById("radio-close")?.addEventListener("click",()=>{document.g
 document.getElementById("radio-toggle")?.addEventListener("click",()=>{if(radioOn){stopRadio();}else{radioFails=0;playRadioTrack();}});
 document.getElementById("radio-next")?.addEventListener("click",()=>{radioIndex++;radioFails=0;playRadioTrack();});
 document.getElementById("radio-prev")?.addEventListener("click",()=>{radioIndex--;radioFails=0;playRadioTrack();});
+
+/* ======================= РАЗДЕЛ «КАНАЛЫ» (v24) =======================
+   Канал — отдельный телеканал со своей сеткой вещания:
+     /channels/<id>   — реестр каналов (название, иконка, описание, порядок);
+     /schedule        — строки с channel=<id> — сетка именно этого канала;
+     /sources         — передачи канала (channel=<id>).
+   Чего нет в реестре, подхватывается из данных — так ваши «мультики» и
+   «инди-анимация» появятся сами. Строки и передачи без канала относятся
+   к общему каналу: ничего ломать и переносить заранее не нужно. */
+
+const CH_DEFAULT = "general";
+let chRegData = {}, chSrcData = {}, chMainCh = "";
+
+function chSched(){ try{ return (typeof schedData !== "undefined" && schedData) || {}; }catch(e){ return {}; } }
+function chOf(row){ const c = (row && row.channel) || ""; return String(c || CH_DEFAULT); }
+function chToday(){ const d = new Date().getDay(); return d === 0 ? 7 : d; }
+function chMinutes(){ const n = new Date(); return n.getHours() * 60 + n.getMinutes(); }
+function chT2m(t){ try{ return t2m(t); }catch(e){ return -1; } }
+
+/* все каналы: из реестра + те, что встречаются в данных */
+function chKeys(){
+    const m = {};
+    m[CH_DEFAULT] = 1;
+    Object.keys(chRegData || {}).forEach(function(k){ m[k] = 1; });
+    Object.keys(chSrcData || {}).forEach(function(k){ m[chOf(chSrcData[k])] = 1; });
+    Object.keys(chSched()).forEach(function(k){ m[chOf(chSched()[k])] = 1; });
+    return Object.keys(m);
+}
+const CH_FX = [["", "без эффекта"], ["stars", "звёзды"], ["bubbles", "пузырьки"],
+                ["butterflies", "бабочки"], ["neon", "неон"]];
+function chGet(id){
+    const r = (chRegData && chRegData[id]) || null;
+    const reg = !!r;
+    let order = (r && typeof r.order === "number") ? r.order : 9e14;
+    if(id === CH_DEFAULT && !reg) order = -1;
+    return { id:id, reg:reg,
+             name:(r && r.name) || (id === CH_DEFAULT ? "Общий" : id),
+             icon:(r && r.icon) || "", desc:(r && r.desc) || "", order:order,
+             effect:(r && r.effect) || "", color:(r && r.color) || "",
+             trailer:(r && r.trailer) || "", hidden:!!(r && r.hidden) };
+}
+function chList(){
+    return chKeys().map(chGet).sort(function(a,b){
+        return (a.order - b.order) || String(a.name).localeCompare(String(b.name), "ru");
+    });
+}
+function chRows(id){
+    const d = chSched();
+    return Object.keys(d).map(function(k){
+        const r = d[k] || {}; return { key:k, name:r.name, url:r.url, time:r.time, day:r.day, channel:chOf(r) };
+    }).filter(function(r){ return r.channel === id; });
+}
+function chSources(id){
+    return Object.keys(chSrcData || {}).map(function(k){
+        const r = chSrcData[k] || {}; return { key:k, name:r.name, url:r.url, channel:chOf(r) };
+    }).filter(function(r){ return r.channel === id; });
+}
+function chCounts(id){
+    let s = 0, sc = 0;
+    Object.keys(chSrcData || {}).forEach(function(k){ if(chOf(chSrcData[k]) === id) s++; });
+    const d = chSched();
+    Object.keys(d).forEach(function(k){ if(chOf(d[k]) === id) sc++; });
+    return { sources:s, sched:sc };
+}
+/* что в канале идёт сейчас */
+function chNow(id){
+    const day = chToday(), now = chMinutes();
+    const rows = chRows(id).filter(function(r){ return !r.day || r.day === "all" || Number(r.day) === day; })
+                           .sort(function(a,b){ return chT2m(a.time) - chT2m(b.time); });
+    let cur = null, next = null;
+    rows.forEach(function(r){ const m = chT2m(r.time); if(m >= 0 && m <= now) cur = r; });
+    for(let i = 0; i < rows.length; i++){ if(chT2m(rows[i].time) > now){ next = rows[i]; break; } }
+    const anyRow = chRows(id).sort(function(a,b){ return chT2m(a.time) - chT2m(b.time); })[0] || null;
+    const src = chSources(id)[0] || null;
+    const item = cur || anyRow || (src ? { name:src.name, url:src.url, time:"" } : null);
+    return { item:item, next:next };
+}
+function chIsAdmin(){ return !!(typeof me !== "undefined" && me && me.role === "admin"); }
+/* включить передачу: админ меняет эфир у всех, зритель — только у себя */
+function chPlayUrl(url, name){
+    if(!url){ showStatus("У этой передачи нет ссылки", "error"); return; }
+    if(chIsAdmin()){ activateStream(url, name || "Канал"); return; }
+    try{ loadStream({ url:url, name:name || "Канал", startedAt:Date.now() }); }
+    catch(e){ showStatus("Не удалось включить", "error"); return; }
+    showStatus("Смотрю: " + (name || "Канал"), "success");
+}
+function chPlay(id){
+    const n = chNow(id);
+    if(!n.item || !n.item.url){ showStatus("В этом канале пока ничего не запланировано", "error"); return; }
+    chPlayUrl(n.item.url, n.item.name);
+    document.getElementById("channels-panel")?.classList.remove("active");
+    document.getElementById("channel-detail-modal")?.classList.remove("active");
+}
+/* ---- панель каналов: compact-строки, управление прямо здесь ---- */
+let chUI = { menu:null, edit:null, del:null, add:false };
+let chProgUI = { edit:null, del:null, add:false, sEdit:null, sDel:null };
+
+function chIconHtml(c){
+    const i = (c && c.icon) || "";
+    return (/^(https?:|data:)/.test(i) ? '<img src="' + esc(i) + '" alt="">' : (i ? esc(i) : "📺"));
+}
+/* неделя сетки точками: какие дни у канала заполнены */
+function chWeekDots(id){
+    const rows = chRows(id);
+    let out = "";
+    for(let d = 1; d <= 7; d++){
+        const n = rows.filter(function(r){ return Number(r.day) === d; }).length;
+        out += '<i class="ch-dot' + (n ? " on" : "") + '" title="' + (DAY_NAMES_RU[d] || d) + ': ' + n + '"></i>';
+    }
+    return '<span class="ch-week" title="заполненные дни сетки">' + out + '</span>';
+}
+function chRenderPanel(){
+    const box = document.getElementById("channels-list");
+    if(!box) return;
+    const admin = chIsAdmin();
+    let curUrl = "";
+    try{ curUrl = (typeof currentStreamUrl !== "undefined" && currentStreamUrl) || ""; }catch(e){}
+    let list = chList();
+    if(!admin) list = list.filter(function(c){ return !c.hidden; });
+    let html = '<div class="ch-list">';
+    list.forEach(function(c){
+        const n = chNow(c.id), cnt = chCounts(c.id);
+        const on = !!(n.item && n.item.url && curUrl && n.item.url === curUrl);
+        html += '<div class="ch-item' + (on ? " on" : "") + '">'
+             +   '<button class="ch-item-main" data-ch-play="' + esc(c.id) + '" title="Смотреть канал">'
+             +     '<span class="ch-icon' + (c.effect ? " ch-fx-" + esc(c.effect) : "") + '"'
+             +       (c.color ? ' style="--ch-color:' + esc(c.color) + '"' : "") + '>' + chIconHtml(c) + '</span>'
+             +     '<span class="ch-text">'
+             +       '<span class="ch-name">' + esc(c.name) + (on ? '<span class="ch-live">в эфире</span>' : "") + '</span>'
+             +       '<span class="ch-meta">'
+             +         (n.item ? ('<span class="ch-now-text">' + esc(n.item.name || "") + (n.item.time ? ' <b>' + esc(n.item.time) + '</b>' : "") + '</span>')
+                               : '<span class="ch-now-text ch-empty-state">пока пусто</span>')
+             +         '<span class="ch-chips"><i class="ch-chip" title="передач">' + cnt.sources + '⏵</i>'
+             +           '<i class="ch-chip" title="строк в сетке">' + cnt.sched + '▤</i>' + chWeekDots(c.id) + '</span>'
+             +       '</span>'
+             +     '</span>'
+             +   '</button>'
+             +   '<span class="ch-item-actions">'
+             +     '<button class="ch-btn play" data-ch-play="' + esc(c.id) + '" title="Смотреть">▶</button>'
+             +     (c.trailer ? '<button class="ch-btn" data-ch-trailer="' + esc(c.id) + '" title="Анонс канала">🎬</button>' : "")
+             +     '<button class="ch-btn" data-ch-follow="' + esc(c.id) + '" title="Смотреть канал как телевизор">📺</button>'
+             +     '<button class="ch-btn" data-ch-prog="' + esc(c.id) + '" title="Программа и передачи">▤</button>'
+             +     (admin ? '<button class="ch-btn" data-ch-menu="' + esc(c.id) + '" title="Управление каналом">⋯</button>' : "")
+             +   '</span>'
+             + '</div>';
+        if(admin && chUI.menu === c.id){
+            const isMain = c.id === (chMainCh || CH_DEFAULT);
+            html += '<div class="ch-menu">'
+                 +   '<button data-ch-act="edit" data-id="' + esc(c.id) + '">✎ Изменить</button>'
+                 +   '<button data-ch-act="up" data-id="' + esc(c.id) + '">↑ Выше</button>'
+                 +   '<button data-ch-act="down" data-id="' + esc(c.id) + '">↓ Ниже</button>'
+                 +   '<button data-ch-act="main" data-id="' + esc(c.id) + '">' + (isMain ? "★ Это главный" : "☆ Сделать главным") + '</button>'
+                 +   '<button data-ch-act="grid" data-id="' + esc(c.id) + '">⧉ Скопировать сетку</button>'
+                 +   (c.trailer ? '<button data-ch-act="air" data-id="' + esc(c.id) + '">Анонс в эфир</button>' : "")
+                 +   '<button data-ch-act="onair" data-id="' + esc(c.id) + '">' + (chAirOn && chWatchId === c.id ? '⏹ Остановить эфир канала' : '📡 Вести эфир канала') + '</button>'
+                 +   '<button data-ch-act="del" data-id="' + esc(c.id) + '" class="danger">🗑 Удалить</button>'
+                 + '</div>';
+        }
+        if(admin && chUI.edit === c.id){
+            const iconVal = /^(https?:|data:)/.test(c.icon || "") ? "" : (c.icon || "");
+            html += '<div class="ch-edit">'
+                 +   '<div class="ch-edit-row"><input id="ch-ed-name" placeholder="Название канала" value="' + esc(c.name) + '"></div>'
+                 +   '<div class="ch-edit-row"><input id="ch-ed-icon" placeholder="Логотип: ссылка или смайл" value="' + esc(iconVal) + '">'
+                 +     '<label class="ch-file">Логотип<input type="file" id="ch-ed-logo" accept="image/*"></label></div>'
+                 +   '<div class="ch-edit-row"><img class="ch-logo-prev" id="ch-ed-prev" alt=""'
+                 +     ( /^(https?:|data:)/.test(c.icon || "") ? ' src="' + esc(c.icon) + '"' : ' style="display:none"' ) + '></div>'
+                 +   '<div class="ch-edit-row"><input id="ch-ed-desc" placeholder="Описание канала" value="' + esc(c.desc) + '"></div>'
+                 +   '<div class="ch-edit-row"><input id="ch-ed-trailer" placeholder="Анонс канала: ссылка на видео или плейлист" value="' + esc(c.trailer) + '"></div>'
+                 +   '<div class="ch-edit-row">'
+                 +     '<select id="ch-ed-effect">' + CH_FX.map(function(f){
+                            return '<option value="' + f[0] + '"' + (c.effect === f[0] ? " selected" : "") + '>Эффект: ' + f[1] + '</option>';
+                        }).join("") + '</select>'
+                 +     '<input type="color" id="ch-ed-color" value="' + esc(c.color || "#6d5dfc") + '" title="Цвет канала">'
+                 +     '<label class="ch-check"><input type="checkbox" id="ch-ed-hidden"' + (c.hidden ? " checked" : "") + '> скрыть от зрителей</label>'
+                 +   '</div>'
+                 +   '<div class="ch-edit-row"><button class="btn-primary" data-ch-act="save" data-id="' + esc(c.id) + '">Сохранить</button>'
+                 +     '<button class="btn-secondary" data-ch-act="cancel">Отмена</button></div>'
+                 + '</div>';
+        }
+        if(admin && chUI.del === c.id){
+            html += '<div class="ch-del">Удалить канал «' + esc(c.name) + '»? Его передачи (' + cnt.sources
+                 +   ') и сетка (' + cnt.sched + ') перейдут в общий канал. '
+                 +   '<button class="btn-primary" data-ch-act="del-yes" data-id="' + esc(c.id) + '">Да, удалить</button>'
+                 +   '<button class="btn-secondary" data-ch-act="cancel">Отмена</button></div>';
+        }
+    });
+    html += "</div>";
+    if(admin){
+        html += chUI.add
+            ? '<div class="ch-edit"><div class="ch-edit-row"><input id="ch-add-name" placeholder="Название канала"></div>'
+              + '<div class="ch-edit-row"><input id="ch-add-icon" placeholder="Иконка: ссылка или смайл">'
+              + '<input id="ch-add-desc" placeholder="Описание"></div>'
+              + '<div class="ch-edit-row"><button class="btn-primary" data-ch-act="add-save">Добавить канал</button>'
+              + '<button class="btn-secondary" data-ch-act="cancel">Отмена</button></div></div>'
+            : '<button class="ch-add" data-ch-act="add">+ Добавить канал</button>';
+    }
+    box.innerHTML = html;
+    box.querySelectorAll("[data-ch-play]").forEach(function(b){ b.onclick = function(){ chPlay(b.dataset.chPlay); }; });
+    box.querySelectorAll("[data-ch-prog]").forEach(function(b){ b.onclick = function(){ chOpen(b.dataset.chProg); }; });
+    box.querySelectorAll("[data-ch-menu]").forEach(function(b){
+        b.onclick = function(){
+            chUI.menu = (chUI.menu === b.dataset.chMenu) ? null : b.dataset.chMenu;
+            chUI.edit = null; chUI.del = null;
+            chRenderPanel();
+        };
+    });
+    box.querySelectorAll("[data-ch-act]").forEach(function(b){
+        b.onclick = function(){ chAct(b.dataset.chAct, b.dataset.id || ""); };
+    });
+    box.querySelectorAll("[data-ch-trailer]").forEach(function(b){
+        b.onclick = function(){ chPlayTrailer(b.dataset.chTrailer); };
+    });
+    box.querySelectorAll("[data-ch-follow]").forEach(function(b){
+        b.onclick = function(){ chFollow(b.dataset.chFollow); };
+    });
+    const logoInp = document.getElementById("ch-ed-logo");
+    if(logoInp) logoInp.onchange = function(){ chLogoUpload(logoInp); };
+    const ab = document.getElementById("ch-admin-box");
+    if(ab) ab.style.display = "none";   /* всё управление стало inline — отдельная форма не нужна */
+    chRenderTvBar();
+}
+/* логотип файлом: сжимаем до 192 px, чтобы база не распухла */
+function chLogoUpload(inp){
+    const f = inp && inp.files && inp.files[0];
+    if(!f) return;
+    const rd = new FileReader();
+    rd.onload = function(){
+        const img = new Image();
+        img.onload = function(){
+            const size = 192, cv = document.createElement("canvas");
+            cv.width = size; cv.height = size;
+            const cx = cv.getContext("2d");
+            const side = Math.min(img.width, img.height);
+            cx.drawImage(img, (img.width - side) / 2, (img.height - side) / 2, side, side, 0, 0, size, size);
+            const data = cv.toDataURL("image/png");
+            const inpI = document.getElementById("ch-ed-icon"), prev = document.getElementById("ch-ed-prev");
+            if(inpI) inpI.value = data;
+            if(prev){ prev.src = data; prev.style.display = ""; }
+            showStatus("Логотип загружен (" + Math.round(data.length / 1024) + " КБ)", "success");
+        };
+        img.onerror = function(){ showStatus("Не удалось открыть картинку", "error"); };
+        img.src = String(rd.result || "");
+    };
+    rd.readAsDataURL(f);
+}
+/* анонс канала: зрителю — у себя, админу можно пустить в общий эфир.
+   Если анонс — это html-файл (свой трейлер), просто открываем его отдельной вкладкой. */
+function chIsHtmlTrailer(url){
+    return /\.html?($|[?#])/i.test(String(url || "")) && !/youtube\.com|youtu\.be/i.test(String(url || ""));
+}
+function chPlayTrailer(id){
+    const c = chGet(id);
+    if(!c.trailer){ showStatus("У канала нет ссылки на анонс", "error"); return; }
+    if(chIsHtmlTrailer(c.trailer)){
+        window.open(c.trailer, "_blank", "noopener");
+        showStatus("Анонс канала открыт в новой вкладке", "success");
+        return;
+    }
+    chPlayUrl(c.trailer, "Анонс · " + c.name);
+}
+function chTrailerOnAir(id){
+    const c = chGet(id);
+    if(!chIsAdmin()){ showStatus("Нужны права администратора", "error"); return; }
+    if(!c.trailer){ showStatus("У канала нет ссылки на анонс", "error"); return; }
+    activateStream(c.trailer, "Анонс · " + c.name);
+}
+/* ══════════ канал как отдельный телеканал ══════════ */
+let chWatchId = null, chAirOn = false, chLastEnd = 0;
+
+/* передачи канала на день — по времени; если день пуст, берём всё, что есть */
+function chRowList(id, day){
+    const all = chRows(id).sort(function(a,b){ return chT2m(a.time) - chT2m(b.time); });
+    const rows = all.filter(function(r){ return !r.day || r.day === "all" || Number(r.day) === day; });
+    return rows.length ? rows : all;
+}
+function chSlotIndex(id, day, url){
+    const rows = chRowList(id, day);
+    if(!rows.length) return -1;
+    for(let i = 0; i < rows.length; i++){ if(rows[i].url && rows[i].url === url) return i; }
+    const now = chMinutes();
+    let idx = -1;
+    rows.forEach(function(r, i){ if(chT2m(r.time) >= 0 && chT2m(r.time) <= now) idx = i; });
+    return idx;
+}
+/* следующая/предыдущая передача канала по сетке */
+function chNextSlot(id, dir){
+    const day = chToday();
+    const rows = chRowList(id, day);
+    if(!rows.length) return null;
+    let curUrl = "";
+    try { curUrl = (typeof currentStreamUrl !== "undefined" && currentStreamUrl) || ""; } catch(e){}
+    let i = chSlotIndex(id, day, curUrl);
+    i = (i < 0) ? 0 : i + (dir || 1);
+    i = ((i % rows.length) + rows.length) % rows.length;
+    return rows[i];
+}
+/* включить канал себе — передачи пойдут по сетке */
+function chFollow(id){
+    const r = chNextSlot(id, 0);
+    if(!r || !r.url){ showStatus("В этом канале пока нет передач", "error"); return; }
+    chWatchId = id; chAirOn = false;
+    try{ chCur = id; localStorage.setItem('mytv.chCur', id); chRenderStrip(); chRenderSwitch(); }catch(e){}
+    chPlayUrl(r.url, r.name);
+    showStatus("Смотрю канал «" + chGet(id).name + "» ✔", "success");
+    chRenderTvBar();
+}
+/* админ ведёт общий эфир канала по сетке */
+function chAir(id){
+    if(!chIsAdmin()){ showStatus("Нужны права администратора", "error"); return; }
+    if(chAirOn && chWatchId === id){ chStopFollow(); return; }
+    const r = chNextSlot(id, 0);
+    if(!r || !r.url){ showStatus("В этом канале пока нет передач", "error"); return; }
+    chWatchId = id; chAirOn = true;
+    try{ chCur = id; localStorage.setItem('mytv.chCur', id); chRenderStrip(); chRenderSwitch(); }catch(e){}
+    activateStream(r.url, r.name);
+    showStatus("Веду эфир канала «" + chGet(id).name + "» — не закрывайте вкладку", "success");
+    chRenderTvBar();
+}
+function chStopFollow(){
+    const name = chWatchId ? chGet(chWatchId).name : "";
+    chWatchId = null; chAirOn = false;
+    chRenderTvBar();
+    if(name) showStatus("Канал «" + name + "» выключен", "success");
+}
+/* видео кончилось — берём следующее по сетке */
+function chOnEnded(){
+    if(!chWatchId) return;
+    const now = Date.now();
+    if(now - chLastEnd < 4000) return;      // защита от двойного срабатывания
+    chLastEnd = now;
+    const r = chNextSlot(chWatchId, 1);
+    if(!r || !r.url) return;
+    if(chAirOn && chIsAdmin()) activateStream(r.url, r.name);
+    else chPlayUrl(r.url, r.name);
+    chRenderTvBar();
+}
+function chTvStep(dir){
+    if(!chWatchId) return;
+    const r = chNextSlot(chWatchId, dir);
+    if(!r || !r.url) return;
+    if(chAirOn && chIsAdmin()) activateStream(r.url, r.name);
+    else chPlayUrl(r.url, r.name);
+    chRenderTvBar();
+}
+function chRenderTvBar(){
+    const box = document.getElementById("ch-tvbar");
+    if(!box) return;
+    if(!chWatchId){ box.style.display = "none"; box.innerHTML = ""; return; }
+    const c = chGet(chWatchId), n = chNow(chWatchId);
+    box.style.display = "flex";
+    if(c.color) box.style.setProperty("--ch-color", c.color);
+    box.innerHTML = '<span class="ch-tv-ic">' + chIconHtml(c) + '</span>'
+      + '<span class="ch-tv-txt"><b>' + esc(c.name) + (chAirOn ? ' · <i>в эфире</i>' : '') + '</b>'
+      + '<small>сейчас: ' + esc((n.item && n.item.name) || "—")
+      + (n.next ? ' · далее ' + esc((n.next.time || "") + " " + (n.next.name || "")) : '') + '</small></span>'
+      + '<button class="ch-btn danger" data-chtv="stop" title="Выключить канал">⏹</button>';
+    box.querySelectorAll("[data-chtv]").forEach(function(b){
+        b.onclick = function(){ chStopFollow(); };
+    });
+}
+/* ловим реальный конец передачи — и у YouTube, и у обычного видео */
+(function(){
+    window.addEventListener("message", function(e){
+        try{
+            const bf = document.getElementById("bumper-frame");
+            if(bf && e.source === bf.contentWindow) return;
+            const d = (typeof e.data === "string") ? JSON.parse(e.data) : e.data;
+            if(d && d.event === "onStateChange" && String(d.info) === "0") setTimeout(chOnEnded, 400);
+        }catch(err){}
+    });
+    window.addEventListener("load", function(){
+        try{
+            const sp = document.getElementById("stream-player");
+            if(sp) sp.addEventListener("ended", function(){ setTimeout(chOnEnded, 400); });
+        }catch(e){}
+    });
+})();
+function chAct(act, id){
+    const reset = function(){ chUI = { menu:null, edit:null, del:null, add:false }; };
+    if(act === "cancel"){ reset(); chRenderPanel(); return; }
+    if(act === "add"){ chUI = { menu:null, edit:null, del:null, add:true }; chRenderPanel();
+        const el = document.getElementById("ch-add-name"); if(el) el.focus(); return; }
+    if(act === "add-save"){
+        const n = (document.getElementById("ch-add-name")?.value || "").trim();
+        if(!n){ showStatus("Введите название канала", "error"); return; }
+        chSave("ch" + Date.now().toString(36), {
+            name:n,
+            icon:(document.getElementById("ch-add-icon")?.value || "").trim(),
+            desc:(document.getElementById("ch-add-desc")?.value || "").trim(),
+            order:Date.now(), createdAt:Date.now()
+        }).then(function(){ reset(); chRenderPanel(); });
+        return;
+    }
+    if(act === "edit"){ chUI = { menu:null, edit:id, del:null, add:false }; chRenderPanel(); return; }
+    if(act === "save"){
+        const n = (document.getElementById("ch-ed-name")?.value || "").trim();
+        if(!n){ showStatus("Название не может быть пустым", "error"); return; }
+        chSave(id, {
+            name:n,
+            icon:(document.getElementById("ch-ed-icon")?.value || "").trim(),
+            desc:(document.getElementById("ch-ed-desc")?.value || "").trim(),
+            trailer:(document.getElementById("ch-ed-trailer")?.value || "").trim(),
+            effect:(document.getElementById("ch-ed-effect")?.value || ""),
+            color:(document.getElementById("ch-ed-color")?.value || ""),
+            hidden:!!(document.getElementById("ch-ed-hidden")?.checked)
+        }).then(function(){ reset(); chRenderPanel(); });
+        return;
+    }
+    if(act === "air"){ chTrailerOnAir(id); return; }
+    if(act === "onair"){ chAir(id); return; }
+    if(act === "follow"){ chFollow(id); return; }
+    if(act === "del"){ chUI = { menu:null, edit:null, del:id, add:false }; chRenderPanel(); return; }
+    if(act === "del-yes"){ chDeleteNow(id); return; }
+    if(act === "up"){ chMove(id, -1); return; }
+    if(act === "down"){ chMove(id, 1); return; }
+    if(act === "main"){ chSetMain(id); return; }
+    if(act === "grid"){ chCopyGrid(id); return; }
+}
+/* удаление канала: передачи и сетка уходят в общий канал, ничего не теряется */
+function chDeleteNow(id){
+    if(!chIsAdmin()){ showStatus("Нужны права администратора", "error"); return; }
+    if(id === CH_DEFAULT){ showStatus("Общий канал удалить нельзя", "error"); return; }
+    const jobs = [];
+    Object.keys(chSrcData || {}).forEach(function(k){ if(chOf(chSrcData[k]) === id) jobs.push(update(ref(db, "sources/" + k), { channel:CH_DEFAULT })); });
+    const d = chSched();
+    Object.keys(d).forEach(function(k){ if(chOf(d[k]) === id) jobs.push(update(ref(db, "schedule/" + k), { channel:CH_DEFAULT })); });
+    Promise.all(jobs).catch(function(){}).then(function(){ return remove(ref(db, "channels/" + id)); })
+        .then(function(){
+            chUI = { menu:null, edit:null, del:null, add:false };
+            showStatus("Канал удалён, его передачи и сетка — в общем канале", "success");
+        })
+        .catch(function(e){ showStatus("Ошибка: " + e.message, "error"); });
+}
+
+/* ---- окно программы канала: сетку и передачи можно править здесь же ---- */
+let chOpenId = null, chProgDay = null;
+function chOpen(id){
+    chOpenId = id;
+    chProgDay = chToday();
+    chProgUI = { edit:null, del:null, add:false, sEdit:null, sDel:null };
+    const c = chGet(id);
+    const t = document.getElementById("channel-detail-title");
+    if(t) t.textContent = c.name;
+    chRenderProg();
+    document.getElementById("channel-detail-modal")?.classList.add("active");
+}
+function chRenderProg(){
+    if(!chOpenId) return;
+    const admin = chIsAdmin(), day = chToday();
+    const days = document.getElementById("ch-detail-days"),
+          box  = document.getElementById("channel-detail-schedule"),
+          shelf= document.getElementById("channel-detail-shelf"),
+          nowEl= document.getElementById("channel-detail-now");
+    if(days){
+        days.innerHTML = [1,2,3,4,5,6,7].map(function(d){
+            const rows = chRows(chOpenId).filter(function(r){ return Number(r.day) === d; }).length;
+            return '<button class="day-tab' + (d === chProgDay ? " active" : "") + (d === day ? " today" : "")
+                 + '" data-chday="' + d + '">' + (DAY_NAMES_RU[d] || d) + (rows ? '<i class="ch-dot on" style="margin-left:3px"></i>' : "") + '</button>';
+        }).join("");
+        days.querySelectorAll("[data-chday]").forEach(function(b){
+            b.onclick = function(){ chProgDay = Number(b.dataset.chday); chRenderProg(); };
+        });
+    }
+    const rows = chRows(chOpenId).filter(function(r){ return !r.day || r.day === "all" || Number(r.day) === chProgDay; })
+                                 .sort(function(a,b){ return chT2m(a.time) - chT2m(b.time); });
+    const n = chNow(chOpenId);
+    const nowUrl = (n.item && n.item.url) || "";
+    if(nowEl){
+        nowEl.innerHTML = n.item
+            ? ('<b>Сейчас:</b> ' + esc(n.item.name || "") + (n.item.time ? ' <span class="ch-time">' + esc(n.item.time) + '</span>' : "")
+               + (n.next ? (' · далее ' + esc(n.next.time || "") + " " + esc(n.next.name || "")) : ""))
+            : '<span class="ch-empty-state">Сейчас в канале ничего не запланировано</span>';
+    }
+    if(box){
+        let h = "";
+        if(admin){
+            h += '<div class="ch-tools">'
+               +   '<button data-pact="add">+ Передача</button>'
+               +   '<button data-pact="tool" data-tool="paste">Списком</button>'
+               +   '<button data-pact="tool" data-tool="dup">Размножить день</button>'
+               +   '<button data-pact="tool" data-tool="spread">Расставить</button>'
+               +   '<button data-pact="tool" data-tool="fill">Заполнить неделю</button>'
+               +   '<button data-pact="tool" data-tool="clear" class="danger">Очистить день</button>'
+               + '</div>';
+            if(chProgUI.tool === "paste"){
+                h += '<div class="ch-tool-form"><div class="ch-edit-row"><textarea id="ch-pt-links" rows="4" placeholder="Ссылки — по одной на строку (можно плейлистом)"></textarea></div>'
+                   + '<div class="ch-edit-row"><label class="ch-mini">с <input type="time" id="ch-pt-from" value="09:00"></label>'
+                   + '<label class="ch-mini">через, мин <input type="number" id="ch-pt-step" value="30" min="1" max="720" style="width:72px"></label>'
+                   + '<label class="ch-mini"><input type="checkbox" id="ch-pt-titles" checked> узнать названия</label></div>'
+                   + '<div class="ch-edit-row"><button class="btn-primary" data-pact="paste-save">Добавить в сетку</button>'
+                   + '<button class="btn-secondary" data-pact="cancel">Отмена</button></div></div>';
+            }
+            if(chProgUI.tool === "dup"){
+                h += '<div class="ch-tool-form"><div class="ch-edit-row ch-days">'
+                   + [1,2,3,4,5,6,7].map(function(d){
+                        return '<label class="ch-day' + (d === chProgDay ? " on" : "") + '">' + (DAY_NAMES_RU[d] || d)
+                             + '<input type="checkbox" class="ch-dup-day" value="' + d + '"' + (d === chProgDay ? " disabled" : "") + '></label>';
+                     }).join("") + '</div>'
+                   + '<div class="ch-edit-row"><button class="btn-primary" data-pact="dup-save">Скопировать на выбранные дни</button>'
+                   + '<button class="btn-secondary" data-pact="cancel">Отмена</button></div></div>';
+            }
+            if(chProgUI.tool === "spread"){
+                h += '<div class="ch-tool-form"><div class="ch-edit-row"><label class="ch-mini">с <input type="time" id="ch-sp-from" value="08:00"></label>'
+                   + '<label class="ch-mini">до <input type="time" id="ch-sp-to" value="23:00"></label></div>'
+                   + '<div class="ch-edit-row"><button class="btn-primary" data-pact="spread-save">Расставить по времени</button>'
+                   + '<button class="btn-secondary" data-pact="cancel">Отмена</button></div>'
+                   + '<div class="ch-tool-note">Передачи этого дня равномерно разойдутся между указанным временем.</div></div>';
+            }
+            if(chProgUI.tool === "fill"){
+                h += '<div class="ch-tool-form"><div class="ch-edit-row"><label class="ch-mini">в день, передач <input type="number" id="ch-fl-count" value="12" min="1" max="48" style="width:72px"></label>'
+                   + '<label class="ch-mini">с <input type="time" id="ch-fl-from" value="08:00"></label>'
+                   + '<label class="ch-mini">до <input type="time" id="ch-fl-to" value="23:00"></label></div>'
+                   + '<div class="ch-edit-row"><button class="btn-primary" data-pact="fill-save">Заполнить всю неделю</button>'
+                   + '<button class="btn-secondary" data-pact="cancel">Отмена</button></div>'
+                   + '<div class="ch-tool-note">Возьмёт все передачи канала и разложит их по 7 дням по кругу.</div></div>';
+            }
+            if(chProgUI.tool === "clear"){
+                h += '<div class="ch-tool-form"><div class="ch-edit-row">Удалить всю программу ' + esc(DAY_FULL_RU[chProgDay] || "") + '?</div>'
+                   + '<div class="ch-edit-row"><button class="btn-primary" data-pact="clear-yes">Удалить</button>'
+                   + '<button class="btn-secondary" data-pact="cancel">Отмена</button></div></div>';
+            }
+        }
+        rows.forEach(function(r){
+            const on = !!(r.url && nowUrl && r.url === nowUrl);
+            h += '<div class="ch-prow' + (on ? " on" : "") + '">'
+               +   '<button class="ch-btn play" data-prow="' + esc(r.key) + '" title="Смотреть">▶</button>'
+               +   '<span class="ch-ptime">' + esc(r.time || "—") + '</span>'
+               +   '<span class="ch-pname">' + esc(r.name || "Без названия") + '</span>'
+               +   (admin ? '<button class="ch-btn' + (String(r.day) === "all" ? " on" : "") + '" data-pdaily="' + esc(r.key) + '" title="Каждый день">🔁</button>'
+                          + '<button class="ch-btn" data-pedit="' + esc(r.key) + '" title="Изменить">✎</button>'
+                          + '<button class="ch-btn danger" data-pdel="' + esc(r.key) + '" title="Удалить">🗑</button>' : "")
+               + '</div>';
+            if(admin && chProgUI.edit === r.key){
+                h += '<div class="ch-edit"><div class="ch-edit-row">'
+                   +   '<input type="time" id="ch-pt-time" value="' + esc(r.time || "") + '" style="max-width:110px">'
+                   +   '<input id="ch-pt-name" placeholder="Название передачи" value="' + esc(r.name || "") + '"></div>'
+                   + '<div class="ch-edit-row"><input id="ch-pt-url" placeholder="Ссылка" value="' + esc(r.url || "") + '"></div>'
+                   + '<div class="ch-edit-row"><button class="btn-primary" data-pact="save" data-key="' + esc(r.key) + '">Сохранить</button>'
+                   + '<button class="btn-secondary" data-pact="cancel">Отмена</button></div></div>';
+            }
+            if(admin && chProgUI.del === r.key){
+                h += '<div class="ch-del">Удалить «' + esc(r.name || "") + '» из сетки?'
+                   + '<button class="btn-primary" data-pact="del-yes" data-key="' + esc(r.key) + '">Удалить</button>'
+                   + '<button class="btn-secondary" data-pact="cancel">Отмена</button></div>';
+            }
+        });
+        if(!rows.length) h += '<div class="ch-empty-state">На этот день программа не заполнена</div>';
+        if(admin){
+            h += chProgUI.add
+                ? '<div class="ch-pform"><input type="time" id="ch-pa-time" value="12:00">'
+                  + '<input id="ch-pa-name" placeholder="Название передачи">'
+                  + '<input id="ch-pa-url" placeholder="Ссылка (YouTube или mp4)">'
+                  + '<button class="btn-primary" data-pact="add-save">Добавить</button>'
+                  + '<button class="btn-secondary" data-pact="cancel">Отмена</button></div>'
+                : '<button class="ch-add" data-pact="add">+ Добавить передачу на ' + esc(DAY_FULL_RU[chProgDay] || "") + '</button>';
+        }
+        box.innerHTML = h;
+        box.querySelectorAll("[data-prow]").forEach(function(b){
+            b.onclick = function(){
+                const r = rows.filter(function(x){ return x.key === b.dataset.prow; })[0];
+                if(r) chPlayUrl(r.url, r.name);
+            };
+        });
+        box.querySelectorAll("[data-pedit]").forEach(function(b){
+            b.onclick = function(){ chProgUI = { edit:b.dataset.pedit, del:null, add:false, sEdit:null, sDel:null }; chRenderProg(); };
+        });
+        box.querySelectorAll("[data-pdel]").forEach(function(b){
+            b.onclick = function(){ chProgUI = { edit:null, del:b.dataset.pdel, add:false, sEdit:null, sDel:null }; chRenderProg(); };
+        });
+        box.querySelectorAll("[data-pact]").forEach(function(b){ b.onclick = function(){ chProgAct(b.dataset.pact, b.dataset.key || ""); }; });
+        box.querySelectorAll("[data-pdaily]").forEach(function(b){ b.onclick = function(){ chProgAct("daily", b.dataset.pdaily); }; });
+        box.querySelectorAll("[data-tool]").forEach(function(b){ b.onclick = function(){ chProgAct("tool", b.dataset.tool); }; });
+    }
+    const src = chSources(chOpenId);
+    if(shelf){
+        let h = "";
+        src.forEach(function(x){
+            h += '<div class="ch-prow">'
+               +   '<button class="ch-btn play" data-srow="' + esc(x.key) + '" title="Смотреть">▶</button>'
+               +   '<span class="ch-pname">' + esc(x.name || "Без названия") + '</span>'
+               +   (admin ? '<button class="ch-btn" data-sedit="' + esc(x.key) + '" title="Изменить">✎</button>'
+                          + '<button class="ch-btn danger" data-sdel="' + esc(x.key) + '" title="Удалить">🗑</button>' : "")
+               + '</div>';
+            if(admin && chProgUI.sEdit === x.key){
+                h += '<div class="ch-edit"><div class="ch-edit-row"><input id="ch-se-name" placeholder="Название" value="' + esc(x.name || "") + '"></div>'
+                   + '<div class="ch-edit-row"><input id="ch-se-url" placeholder="Ссылка" value="' + esc(x.url || "") + '"></div>'
+                   + '<div class="ch-edit-row"><select id="ch-se-ch">' + chList().map(function(c){
+                        return '<option value="' + esc(c.id) + '"' + (c.id === chOf(x) ? " selected" : "") + '>' + esc(c.name) + '</option>';
+                     }).join("") + '</select></div>'
+                   + '<div class="ch-edit-row"><button class="btn-primary" data-sact="save" data-key="' + esc(x.key) + '">Сохранить</button>'
+                   + '<button class="btn-secondary" data-sact="cancel">Отмена</button></div></div>';
+            }
+            if(admin && chProgUI.sDel === x.key){
+                h += '<div class="ch-del">Удалить передачу «' + esc(x.name || "") + '» совсем?'
+                   + '<button class="btn-primary" data-sact="del-yes" data-key="' + esc(x.key) + '">Удалить</button>'
+                   + '<button class="btn-secondary" data-sact="cancel">Отмена</button></div>';
+            }
+        });
+        if(!src.length) h += '<div class="ch-empty-state">Передач у канала пока нет</div>';
+        shelf.innerHTML = h;
+        shelf.querySelectorAll("[data-srow]").forEach(function(b){
+            b.onclick = function(){
+                const x = src.filter(function(y){ return y.key === b.dataset.srow; })[0];
+                if(x) chPlayUrl(x.url, x.name);
+            };
+        });
+        shelf.querySelectorAll("[data-sedit]").forEach(function(b){
+            b.onclick = function(){ chProgUI = { edit:null, del:null, add:false, sEdit:b.dataset.sedit, sDel:null }; chRenderProg(); };
+        });
+        shelf.querySelectorAll("[data-sdel]").forEach(function(b){
+            b.onclick = function(){ chProgUI = { edit:null, del:null, add:false, sEdit:null, sDel:b.dataset.sdel }; chRenderProg(); };
+        });
+        shelf.querySelectorAll("[data-sact]").forEach(function(b){ b.onclick = function(){ chSrcAct(b.dataset.sact, b.dataset.key || ""); }; });
+    }
+}
+/* ——— редактор сетки: инструменты ——— */
+function chLinkId(text){
+    const t = String(text || "");
+    let m = t.match(/[?&]v=([A-Za-z0-9_-]{11})/) || t.match(/youtu\.be\/([A-Za-z0-9_-]{11})/)
+         || t.match(/\/shorts\/([A-Za-z0-9_-]{11})/) || t.match(/\/embed\/([A-Za-z0-9_-]{11})/);
+    return m ? m[1] : null;
+}
+function chAddTimes(startStr, stepMin, i){
+    const base = chT2m(startStr);
+    const m = ((base >= 0 ? base : 540) + i * (Math.max(1, stepMin) )) % 1440;
+    return String(Math.floor(m / 60)).padStart(2, "0") + ":" + String(m % 60).padStart(2, "0");
+}
+/* пачкой: вставили ссылки — они разошлись по времени */
+function chToolPaste(){
+    const ta = document.getElementById("ch-pt-links");
+    const raw = (ta && ta.value || "").trim();
+    if(!raw){ showStatus("Вставьте ссылки", "error"); return; }
+    const lines = raw.split(/[\n,;]+/).map(function(x){ return x.trim(); }).filter(Boolean);
+    const from = (document.getElementById("ch-pt-from")?.value || "09:00");
+    const step = Number(document.getElementById("ch-pt-step")?.value || 30);
+    const wantTitles = !!(document.getElementById("ch-pt-titles")?.checked);
+    const items = [];
+    lines.forEach(function(l, i){
+        const id = chLinkId(l);
+        const url = id ? ("https://www.youtube.com/watch?v=" + id) : l;
+        items.push({ id:id, url:url, name:"", time:chAddTimes(from, step, i) });
+    });
+    if(!items.length){ showStatus("Ничего не нашёл", "error"); return; }
+    const after = function(){
+        let n = 0;
+        const jobs = items.map(function(it){
+            return push(ref(db, "schedule"), { name:it.name || ("Передача " + it.time), url:it.url,
+                                               time:it.time, day:chProgDay, channel:chOpenId, auto:false })
+                .then(function(){ n++; });
+        });
+        Promise.all(jobs).then(function(){
+            chProgUI = { edit:null, del:null, add:false, sEdit:null, sDel:null, tool:null };
+            if(wantTitles && items.some(function(x){ return x.id; })){
+                const need = items.filter(function(x){ return x.id; }).map(function(x){ return { id:x.id, title:"" }; });
+                ytTitlesFor(need, function(a, b){ showStatus("Узнаю названия: " + a + " из " + b + "…", "success"); })
+                    .then(chRenameByUrls)
+                    .catch(function(){});
+            }
+            chRenderProg();
+            showStatus("Добавлено передач: " + n, "success");
+        }).catch(function(e){ showStatus("Ошибка: " + e.message, "error"); });
+    };
+    if(wantTitles && items.some(function(x){ return x.id; })){
+        const need = items.filter(function(x){ return x.id; }).map(function(x){ return { id:x.id, title:"" }; });
+        ytTitlesFor(need, function(a, b){ showStatus("Узнаю названия: " + a + " из " + b + "…", "success"); })
+            .then(function(list){
+                const map = {};
+                (list || []).forEach(function(x){ if(x && x.id) map[x.id] = x.title; });
+                items.forEach(function(it){ if(it.id && map[it.id]) it.name = map[it.id]; });
+                after();
+            }).catch(function(){ after(); });
+    } else after();
+}
+/* если названия узнали уже после записи — подправим по ссылкам */
+function chRenameByUrls(list){
+    const map = {};
+    (list || []).forEach(function(x){ if(x && x.id) map[x.id] = x.title; });
+    if(!Object.keys(map).length) return Promise.resolve();
+    const d = chSched();
+    const jobs = [];
+    Object.keys(d).forEach(function(k){
+        const r = d[k] || {};
+        if(chOf(r) !== chOpenId) return;
+        const id = chLinkId(r.url || "");
+        if(id && map[id] && String(r.name || "").indexOf("Передача ") === 0){
+            jobs.push(update(ref(db, "schedule/" + k), { name:map[id] }));
+        }
+    });
+    return Promise.all(jobs);
+}
+/* размножить день на другие дни */
+function chToolDup(){
+    const boxes = [...document.querySelectorAll(".ch-dup-day")].filter(function(x){ return x.checked && !x.disabled; });
+    if(!boxes.length){ showStatus("Выберите дни", "error"); return; }
+    const days = boxes.map(function(x){ return Number(x.value); });
+    const rows = chRows(chOpenId).filter(function(r){ return !r.day || r.day === "all" || Number(r.day) === chProgDay; });
+    if(!rows.length){ showStatus("В этот день programme пуста", "error"); return; }
+    const jobs = [];
+    days.forEach(function(d){
+        rows.forEach(function(r){
+            jobs.push(push(ref(db, "schedule"), { name:r.name, url:r.url, time:r.time, day:d, channel:chOpenId, auto:false }));
+        });
+    });
+    Promise.all(jobs).then(function(){
+        chProgUI = { edit:null, del:null, add:false, sEdit:null, sDel:null, tool:null };
+        chRenderProg();
+        showStatus("Скопировано: " + jobs.length + " передач на " + days.length + " дн.", "success");
+    }).catch(function(e){ showStatus("Ошибка: " + e.message, "error"); });
+}
+/* равномерно расставить передачи дня по времени */
+function chToolSpread(){
+    const from = chT2m(document.getElementById("ch-sp-from")?.value || "08:00");
+    const to = chT2m(document.getElementById("ch-sp-to")?.value || "23:00");
+    const rows = chRows(chOpenId).filter(function(r){ return !r.day || r.day === "all" || Number(r.day) === chProgDay; })
+                                 .sort(function(a,b){ return chT2m(a.time) - chT2m(b.time); });
+    if(!rows.length){ showStatus("В этот день ничего нет", "error"); return; }
+    const a = from >= 0 ? from : 480, b = to >= 0 ? to : 1380;
+    const span = Math.max(1, b - a);
+    const step = rows.length > 1 ? span / (rows.length - 1) : 0;
+    const upd = {};
+    rows.forEach(function(r, i){
+        const m = Math.min(1439, Math.round(a + step * i));
+        upd["schedule/" + r.key + "/time"] = String(Math.floor(m / 60)).padStart(2, "0") + ":" + String(m % 60).padStart(2, "0");
+    });
+    update(ref(db), upd).then(function(){
+        chProgUI = { edit:null, del:null, add:false, sEdit:null, sDel:null, tool:null };
+        chRenderProg();
+        showStatus("Расставил: " + rows.length + " передач", "success");
+    }).catch(function(e){ showStatus("Ошибка: " + e.message, "error"); });
+}
+/* заполнить всю неделю передачами канала по кругу */
+function chToolFill(){
+    const perDay = Math.max(1, Math.min(48, Number(document.getElementById("ch-fl-count")?.value || 12)));
+    const from = chT2m(document.getElementById("ch-fl-from")?.value || "08:00");
+    const to = chT2m(document.getElementById("ch-fl-to")?.value || "23:00");
+    const pool = chSources(chOpenId);
+    let rows = chRows(chOpenId).slice();
+    if(!pool.length && !rows.length){ showStatus("У канала нет передач", "error"); return; }
+    /* сначала чистим старую сетку канала */
+    const del = rows.map(function(r){ return remove(ref(db, "schedule/" + r.key)); });
+    const a = from >= 0 ? from : 480, b = to >= 0 ? to : 1380;
+    const span = Math.max(1, b - a);
+    const step = perDay > 1 ? span / (perDay - 1) : 0;
+    Promise.all(del).then(function(){
+        const jobs = [];
+        for(let d = 1; d <= 7; d++){
+            for(let i = 0; i < perDay; i++){
+                const it = pool[(d - 1) * perDay + i] || pool[((d - 1) * perDay + i) % Math.max(1, pool.length)];
+                if(!it) continue;
+                const m = Math.min(1439, Math.round(a + step * i));
+                const tm = String(Math.floor(m / 60)).padStart(2, "0") + ":" + String(m % 60).padStart(2, "0");
+                jobs.push(push(ref(db, "schedule"), { name:it.name, url:it.url, time:tm, day:d, channel:chOpenId, auto:false }));
+            }
+        }
+        return Promise.all(jobs);
+    }).then(function(jobs){
+        chProgUI = { edit:null, del:null, add:false, sEdit:null, sDel:null, tool:null };
+        chRenderProg();
+        showStatus("Сетка на неделю готова: " + (jobs ? jobs.length : 0) + " передач", "success");
+    }).catch(function(e){ showStatus("Ошибка: " + e.message, "error"); });
+}
+/* очистить день */
+function chToolClearDay(){
+    const rows = chRows(chOpenId).filter(function(r){ return !r.day || r.day === "all" || Number(r.day) === chProgDay; });
+    if(!rows.length){ showStatus("В этот день и так пусто", "error"); return; }
+    Promise.all(rows.map(function(r){ return remove(ref(db, "schedule/" + r.key)); })).then(function(){
+        chProgUI = { edit:null, del:null, add:false, sEdit:null, sDel:null, tool:null };
+        chRenderProg();
+        showStatus("День очищен: " + rows.length + " передач", "success");
+    }).catch(function(e){ showStatus("Ошибка: " + e.message, "error"); });
+}
+/* передача «каждый день» */
+function chToolDaily(key){
+    const r = (chSched() || {})[key];
+    if(!r) return;
+    const daily = !(String(r.day) === "all");
+    update(ref(db, "schedule/" + key), { day: daily ? "all" : chProgDay })
+        .then(function(){ chRenderProg(); showStatus(daily ? "Передача теперь каждый день" : "Вернули на один день", "success"); })
+        .catch(function(e){ showStatus("Ошибка: " + e.message, "error"); });
+}
+function chProgAct(act, key){
+    const reset = function(){ chProgUI = { edit:null, del:null, add:chProgUI.add, sEdit:null, sDel:null }; chRenderProg(); };
+    if(act === "cancel"){ chProgUI = { edit:null, del:null, add:false, sEdit:null, sDel:null, tool:null }; chRenderProg(); return; }
+    if(act === "tool"){ chProgUI = { edit:null, del:null, add:false, sEdit:null, sDel:null, tool:(key === chProgUI.tool ? null : key) }; chRenderProg(); return; }
+    if(act === "paste-save"){ chToolPaste(); return; }
+    if(act === "dup-save"){ chToolDup(); return; }
+    if(act === "spread-save"){ chToolSpread(); return; }
+    if(act === "fill-save"){ chToolFill(); return; }
+    if(act === "clear-yes"){ chToolClearDay(); return; }
+    if(act === "daily"){ chToolDaily(key); return; }
+    if(act === "add"){ chProgUI = { edit:null, del:null, add:true, sEdit:null, sDel:null }; chRenderProg();
+        const el = document.getElementById("ch-pa-name"); if(el) el.focus(); return; }
+    if(act === "add-save"){
+        if(!chIsAdmin()){ showStatus("Нужны права администратора", "error"); return; }
+        const t = (document.getElementById("ch-pa-time")?.value || "").trim();
+        const nm = (document.getElementById("ch-pa-name")?.value || "").trim();
+        const u = (document.getElementById("ch-pa-url")?.value || "").trim();
+        if(!nm || !u){ showStatus("Нужны название и ссылка", "error"); return; }
+        push(ref(db, "schedule"), { day:chProgDay, time:t || "12:00", name:nm, url:u, channel:chOpenId, auto:false, createdAt:Date.now() })
+            .then(function(){ chProgUI = { edit:null, del:null, add:false, sEdit:null, sDel:null }; showStatus("Передача добавлена в сетку", "success"); })
+            .catch(function(e){ showStatus("Ошибка: " + e.message, "error"); });
+        return;
+    }
+    if(act === "save"){
+        if(!chIsAdmin()){ showStatus("Нужны права администратора", "error"); return; }
+        update(ref(db, "schedule/" + key), {
+            time:(document.getElementById("ch-pt-time")?.value || ""),
+            name:(document.getElementById("ch-pt-name")?.value || "").trim(),
+            url :(document.getElementById("ch-pt-url")?.value || "").trim()
+        }).then(function(){ chProgUI = { edit:null, del:null, add:false, sEdit:null, sDel:null }; showStatus("Сохранено", "success"); })
+          .catch(function(e){ showStatus("Ошибка: " + e.message, "error"); });
+        return;
+    }
+    if(act === "del-yes"){
+        if(!chIsAdmin()){ showStatus("Нужны права администратора", "error"); return; }
+        remove(ref(db, "schedule/" + key))
+            .then(function(){ chProgUI = { edit:null, del:null, add:false, sEdit:null, sDel:null }; showStatus("Удалено из сетки", "success"); })
+            .catch(function(e){ showStatus("Ошибка: " + e.message, "error"); });
+        return;
+    }
+    reset();
+}
+function chSrcAct(act, key){
+    if(act === "cancel"){ chProgUI = { edit:null, del:null, add:false, sEdit:null, sDel:null }; chRenderProg(); return; }
+    if(act === "save"){
+        if(!chIsAdmin()){ showStatus("Нужны права администратора", "error"); return; }
+        update(ref(db, "sources/" + key), {
+            name:(document.getElementById("ch-se-name")?.value || "").trim(),
+            url :(document.getElementById("ch-se-url")?.value || "").trim(),
+            channel:(document.getElementById("ch-se-ch")?.value || chOpenId)
+        }).then(function(){ chProgUI = { edit:null, del:null, add:false, sEdit:null, sDel:null }; showStatus("Передача сохранена", "success"); })
+          .catch(function(e){ showStatus("Ошибка: " + e.message, "error"); });
+        return;
+    }
+    if(act === "del-yes"){
+        if(!chIsAdmin()){ showStatus("Нужны права администратора", "error"); return; }
+        remove(ref(db, "sources/" + key))
+            .then(function(){ chProgUI = { edit:null, del:null, add:false, sEdit:null, sDel:null }; showStatus("Передача удалена", "success"); })
+            .catch(function(e){ showStatus("Ошибка: " + e.message, "error"); });
+    }
+}
+
+/* ---- админка каналов ---- */
+function chSave(id, obj){
+    if(!chIsAdmin()){ showStatus("Нужны права администратора", "error"); return Promise.resolve(); }
+    const cur = chGet(id);
+    const row = { name:cur.name, icon:cur.icon, desc:cur.desc, order:cur.order, updatedAt:Date.now() };
+    Object.keys(obj || {}).forEach(function(k){ row[k] = obj[k]; });
+    return set(ref(db, "channels/" + id), row)
+        .then(function(){ showStatus("Канал сохранён", "success"); })
+        .catch(function(e){ showStatus("Ошибка: " + e.message, "error"); });
+}
+function chDelete(id){
+    if(!chIsAdmin()) return;
+    if(id === CH_DEFAULT){ showStatus("Общий канал удалить нельзя", "error"); return; }
+    const c = chGet(id), cnt = chCounts(id);
+    const msg = "Удалить канал «" + c.name + "»?"
+              + ((cnt.sources + cnt.sched) ? ("\nЕго передачи (" + cnt.sources + ") и строки сетки (" + cnt.sched + ") будут переданы общему каналу.") : "");
+    if(!confirm(msg)) return;
+    chDeleteNow(id);
+}
+function chMove(id, dir){
+    const list = chList(), i = list.findIndex(function(x){ return x.id === id; });
+    if(i < 0) return;
+    const j = i + dir;
+    if(j < 0 || j >= list.length) return;
+    const a = list[i], b = list[j];
+    chSave(a.id, { order:(typeof b.order === "number" ? b.order : Date.now()) + (dir > 0 ? 1 : -1) });
+}
+function chCopyGrid(id){
+    if(!chIsAdmin()){ showStatus("Нужны права администратора", "error"); return; }
+    if(id === CH_DEFAULT){ showStatus("Общий канал и есть источник сетки", "error"); return; }
+    const rows = chRows(CH_DEFAULT);
+    if(!rows.length){ showStatus("В общем канале пока нет ни одной строки сетки", "error"); return; }
+    if(!confirm("Скопировать сетку общего канала (" + rows.length + " строк) в канал «" + chGet(id).name + "»?")) return;
+    const jobs = rows.map(function(r){
+        return push(ref(db, "schedule"), { day:r.day, time:r.time, name:r.name, url:r.url,
+                                           channel:id, auto:false, copiedFrom:r.key, createdAt:Date.now() });
+    });
+    Promise.all(jobs)
+        .then(function(){ showStatus("Скопировано строк: " + jobs.length, "success"); })
+        .catch(function(e){ showStatus("Ошибка: " + e.message, "error"); });
+}
+function chSetMain(id){
+    if(!chIsAdmin()){ showStatus("Нужны права администратора", "error"); return; }
+    set(ref(db, "settings/mainChannel"), id)
+        .then(function(){ showStatus("Главный канал: " + chGet(id).name, "success"); })
+        .catch(function(e){ showStatus("Ошибка: " + e.message, "error"); });
+}
+function chRenderAdmin(){
+    const l = document.getElementById("channel-admin-list");
+    if(!l) return;
+    if(!chIsAdmin()){ l.innerHTML = '<div class="hint">Каналы настраивает администратор</div>'; return; }
+    const list = chList(), main = chMainCh || CH_DEFAULT;
+    l.innerHTML = list.map(function(c){
+        const cnt = chCounts(c.id);
+        return '<div class="list-item"><span class="li-name"><strong>' + esc(c.name) + '</strong>'
+             + '<br><small style="opacity:.6">передач: ' + cnt.sources + ' · в сетке: ' + cnt.sched
+             + (c.reg ? "" : " · канал из данных") + '</small></span>'
+             + '<button class="ch-main" data-chid="' + esc(c.id) + '">' + (c.id === main ? "★ главный" : "☆ главным") + '</button>'
+             + '<button class="ch-grid-copy" data-chid="' + esc(c.id) + '" title="Скопировать сетку общего канала в этот канал">⧉ сетка</button>'
+             + '<button class="ch-up" data-chid="' + esc(c.id) + '">↑</button>'
+             + '<button class="ch-down" data-chid="' + esc(c.id) + '">↓</button>'
+             + '<button class="edit-channel" data-chid="' + esc(c.id) + '">Изменить</button>'
+             + '<button class="del" data-chdel="' + esc(c.id) + '">Удалить</button></div>';
+    }).join("");
+    l.querySelectorAll(".ch-main").forEach(function(b){ b.onclick = function(){ chSetMain(b.dataset.chid); }; });
+    l.querySelectorAll(".ch-grid-copy").forEach(function(b){ b.onclick = function(){ chCopyGrid(b.dataset.chid); }; });
+    l.querySelectorAll(".ch-up").forEach(function(b){ b.onclick = function(){ chMove(b.dataset.chid, -1); }; });
+    l.querySelectorAll(".ch-down").forEach(function(b){ b.onclick = function(){ chMove(b.dataset.chid, 1); }; });
+    l.querySelectorAll(".edit-channel").forEach(function(b){
+        b.onclick = function(){
+            const c = chGet(b.dataset.chid);
+            const n = prompt("Название канала", c.name); if(n === null) return;
+            const i = prompt("Иконка: ссылка на картинку или смайл", c.icon); if(i === null) return;
+            const d = prompt("Описание канала", c.desc); if(d === null) return;
+            chSave(c.id, { name:n.trim() || c.name, icon:i.trim(), desc:d.trim() });
+        };
+    });
+    l.querySelectorAll("[data-chdel]").forEach(function(b){ b.onclick = function(){ chDelete(b.dataset.chdel); }; });
+}
+/* приписать бесхозные передачи и строки сетки к каналу разом */
+function chRenderMigrate(){
+    const box = document.getElementById("channel-admin-migrate");
+    if(!box) return;
+    if(!chIsAdmin()){ box.innerHTML = ""; return; }
+    const d = chSched();
+    const rows = Object.keys(d).filter(function(k){ return !(d[k] || {}).channel; });
+    const srcs = Object.keys(chSrcData || {}).filter(function(k){ return !(chSrcData[k] || {}).channel; });
+    if(!rows.length && !srcs.length){
+        box.innerHTML = '<div class="hint">Всё приписано к каналам: каждая передача и каждая строка сетки знают свой канал.</div>';
+        return;
+    }
+    box.innerHTML = '<div class="hint">Без канала: <b>' + rows.length + '</b> строк сетки и <b>' + srcs.length
+                  + '</b> передач. Они идут в общий канал — можно приписать их к любому каналу разом:</div>'
+                  + '<div class="fx-row"><select id="ch-migrate-target">'
+                  + chList().map(function(c){ return '<option value="' + esc(c.id) + '">' + esc(c.name) + '</option>'; }).join("")
+                  + '</select><button class="btn-secondary" id="ch-migrate-go">Приписать</button></div>';
+    const go = document.getElementById("ch-migrate-go");
+    if(go) go.onclick = function(){
+        const t = (document.getElementById("ch-migrate-target") || {}).value || CH_DEFAULT;
+        if(!confirm("Приписать " + (rows.length + srcs.length) + " записей каналу «" + chGet(t).name + "»?")) return;
+        const jobs = [];
+        srcs.forEach(function(k){ jobs.push(update(ref(db, "sources/" + k), { channel:t })); });
+        rows.forEach(function(k){ jobs.push(update(ref(db, "schedule/" + k), { channel:t })); });
+        Promise.all(jobs)
+            .then(function(){ showStatus("Приписано записей: " + jobs.length, "success"); })
+            .catch(function(e){ showStatus("Ошибка: " + e.message, "error"); });
+    };
+}
+/* выбор канала в формах источника и расписания */
+function chFillSelects(){
+    const list = chList();
+    const opts = list.map(function(c){ return '<option value="' + esc(c.id) + '">' + esc(c.name) + '</option>'; }).join("");
+    ["source-channel", "sched-channel"].forEach(function(id){
+        const el = document.getElementById(id);
+        if(!el) return;
+        const cur = el.value;
+        el.innerHTML = opts;
+        if(cur) el.value = cur;
+    });
+    const mt = document.getElementById("ch-migrate-target");
+    if(mt){ const cur = mt.value; mt.innerHTML = opts; if(cur) mt.value = cur; }
+}
+function chRefresh(){
+    try{ chRenderSwitch(); chRenderStrip(); }catch(e){}
+    try{
+        chFillSelects(); chRenderAdmin(); chRenderMigrate();
+        if(document.getElementById("channels-panel")?.classList.contains("active")) chRenderPanel();
+        if(document.getElementById("channel-detail-modal")?.classList.contains("active")) chRenderProg();
+    }catch(e){}
+}
+function chSubscribe(){
+    if(!FB_OK) return;
+    onValue(ref(db, "channels"), function(s){ chRegData = s.val() || {}; chRefresh(); });
+    onValue(ref(db, "sources"),  function(s){ chSrcData = s.val() || {}; chRefresh(); });
+    onValue(ref(db, "settings/mainChannel"), function(s){ chMainCh = s.val() || CH_DEFAULT; chRefresh(); });
+}
+document.getElementById("add-channel-admin")?.addEventListener("click", function(){
+    if(!chIsAdmin()){ showStatus("Нужны права администратора", "error"); return; }
+    const n = (document.getElementById("channel-admin-name")?.value || "").trim();
+    if(!n){ showStatus("Введите название канала", "error"); return; }
+    const i = (document.getElementById("channel-admin-icon")?.value || "").trim();
+    const d = (document.getElementById("channel-admin-desc")?.value || "").trim();
+    const id = "ch" + Date.now().toString(36);
+    set(ref(db, "channels/" + id), { name:n, icon:i, desc:d, order:Date.now(), createdAt:Date.now() })
+        .then(function(){
+            document.getElementById("channel-admin-name").value = "";
+            document.getElementById("channel-admin-icon").value = "";
+            document.getElementById("channel-admin-desc").value = "";
+            showStatus("Канал «" + n + "» добавлен", "success");
+        })
+        .catch(function(e){ showStatus("Ошибка: " + e.message, "error"); });
+});
+document.getElementById("ch-new-add")?.addEventListener("click", function(){
+    if(!chIsAdmin()){ showStatus("Нужны права администратора", "error"); return; }
+    const n = (document.getElementById("ch-new-name")?.value || "").trim();
+    if(!n){ showStatus("Введите название канала", "error"); return; }
+    const i = (document.getElementById("ch-new-icon")?.value || "").trim();
+    const d = (document.getElementById("ch-new-desc")?.value || "").trim();
+    set(ref(db, "channels/ch" + Date.now().toString(36)), { name:n, icon:i, desc:d, order:Date.now(), createdAt:Date.now() })
+        .then(function(){
+            document.getElementById("ch-new-name").value = "";
+            document.getElementById("ch-new-icon").value = "";
+            document.getElementById("ch-new-desc").value = "";
+            showStatus("Канал «" + n + "» добавлен", "success");
+        })
+        .catch(function(e){ showStatus("Ошибка: " + e.message, "error"); });
+});
+chSubscribe();
+chRefresh();
+window.chRefresh = chRefresh;
+/* раздел должен перерисоваться, когда стал известен пользователь (вошёл админ) */
+(function(){
+    const orig = window.updateProfileBtn;
+    if(typeof orig !== "function") return;
+    window.updateProfileBtn = function(){
+        try{ orig.apply(this, arguments); }catch(e){}
+        setTimeout(function(){ try{ chRefresh(); }catch(e){} }, 250);
+    };
+})();
+
 /* ================= ЭКВАЛАЙЗЕР РАДИО (v12) =================
    Слушаем спектр на отдельном «тихом» подключении к тому же потоку:
    основной звук радио при этом вообще не трогаем. Если поток не отдаёт CORS,
@@ -6943,8 +8484,8 @@ function parseImportJson(text){
     try { data = JSON.parse(raw); }
     catch(e){ return { err: 'Не JSON: ' + e.message }; }
     if(data && !Array.isArray(data) && typeof data === 'object'){
-        if(Array.isArray(data.sources)) data = { sources: data.sources, schedule: data.schedule || [] };
-        else if(Array.isArray(data.schedule)) data = { sources: [], schedule: data.schedule };
+        if(Array.isArray(data.sources)) data = { sources: data.sources, schedule: data.schedule || [], channels: data.channels || [] };
+        else if(Array.isArray(data.schedule)) data = { sources: [], schedule: data.schedule, channels: data.channels || [] };
         else if(Array.isArray(data.items)) data = data.items;
     }
     let srcs = [], sched = [];
@@ -6967,10 +8508,22 @@ function parseImportJson(text){
         return { name: String(x.name || 'Без названия').slice(0, 120),
                  url: cleanUrl(x.url),
                  time: /^\d{1,2}:\d{2}$/.test(String(x.time || '')) ? String(x.time) : '12:00',
-                 day: (day >= 1 && day <= 7) ? day : 1 };
+                 day: (day >= 1 && day <= 7) ? day : 1,
+                 channel: String(x.channel || 'general') };
     });
-    if(!srcs.length && !sched.length) return { err: 'Не нашёл ни одного видео с полем url' };
-    return { sources: srcs, schedule: sched };
+    let chans = [];
+    if(!Array.isArray(data) && data && Array.isArray(data.channels)){
+        chans = data.channels.filter(function(x){ return x && (x.name || x.url); }).map(function(x){
+            return { id: String(x.id || '').slice(0, 40).replace(/[.#$\/\[\]]/g, '_'),
+                     name: String(x.name || 'Канал').slice(0, 80),
+                     icon: String(x.icon || ''), desc: String(x.desc || ''),
+                     trailer: String(x.trailer || x.url || ''),
+                     effect: String(x.effect || ''), color: String(x.color || ''),
+                     order: typeof x.order === 'number' ? x.order : Date.now() };
+        });
+    }
+    if(!srcs.length && !sched.length && !chans.length) return { err: 'Не нашёл ни одного видео с полем url' };
+    return { sources: srcs, schedule: sched, channels: chans };
 }
 window.doImportContent=async function(){
     const ta = document.getElementById('import-json');
@@ -6979,8 +8532,21 @@ window.doImportContent=async function(){
     if(!me || me.role !== 'admin'){ if(log) log.textContent = 'Нужны права администратора'; return; }
     const parsed = parseImportJson(ta.value);
     if(parsed.err){ if(log) log.textContent = 'Ошибка: ' + parsed.err; return; }
-    if(log) log.textContent = 'Добавляю: источников ' + parsed.sources.length + ', в расписание ' + parsed.schedule.length + '…';
+    let okC = 0;
+    if(log) log.textContent = 'Добавляю: каналов ' + (parsed.channels || []).length
+        + ', источников ' + parsed.sources.length + ', в расписание ' + parsed.schedule.length + '…';
     let okS = 0, okT = 0, errs = [];
+    for(const it of (parsed.channels || [])){
+        try {
+            const copy = { ...it, createdAt: Date.now() };
+            const cid = String(copy.id || '').trim();
+            delete copy.id;
+            if(cid){ await set(ref(db, 'channels/' + cid), copy); }
+            else { await push(ref(db, 'channels'), copy); }
+            okC++;
+        }
+        catch(e){ errs.push(it.name + ': ' + e.message); }
+    }
     for(const it of parsed.sources){
         try { await push(ref(db, 'sources'), { ...it, createdAt: Date.now() }); okS++; }
         catch(e){ errs.push(it.name + ': ' + e.message); }
@@ -6989,9 +8555,9 @@ window.doImportContent=async function(){
         try { await push(ref(db, 'schedule'), it); okT++; }
         catch(e){ errs.push(it.name + ': ' + e.message); }
     }
-    if(log) log.textContent = 'Готово. Добавлено источников: ' + okS + ', в расписание: ' + okT +
+    if(log) log.textContent = 'Готово. Добавлено каналов: ' + okC + ', источников: ' + okS + ', в расписание: ' + okT +
         (errs.length ? '\\nОшибки: ' + errs.slice(0, 5).join('; ') : '');
-    showStatus('Импорт завершён: +' + okS + ' источников, +' + okT + ' в расписании', 'success');
+    showStatus('Импорт завершён: +' + okC + ' каналов, +' + okS + ' источников, +' + okT + ' в расписании', 'success');
 };
 document.getElementById('import-run')?.addEventListener('click', () => { doImportContent(); });
 // Загрузка файла .json: выбрали (или перетащили) — сразу разобрали и показали, что будет записано
@@ -7009,7 +8575,8 @@ window.handleImportFile = async function (file) {
     if (ta) ta.value = text;
     const parsed = parseImportJson(text);
     if (parsed.err) { if (log) log.textContent = 'Ошибка в файле «' + file.name + '»: ' + parsed.err; return; }
-    const msg = 'Файл «' + file.name + '»:\nвидео в библиотеку — ' + parsed.sources.length +
+    const msg = 'Файл «' + file.name + '»:\nканалов — ' + (parsed.channels || []).length +
+                '\nвидео в библиотеку — ' + parsed.sources.length +
                 '\nпередач в расписание — ' + parsed.schedule.length + '\nДобавить в базу?';
     if (!window.confirm(msg)) { if (log) log.textContent = 'Отменено. Файл разобран, но ничего не записано.'; return; }
     await doImportContent();
@@ -7063,6 +8630,7 @@ Object.keys(radioTracks).forEach(function(k){
     if((radioTracks[k]||{}).videoId) return;          /* песни с YouTube звуковым файлом не проверяем */
     radioCheckUrl((radioTracks[k]||{}).url||"",false,function(){paintRadioChecks(l);});
 });
+    ytFillExistingTitles();
 }
 function radioCheckUrl(url,force,cb){
     window.__radioChecks=window.__radioChecks||{};
@@ -7085,7 +8653,7 @@ function paintRadioChecks(host){
     window.__radioChecks=window.__radioChecks||{};
     l2.querySelectorAll(".radio-check").forEach(el=>{
         const st=window.__radioChecks[el.dataset.url||""]||"checking";
-        el.textContent=st==="ok"?"✅ ссылка работает":(st==="bad"?"⚠️ не аудио — на этом треке радио замолчит":(st==="ytok"?"▶ YouTube — играет встроенным плеером":(st==="ytbad"?"⚠️ YouTube: песня не проигрывается, пропускаем":"⏳ проверяю ссылку…")));
+        el.textContent=st==="ok"?"✅ ссылка работает":(st==="bad"?"⚠️ не аудио — на этом треке радио замолчит":(st==="ytok"?"▶ играет встроенным плеером":(st==="ytbad"?"⚠️ не проигрывается, пропускаем":"⏳ проверяю ссылку…")));
         el.style.color=(st==="ok"||st==="ytok")?"#7ee787":((st==="bad"||st==="ytbad")?"#ff9f9f":"rgba(255,255,255,.55)");
     });
 }
@@ -7115,7 +8683,7 @@ function ytAddMany(items){
     const nm=one?((tTitle&&tTitle.value||"").trim()):"";
     let i=0, added=0, failed=0;
     if(!list.length) return;
-    showStatus("Добавляю песни: 0 из "+list.length+"…");
+    if(one&&nm) list[0].title=nm;      /* админ сам написал название — оно главнее */
     const step=function(){
         if(i>=list.length){
             if(tTitle) tTitle.value="";
@@ -7125,8 +8693,8 @@ function ytAddMany(items){
             return;
         }
         const it=list[i++];
-        const row={ title:(one&&nm)?nm:(it.title||"Песня с YouTube"),
-                    artist:one?((tArtist&&tArtist.value||"").trim()):"",
+        const row={ title:it.title||"Без названия",
+                    artist:(one?((tArtist&&tArtist.value||"").trim()):"")||it.artist||"",
                     url:ytWatch(it.id), videoId:it.id, yt:true, ytBad:false,
                     cover:ytCover(it.id), enabled:true, createdAt:Date.now() };
         push(ref(db,"radioTracks"),row)
@@ -7137,7 +8705,13 @@ function ytAddMany(items){
                 setTimeout(step,220);
             });
     };
-    step();
+    const go=function(){ showStatus("Добавляю песни: 0 из "+list.length+"…"); step(); };
+    if(list.some(function(x){ return !x.title; })){
+        showStatus("Узнаю названия песен…");
+        ytTitlesFor(list,function(a,b){ showStatus("Узнаю названия: "+a+" из "+b+"…"); }).then(go,go);
+        return;
+    }
+    go();
 }
 function ytProbeQueue(ids){
     let i=0;
@@ -7169,8 +8743,17 @@ document.getElementById("add-radio-yt")?.addEventListener("click", function(){
                 return;
             }
             if(inp) inp.value="";
-            showStatus("В плейлисте песен: "+items.length+". Отметьте нужные и нажмите «Добавить выбранные»","success");
             ytRenderList(items);
+            showStatus("В плейлисте песен: "+items.length+". Узнаю названия…");
+            ytTitlesFor(items,function(a,b){ showStatus("Узнаю названия: "+a+" из "+b+"…"); })
+                .then(function(){
+                    ytRenderList(items);
+                    showStatus("В плейлисте песен: "+items.length+". Отметьте нужные и нажмите «Добавить выбранные»","success");
+                })
+                .catch(function(){
+                    ytRenderList(items);
+                    showStatus("В плейлисте песен: "+items.length+". Отметьте нужные и нажмите «Добавить выбранные»","success");
+                });
         });
         return;
     }
@@ -7358,8 +8941,73 @@ window.toggleScheduleReminder=function(id,name,time,day){
 document.addEventListener('click',e=>{const b=e.target.closest('.sched-remind');if(!b)return;e.preventDefault();const id=b.dataset.remind;const d=schedData||{};const it=d[id]||{};toggleScheduleReminder(id,it.name||'',it.time||'',it.day||'all')});
 
 // Управление видимостью радио и статистика текущей сессии
+/* ══════════ живая аудитория: счётчик и кнопка статистики ══════════ */
+let SHOW_ONLINE = true, SHOW_STATS_BTN = true;
+function onlineNow(){
+    const d = window.__viewersRaw || {}, now = Date.now();
+    let n = 0;
+    Object.keys(d).forEach(function(k){
+        const v = d[k] || {};
+        if(now - (v.lastSeen || v.joinedAt || 0) < 150000) n++;
+    });
+    return Math.max(1, n);                       // вы сами на сайте — минимум один
+}
+function onlineWord(n){
+    const a = Math.abs(n) % 100, b = a % 10;
+    if(a > 10 && a < 20) return "смотрят";
+    if(b === 1) return "смотрит";
+    if(b >= 2 && b <= 4) return "смотрят";
+    return "смотрят";
+}
+function updateOnlineBadge(n){
+    const box = document.getElementById("online-now");
+    if(!box) return;
+    const c = (typeof n === "number") ? n : onlineNow();
+    const cnt = document.getElementById("online-count");
+    const w = document.getElementById("online-word");
+    if(cnt) cnt.textContent = c;
+    if(w) w.textContent = onlineWord(c);
+    box.style.display = SHOW_ONLINE ? "" : "none";
+    box.classList.toggle("busy", c > 1);
+}
+function applyStatsToggles(){
+    const isAdmin = !!(typeof me !== "undefined" && me && (me.role === "admin" || me.role === "mod" || me.role === "moderator"));
+    const btn = document.getElementById("nav-stats");
+    if(btn) btn.style.display = (isAdmin && SHOW_STATS_BTN) ? "" : "none";
+    updateOnlineBadge();
+    const t1 = document.getElementById("toggle-online-counter");
+    const t2 = document.getElementById("toggle-stats-btn");
+    if(t1) t1.classList.toggle("on", !!SHOW_ONLINE);
+    if(t2) t2.classList.toggle("on", !!SHOW_STATS_BTN);
+}
+function setStatToggle(key, val){
+    if(!(typeof me !== "undefined" && me && me.role === "admin")){ showStatus("Нужны права администратора", "error"); return; }
+    if(!(typeof FB_OK !== "undefined" && FB_OK)) return;
+    set(ref(db, "settings/" + key), val)
+        .then(function(){ showStatus(val ? "Показываю ✔" : "Скрыто", "success"); })
+        .catch(function(e){ showStatus("Ошибка Firebase: " + e.message, "error"); });
+}
 function applyRadioVisibility(v){const n=document.getElementById('nav-radio'),t=document.getElementById('radio-visibility-toggle');if(n)n.style.display=v?'flex':'none';if(t)t.classList.toggle('on',v)}
 if(FB_OK)onValue(ref(db,'settings/radioEnabled'),x=>applyRadioVisibility(x.val()!==false));
+if(FB_OK){
+    onValue(ref(db,'settings/onlineCounter'),x=>{ SHOW_ONLINE = (x.val()!==false); applyStatsToggles(); });
+    onValue(ref(db,'settings/statsInMore'),x=>{ SHOW_STATS_BTN = (x.val()!==false); applyStatsToggles(); });
+}
+document.getElementById('toggle-online-counter')?.addEventListener('click',()=>{ setStatToggle('onlineCounter', !SHOW_ONLINE); });
+document.getElementById('toggle-stats-btn')?.addEventListener('click',()=>{ setStatToggle('statsInMore', !SHOW_STATS_BTN); });
+document.getElementById('online-now')?.addEventListener('click',()=>{
+    if(!(typeof me !== "undefined" && me && me.role === "admin")) return;
+    const m = document.getElementById('viewer-stats-modal');
+    if(!m) return;
+    m.classList.add('active');
+    if(typeof renderViewerStats === 'function') renderViewerStats();
+});
+setInterval(function(){ updateOnlineBadge(); }, 20000);
+setTimeout(function(){ try{ chRenderStrip(); chRenderSwitch(); }catch(e){} }, 1500);
+window.addEventListener('load', function(){
+    setTimeout(function(){ try{ chRenderStrip(); chRenderSwitch(); }catch(e){} }, 1200);
+});
+try{ applyStatsToggles(); }catch(e){}
 document.getElementById('radio-visibility-toggle')?.addEventListener('click',()=>{if(!me||me.role!=='admin')return;const on=!document.getElementById('radio-visibility-toggle').classList.contains('on');set(ref(db,'settings/radioEnabled'),on).catch(e=>showStatus('Ошибка Firebase: '+e.message,'error'))});
 function statNum(n,label,sub){
     return '<div class="stat-card"><div class="n">'+n+'</div><div class="l">'+label+'</div>'+(sub?'<div style="font-size:11px;opacity:.55;margin-top:2px">'+sub+'</div>':'')+'</div>';
@@ -8124,9 +9772,7 @@ async function mytvDeleteSource(k){
 }
 window.mytvDeleteSource = mytvDeleteSource;
 
-// Каналы строятся из источников, назначенных администратором
-function renderChannels(){if(!FB_OK)return;get(ref(db,'sources')).then(x=>{const v=x.val()||{},groups={};Object.values(v).forEach(a=>{const g=a.channel||'general';(groups[g]??={items:[],icon:a.icon||''}).items.push(a);if(a.icon)groups[g].icon=a.icon});const l=document.getElementById('channels-list');if(l)l.innerHTML=Object.entries(groups).map(([g,a])=>`<button class="btn-secondary" data-channel="${g}">${g} (${a.items.length})</button>`).join('');l?.querySelectorAll('[data-channel]').forEach(b=>b.onclick=()=>{const a=groups[b.dataset.channel].items[0];activateStream(a.url,a.name)})})}
-renderChannels();
+
 // Запись реальных контрольных точек статистики начиная с текущего обновления
 function viewersFresh(){
     const d=window.__viewersRaw||{}, now=Date.now();
@@ -8138,9 +9784,8 @@ setInterval(()=>{ if(FB_OK&&me){ try{ push(ref(db,'analytics/viewers'),{ts:Date.
 setTimeout(viewersCleanup,8000);
 setInterval(viewersCleanup,600000);
 
-// Раздел каналов: панель и рендер уже есть — просто открываем (раньше была заглушка «в разработке»)
 document.getElementById('nav-channels')?.addEventListener('click',()=>{
-    try{renderChannels();}catch(e){}
+    try{chRenderPanel();}catch(e){}
     setActiveNav(document.getElementById('nav-channels'));
     document.getElementById('channels-panel')?.classList.add('active');
 });
@@ -8179,13 +9824,10 @@ document.getElementById('channels-close')?.addEventListener('click',()=>{documen
 
 document.getElementById('source-channel-icon-file')?.addEventListener('change',e=>{const f=e.target.files?.[0];if(!f)return;const r=new FileReader();r.onload=()=>{document.getElementById('source-channel-icon').value=r.result};r.readAsDataURL(f)});
 document.getElementById('channel-detail-close')?.addEventListener('click',()=>document.getElementById('channel-detail-modal')?.classList.remove('active'));
-document.addEventListener('click',e=>{const b=e.target.closest('[data-channel]');if(!b)return;const title=document.getElementById('channel-detail-title'),list=document.getElementById('channel-detail-schedule');if(!title||!list)return;title.textContent=b.dataset.channel;get(ref(db,'sources')).then(x=>{const a=Object.values(x.val()||{}).filter(v=>(v.channel||'general')===b.dataset.channel);list.innerHTML=a.map(v=>`<div class="list-item"><span class="li-name">${esc(v.name||'Без названия')}</span><button class="btn-secondary" data-channel-play="${esc(v.url||'')}">Открыть</button></div>`).join('');document.getElementById('channel-detail-modal').classList.add('active')})});
-document.addEventListener('click',e=>{const b=e.target.closest('[data-channel-play]');if(b){activateStream(b.dataset.channelPlay,b.closest('.list-item')?.querySelector('.li-name')?.textContent||'Канал');document.getElementById('channel-detail-modal')?.classList.remove('active')}});
 
 function applyAvatarFrame(el,days=0){if(!el)return;el.classList.remove('avatar-frame','level-2','level-3','level-4');const d=Number(days)||0;if(d>=90)el.classList.add('avatar-frame','level-4');else if(d>=30)el.classList.add('avatar-frame','level-3');else if(d>=7)el.classList.add('avatar-frame','level-2');else if(d>=1)el.classList.add('avatar-frame')}
 
-function renderChannelAdmin(){if(!FB_OK)return;const l=document.getElementById('channel-admin-list');if(!l)return;get(ref(db,'channels')).then(x=>{const d=x.val()||{};l.innerHTML=Object.entries(d).map(([k,v])=>`<div class="list-item"><span class="li-name">${esc(v.name||k)}</span><button class="edit-channel" data-id="${k}">Изменить</button><button class="del" data-del-channel="${k}">Удалить</button></div>`).join('');l.querySelectorAll('[data-del-channel]').forEach(b=>b.onclick=()=>remove(ref(db,'channels/'+b.dataset.delChannel)));l.querySelectorAll('.edit-channel').forEach(b=>b.onclick=()=>{const v=d[b.dataset.id],n=prompt('Название канала',v.name);if(n)update(ref(db,'channels/'+b.dataset.id),{name:n})})})}
-document.getElementById('add-channel-admin')?.addEventListener('click',()=>{if(me?.role!=='admin')return;const n=document.getElementById('channel-admin-name').value.trim(),i=document.getElementById('channel-admin-icon').value.trim();if(n)push(ref(db,'channels'),{name:n,icon:i,order:Date.now()}).then(renderChannelAdmin)});renderChannelAdmin();
+
 
 function frameForDays(days){return days>=90?'avatar-frame level-4':days>=30?'avatar-frame level-3':days>=7?'avatar-frame level-2':days>=1?'avatar-frame':''}
 // ===== Витрина рамок: что открыто зрителю (по выслуге дней или по выдаче админа) =====
@@ -9132,7 +10774,7 @@ renderAvatarFrameList();
      ============================================================ */
   const nav = $('#bottom-nav');
   // «Каналы» временно убраны (вернуть раздел = добавить 'nav-channels' в этот список)
-  const SHEET_IDS = ['nav-requests', 'nav-reminders', 'nav-favorites', 'nav-admin'];
+  const SHEET_IDS = ['nav-channels', 'nav-requests', 'nav-reminders', 'nav-favorites', 'nav-admin'];
   let sheetEl = null;
   function buildSheet() {
     sheetEl = document.createElement('div');
@@ -9140,7 +10782,25 @@ renderAvatarFrameList();
     sheetEl.id = 'more-sheet';
     const grid = document.createElement('div');
     grid.className = 'more-grid';
-    SHEET_IDS.forEach(id => { const b = document.getElementById(id); if (b) grid.appendChild(b); });
+    let chBtn = null;
+    SHEET_IDS.forEach(id => { const b = document.getElementById(id); if (b) { if (id === 'nav-channels') chBtn = b; grid.appendChild(b); } });
+    // Статистика зрителей — рядом с «Каналы», видна только администратору
+    const statsNavBtn = document.createElement('button');
+    statsNavBtn.className = 'nav-btn';
+    statsNavBtn.id = 'nav-stats';
+    statsNavBtn.style.display = 'none';
+    statsNavBtn.innerHTML = '<span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span><span class="nav-label">Статистика</span>';
+    if (chBtn && chBtn.parentNode) chBtn.parentNode.insertBefore(statsNavBtn, chBtn.nextSibling);
+    else grid.appendChild(statsNavBtn);
+    on(statsNavBtn, 'click', () => {
+      closeSheet();
+      setTimeout(() => {
+        const m = document.getElementById('viewer-stats-modal');
+        if (!m) return;
+        m.classList.add('active');
+        if (typeof renderViewerStats === 'function') renderViewerStats();
+      }, 140);
+    });
     // Достижения: своя кнопка и своё окно
     const achvBtn = document.createElement('button');
     achvBtn.className = 'nav-btn';
@@ -9229,24 +10889,7 @@ renderAvatarFrameList();
   /* ============================================================
      10. ПОЧИНКИ ПОВЕДЕНИЯ
      ============================================================ */
-  // «Каналы» временно убраны из интерфейса (вернуть = вернуть 'nav-channels' в SHEET_IDS)
-  const chBtnHide = document.getElementById('nav-channels');
-  if (chBtnHide) chBtnHide.style.display = 'none';
-
-  // Каналы: панель реально существует — открываем её вместо «в разработке»
-  const navCh = document.getElementById('nav-channels');
-  if (navCh) {
-    const fresh = navCh.cloneNode(true);
-    navCh.parentNode.replaceChild(fresh, navCh);
-    on(fresh, 'click', () => {
-      const panel = $('#channels-panel');
-      if (!panel) return;
-      try { if (typeof renderChannels === 'function') renderChannels(); } catch (e) {}
-      panel.classList.add('active');
-      closeSheet();
-      SFX.click();
-    });
-  }
+  // Раздел «Каналы» вернулся: кнопка лежит в меню «Ещё», панель открывается по ней
   // Радио: подсветка табло и счётчик времени для достижений + свет вокруг выключаем
   on(document, 'click', e => {
     const t = e.target;
@@ -9354,7 +10997,7 @@ renderAvatarFrameList();
 })();
 
 </script>
-<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a3b98c7b79f799f2',t:'MTc4OTQ5NTQxMw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><script>
+<script>
 (function () {
     // показать / скрыть пароль
     document.querySelectorAll('.auth-eye').forEach(function (b) {
@@ -9933,5 +11576,5 @@ window.checkDbRights = async function () {
 })();
 </script>
 <div class="aero-bubbles" id="aero-bubbles" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-</body>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a3dbe2949ae1d352',t:'MTc4OTg1NTQ1NQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
