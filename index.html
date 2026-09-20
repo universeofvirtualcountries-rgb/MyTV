@@ -1313,6 +1313,52 @@ body.aero-theme #radio-mini button{background:rgba(255,255,255,.75)!important;bo
 .src-ch-badge{flex:none;font-size:10px;padding:2px 7px;border-radius:999px;white-space:nowrap;
   border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.08);opacity:.85}
 .aero-theme .src-ch-badge{border-color:rgba(31,86,140,.25);background:rgba(255,255,255,.8);color:#053a65}
+
+/* ══════════ v32: вёрстка не едет ══════════ */
+/* 1. окно «Каналы»: список прокручивается, низ всегда доступен */
+#channels-panel .modal-card{max-height:88vh}
+#channels-panel .modal-card>*{flex:0 0 auto}
+#channels-panel #channels-list{flex:1 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding-right:2px}
+#channels-panel .modal-header,#channels-panel .hint{flex:0 0 auto}
+/* 2. запас снизу под плавающую кнопку чата — ничего под неё не попадает */
+.app{padding-bottom:150px}
+@media(max-width:600px){ .app{padding-bottom:140px} }
+/* 3. радио: кнопки переносятся, а не вылезают за карточку */
+.radio-hero>div{flex-wrap:wrap}
+.radio-hero button{min-width:0;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+/* 4. строки админки переносятся */
+.fx-row{flex-wrap:wrap}
+.fx-row>label{flex:1 1 110px;min-width:0;overflow-wrap:anywhere}
+.fx-row>input,.fx-row>select,.fx-row>textarea{flex:1 1 130px;min-width:0;max-width:100%}
+.fx-row>.fx-toggle{flex:0 0 auto}
+.admin-section,.admin-tab-content,.admin-panel{min-width:0}
+/* 5. длинные названия — многоточие, а не раздвинутый экран */
+.ch-strip-item{max-width:76vw}
+.ch-strip-n{max-width:132px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ch-chip2{max-width:58vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ch-inline{max-width:44vw;display:inline-block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;vertical-align:bottom}
+.nav-label{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.stream-title,#stream-title-display,#stream-next-display,#osd-title,#osd-next{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+/* 6. ничего не бывает шире экрана */
+img,svg,video,iframe,canvas{max-width:100%}
+input,select,textarea,button,.btn-primary,.btn-secondary,.btn-danger,.btn-upload{max-width:100%;min-width:0}
+/* 7. счётчик у эмодзи не вылезает за кнопку */
+.emoji-btn{overflow:hidden}
+.emoji-btn b{max-width:100%;overflow:hidden}
+/* 8. «✕» у объявления — удобнее для пальца */
+#mytv-announce button{min-width:28px;min-height:28px}
+/* 9. страница не уезжает вбок */
+html,body{max-width:100%}
+html{overflow-x:hidden;overflow-y:auto}
+/* 10. ВАЖНО: страница снова прокручивается. Из-за html,body{height:100%}
+       контент выше экрана (планшет, горизонтальный телефон) обрезался и до
+       нижних кнопок было не добраться. */
+html,body{height:auto;min-height:100%}
+body{overflow-x:clip;overflow-y:visible}
+/* 11. плеер свёрнут в угол — под него резервируем место, чтобы нижние кнопки
+       не оказывались под ним и оставались нажимаемыми */
+body.tv-docked #app{padding-bottom:calc(74px + min(46vw,340px) * 0.5625 + 30px)}
+@media(max-width:600px){ body.tv-docked #app{padding-bottom:calc(74px + min(64vw,300px) * 0.5625 + 30px)} }
 </style>
 </head>
 <body class="theme-minimal">
@@ -1783,7 +1829,7 @@ body.aero-theme #radio-mini button{background:rgba(255,255,255,.75)!important;bo
                 <button class="btn-primary" id="add-source-btn">Добавить в список</button>
                 <div style="height:6px"></div>
                 <button class="btn-secondary" id="load-cartoon-pack">📺 Загрузить подборку мультфильмов (7 шт)</button>
-                <div class="admin-section" id="import-box" style="border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:12px;margin-bottom:6px"><label style="font-weight:600">📥 Импорт контента (JSON)</label><div style="font-size:11px;opacity:.6;margin:4px 0 8px;line-height:1.4">Вставьте список видео — можно плейлистом (ссылка вида <code>youtube.com/playlist?list=…</code>) или обычной ссылкой на видео. Поля: <b>sources</b> — video в библиотеку, <b>schedule</b> — в сетку (day 1…7, time «18:00»). В базу пишется только при нажатии кнопки.</div><textarea id="import-json" rows="7" placeholder='[{"name":"Мультик","url":"https://www.youtube.com/watch?v=…"}]' style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);color:#fff;border-radius:10px;padding:10px;font-family:monospace;font-size:12px"></textarea><div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap"><button class="btn-primary" id="import-run" style="width:auto;padding:8px 16px">Добавить в базу</button><button class="btn-secondary" id="import-file-btn" style="width:auto;padding:8px 14px">📁 Загрузить файл .json</button><button class="btn-secondary" id="import-sample" style="width:auto;padding:8px 12px">Пример</button><input type="file" id="import-file" accept=".json,application/json,text/plain" style="display:none"></div><div style="font-size:11px;opacity:.5;margin-top:6px">Можно просто перетащить файл .json в эту область — список подхватится сам.</div><pre id="import-log" style="white-space:pre-wrap;font-size:12px;opacity:.8;margin:8px 0 0"></pre></div><div id="saved-sources-list" style="margin-top:12px"></div>
+                <div class="admin-section" id="import-box" style="border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:12px;margin-bottom:6px"><label style="font-weight:600">📥 Импорт контента (JSON)</label><div style="font-size:11px;opacity:.6;margin:4px 0 8px;line-height:1.4">Вставьте список видео — можно плейлистом (ссылка вида <code>youtube.com/playlist?list=…</code>) или обычной ссылкой на видео. Поля: <b>sources</b> — video в библиотеку, <b>schedule</b> — в сетку (day 1…7, time «18:00»). В базу пишется только при нажатии кнопки.</div><div id="import-ch-hint" style="font-size:11px;margin:0 0 8px;line-height:1.4;color:#ffd479">→ Список без указания канала уйдёт в канал: <b>—</b></div><textarea id="import-json" rows="7" placeholder='[{"name":"Мультик","url":"https://www.youtube.com/watch?v=…"}]' style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);color:#fff;border-radius:10px;padding:10px;font-family:monospace;font-size:12px"></textarea><div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap"><button class="btn-primary" id="import-run" style="width:auto;padding:8px 16px">Добавить в базу</button><button class="btn-secondary" id="import-file-btn" style="width:auto;padding:8px 14px">📁 Загрузить файл .json</button><button class="btn-secondary" id="import-sample" style="width:auto;padding:8px 12px">Пример</button><input type="file" id="import-file" accept=".json,application/json,text/plain" style="display:none"></div><div style="font-size:11px;opacity:.5;margin-top:6px">Можно просто перетащить файл .json в эту область — список подхватится сам.</div><pre id="import-log" style="white-space:pre-wrap;font-size:12px;opacity:.8;margin:8px 0 0"></pre></div><div id="saved-sources-list" style="margin-top:12px"></div>
                 <div style="height:10px"></div>
                 <select id="active-source-select"><option value="">-- Выбери --</option></select>
                 <div style="height:8px"></div>
@@ -3326,6 +3372,8 @@ function chRenderSwitch(){
         const c = chGet(chCurGet());
         nameEl.textContent = '· ' + c.name;
     }
+    const ih = document.getElementById('import-ch-hint');
+    if(ih) ih.innerHTML = '→ Список без указания канала уйдёт в канал: <b>' + esc(chGet(chCurGet()).name) + '</b>';
 }
 /* полоса каналов под плеером — как на настоящем телевизоре */
 function chRenderStrip(){
@@ -8499,9 +8547,10 @@ function parseImportJson(text){
         srcs = Array.isArray(data.sources) ? data.sources.filter(function(x){ return x && x.url; }) : [];
         sched = Array.isArray(data.schedule) ? data.schedule.filter(function(x){ return x && x.url; }) : [];
     }
+    const defCh = (typeof chCurGet === 'function') ? chCurGet() : 'general';
     srcs = srcs.map(function(x){
         return { name: String(x.name || 'Без названия').slice(0, 120),
-                 url: cleanUrl(x.url), channel: String(x.channel || 'general'), icon: String(x.icon || '') };
+                 url: cleanUrl(x.url), channel: String(x.channel || defCh), icon: String(x.icon || '') };
     });
     sched = sched.map(function(x){
         const day = Number(x.day);
@@ -8509,7 +8558,7 @@ function parseImportJson(text){
                  url: cleanUrl(x.url),
                  time: /^\d{1,2}:\d{2}$/.test(String(x.time || '')) ? String(x.time) : '12:00',
                  day: (day >= 1 && day <= 7) ? day : 1,
-                 channel: String(x.channel || 'general') };
+                 channel: String(x.channel || defCh) };
     });
     let chans = [];
     if(!Array.isArray(data) && data && Array.isArray(data.channels)){
@@ -8533,8 +8582,11 @@ window.doImportContent=async function(){
     const parsed = parseImportJson(ta.value);
     if(parsed.err){ if(log) log.textContent = 'Ошибка: ' + parsed.err; return; }
     let okC = 0;
+    const impCh = (typeof chCurGet === 'function') ? chCurGet() : '';
+    const impChName = (typeof chGet === 'function' && impCh) ? chGet(impCh).name : 'общий';
     if(log) log.textContent = 'Добавляю: каналов ' + (parsed.channels || []).length
-        + ', источников ' + parsed.sources.length + ', в расписание ' + parsed.schedule.length + '…';
+        + ', источников ' + parsed.sources.length + ', в расписание ' + parsed.schedule.length + '…'
+        + '\nКуда: ' + impChName + ' (канал выбран наверху)';
     let okS = 0, okT = 0, errs = [];
     for(const it of (parsed.channels || [])){
         try {
@@ -8548,14 +8600,21 @@ window.doImportContent=async function(){
         catch(e){ errs.push(it.name + ': ' + e.message); }
     }
     for(const it of parsed.sources){
-        try { await push(ref(db, 'sources'), { ...it, createdAt: Date.now() }); okS++; }
+        try { await push(ref(db, 'sources'), Object.assign({}, it, { channel: (it.channel || impCh), createdAt: Date.now() })); okS++; }
         catch(e){ errs.push(it.name + ': ' + e.message); }
     }
+    let toCur = 0;
     for(const it of parsed.schedule){
-        try { await push(ref(db, 'schedule'), it); okT++; }
+        try {
+            const row = Object.assign({}, it);
+            if(!row.channel) row.channel = impCh;
+            if(row.channel === impCh) toCur++;
+            row.createdAt = Date.now();
+            await push(ref(db, 'schedule'), row); okT++;
+        }
         catch(e){ errs.push(it.name + ': ' + e.message); }
     }
-    if(log) log.textContent = 'Готово. Добавлено каналов: ' + okC + ', источников: ' + okS + ', в расписание: ' + okT +
+    if(log) log.textContent = 'Готово. Добавлено каналов: ' + okC + ', источников: ' + okS + ', в расписание: ' + okT + '\nИз них в канал «' + impChName + '»: ' + toCur +
         (errs.length ? '\\nОшибки: ' + errs.slice(0, 5).join('; ') : '');
     showStatus('Импорт завершён: +' + okC + ' каналов, +' + okS + ' источников, +' + okT + ' в расписании', 'success');
 };
@@ -11576,5 +11635,5 @@ window.checkDbRights = async function () {
 })();
 </script>
 <div class="aero-bubbles" id="aero-bubbles" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a3dbe2949ae1d352',t:'MTc4OTg1NTQ1NQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a3deba5068be74bb',t:'MTc4OTg4NTI2Mw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
