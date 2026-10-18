@@ -65,7 +65,7 @@
   .btn.primary { background: var(--accent); color: #04130b; }
   .btn.ghost { background: rgba(255,255,255,.07); color: var(--text); border: 1px solid var(--stroke); }
   .toast {
-    min-height: 18px; font-size: 12px; color: var(--accent); margin-top: 6px;
+    min-height: 20px; font-size: 12.5px; color: var(--accent); margin-top: 8px; line-height: 1.4;
   }
 </style>
 </head>
@@ -81,20 +81,20 @@
     <p class="sub" id="inv-sub">Приглашение в игру с бонусом <b>+40 XP</b> на старте</p>
 
     <div class="code-box">
-      <div class="code-lbl">Твой код приглашения</div>
+      <div class="code-lbl">Реферальный код приглашения</div>
       <div class="code-val" id="inv-code">DTP-REF:maksplay</div>
     </div>
 
-    <button class="btn primary" id="btn-open-app" type="button">
-      Открыть приложение с кодом
+    <button class="btn primary" id="btn-copy-code" type="button">
+      Скопировать код (+40 XP)
     </button>
-    <button class="btn ghost" id="btn-copy-code" type="button">
-      Скопировать код для регистрации
+    <button class="btn ghost" id="btn-open-app" type="button">
+      Открыть установленное приложение
     </button>
     <a class="btn ghost" id="btn-dl-apk" href="./DropThePhone.apk" download="DropThePhone.apk">
-      Скачать APK (с автокопированием кода)
+      Скачать APK игры
     </a>
-    <div class="toast" id="inv-toast"></div>
+    <div class="toast" id="inv-toast">Нажми «Скопировать код» — в приложении он вставится одной кнопкой</div>
   </div>
 
 <script>
@@ -126,25 +126,24 @@
     } catch (e) {}
   }
 
-  function openInApk() {
-    copyCode("Код " + fullCode + " скопирован и передаётся в APK…");
-    var intentUrl = "intent://ref/" + encodeURIComponent(safe) + "#Intent;scheme=dtp;package=com.dropthephone.app;end";
-    location.href = intentUrl;
-    setTimeout(function () {
-      location.href = "dtp://ref/" + encodeURIComponent(safe);
-    }, 350);
-  }
-
-  document.getElementById("btn-open-app").onclick = openInApk;
   document.getElementById("btn-copy-code").onclick = function () {
-    copyCode("Код " + fullCode + " скопирован! Вставь его в окне регистрации");
-  };
-  document.getElementById("btn-dl-apk").onclick = function () {
-    copyCode("Код " + fullCode + " скопирован! При открытии APK он подставится сам");
+    copyCode("Код " + fullCode + " скопирован! Открой игру и нажми «Вставить»");
   };
 
-  /* Автоматически пробуем открыть установленный APK с кодом при заходе по ссылке */
-  setTimeout(openInApk, 250);
+  document.getElementById("btn-open-app").onclick = function () {
+    copyCode("Код " + fullCode + " скопирован! Открываю приложение…");
+    /* Используем прямой протокол dtp:// без package=, чтобы Chrome НЕ кидал в Google Play Маркет */
+    var iframe = document.createElement("iframe");
+    iframe.style.display = "none";
+    iframe.src = "dtp://ref/" + encodeURIComponent(safe);
+    document.body.appendChild(iframe);
+    setTimeout(function () { iframe.remove(); }, 1500);
+    window.location.href = "dtp://ref/" + encodeURIComponent(safe);
+  };
+
+  document.getElementById("btn-dl-apk").onclick = function () {
+    copyCode("Код " + fullCode + " скопирован! После установки APK просто нажми «Вставить»");
+  };
 })();
 </script>
 </body>
