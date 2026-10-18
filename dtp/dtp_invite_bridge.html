@@ -3,8 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <meta name="theme-color" content="#07080c">
-<title>Drop the Phone — Приглашение</title>
+<title>Drop the Phone — Скачать APK и Приглашение</title>
 <style>
   :root {
     --bg: #07080c;
@@ -17,14 +20,14 @@
   * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
   html, body {
     margin: 0; padding: 0; min-height: 100%;
-    background: radial-gradient(circle at 50% 0%, rgba(53,208,127,.16), transparent 58%), var(--bg);
+    background: radial-gradient(circle at 50% 0%, rgba(53,208,127,.18), transparent 58%), var(--bg);
     color: var(--text);
     font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
     display: flex; align-items: center; justify-content: center;
     padding: 20px;
   }
   .card {
-    width: 100%; max-width: 400px;
+    width: 100%; max-width: 410px;
     background: var(--card);
     border: 1px solid var(--stroke);
     border-radius: 26px;
@@ -35,24 +38,49 @@
     box-shadow: 0 24px 60px rgba(0,0,0,.55);
   }
   .icon {
-    width: 64px; height: 64px; margin: 0 auto 14px;
+    width: 64px; height: 64px; margin: 0 auto 12px;
     border-radius: 18px;
     background: rgba(53,208,127,.14);
     border: 1px solid rgba(53,208,127,.35);
     display: grid; place-items: center;
     color: var(--accent);
   }
-  h1 { margin: 0 0 6px; font-size: 22px; font-weight: 700; letter-spacing: -.02em; }
-  .sub { margin: 0 0 18px; font-size: 13.5px; color: var(--muted); line-height: 1.45; }
+  .ver-pill {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: rgba(53,208,127,.14);
+    border: 1px solid rgba(53,208,127,.32);
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .04em;
+    margin-bottom: 10px;
+  }
+  h1 { margin: 0 0 6px; font-size: 23px; font-weight: 700; letter-spacing: -.02em; }
+  .sub { margin: 0 0 16px; font-size: 13.5px; color: var(--muted); line-height: 1.45; }
   .code-box {
     padding: 13px 14px;
     border-radius: 16px;
     background: rgba(0,0,0,.42);
-    border: 1px solid var(--stroke);
+    border: 1px solid rgba(53,208,127,.32);
     margin-bottom: 14px;
   }
   .code-lbl { font-size: 10.5px; color: var(--muted); letter-spacing: .07em; text-transform: uppercase; margin-bottom: 5px; }
   .code-val { font-size: 17px; font-weight: 700; color: var(--accent); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; word-break: break-all; }
+  .feat-list {
+    text-align: left;
+    padding: 12px 14px;
+    border-radius: 16px;
+    background: rgba(0,0,0,.35);
+    border: 1px solid var(--stroke);
+    margin-bottom: 14px;
+    font-size: 12.5px;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+  .feat-list div { display: flex; align-items: center; gap: 8px; margin: 4px 0; color: var(--text); }
+  .feat-list i { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
   .btn {
     width: 100%; height: 48px; border: 0; border-radius: 14px;
     font-size: 14.5px; font-weight: 600; cursor: pointer;
@@ -65,7 +93,7 @@
   .btn.primary { background: var(--accent); color: #04130b; }
   .btn.ghost { background: rgba(255,255,255,.07); color: var(--text); border: 1px solid var(--stroke); }
   .toast {
-    min-height: 20px; font-size: 12.5px; color: var(--accent); margin-top: 8px; line-height: 1.4;
+    min-height: 20px; font-size: 12.5px; color: var(--accent); margin-top: 8px; line-height: 1.45;
   }
 </style>
 </head>
@@ -77,46 +105,67 @@
         <path d="M10 18h4"/>
       </svg>
     </div>
+    <div class="ver-pill" id="top-pill">ANDROID APK · ОБНОВЛЕНИЕ v3.3</div>
     <h1>Drop the Phone</h1>
-    <p class="sub" id="inv-sub">Приглашение в игру с бонусом <b>+40 XP</b> на старте</p>
+    <p class="sub" id="inv-sub">Официальная страница загрузки игры и обновлений</p>
 
-    <div class="code-box">
-      <div class="code-lbl">Реферальный код приглашения</div>
+    <!-- Блок реферального кода (показывается, если ссылка с ?ref=...) -->
+    <div class="code-box" id="ref-box" style="display:none">
+      <div class="code-lbl">Твой реферальный код (+40 XP на старте)</div>
       <div class="code-val" id="inv-code">DTP-REF:maksplay</div>
     </div>
 
-    <button class="btn primary" id="btn-copy-code" type="button">
-      Скопировать код (+40 XP)
+    <!-- Список возможностей -->
+    <div class="feat-list" id="dl-features">
+      <div><i></i><span>Точное измерение высоты подброса и перегрузки</span></div>
+      <div><i></i><span>Мировой онлайн-рейтинг Топ-15, друзья и чат</span></div>
+      <div><i></i><span>Виджеты на рабочий стол, серии дней и сезоны</span></div>
+      <div><i></i><span>Реферальная программа со ступенями опыта</span></div>
+    </div>
+
+    <!-- Кнопка автоматического перехода в установленный APK с кодом (без Play Маркета!) -->
+    <button class="btn primary" id="btn-open-app" type="button" style="display:none">
+      Открыть приложение с кодом (+40 XP)
     </button>
-    <button class="btn ghost" id="btn-open-app" type="button">
-      Открыть установленное приложение
-    </button>
-    <a class="btn ghost" id="btn-dl-apk" href="./DropThePhone.apk" download="DropThePhone.apk">
-      Скачать APK игры
+
+    <a class="btn primary" id="btn-dl-apk" href="./DropThePhone.apk" download="DropThePhone.apk">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/>
+      </svg>
+      <span id="btn-dl-txt">Скачать DropThePhone.apk</span>
     </a>
-    <div class="toast" id="inv-toast">Нажми «Скопировать код» — в приложении он вставится одной кнопкой</div>
+
+    <button class="btn ghost" id="btn-copy-code" type="button" style="display:none">
+      Скопировать реферальный код (+40 XP)
+    </button>
+
+    <div class="toast" id="inv-toast">Прямая загрузка файла .apk без архивов .zip</div>
   </div>
 
 <script>
 (function () {
   var params = new URLSearchParams(location.search || "");
-  var raw = (params.get("ref") || (location.hash || "").replace(/^#?ref=/i, "") || "maksplay").trim().replace(/^@+/, "");
-  var safe = raw.replace(/[^A-Za-z0-9_-]/g, "") || "maksplay";
-  var fullCode = "DTP-REF:" + safe;
+  var rawRef = (params.get("ref") || (location.hash || "").replace(/^#?ref=/i, "") || "").trim().replace(/^@+/, "");
+  var safe = rawRef.replace(/[^A-Za-z0-9_-]/g, "");
+  var alreadyTried = params.get("stay") === "1";
 
+  var pillEl = document.getElementById("top-pill");
   var subEl = document.getElementById("inv-sub");
+  var refBox = document.getElementById("ref-box");
   var codeEl = document.getElementById("inv-code");
+  var openBtn = document.getElementById("btn-open-app");
+  var copyBtn = document.getElementById("btn-copy-code");
+  var dlBtn = document.getElementById("btn-dl-apk");
+  var dlTxt = document.getElementById("btn-dl-txt");
   var toastEl = document.getElementById("inv-toast");
-  codeEl.textContent = fullCode;
-  subEl.innerHTML = "Приглашение от <b>@" + safe + "</b> · бонус <b>+40 XP</b> при входе";
 
-  function copyCode(msg) {
+  function copyText(text, msg) {
     try {
       if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(fullCode);
+        navigator.clipboard.writeText(text);
       } else {
         var ta = document.createElement("textarea");
-        ta.value = fullCode;
+        ta.value = text;
         document.body.appendChild(ta);
         ta.select();
         document.execCommand("copy");
@@ -126,24 +175,52 @@
     } catch (e) {}
   }
 
-  document.getElementById("btn-copy-code").onclick = function () {
-    copyCode("Код " + fullCode + " скопирован! Открой игру и нажми «Вставить»");
-  };
+  function launchAppWithRef(refCode) {
+    copyText("DTP-REF:" + refCode, "Передаю код в приложение Drop the Phone…");
+    /* S.browser_fallback_url гарантирует, что если приложение ещё не установлено (или стоит старая версия),
+       Chrome НЕ открывает Google Play Маркет, а остаётся прямо на этой странице! */
+    var fallback = location.origin + location.pathname + "?v=33&ref=" + encodeURIComponent(refCode) + "&stay=1";
+    var intentUri = "intent://ref/" + encodeURIComponent(refCode) +
+      "#Intent;scheme=dtp;package=com.dropthephone.app;S.browser_fallback_url=" +
+      encodeURIComponent(fallback) + ";end";
+    location.href = intentUri;
+  }
 
-  document.getElementById("btn-open-app").onclick = function () {
-    copyCode("Код " + fullCode + " скопирован! Открываю приложение…");
-    /* Используем прямой протокол dtp:// без package=, чтобы Chrome НЕ кидал в Google Play Маркет */
-    var iframe = document.createElement("iframe");
-    iframe.style.display = "none";
-    iframe.src = "dtp://ref/" + encodeURIComponent(safe);
-    document.body.appendChild(iframe);
-    setTimeout(function () { iframe.remove(); }, 1500);
-    window.location.href = "dtp://ref/" + encodeURIComponent(safe);
-  };
+  if (safe && safe.length >= 2) {
+    var fullCode = "DTP-REF:" + safe;
+    pillEl.textContent = "ПРИГЛАШЕНИЕ В ИГРУ · +40 XP";
+    subEl.innerHTML = "Тебя пригласил <b>@" + safe + "</b>! Если игра установлена — она откроется сразу с кодом, иначе скачай APK ниже";
+    refBox.style.display = "block";
+    codeEl.textContent = fullCode;
+    openBtn.style.display = "flex";
+    dlBtn.className = "btn ghost";
+    copyBtn.style.display = "flex";
+    dlTxt.textContent = "Скачать APK (если ещё не установлен)";
+    toastEl.textContent = alreadyTried
+      ? "Установи свежий APK v3.3 ниже — или скопируй код для вставки"
+      : "Открываю установленное приложение с кодом…";
 
-  document.getElementById("btn-dl-apk").onclick = function () {
-    copyCode("Код " + fullCode + " скопирован! После установки APK просто нажми «Вставить»");
-  };
+    openBtn.onclick = function () {
+      launchAppWithRef(safe);
+    };
+    copyBtn.onclick = function () {
+      copyText(fullCode, "Код " + fullCode + " скопирован! Открой игру и нажми «Вставить»");
+    };
+    dlBtn.onclick = function () {
+      copyText(fullCode, "Код " + fullCode + " скопирован в буфер! Установи скачанный APK");
+    };
+
+    /* Автоматически перекидываем в установленный APK v3.3 при открытии ссылки (1 раз, без Play Маркета) */
+    if (!alreadyTried) {
+      setTimeout(function () {
+        launchAppWithRef(safe);
+      }, 250);
+    }
+  } else {
+    dlBtn.onclick = function () {
+      toastEl.textContent = "Загрузка DropThePhone.apk началась…";
+    };
+  }
 })();
 </script>
 </body>
