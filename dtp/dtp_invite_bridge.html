@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#07080c">
+<title>Drop the Phone — Приглашение</title>
+<style>
+  :root {
+    --bg: #07080c;
+    --card: rgba(255,255,255,.055);
+    --stroke: rgba(255,255,255,.11);
+    --text: #f5f7fb;
+    --muted: #8f96a8;
+    --accent: #35d07f;
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body {
+    margin: 0; padding: 0; min-height: 100%;
+    background: radial-gradient(circle at 50% 0%, rgba(53,208,127,.16), transparent 58%), var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+    display: flex; align-items: center; justify-content: center;
+    padding: 20px;
+  }
+  .card {
+    width: 100%; max-width: 400px;
+    background: var(--card);
+    border: 1px solid var(--stroke);
+    border-radius: 26px;
+    padding: 26px 22px 22px;
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    text-align: center;
+    box-shadow: 0 24px 60px rgba(0,0,0,.55);
+  }
+  .icon {
+    width: 64px; height: 64px; margin: 0 auto 14px;
+    border-radius: 18px;
+    background: rgba(53,208,127,.14);
+    border: 1px solid rgba(53,208,127,.35);
+    display: grid; place-items: center;
+    color: var(--accent);
+  }
+  h1 { margin: 0 0 6px; font-size: 22px; font-weight: 700; letter-spacing: -.02em; }
+  .sub { margin: 0 0 18px; font-size: 13.5px; color: var(--muted); line-height: 1.45; }
+  .code-box {
+    padding: 13px 14px;
+    border-radius: 16px;
+    background: rgba(0,0,0,.42);
+    border: 1px solid var(--stroke);
+    margin-bottom: 14px;
+  }
+  .code-lbl { font-size: 10.5px; color: var(--muted); letter-spacing: .07em; text-transform: uppercase; margin-bottom: 5px; }
+  .code-val { font-size: 17px; font-weight: 700; color: var(--accent); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; word-break: break-all; }
+  .btn {
+    width: 100%; height: 48px; border: 0; border-radius: 14px;
+    font-size: 14.5px; font-weight: 600; cursor: pointer;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    text-decoration: none;
+    transition: transform .12s ease, opacity .12s ease;
+    margin-bottom: 10px;
+  }
+  .btn:active { transform: scale(.98); }
+  .btn.primary { background: var(--accent); color: #04130b; }
+  .btn.ghost { background: rgba(255,255,255,.07); color: var(--text); border: 1px solid var(--stroke); }
+  .toast {
+    min-height: 18px; font-size: 12px; color: var(--accent); margin-top: 6px;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="icon">
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="6" y="2" width="12" height="20" rx="3"/>
+        <path d="M10 18h4"/>
+      </svg>
+    </div>
+    <h1>Drop the Phone</h1>
+    <p class="sub" id="inv-sub">Приглашение в игру с бонусом <b>+40 XP</b> на старте</p>
+
+    <div class="code-box">
+      <div class="code-lbl">Твой код приглашения</div>
+      <div class="code-val" id="inv-code">DTP-REF:maksplay</div>
+    </div>
+
+    <button class="btn primary" id="btn-open-app" type="button">
+      Открыть приложение с кодом
+    </button>
+    <button class="btn ghost" id="btn-copy-code" type="button">
+      Скопировать код для регистрации
+    </button>
+    <a class="btn ghost" id="btn-dl-apk" href="./DropThePhone.apk" download="DropThePhone.apk">
+      Скачать APK (с автокопированием кода)
+    </a>
+    <div class="toast" id="inv-toast"></div>
+  </div>
+
+<script>
+(function () {
+  var params = new URLSearchParams(location.search || "");
+  var raw = (params.get("ref") || (location.hash || "").replace(/^#?ref=/i, "") || "maksplay").trim().replace(/^@+/, "");
+  var safe = raw.replace(/[^A-Za-z0-9_-]/g, "") || "maksplay";
+  var fullCode = "DTP-REF:" + safe;
+
+  var subEl = document.getElementById("inv-sub");
+  var codeEl = document.getElementById("inv-code");
+  var toastEl = document.getElementById("inv-toast");
+  codeEl.textContent = fullCode;
+  subEl.innerHTML = "Приглашение от <b>@" + safe + "</b> · бонус <b>+40 XP</b> при входе";
+
+  function copyCode(msg) {
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(fullCode);
+      } else {
+        var ta = document.createElement("textarea");
+        ta.value = fullCode;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        ta.remove();
+      }
+      if (msg) toastEl.textContent = msg;
+    } catch (e) {}
+  }
+
+  function openInApk() {
+    copyCode("Код " + fullCode + " скопирован и передаётся в APK…");
+    var intentUrl = "intent://ref/" + encodeURIComponent(safe) + "#Intent;scheme=dtp;package=com.dropthephone.app;end";
+    location.href = intentUrl;
+    setTimeout(function () {
+      location.href = "dtp://ref/" + encodeURIComponent(safe);
+    }, 350);
+  }
+
+  document.getElementById("btn-open-app").onclick = openInApk;
+  document.getElementById("btn-copy-code").onclick = function () {
+    copyCode("Код " + fullCode + " скопирован! Вставь его в окне регистрации");
+  };
+  document.getElementById("btn-dl-apk").onclick = function () {
+    copyCode("Код " + fullCode + " скопирован! При открытии APK он подставится сам");
+  };
+
+  /* Автоматически пробуем открыть установленный APK с кодом при заходе по ссылке */
+  setTimeout(openInApk, 250);
+})();
+</script>
+</body>
+</html>
