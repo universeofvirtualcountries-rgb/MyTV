@@ -105,7 +105,7 @@
         <path d="M10 18h4"/>
       </svg>
     </div>
-    <div class="ver-pill" id="top-pill">ANDROID APK · ОБНОВЛЕНИЕ v3.3</div>
+    <div class="ver-pill" id="top-pill">ANDROID APK · ОБНОВЛЕНИЕ v3.4</div>
     <h1>Drop the Phone</h1>
     <p class="sub" id="inv-sub">Официальная страница загрузки игры и обновлений</p>
 
@@ -179,7 +179,7 @@
     copyText("DTP-REF:" + refCode, "Передаю код в приложение Drop the Phone…");
     /* S.browser_fallback_url гарантирует, что если приложение ещё не установлено (или стоит старая версия),
        Chrome НЕ открывает Google Play Маркет, а остаётся прямо на этой странице! */
-    var fallback = location.origin + location.pathname + "?v=33&ref=" + encodeURIComponent(refCode) + "&stay=1";
+    var fallback = location.origin + location.pathname + "?v=34&ref=" + encodeURIComponent(refCode) + "&stay=1";
     var intentUri = "intent://ref/" + encodeURIComponent(refCode) +
       "#Intent;scheme=dtp;package=com.dropthephone.app;S.browser_fallback_url=" +
       encodeURIComponent(fallback) + ";end";
@@ -197,7 +197,7 @@
     copyBtn.style.display = "flex";
     dlTxt.textContent = "Скачать APK (если ещё не установлен)";
     toastEl.textContent = alreadyTried
-      ? "Установи свежий APK v3.3 ниже — или скопируй код для вставки"
+      ? "Установи свежий APK v3.4 ниже — или скопируй код для вставки"
       : "Открываю установленное приложение с кодом…";
 
     openBtn.onclick = function () {
@@ -210,7 +210,7 @@
       copyText(fullCode, "Код " + fullCode + " скопирован в буфер! Установи скачанный APK");
     };
 
-    /* Автоматически перекидываем в установленный APK v3.3 при открытии ссылки (1 раз, без Play Маркета) */
+    /* Автоматически перекидываем в установленный APK v3.4 при открытии ссылки (1 раз, без Play Маркета) */
     if (!alreadyTried) {
       setTimeout(function () {
         launchAppWithRef(safe);
