@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#050507">
+  <meta name="description" content="Скачай Drop the Phone v5.7 для Android напрямую или открой страницу игры в RuStore.">
+  <title>Drop the Phone — Скачать v5.7</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #050507;
+      --text: #f7f7f8;
+      --accent: #ff2d55;
+      --muted: #a0a0aa;
+      --glass: rgba(255,255,255,.035);
+      --border: rgba(255,255,255,.09);
+      --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+    * { box-sizing: border-box; }
+    html { min-height: 100%; background: var(--bg); }
+    body {
+      min-height: 100vh; margin: 0; padding: 24px 16px;
+      display: grid; place-items: center; overflow-x: hidden;
+      color: var(--text); background: var(--bg);
+      font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+    .space-bg { position: fixed; inset: 0; z-index: -1; pointer-events: none;
+      background: radial-gradient(ellipse at 12% 18%,rgba(255,45,85,.12),transparent 42%),
+                  radial-gradient(ellipse at 90% 82%,rgba(93,91,255,.10),transparent 42%), #050507; }
+    .stars { position: absolute; inset: 0; opacity: .28;
+      background-image: radial-gradient(1px 1px at 17% 24%,#fff 99%,transparent),
+                        radial-gradient(1px 1px at 74% 31%,#fff 99%,transparent),
+                        radial-gradient(2px 2px at 88% 70%,#fff 99%,transparent),
+                        radial-gradient(1px 1px at 39% 82%,#fff 99%,transparent);
+      background-size: 260px 260px,330px 330px,430px 430px,530px 530px; }
+    .wrap { width: min(940px,100%); display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px,5vw,54px); align-items: center; }
+    .intro { animation: rise .65s ease both; }
+    .brand { display: flex; align-items: center; gap: 14px; margin-bottom: 22px; }
+    .brand-icon { width: 52px; height: 52px; flex: 0 0 52px; display: grid; place-items: center;
+      border: 1px solid var(--border); border-radius: 16px; background: rgba(255,255,255,.045); }
+    .brand-icon svg { width: 25px; height: 25px; }
+    .brand-name { margin: 0; font-size: 1.32rem; line-height: 1; font-weight: 850; letter-spacing: -.045em; text-transform: uppercase; }
+    .version { display: inline-block; margin-top: 8px; padding: 4px 8px; border: 1px solid rgba(255,45,85,.28);
+      border-radius: 7px; color: var(--accent); background: rgba(255,45,85,.09); font: 700 .72rem var(--mono); letter-spacing: .05em; }
+    .intro-copy { max-width: 490px; margin: 0; color: var(--muted); font-size: 1rem; line-height: 1.62; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+    .chip { border: 1px solid rgba(255,45,85,.22); border-radius: 999px; padding: 6px 10px; color: #ff8298;
+      background: rgba(255,45,85,.055); font: 600 .67rem var(--mono); letter-spacing: .045em; }
+    .panel { padding: clamp(20px,4vw,32px); border: 1px solid var(--border); border-radius: 24px;
+      background: rgba(255,255,255,.035); box-shadow: 0 24px 70px rgba(0,0,0,.48); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+      animation: rise .7s .08s ease both; }
+    .eyebrow { margin: 0 0 10px; color: var(--muted); font: 700 .68rem var(--mono); letter-spacing: .12em; text-transform: uppercase; }
+    .panel h2 { margin: 0 0 18px; font-size: 1.38rem; letter-spacing: -.035em; }
+    .release-list { display: grid; gap: 13px; margin: 0 0 23px; padding: 0; list-style: none; }
+    .release-list li { display: flex; gap: 10px; align-items: flex-start; color: var(--muted); font-size: .87rem; line-height: 1.45; }
+    .release-list li::before { content: ">"; flex: 0 0 auto; color: var(--accent); font: 700 .88rem var(--mono); }
+    .release-list strong { color: var(--text); font-weight: 650; }
+    .btn { min-height: 50px; width: 100%; display: flex; align-items: center; justify-content: center; gap: 10px;
+      padding: 12px 16px; border: 1px solid transparent; border-radius: 14px; text-decoration: none; text-align: center;
+      font-size: .94rem; font-weight: 800; letter-spacing: .015em; transition: transform .16s ease, background .16s ease, border-color .16s ease; }
+    .btn svg { width: 19px; height: 19px; flex: 0 0 auto; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn:focus-visible, .back:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+    .btn-primary { color: #10050a; background: #fff; }
+    .btn-primary:hover { color: #fff; background: var(--accent); box-shadow: 0 12px 32px rgba(255,45,85,.22); }
+    .btn-store { margin-top: 9px; color: var(--text); border-color: var(--border); background: rgba(255,255,255,.045); }
+    .btn-store:hover { border-color: rgba(77,145,255,.55); background: rgba(77,145,255,.11); }
+    .file-meta { display: flex; justify-content: space-between; gap: 12px; margin-top: 14px; color: #777985; font: .67rem var(--mono); }
+    .help { margin: 18px 0 0; color: var(--muted); font-size: .77rem; line-height: 1.5; }
+    .help strong { color: #ddd; }
+    .back { display: inline-flex; align-items: center; gap: 7px; margin-top: 19px; color: var(--muted); text-decoration: none; font: .77rem var(--mono); transition: color .15s; }
+    .back:hover { color: var(--accent); }
+    .foot { grid-column: 1 / -1; display: flex; justify-content: space-between; gap: 12px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,.07); color: #777985; font: .65rem var(--mono); }
+    @keyframes rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    @media (max-width: 720px) {
+      body { padding: 20px 14px; align-items: start; }
+      .wrap { max-width: 520px; grid-template-columns: 1fr; gap: 25px; margin: auto; }
+      .intro { text-align: center; }
+      .brand { justify-content: center; }
+      .intro-copy { margin-inline: auto; font-size: .94rem; }
+      .chips { justify-content: center; }
+      .panel { padding: 22px 18px; }
+      .foot { flex-direction: column; align-items: center; text-align: center; }
+    }
+    @media (prefers-reduced-motion: reduce) { *,*::before,*::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; } }
+  </style>
+</head>
+<body>
+  <div class="space-bg" aria-hidden="true"><div class="stars"></div></div>
+  <main class="wrap">
+    <section class="intro" aria-labelledby="page-title">
+      <div class="brand">
+        <div class="brand-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2.5"/><path d="M10 18h4"/></svg>
+        </div>
+        <div><h1 class="brand-name" id="page-title">Drop the Phone</h1><span class="version">ANDROID · BUILD 5.7</span></div>
+      </div>
+      <p class="intro-copy">Drop the Phone измеряет высоту, время в воздухе, перегрузки и вращение по датчикам смартфона. Сравнивай результаты, собирай рекорды и следи за местом в Топ-15.</p>
+      <div class="chips" aria-label="Возможности">
+        <span class="chip">ACCELEROMETER</span><span class="chip">GYROSCOPE</span><span class="chip">BLACK BOX</span><span class="chip">TOP-15</span>
+      </div>
+    </section>
+
+    <section class="panel" aria-labelledby="download-title">
+      <p class="eyebrow">Обновление · Android</p>
+      <h2 id="download-title">Что нового в 5.7</h2>
+      <ul class="release-list">
+        <li><span>Исправлены ошибки, в том числе в работе кнопки <strong>«Друзья»</strong>.</span></li>
+        <li><span>Добавлены подписки на профили и счётчики <strong>подписчиков и друзей</strong>.</span></li>
+      </ul>
+      <a class="btn btn-primary" href="./DropThePhone.apk?v=57" download="DropThePhone-5.7.apk">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5M12 15V3"/></svg>
+        Скачать APK 5.7
+      </a>
+      <a class="btn btn-store" href="https://www.rustore.ru/catalog/app/com.dropthephone.app" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v13a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 18.5z"/><path d="m10 8 6 4-6 4z"/></svg>
+        Страница игры в RuStore
+      </a>
+      <div class="file-meta"><span>APK · ANDROID 7.0+</span><span>≈ 1.8 MB · БЕЗ ZIP</span></div>
+      <p class="help">Если версия в RuStore ещё не обновилась, можно скачать APK напрямую. После загрузки открой файл и подтверди установку.</p>
+      <a class="back" href="./index.html">← На официальный сайт</a>
+    </section>
+
+    <footer class="foot"><span>© 2026 DROP THE PHONE</span><span>Официальная страница загрузки</span></footer>
+  </main>
+</body>
+</html>

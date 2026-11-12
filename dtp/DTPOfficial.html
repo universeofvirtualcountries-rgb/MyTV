@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drop the Phone — Official Hub</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=Syne:wght@700;800&display=swap');
+
+        :root {
+            --bg: #000000;
+            --text: #ffffff;
+            --accent: #ff2d55;
+            --sub-metal: #8e8e93;
+            --border-line: 1px solid rgba(255, 255, 255, 0.08);
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            --iron-gradient: linear-gradient(180deg, #ffffff 0%, #aeaeae 50%, #3a3a3c 100%);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Space Grotesk', -apple-system, sans-serif;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* === КОСМИЧЕСКИЙ ФОН === */
+        .space-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: -2;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255, 45, 85, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(100, 100, 255, 0.05) 0%, transparent 40%),
+                #000000;
+            overflow: hidden;
+        }
+
+        .stars {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                radial-gradient(1px 1px at 10% 20%, #ffffff 100%, transparent),
+                radial-gradient(1px 1px at 40% 50%, #ffffff 100%, transparent),
+                radial-gradient(1px 1px at 70% 30%, #ffffff 100%, transparent),
+                radial-gradient(2px 2px at 90% 80%, #ffffff 100%, transparent),
+                radial-gradient(1px 1px at 15% 70%, #ffffff 100%, transparent);
+            background-size: 200px 200px, 300px 300px, 400px 400px, 500px 500px, 600px 600px;
+            opacity: 0.6;
+            animation: twinkle 5s infinite alternate;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.4; }
+            100% { opacity: 0.8; }
+        }
+
+        .scroll-progress {
+            position: fixed;
+            top: 0; left: 0; width: 0%; height: 3px;
+            background: var(--accent);
+            box-shadow: 0 0 12px var(--accent);
+            z-index: 9999;
+        }
+
+        .screen-layout {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        @media (max-width: 768px) {
+            .screen-layout { padding: 0 20px; }
+        }
+
+        nav {
+            padding: 40px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: var(--border-line);
+        }
+
+        .clean-logo {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: 1.6rem;
+            letter-spacing: -0.06em;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .clean-logo span {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 300;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            color: var(--sub-metal);
+            border-left: 1px solid var(--sub-metal);
+            padding-left: 10px;
+        }
+
+        .hero-block {
+            min-height: 55vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .laser-text {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(3rem, 9vw, 7.5rem);
+            font-weight: 800;
+            line-height: 0.85;
+            letter-spacing: -0.05em;
+            text-transform: uppercase;
+            background: var(--iron-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(30px);
+            filter: blur(10px);
+            animation: laserBurn 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation-delay: 0.2s;
+        }
+
+        @keyframes laserBurn {
+            0% { opacity: 0; transform: translateY(30px); filter: blur(10px) brightness(1); }
+            50% { filter: blur(2px) brightness(2); }
+            100% { opacity: 1; transform: translateY(0); filter: blur(0) brightness(1); }
+        }
+
+        .hero-desc {
+            font-size: clamp(1rem, 1.8vw, 1.3rem);
+            font-weight: 300;
+            line-height: 1.5;
+            color: var(--sub-metal);
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInDesc 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation-delay: 0.6s;
+        }
+
+        @keyframes fadeInDesc {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .tech-specs {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+            opacity: 0;
+            animation: fadeInDesc 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation-delay: 0.8s;
+        }
+
+        .spec-item {
+            font-family: monospace;
+            font-size: 0.75rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            padding: 6px 12px;
+            border: 1px solid rgba(255, 45, 85, 0.2);
+            border-radius: 4px;
+            background: rgba(255, 45, 85, 0.05);
+        }
+
+        /* === СТЕКЛЯННЫЕ КНОПКИ === */
+        .release-strip {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            margin: 0 auto 18px;
+            padding: 17px 20px;
+            border: 1px solid rgba(255, 45, 85, .2);
+            border-radius: 18px;
+            background: linear-gradient(110deg, rgba(255,45,85,.10), rgba(255,255,255,.025));
+        }
+        .release-strip strong { display:block; margin-bottom:4px; font-family:'Syne',sans-serif; font-size:1rem; }
+        .release-strip p { margin:0; color:var(--sub-metal); font-size:.86rem; line-height:1.45; }
+        .release-link { flex:0 0 auto; display:inline-flex; align-items:center; gap:7px; padding:10px 13px; border-radius:11px;
+            color:#11050a; background:#fff; text-decoration:none; font-size:.84rem; font-weight:800; transition:.2s; }
+        .release-link:hover { color:#fff; background:var(--accent); transform:translateY(-2px); }
+
+        .glass-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px 0 40px 0;
+        }
+
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 30px 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--text);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--glass-shadow);
+            text-align: center;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            border-color: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .glass-card:hover::before {
+            opacity: 1;
+        }
+
+        .glass-icon {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 15px;
+            fill: currentColor;
+            color: var(--text);
+            opacity: 0.8;
+            transition: all 0.3s;
+        }
+
+        .glass-card:hover .glass-icon {
+            opacity: 1;
+            color: var(--accent);
+            transform: scale(1.1);
+        }
+
+        .glass-card h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            margin-bottom: 6px;
+        }
+
+        .glass-card p {
+            font-size: 0.85rem;
+            color: var(--sub-metal);
+            line-height: 1.4;
+        }
+
+        /* Цветовые акценты для кнопок */
+        .glass-card.ru { border-color: rgba(0, 122, 255, 0.3); }
+        .glass-card.ru:hover { border-color: rgba(0, 122, 255, 0.8); box-shadow: 0 0 30px rgba(0, 122, 255, 0.15); }
+
+        .glass-card.tg { border-color: rgba(0, 136, 204, 0.3); }
+        .glass-card.tg:hover { border-color: rgba(0, 136, 204, 0.8); box-shadow: 0 0 30px rgba(0, 136, 204, 0.15); }
+
+        .glass-card.tt { border-color: rgba(255, 45, 85, 0.3); }
+        .glass-card.tt:hover { border-color: rgba(255, 45, 85, 0.8); box-shadow: 0 0 30px rgba(255, 45, 85, 0.15); }
+
+        .glass-card.apk { border-color: rgba(52, 199, 89, 0.3); }
+        .glass-card.apk:hover { border-color: rgba(52, 199, 89, 0.8); box-shadow: 0 0 30px rgba(52, 199, 89, 0.15); }
+        .glass-card.install { border-color: rgba(255, 45, 85, 0.35); }
+        .glass-card.install:hover { border-color: rgba(255, 45, 85, 0.85); box-shadow: 0 0 30px rgba(255, 45, 85, 0.18); }
+        
+        .glass-card.tb { border-color: rgba(255, 165, 0, 0.3); }
+        .glass-card.tb:hover { border-color: rgba(255, 165, 0, 0.8); box-shadow: 0 0 30px rgba(255, 165, 0, 0.15); }
+
+        .glass-card.bridge { border-color: rgba(138, 43, 226, 0.3); }
+        .glass-card.bridge:hover { border-color: rgba(138, 43, 226, 0.8); box-shadow: 0 0 30px rgba(138, 43, 226, 0.15); }
+
+        /* === БАННЕР ОБНОВЛЕНИЙ (ПОД КНОПКАМИ) === */
+        .update-banner-wrapper {
+            margin-bottom: 60px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .update-banner {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 136, 204, 0.03);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(0, 136, 204, 0.15);
+            padding: 8px 16px;
+            border-radius: 100px;
+            text-decoration: none;
+            color: var(--sub-metal);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.8rem;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .update-banner:hover {
+            background: rgba(0, 136, 204, 0.1);
+            border-color: rgba(0, 136, 204, 0.4);
+            color: var(--text);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 136, 204, 0.1);
+        }
+
+        .banner-icon {
+            width: 16px;
+            height: 16px;
+            color: #0088cc;
+            flex-shrink: 0;
+        }
+
+        .banner-arrow {
+            font-family: monospace;
+            color: #0088cc;
+            font-weight: bold;
+            transition: transform 0.3s;
+        }
+
+        .update-banner:hover .banner-arrow {
+            transform: translateX(3px);
+        }
+
+        @media (max-width: 600px) {
+            .update-banner { font-size: 0.75rem; padding: 6px 12px; }
+            .release-strip { flex-direction:column; align-items:stretch; text-align:center; padding:16px; }
+            .release-link { justify-content:center; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration:.01ms !important; transition-duration:.01ms !important; scroll-behavior:auto !important; }
+        }
+
+        /* === FOOTER === */
+        footer {
+            padding: 60px 0;
+            border-top: var(--border-line);
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .footer-title {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(1.5rem, 4vw, 3rem);
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: -0.05em;
+            text-transform: uppercase;
+            background: var(--iron-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+        }
+
+        .footer-desc {
+            font-size: 0.95rem;
+            color: var(--sub-metal);
+            line-height: 1.5;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .footer-contact {
+            margin-top: 25px;
+            font-family: monospace;
+            font-size: 0.9rem;
+            color: var(--sub-metal);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .email-link {
+            color: var(--text);
+            text-decoration: none;
+            border-bottom: 1px solid var(--sub-metal);
+            transition: all 0.3s;
+        }
+
+        .email-link:hover {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+        }
+
+        .footer-meta {
+            margin-top: 40px;
+            font-family: monospace;
+            color: var(--sub-metal);
+            font-size: 0.8rem;
+            display: flex;
+            justify-content: space-between;
+            border-top: var(--border-line);
+            padding-top: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .glass-grid { grid-template-columns: 1fr; }
+            .footer-meta { flex-direction: column; align-items: center; gap: 5px; }
+        }
+
+        .section-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            filter: blur(5px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .section-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0);
+        }
+    </style>
+</head>
+<body>
+
+<div class="space-bg">
+    <div class="stars"></div>
+</div>
+
+<div class="scroll-progress" id="progressBar"></div>
+
+<div class="screen-layout">
+    
+    <nav>
+        <div class="clean-logo">
+            Drop <span>The Phone</span>
+        </div>
+        <span style="font-family: monospace; color: var(--sub-metal); font-size: 0.75rem; letter-spacing: 0.1em;">OFFICIAL HUB // v5.7</span>
+    </nav>
+
+    <div class="hero-block">
+        <h1 class="laser-text">DROP<br>THE PHONE</h1>
+        <div class="hero-desc">
+            Спортивная физическая аркада и орбитальный высотомер бросков. Точный расчёт баллистики полёта, перегрузок G-force и вращения смартфона в невесомости по датчикам акселерометра и гироскопа.
+        </div>
+        <div class="tech-specs">
+            <span class="spec-item">ACCELEROMETER</span>
+            <span class="spec-item">GYROSCOPE</span>
+            <span class="spec-item">BLACK BOX TELEMETRY</span>
+            <span class="spec-item">TOP-15 GLOBAL</span>
+        </div>
+    </div>
+
+    <section class="release-strip section-reveal" aria-label="Обновление 5.7">
+        <div>
+            <strong>Обновление v5.7</strong>
+            <p>Подписки на профили, счётчики подписчиков и друзей, исправления ошибок.</p>
+        </div>
+        <a class="release-link" href="./download.html">Скачать обновление <span aria-hidden="true">→</span></a>
+    </section>
+
+    <div class="glass-grid section-reveal">
+        
+        <!-- RuStore -->
+        <a href="https://www.rustore.ru/catalog/app/com.dropthephone.app" target="_blank" rel="noopener noreferrer" class="glass-card ru">
+            <svg class="glass-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path><line x1="9" y1="10" x2="15" y2="10"></line></svg>
+            <h3>RuStore</h3>
+            <p>Скачать в официальном магазине</p>
+        </a>
+
+        <!-- Прямая загрузка APK -->
+        <a href="./download.html" class="glass-card install">
+            <svg class="glass-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="m7 10 5 5 5-5M12 15V3"></path></svg>
+            <h3>Скачать APK</h3>
+            <p>Прямая загрузка Android v5.7 · без архива</p>
+        </a>
+
+        <!-- Trashbox -->
+        <a href="https://trashbox.ru/topics/224565/drop-the-phone-5.7" target="_blank" rel="noopener noreferrer" class="glass-card tb">
+            <svg class="glass-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+            <h3>Trashbox</h3>
+            <p>Статья и обсуждение v5.7</p>
+        </a>
+
+        <!-- Telegram -->
+        <a href="https://t.me/dropthephone" target="_blank" rel="noopener noreferrer" class="glass-card tg">
+            <svg class="glass-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+            <h3>Telegram</h3>
+            <p>Новости и общение</p>
+        </a>
+
+        <!-- TikTok -->
+        <a href="https://www.tiktok.com/@dropthesmartphone" target="_blank" rel="noopener noreferrer" class="glass-card tt">
+            <svg class="glass-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg>
+            <h3>TikTok</h3>
+            <p>Видео и челленджи</p>
+        </a>
+
+        <!-- APKPure -->
+        <a href="https://apkpure.com/ru/drop-the-phone/com.dropthephone.app" target="_blank" rel="noopener noreferrer" class="glass-card apk">
+            <svg class="glass-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            <h3>APKPure</h3>
+            <p>Альтернативная загрузка</p>
+        </a>
+
+        <!-- DTP Bridge -->
+        <a href="https://universeofvirtualcountries-rgb.github.io/MyTV/dtp/dtp_invite_bridge.html?v=49" target="_blank" rel="noopener noreferrer" class="glass-card bridge">
+            <svg class="glass-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+            <h3>DTP Bridge</h3>
+            <p>Инвайт-хаб и связь</p>
+        </a>
+
+    </div>
+
+    <!-- Плашка обновлений, перенесена вниз, под кнопки -->
+    <div class="update-banner-wrapper section-reveal">
+        <a href="https://t.me/dropthephone" target="_blank" class="update-banner">
+            <svg class="banner-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+            <span>Самые свежие обновления и новости всегда в Telegram</span>
+            <span class="banner-arrow">→</span>
+        </a>
+    </div>
+
+    <footer>
+        <div class="footer-title">DROP THE PHONE</div>
+        <div class="footer-desc">Измеряй полёт. Ставь рекорды. Не разбей телефон.</div>
+        
+        <div class="footer-contact">
+            <span>Support:</span>
+            <a href="/cdn-cgi/l/email-protection#5a3e28352a2e323f29373b282e2a3235343f1a3d373b333674393537" class="email-link"><span class="__cf_email__" data-cfemail="ddb9afb2ada9b5b8aeb0bcafa9adb5b2b3b89dbab0bcb4b1f3beb2b0">[email&#160;protected]</span></a>
+        </div>
+
+        <div class="footer-meta">
+            <span>© 2026 DROP THE PHONE</span>
+            <span>BUILD FOR DROP THE PHONE // OFFICIAL HUB</span>
+        </div>
+    </footer>
+
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    const sections = document.querySelectorAll('.section-reveal');
+    
+    const revealSections = () => {
+        const triggerBottom = window.innerHeight * 0.85;
+        sections.forEach(section => {
+            const sectionTop = section.getBoundingClientRect().top;
+            if(sectionTop < triggerBottom) {
+                section.classList.add('revealed');
+            }
+        });
+    };
+
+    window.onscroll = function() {
+        let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        let scrolled = height > 0 ? Math.max(0, Math.min(100, (winScroll / height) * 100)) : 0;
+        const pb = document.getElementById("progressBar");
+        if(pb) pb.style.width = scrolled + "%";
+        
+        revealSections();
+    };
+
+    // Запускаем при загрузке
+    revealSections();
+</script>
+
+</body>
+</html>
