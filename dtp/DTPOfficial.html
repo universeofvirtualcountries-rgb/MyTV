@@ -191,23 +191,6 @@
         }
 
         /* === СТЕКЛЯННЫЕ КНОПКИ === */
-        .release-strip {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 18px;
-            margin: 0 auto 18px;
-            padding: 17px 20px;
-            border: 1px solid rgba(255, 45, 85, .2);
-            border-radius: 18px;
-            background: linear-gradient(110deg, rgba(255,45,85,.10), rgba(255,255,255,.025));
-        }
-        .release-strip strong { display:block; margin-bottom:4px; font-family:'Syne',sans-serif; font-size:1rem; }
-        .release-strip p { margin:0; color:var(--sub-metal); font-size:.86rem; line-height:1.45; }
-        .release-link { flex:0 0 auto; display:inline-flex; align-items:center; gap:7px; padding:10px 13px; border-radius:11px;
-            color:#11050a; background:#fff; text-decoration:none; font-size:.84rem; font-weight:800; transition:.2s; }
-        .release-link:hover { color:#fff; background:var(--accent); transform:translateY(-2px); }
-
         .glass-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -296,8 +279,6 @@
 
         .glass-card.apk { border-color: rgba(52, 199, 89, 0.3); }
         .glass-card.apk:hover { border-color: rgba(52, 199, 89, 0.8); box-shadow: 0 0 30px rgba(52, 199, 89, 0.15); }
-        .glass-card.install { border-color: rgba(255, 45, 85, 0.35); }
-        .glass-card.install:hover { border-color: rgba(255, 45, 85, 0.85); box-shadow: 0 0 30px rgba(255, 45, 85, 0.18); }
         
         .glass-card.tb { border-color: rgba(255, 165, 0, 0.3); }
         .glass-card.tb:hover { border-color: rgba(255, 165, 0, 0.8); box-shadow: 0 0 30px rgba(255, 165, 0, 0.15); }
@@ -356,12 +337,10 @@
         }
 
         @media (max-width: 600px) {
-            .update-banner { font-size: 0.75rem; padding: 6px 12px; }
-            .release-strip { flex-direction:column; align-items:stretch; text-align:center; padding:16px; }
-            .release-link { justify-content:center; }
-        }
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after { animation-duration:.01ms !important; transition-duration:.01ms !important; scroll-behavior:auto !important; }
+            .update-banner {
+                font-size: 0.75rem;
+                padding: 6px 12px;
+            }
         }
 
         /* === FOOTER === */
@@ -462,7 +441,7 @@
         <div class="clean-logo">
             Drop <span>The Phone</span>
         </div>
-        <span style="font-family: monospace; color: var(--sub-metal); font-size: 0.75rem; letter-spacing: 0.1em;">OFFICIAL HUB // v5.7</span>
+        <span style="font-family: monospace; color: var(--sub-metal); font-size: 0.75rem; letter-spacing: 0.1em;">OFFICIAL HUB // 2026</span>
     </nav>
 
     <div class="hero-block">
@@ -478,60 +457,45 @@
         </div>
     </div>
 
-    <section class="release-strip section-reveal" aria-label="Обновление 5.7">
-        <div>
-            <strong>Обновление v5.7</strong>
-            <p>Подписки на профили, счётчики подписчиков и друзей, исправления ошибок.</p>
-        </div>
-        <a class="release-link" href="./download.html">Скачать обновление <span aria-hidden="true">→</span></a>
-    </section>
-
     <div class="glass-grid section-reveal">
         
         <!-- RuStore -->
-        <a href="https://www.rustore.ru/catalog/app/com.dropthephone.app" target="_blank" rel="noopener noreferrer" class="glass-card ru">
+        <a href="https://www.rustore.ru/catalog/app/com.dropthephone.app" target="_blank" class="glass-card ru">
             <svg class="glass-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path><line x1="9" y1="10" x2="15" y2="10"></line></svg>
             <h3>RuStore</h3>
             <p>Скачать в официальном магазине</p>
         </a>
 
-        <!-- Прямая загрузка APK -->
-        <a href="./download.html" class="glass-card install">
-            <svg class="glass-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="m7 10 5 5 5-5M12 15V3"></path></svg>
-            <h3>Скачать APK</h3>
-            <p>Прямая загрузка Android v5.7 · без архива</p>
-        </a>
-
         <!-- Trashbox -->
-        <a href="https://trashbox.ru/topics/224565/drop-the-phone-5.7" target="_blank" rel="noopener noreferrer" class="glass-card tb">
+        <a href="https://trashbox.ru/topics/224565/drop-the-phone-5.7" target="_blank" class="glass-card tb">
             <svg class="glass-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
             <h3>Trashbox</h3>
             <p>Статья и обсуждение v5.7</p>
         </a>
 
         <!-- Telegram -->
-        <a href="https://t.me/dropthephone" target="_blank" rel="noopener noreferrer" class="glass-card tg">
+        <a href="https://t.me/dropthephone" target="_blank" class="glass-card tg">
             <svg class="glass-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
             <h3>Telegram</h3>
             <p>Новости и общение</p>
         </a>
 
         <!-- TikTok -->
-        <a href="https://www.tiktok.com/@dropthesmartphone" target="_blank" rel="noopener noreferrer" class="glass-card tt">
+        <a href="https://www.tiktok.com/@dropthesmartphone" target="_blank" class="glass-card tt">
             <svg class="glass-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg>
             <h3>TikTok</h3>
             <p>Видео и челленджи</p>
         </a>
 
         <!-- APKPure -->
-        <a href="https://apkpure.com/ru/drop-the-phone/com.dropthephone.app" target="_blank" rel="noopener noreferrer" class="glass-card apk">
+        <a href="https://apkpure.com/ru/drop-the-phone/com.dropthephone.app" target="_blank" class="glass-card apk">
             <svg class="glass-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
             <h3>APKPure</h3>
             <p>Альтернативная загрузка</p>
         </a>
 
         <!-- DTP Bridge -->
-        <a href="https://universeofvirtualcountries-rgb.github.io/MyTV/dtp/dtp_invite_bridge.html?v=49" target="_blank" rel="noopener noreferrer" class="glass-card bridge">
+        <a href="https://universeofvirtualcountries-rgb.github.io/MyTV/dtp/dtp_invite_bridge.html?v=49" target="_blank" class="glass-card bridge">
             <svg class="glass-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
             <h3>DTP Bridge</h3>
             <p>Инвайт-хаб и связь</p>
@@ -554,7 +518,7 @@
         
         <div class="footer-contact">
             <span>Support:</span>
-            <a href="/cdn-cgi/l/email-protection#5a3e28352a2e323f29373b282e2a3235343f1a3d373b333674393537" class="email-link"><span class="__cf_email__" data-cfemail="ddb9afb2ada9b5b8aeb0bcafa9adb5b2b3b89dbab0bcb4b1f3beb2b0">[email&#160;protected]</span></a>
+            <a href="mailto:dropthesmartphone@gmail.com" class="email-link">dropthesmartphone@gmail.com</a>
         </div>
 
         <div class="footer-meta">
@@ -565,7 +529,7 @@
 
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
     const sections = document.querySelectorAll('.section-reveal');
     
     const revealSections = () => {
@@ -581,7 +545,7 @@
     window.onscroll = function() {
         let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
         let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        let scrolled = height > 0 ? Math.max(0, Math.min(100, (winScroll / height) * 100)) : 0;
+        let scrolled = (winScroll / height) * 100;
         const pb = document.getElementById("progressBar");
         if(pb) pb.style.width = scrolled + "%";
         
